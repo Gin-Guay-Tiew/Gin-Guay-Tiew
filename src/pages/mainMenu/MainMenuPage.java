@@ -1,12 +1,12 @@
 package pages.mainMenu;
 
 import pages.MainFrame;
+import utilities.IconFilter;
 import utilities.IconImage;
-import components.MainMenu;
+import utilities.IconBtn;
+
 import javax.swing.*;
 import java.awt.*;
-
-import static javax.swing.BoxLayout.Y_AXIS;
 
 public class MainMenuPage extends JPanel {
 
@@ -17,76 +17,109 @@ public class MainMenuPage extends JPanel {
     JButton no = new JButton("No");
     JDialog dialog;
 
-    JLabel logo = new JLabel();
-    JButton start_game = new JButton("Start Game");
-    JButton tutorial = new JButton("Tutorial");
-    JButton shop = new JButton("Shop");
-    JButton setting = new JButton("Setting");
-    JButton exit = new JButton("Exit");
-
     public MainMenuPage(MainFrame frame) {
 
         this.frame = frame;
         setLayout(new BorderLayout());
-        dialog = new PopupWindow().PopupTutorial(frame,"tutorial",true,"Do you want to play Tutorial",yes,no);
-        this.backgroundImage = new ImageIcon("resources/images/mainMenu/image-from-rawpixel-id-14653376-jpeg.jpg").getImage();
 
+        dialog = new PopupWindow().PopupTutorial(
+                frame,"tutorial",true,
+                "Do you want to play Tutorial",yes,no
+        );
+
+        ImageIcon original = new ImageIcon(
+                "resources/images/mainMenu/image-from-rawpixel-id-14653376-jpeg.jpg"
+        );
+        ImageIcon newBackground = IconFilter.setOpacity(original, 0.35f);
+        backgroundImage = newBackground.getImage();
+
+        // ================= Center Container =================
         JPanel center_contain = new JPanel();
-        center_contain.setLayout(new BoxLayout(center_contain,Y_AXIS));
-
-
-        // Image LoGogame
-        ImageIcon icon = IconImage.create("resources/images/mainMenu/LogoGame.png", 300, 300);
-        JLabel con_icon = new JLabel();
-        con_icon.setIcon(icon);
-        con_icon.setAlignmentX(Component.CENTER_ALIGNMENT);
-        center_contain.add(con_icon);
+        center_contain.setLayout(new BoxLayout(center_contain, BoxLayout.Y_AXIS));
         center_contain.setOpaque(false);
 
+        // ================= Logo =================
+        ImageIcon icon = IconImage.create(
+                "resources/images/mainMenu/logoGame-type01.png",
+                280, 280
+        );
 
-        // -------------------------------------
+        JLabel logo = new JLabel(icon);
+        logo.setAlignmentX(Component.CENTER_ALIGNMENT);
 
+        center_contain.add(logo);
 
-        // GridButton, start_game, tutorial, shop, setting
-        MainMenu setBtn = new MainMenu();
-        JPanel con_Main_btn = new JPanel();
-        con_Main_btn.setLayout(new GridLayout(2,2,10,10));
-        con_Main_btn.setMaximumSize(new Dimension(500,35));
-        con_Main_btn.setOpaque(false);
+        // ================= Button Images =================
+        ImageIcon normal = IconImage.create(
+                "resources/images/mainMenu/btn-start-main.png",
+                250, 50
+        );
+        ImageIcon hover = IconImage.create(
+                "resources/images/mainMenu/btn-start-hover.png",
+                250, 50
+        );
+        ImageIcon pressed = IconImage.create(
+                "resources/images/mainMenu/btn-start-press.png",
+                250, 50
+        );
+
+        ImageIcon enormal = IconImage.create(
+                "resources/images/mainMenu/btn-start-main.png",
+                510, 50
+        );
+        ImageIcon ehover = IconImage.create(
+                "resources/images/mainMenu/btn-start-hover.png",
+                510, 50
+        );
+        ImageIcon epressed = IconImage.create(
+                "resources/images/mainMenu/btn-start-press.png",
+                510, 50
+        );
+
+        JButton start_game = new IconBtn(normal, hover, pressed);
+        JButton tutorial = new IconBtn(normal, hover, pressed);
+        JButton shop = new IconBtn(normal, hover, pressed);
+        JButton setting = new IconBtn(normal, hover, pressed);
+        JButton exit = new IconBtn(enormal, ehover, epressed);
+
+        // ================= Row 1 =================
+        JPanel row01 = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 0));
+        row01.setOpaque(false);
+        row01.setMaximumSize(new Dimension(Integer.MAX_VALUE, normal.getIconHeight()));
+        row01.add(start_game);
+        row01.add(tutorial);
+
+        // ================= Row 2 =================
+        JPanel row02 = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 0));
+        row02.setOpaque(false);
+        row02.setMaximumSize(new Dimension(Integer.MAX_VALUE, normal.getIconHeight()));
+        row02.add(shop);
+        row02.add(setting);
+
+        // ================= Exit Row =================
+        JPanel exitRow = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
+        exitRow.setOpaque(false);
+        exitRow.setMaximumSize(new Dimension(Integer.MAX_VALUE, enormal.getIconHeight()));
+        exitRow.add(exit);
+
+        // ================= Add to Container =================
+        center_contain.add(row01);
+        center_contain.add(Box.createVerticalStrut(5));
+        center_contain.add(row02);
+        center_contain.add(Box.createVerticalStrut(8));
+        center_contain.add(exitRow);
+
+        add(center_contain, BorderLayout.CENTER);
+
+        // ================= Action =================
+        MainBtn action_btn = new MainBtn(dialog, frame);
+
 
         start_game.setActionCommand("Start Game");
         tutorial.setActionCommand("Tutorial");
         shop.setActionCommand("Shop");
-        exit.setActionCommand("Exit");
         setting.setActionCommand("Setting");
-
-        setBtn.settingBtn(start_game,200,35);
-        setBtn.settingBtn(tutorial,200,35);
-        setBtn.settingBtn(shop,200,35);
-        setBtn.settingBtn(setting,200,35);
-
-        con_Main_btn.add(start_game);
-        con_Main_btn.add(tutorial);
-        con_Main_btn.add(shop);
-        con_Main_btn.add(setting);
-
-        center_contain.add(con_Main_btn);
-        // -------------------------------------
-
-
-
-        // Button Exit
-        JPanel con_exit = new JPanel();
-        setBtn.settingBtn(exit,500,35);
-        con_exit.add(exit);
-        con_exit.setBorder(BorderFactory.createEmptyBorder(5,0,0,0));
-        center_contain.add(con_exit);
-        con_exit.setOpaque(false);
-        // -------------------------------------
-
-
-        // ส่งค่าแต่ละปุ่มไปยัง class ปุ่มที่สร้างแยกไว้
-        MainBtn action_btn = new MainBtn(dialog,frame);
+        exit.setActionCommand("Exit");
 
 
         start_game.addActionListener(action_btn);
@@ -94,11 +127,6 @@ public class MainMenuPage extends JPanel {
         shop.addActionListener(action_btn);
         exit.addActionListener(action_btn);
         setting.addActionListener(action_btn);
-
-
-
-        add(center_contain, BorderLayout.CENTER);
-
     }
 
     @Override
@@ -110,4 +138,4 @@ public class MainMenuPage extends JPanel {
     public JDialog getDialog() {
         return dialog;
     }
-    }
+}
