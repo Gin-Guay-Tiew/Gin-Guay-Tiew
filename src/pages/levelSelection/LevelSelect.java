@@ -1,31 +1,35 @@
 package pages.levelSelection;
 
-import config.CustomFontLoader;
+import components.BackBtn;
+import components.MoneyDisplay;
 import pages.MainFrame;
 
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
 public class LevelSelect extends JPanel {
-
-    private final Font loadedFont = CustomFontLoader.loadCustomFont("Jersey10.ttf");
     private MainFrame mainFrame;
 
     public LevelSelect(MainFrame mainFrame) {
         this.mainFrame = mainFrame;
+        setLayout(new BorderLayout());
         add(topPanel(), BorderLayout.NORTH);
     }
 
     private JPanel topPanel() {
+        // TOP_PANEL Configuration //
         JPanel topPanel = new JPanel(new BorderLayout());
+        topPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 20));
+        topPanel.setBackground(Color.orange);
+
+        // Components //
         JButton backBtn = new BackBtn();
         JPanel moneyDisplay = new MoneyDisplay();
 
-        topPanel.setBorder(new EmptyBorder(0, 0, 0, 75));
-
+        // Adding //
         topPanel.add(backBtn, BorderLayout.WEST);
         topPanel.add(moneyDisplay, BorderLayout.EAST);
+
         return topPanel;
     }
 }

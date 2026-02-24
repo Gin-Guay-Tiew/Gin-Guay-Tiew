@@ -14,9 +14,9 @@ public class MainFrame extends JFrame{
     private JPanel container = new JPanel(cardLayout);
 
 
-    /* สร้างหน้า page จาก class ที่เราสร้างใน folder pages
-    เมื่อสร้าง class page เสร็จแล้วในทำเอาไปใส่ container.add(ojb_page,/path)
-    */
+//    /* สร้างหน้า page จาก class ที่เราสร้างใน folder pages
+//    เมื่อสร้าง class page เสร็จแล้วในทำเอาไปใส่ container.add(ojb_page,/path)
+//    */
     public void showPage(String name){
         cardLayout.show(container, name);
     }
@@ -34,5 +34,5 @@ public class MainFrame extends JFrame{
 
         add(container);
         setVisible(true);
-
+        setResizable(false);
     }}

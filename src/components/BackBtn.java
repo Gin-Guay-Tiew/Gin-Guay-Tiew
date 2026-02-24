@@ -1,4 +1,4 @@
-package pages.levelSelection;
+package components;
 
 import config.CustomFontLoader;
 
@@ -8,10 +8,9 @@ import java.awt.font.TextLayout;
 import java.awt.geom.AffineTransform;
 
 public class BackBtn extends JButton {
-
     public BackBtn() {
         super("< Back");
-        Font JerseyFont = CustomFontLoader.loadCustomFont("Jersey10.ttf");
+        Font JerseyFont = CustomFontLoader.loadCustomFont("resources/Jersey10.ttf");
         setFont(JerseyFont.deriveFont(24f));
         setBorderPainted(false);
         setContentAreaFilled(false);
