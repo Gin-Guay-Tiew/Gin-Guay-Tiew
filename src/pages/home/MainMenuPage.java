@@ -24,7 +24,7 @@ public class MainMenuPage extends JPanel implements ActionListener {
 
     public void actionPerformed(ActionEvent e){
         if (e.getSource().equals(next)){
-            frame.showPage("calculatorUI");
+            frame.showPage("levelSelect");
         }
     }
 }

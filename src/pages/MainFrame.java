@@ -1,6 +1,7 @@
 package pages;
 
 import pages.home.MainMenuPage;
+import pages.levelSelection.LevelSelect;
 
 import javax.swing.*;
 import java.awt.*;
@@ -26,8 +27,10 @@ public class MainFrame extends JFrame{
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
         MainMenuPage mainMenuPage = new MainMenuPage(this);
+        LevelSelect levelSelectPage = new LevelSelect(this);
 
-        container.add(mainMenuPage,"menu");
+        container.add(mainMenuPage,"mainMenu");
+        container.add(levelSelectPage,"levelSelect");
 
         add(container);
         setVisible(true);
