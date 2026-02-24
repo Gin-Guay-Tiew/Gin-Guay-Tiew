@@ -1,3 +1,12 @@
+/**
+ * Create JLabel with stroke attached.
+ * Declaration : private final Font jerseyFont = CustomFontLoader.loadCustomFont("resources/Jersey10.ttf");
+ * Usage : Your_JLabel.deriveFont(32f);
+ *
+ * @param fontFileName Path of font file.
+ * @return Loaded Font object.
+ */
+
 package utilities;
 
 import java.awt.*;

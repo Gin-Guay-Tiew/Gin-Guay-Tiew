@@ -1,7 +1,7 @@
 package pages;
 
 import pages.home.MainMenuPage;
-import pages.levelSelection.LevelSelect;
+import pages.levelSelection.LevelSelectPage;
 
 import javax.swing.*;
 import java.awt.*;
@@ -28,7 +28,7 @@ public class MainFrame extends JFrame{
         setLocationRelativeTo(null);
 
         MainMenuPage mainMenuPage = new MainMenuPage(this);
-        LevelSelect levelSelectPage = new LevelSelect(this);
+        LevelSelectPage levelSelectPage = new LevelSelectPage(this);
 
         container.add(mainMenuPage,"mainMenu");
         container.add(levelSelectPage,"levelSelect");

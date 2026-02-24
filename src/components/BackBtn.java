@@ -5,11 +5,12 @@ import utilities.CustomFontLoader;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
-import java.awt.font.TextLayout;
-import java.awt.geom.AffineTransform;
+import java.awt.font.*;
+import java.awt.geom.*;
 
 public class BackBtn extends JButton {
-    private final Font jerseyFont = CustomFontLoader.loadCustomFont("resources/Jersey10.ttf");;
+    private final Font jerseyFont = CustomFontLoader.loadCustomFont("resources/Jersey10.ttf");
+    ;
 
     public BackBtn() {
         // BUTTON Configuration //
@@ -17,8 +18,7 @@ public class BackBtn extends JButton {
         setBorderPainted(false);
         setContentAreaFilled(false);
         setFocusPainted(false);
-        setBorder(new EmptyBorder(10, 10, 10, 10));
-        setFont(jerseyFont.deriveFont(24f));
+        setFont(jerseyFont.deriveFont(32f));
     }
 
     // Graphics2D Outline & Hover Effects

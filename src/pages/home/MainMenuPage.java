@@ -79,10 +79,11 @@ public class MainMenuPage extends JPanel {
 
 
         // ส่งค่าแต่ละปุ่มไปยัง class ปุ่มที่สร้างแยกไว้
-        MainBtn action_btn_dialog = new MainBtn(dialog);
-        MainBtn action_btn = new MainBtn(dialog);
+        MainBtn action_btn = new MainBtn(dialog,frame);
+
+
         start_game.addActionListener(action_btn);
-        tutorial.addActionListener(action_btn_dialog);
+        tutorial.addActionListener(action_btn);
         shop.addActionListener(action_btn);
         exit.addActionListener(action_btn);
         setting.addActionListener(action_btn);
