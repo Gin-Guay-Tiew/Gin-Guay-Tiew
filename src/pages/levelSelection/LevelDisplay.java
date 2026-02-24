@@ -56,7 +56,7 @@ public class LevelDisplay extends JPanel {
                     @Override
                     public void mouseEntered(MouseEvent e) {
                         iconShadow.setIcon(shadow_Selected);
-                        iconLevel.setBorder(BorderFactory.createEmptyBorder(0, 0, 15, 0));
+                        iconLevel.setBorder(BorderFactory.createEmptyBorder(15, 0, 0, 0));
                     }
 
                     @Override
