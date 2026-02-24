@@ -7,19 +7,28 @@ import javax.swing.*;
 import java.awt.*;
 
 public class MoneyDisplay extends JPanel {
-    private final Font jerseyFont = CustomFontLoader.loadCustomFont("resources/Jersey10.ttf");;
+    private final Font jerseyFont = CustomFontLoader.loadCustomFont("resources/Jersey10.ttf");
+    ;
 
     public MoneyDisplay() {
         // DISPLAY Configuration //
-        setBorder(BorderFactory.createEmptyBorder(5, 10, 5, 10));
-        setBackground(Color.orange);
+        setLayout(new BorderLayout());
+        setBorder(BorderFactory.createEmptyBorder(10, 15, 5, 15));
+        setBackground(new Color(225, 225, 225));
 
         // MONEY_LABEL Configuration //
         JLabel moneyLabel = new JLabel("Money");
         ImageIcon icon = IconImage.create("resources/images/Money.png", 20, 20); // Icon for JLabel
-        moneyLabel.setFont(jerseyFont);
+        moneyLabel.setFont(jerseyFont.deriveFont(17f));
         moneyLabel.setIcon(icon);
+        moneyLabel.setForeground(new Color(100, 100, 100));
+        moneyLabel.setVerticalAlignment(JLabel.CENTER);
 
-        add(moneyLabel);
+        // MONEY_AMOUNT Configuration //
+        JLabel moneyAmount = new JLabel("100,000 N");
+        moneyAmount.setFont(jerseyFont.deriveFont(25f));
+
+        add(moneyLabel, BorderLayout.NORTH);
+        add(moneyAmount, BorderLayout.SOUTH);
     }
 }
