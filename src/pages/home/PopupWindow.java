@@ -34,6 +34,7 @@ public class PopupWindow {
             dialog.setSize(442, 108);
             dialog.setUndecorated(true);
             dialog.setLocationRelativeTo(frame);
+            dialog.setVisible(true);
 
             // Create text button
             btn.setLayout(new FlowLayout(FlowLayout.CENTER, 15, 10));
