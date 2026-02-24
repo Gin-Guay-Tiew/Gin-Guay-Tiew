@@ -1,4 +1,4 @@
-package pages.home;
+package pages.mainMenu;
 
 
 import javax.swing.BorderFactory;

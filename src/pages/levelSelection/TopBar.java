@@ -14,12 +14,12 @@ public class TopBar extends JPanel {
     public TopBar(MainFrame mainFrame) {
         this.mainFrame = mainFrame;
 
-        // TOP_PANEL Configuration //
+        // TopPanel
         setLayout(new BorderLayout());
-        setBorder(BorderFactory.createEmptyBorder(0, 10, 0, 55)); // Padding
+        setBorder(BorderFactory.createEmptyBorder(0, 10, 0, 55)); // Padding :3
         setOpaque(false);
 
-        // Components //
+        // Components
         JButton backBtn = new BackBtn();
         JPanel moneyDisplay = new MoneyDisplay();
 
@@ -27,7 +27,6 @@ public class TopBar extends JPanel {
             mainFrame.showPage("mainMenu");
         });
 
-        // Adding //
         add(backBtn, BorderLayout.WEST);
         add(moneyDisplay, BorderLayout.EAST);
     }

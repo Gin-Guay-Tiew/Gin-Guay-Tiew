@@ -3,7 +3,6 @@ package components;
 import utilities.CustomFontLoader;
 
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.font.*;
 import java.awt.geom.*;
@@ -13,7 +12,6 @@ public class BackBtn extends JButton {
     ;
 
     public BackBtn() {
-        // BUTTON Configuration //
         super("< Back");
         setBorderPainted(false);
         setContentAreaFilled(false);

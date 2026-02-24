@@ -11,20 +11,20 @@ public class MoneyDisplay extends JPanel {
     ;
 
     public MoneyDisplay() {
-        // DISPLAY Configuration //
+        // Display
         setLayout(new BorderLayout());
         setBorder(BorderFactory.createEmptyBorder(10, 15, 5, 15));
         setBackground(new Color(225, 225, 225));
 
-        // MONEY_LABEL Configuration //
+        // MoneyLabel
         JLabel moneyLabel = new JLabel("Money");
-        ImageIcon icon = IconImage.create("resources/images/Money.png", 20, 20); // Icon for JLabel
+        ImageIcon icon = IconImage.create("resources/images/shared/Money.png", 20, 20); // Icon for JLabel
         moneyLabel.setFont(jerseyFont.deriveFont(17f));
         moneyLabel.setIcon(icon);
         moneyLabel.setForeground(new Color(100, 100, 100));
         moneyLabel.setVerticalAlignment(JLabel.CENTER);
 
-        // MONEY_AMOUNT Configuration //
+        // MoneyAmount
         JLabel moneyAmount = new JLabel("100,000 N");
         moneyAmount.setFont(jerseyFont.deriveFont(25f));
 

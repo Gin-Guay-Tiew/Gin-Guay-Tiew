@@ -4,6 +4,7 @@ import utilities.CustomJLabel;
 import utilities.CustomFontLoader;
 import utilities.IconImage;
 import utilities.IconFilter;
+import utilities.UiAnimator;
 
 import javax.swing.*;
 import java.awt.*;
@@ -14,9 +15,10 @@ public class LevelDisplay extends JPanel {
     String[] levelsName = {"Wat Plook", "Vidya Garden<br>Market", "KMITL", "Suvarnabhumi<br>Airport", "Jurassic Park"};
 
     public LevelDisplay() {
-        // DISPLAY Configuration //
+        // Display
         setLayout(new GridLayout(2, 3));
         setBorder(BorderFactory.createEmptyBorder(0, 0, 50, 0));
+        setOpaque(false);
 
         // Mapping array to get 1 2 3 / 6 5 4 order
         int[] displayOrder = {1, 2, 3, 6, 5, 4};
@@ -29,7 +31,7 @@ public class LevelDisplay extends JPanel {
             if (levelNum <= levelsName.length) {
 
                 // Shadow (Bottom Layer)
-                ImageIcon rawShadow = IconImage.create("resources/images/levels/Shadow.png", 150, 40);
+                ImageIcon rawShadow = IconImage.create("resources/images/levelSelection/Shadow.png", 150, 40);
                 ImageIcon shadow_Selected = IconFilter.setOpacity(rawShadow, 0.35f);
                 ImageIcon shadow_Unselect = IconFilter.setOpacity(rawShadow, 0.1f);
                 JLabel iconShadow = new JLabel(shadow_Unselect);
@@ -39,7 +41,7 @@ public class LevelDisplay extends JPanel {
                 iconShadow.setBorder(BorderFactory.createEmptyBorder(100, 0, 0, 0));
 
                 // Level Image (Middle Layer)
-                String imagePath = "resources/images/levels/Level" + levelNum + ".png";
+                String imagePath = "resources/images/levelSelection/Level" + levelNum + ".png";
                 ImageIcon icon_Selected = IconImage.create(imagePath, 130, 130);
                 ImageIcon icon_Unselected = IconFilter.cloneDark(icon_Selected, 100);
                 ImageIcon icon_Locked = IconFilter.cloneDark(icon_Selected, 200);
@@ -52,17 +54,19 @@ public class LevelDisplay extends JPanel {
                 iconLevel.setAlignmentY(0.5f);
                 iconLevel.setCursor(new Cursor(Cursor.HAND_CURSOR));
 
+                // Animator
+                UiAnimator animator = new UiAnimator(iconLevel);
                 iconLevel.addMouseListener(new MouseAdapter() {
                     @Override
                     public void mouseEntered(MouseEvent e) {
                         iconShadow.setIcon(shadow_Selected);
-                        iconLevel.setBorder(BorderFactory.createEmptyBorder(15, 0, 0, 0));
+                        animator.animatePos(10, 2, 10);
                     }
 
                     @Override
                     public void mouseExited(MouseEvent e) {
                         iconShadow.setIcon(shadow_Unselect);
-                        iconLevel.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
+                        animator.animatePos(0, 2, 10);
                     }
                 });
 
@@ -73,7 +77,6 @@ public class LevelDisplay extends JPanel {
                 textLabel.setAlignmentY(1f);
                 textLabel.setBorder(BorderFactory.createEmptyBorder(50, 10, 0, 10));
 
-                // Add To Panel
                 levelContainer.add(textLabel);
                 levelContainer.add(iconLevel);
                 levelContainer.add(iconShadow);

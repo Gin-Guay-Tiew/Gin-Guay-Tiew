@@ -1,6 +1,6 @@
 package pages;
 
-import pages.home.MainMenuPage;
+import pages.mainMenu.MainMenuPage;
 import pages.levelSelection.LevelSelectPage;
 
 import javax.swing.*;

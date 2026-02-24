@@ -12,16 +12,13 @@ public class LevelSelectPage extends JPanel {
 
     public LevelSelectPage(MainFrame mainFrame) {
         this.mainFrame = mainFrame;
-        this.bgImage = new ImageIcon("resources/images/levels/Background.png").getImage();
+        this.bgImage = new ImageIcon("resources/images/levelSelection/Background.png").getImage();
 
         setLayout(new BorderLayout());
         setOpaque(true);
 
-        // LEVEL_DISPLAY Configuration //
         LevelDisplay display = new LevelDisplay();
-        display.setOpaque(false);
 
-        // Add To Panel
         add(new TopBar(mainFrame), BorderLayout.NORTH);
         add(display, BorderLayout.CENTER);
     }
