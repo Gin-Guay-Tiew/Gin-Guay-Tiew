@@ -10,11 +10,11 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-public class LevelDisplay extends JPanel {
+public class LevelsDisplay extends JPanel {
     private final Font jerseyFont = CustomFontLoader.loadCustomFont("resources/Jersey10.ttf");
     String[] levelsName = {"Wat Plook", "Vidya Garden<br>Market", "KMITL", "Suvarnabhumi<br>Airport", "Jurassic Park"};
 
-    public LevelDisplay() {
+    public LevelsDisplay() {
         // Display
         setLayout(new GridLayout(2, 3));
         setBorder(BorderFactory.createEmptyBorder(0, 0, 50, 0));

@@ -17,7 +17,7 @@ public class LevelSelectPage extends JPanel {
         setLayout(new BorderLayout());
         setOpaque(true);
 
-        LevelDisplay display = new LevelDisplay();
+        LevelsDisplay display = new LevelsDisplay();
 
         add(new TopBar(mainFrame), BorderLayout.NORTH);
         add(display, BorderLayout.CENTER);

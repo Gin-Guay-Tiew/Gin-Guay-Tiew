@@ -17,6 +17,11 @@ public class IconImage {
      */
     public static ImageIcon create(String path, int width, int height) {
         ImageIcon icon = new ImageIcon(path);
+
+        if (icon.getIconWidth() == -1) {
+            throw new RuntimeException("FILE NOT FOUND at: " + new java.io.File(path).getAbsolutePath());
+        }
+
         Image image = icon.getImage();
         Image newImg = image.getScaledInstance(width, height, Image.SCALE_SMOOTH);
         return new ImageIcon(newImg);
