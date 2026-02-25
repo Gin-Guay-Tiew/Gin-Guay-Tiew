@@ -31,7 +31,7 @@ public class Transition {
     /**
      * Resets the component size to zero and expands it to a fixed maximum size.
      * <p>
-     * Resets size to 0, sets alpha to 1, and expand to 1000px.
+     * Resets size to 0, sets alpha to 1, and expand to 1500px.
      *
      * @param step The amount of pixels to grow per animation tick.
      */
@@ -73,8 +73,8 @@ public class Transition {
     private void startAnimation(int step) {
         timer = new Timer(10, e -> {
             currentSize += step;
-            if (currentSize >= 1000) {
-                currentSize = 1000;
+            if (currentSize >= 1500) {
+                currentSize = 1500;
                 timer.stop();
             }
             updateBoundsAndIcon();
