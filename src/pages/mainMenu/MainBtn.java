@@ -3,7 +3,6 @@ package pages.mainMenu;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import pages.MainFrame;
 import utilities.PopupWindow;
 
@@ -25,9 +24,6 @@ public class MainBtn implements ActionListener {
         }
 
         if (e.getActionCommand().equals("Tutorial")) {
-
-            System.out.println("Tutorial clicked");
-
             // Create popUp
             String[] btnPaths = {
                     "resources/images/shared/buttons/No",
@@ -40,10 +36,8 @@ public class MainBtn implements ActionListener {
             };
             dialog = pop.createPopup(
                     frame,
-                    "Tutorial Prompt",                                   // Title
-                    true,                                                     // Modal
-                    "Do you want to play the tutorial?",                      // Message
-                    "resources/images/shared/popups/Demo.png",    // Background Path
+                    "Do you want to play the tutorial?", // Message
+                    "resources/images/shared/popups/Demo.png", // Background Path
                     btnPaths,
                     btnLabels,
                     btnActions
@@ -59,7 +53,24 @@ public class MainBtn implements ActionListener {
         }
 
         if (e.getActionCommand().equals("Exit")) {
-            System.out.println("Exit");
+            // Create popUp
+            String[] btnPaths = {
+                    "resources/images/shared/buttons/No",
+                    "resources/images/shared/buttons/Yes"
+            };
+            String[] btnLabels = {"No", "Yes"};
+            ActionListener[] btnActions = {
+                    null, // The "No" button logic is handled internally (dispose)
+                    ex -> frame.closeApp()
+            };
+            dialog = pop.createPopup(
+                    frame,
+                    "Do you want to close the game?", // Message
+                    "resources/images/shared/popups/Demo.png", // Background Path
+                    btnPaths,
+                    btnLabels,
+                    btnActions
+            );
         }
     }
 }
