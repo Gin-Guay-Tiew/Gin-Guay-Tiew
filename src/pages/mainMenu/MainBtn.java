@@ -3,6 +3,7 @@ package pages.mainMenu;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import pages.MainFrame;
 import utilities.PopupWindow;
 
@@ -28,21 +29,21 @@ public class MainBtn implements ActionListener {
 
             System.out.println("Tutorial clicked");
 
-           dialog = pop.createPopup(
-                   frame,
-                   "tutorial",
+            dialog = pop.createPopup(
+                    frame,
+                    "tutorial",
                     true,
-                   "Do you want to play Tutorial",
-                   "resources/images/mainMenu/8bit-pixel-graphic-blue-sky-background-with-clouds-vector.jpg",
-                   new String[]{"resources/images/mainMenu/BtnShort",null},
-                   new String[]{"Yes", "No"},
-                   new ActionListener[]{
-                          ev -> {
-                               frame.getNavigator().toPage("tutorial",true,250);
-                            },
-                           null
-                  }
-           );
+                    "Do you want to play Tutorial",
+                    "resources/images/mainMenu/PopupBgTest.jpg",
+                    new String[]{"resources/images/shared/buttons/No", "resources/images/shared/buttons/Yes"},
+                    new String[]{"No", "Yes"},
+                    new ActionListener[]{
+                            null,
+                            ev -> {
+                                frame.getNavigator().toPage("levelSelect", true, 250);
+                            }
+                    }
+            );
         }
 
         if (e.getActionCommand().equals("Shop")) {

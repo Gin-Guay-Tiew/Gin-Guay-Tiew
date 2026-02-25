@@ -46,6 +46,15 @@ public class ImageJButton extends JButton {
             public void mousePressed(MouseEvent e) {
                 setIcon(btnImage_Clicked);
             }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                if (getBounds().contains(e.getPoint())) {
+                    setIcon(btnImage_Hover);
+                } else {
+                    setIcon(btnImage);
+                }
+            }
         });
     }
 }

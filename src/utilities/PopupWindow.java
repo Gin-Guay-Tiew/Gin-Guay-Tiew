@@ -127,10 +127,10 @@ public class PopupWindow {
         for (int i = 0; i < buttonTexts.length; i++) {
             JButton btn;
             if (images == null || images[i] == null || i >= images.length){
-                btn = new ImageJButton("resources/images/mainMenu/BtnLong", ".png", 30,150,50);
+                btn = new ImageJButton("resources/images/shared/buttons/Yes", ".png", 30,80,50);
             }
             else {
-                btn = new ImageJButton(images[i], ".png", 30,150,50);
+                btn = new ImageJButton(images[i], ".png", 30,80,50);
             }
 
             // ถ้าเป็น No → ปิด dialog
