@@ -21,7 +21,6 @@ public class MainBtn implements ActionListener {
     public void actionPerformed(ActionEvent e) {
 
         if (e.getActionCommand().equals("Start Game")) {
-
             frame.getNavigator().toPage("levelSelect", true, 250);
         }
 
@@ -29,20 +28,25 @@ public class MainBtn implements ActionListener {
 
             System.out.println("Tutorial clicked");
 
+            // Create popUp
+            String[] btnPaths = {
+                    "resources/images/shared/buttons/No",
+                    "resources/images/shared/buttons/Yes"
+            };
+            String[] btnLabels = {"No", "Yes"};
+            ActionListener[] btnActions = {
+                    null, // The "No" button logic is handled internally (dispose)
+                    ex -> frame.getNavigator().toPage("levelSelect", true, 250)
+            };
             dialog = pop.createPopup(
                     frame,
-                    "tutorial",
-                    true,
-                    "Do you want to play Tutorial",
-                    "resources/images/mainMenu/PopupBgTest.jpg",
-                    new String[]{"resources/images/shared/buttons/No", "resources/images/shared/buttons/Yes"},
-                    new String[]{"No", "Yes"},
-                    new ActionListener[]{
-                            null,
-                            ev -> {
-                                frame.getNavigator().toPage("levelSelect", true, 250);
-                            }
-                    }
+                    "Tutorial Prompt",                                   // Title
+                    true,                                                     // Modal
+                    "Do you want to play the tutorial?",                      // Message
+                    "resources/images/shared/popups/Demo.png",    // Background Path
+                    btnPaths,
+                    btnLabels,
+                    btnActions
             );
         }
 
@@ -55,7 +59,7 @@ public class MainBtn implements ActionListener {
         }
 
         if (e.getActionCommand().equals("Exit")) {
-            frame.getOut();
+            System.out.println("Exit");
         }
     }
 }
