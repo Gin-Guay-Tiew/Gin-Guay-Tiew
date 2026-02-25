@@ -7,20 +7,16 @@ import java.awt.*;
 
 public class LevelSelectPage extends JPanel {
 
-    private MainFrame mainFrame;
     private Image bgImage;
 
     public LevelSelectPage(MainFrame mainFrame) {
-        this.mainFrame = mainFrame;
         this.bgImage = new ImageIcon("resources/images/levelSelection/Background.png").getImage();
 
         setLayout(new BorderLayout());
         setOpaque(true);
 
-        LevelsDisplay display = new LevelsDisplay();
-
         add(new TopBar(mainFrame), BorderLayout.NORTH);
-        add(display, BorderLayout.CENTER);
+        add(new LevelsDisplay(mainFrame), BorderLayout.CENTER);
     }
 
     // Draw BG Image

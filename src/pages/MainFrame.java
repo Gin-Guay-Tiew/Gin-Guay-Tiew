@@ -2,6 +2,7 @@ package pages;
 
 import pages.mainMenu.MainMenuPage;
 import pages.levelSelection.LevelSelectPage;
+import pages.settingMenu.MainSettingPage;
 import utilities.IconImage;
 import utilities.PageNavigator;
 import utilities.Transition;
@@ -44,8 +45,10 @@ public class MainFrame extends JFrame {
 
         // Initialize the navigator before adding pages
         navigator = new PageNavigator(mainPanel, cardLayout, animator);
-        mainPanel.add(new MainMenuPage(this), MAIN_MENU);
-        mainPanel.add(new LevelSelectPage(this), LEVEL_SELECT);
+
+        mainPanel.add(new MainMenuPage(this), MAIN_MENU); // + MainMenu
+        mainPanel.add(new LevelSelectPage(this), LEVEL_SELECT); // + LevelSelection
+
         navigator.toPage(MAIN_MENU, false);
 
         add(mainPanel);

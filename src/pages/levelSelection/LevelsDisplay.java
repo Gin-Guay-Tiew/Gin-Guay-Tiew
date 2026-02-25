@@ -1,19 +1,30 @@
 package pages.levelSelection;
 
-import utilities.CustomJLabel;
-import utilities.CustomFontLoader;
-import utilities.IconImage;
-import utilities.IconFilter;
+import pages.MainFrame;
+import utilities.*;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class LevelsDisplay extends JPanel {
     private final Font jerseyFont = CustomFontLoader.loadCustomFont("resources/Jersey10.ttf");
-    String[] levelsName = {"Wat Plook", "Vidya Garden<br>Market", "KMITL", "Suvarnabhumi<br>Airport", "Jurassic Park"};
+    private List<Level> levelsInfo;
 
-    public LevelsDisplay() {
+    private void initLevels() {
+        levelsInfo = new ArrayList<>();
+        levelsInfo.add(new Level("Wat Plook", 0, true));
+        levelsInfo.add(new Level("Vidya Garden<br>Market", 1000, false));
+        levelsInfo.add(new Level("KMITL", 2000, false));
+        levelsInfo.add(new Level("Suvarnabhumi<br>Airport", 3000, false));
+        levelsInfo.add(new Level("Jurassic Park", 4000, false));
+    }
+
+    public LevelsDisplay(MainFrame mainFrame) {
+        initLevels();
+
         // Display
         setLayout(new GridLayout(2, 3));
         setBorder(BorderFactory.createEmptyBorder(0, 0, 50, 0));
@@ -27,9 +38,10 @@ public class LevelsDisplay extends JPanel {
             levelContainer.setLayout(new OverlayLayout(levelContainer));
             levelContainer.setOpaque(false);
 
-            if (levelNum <= levelsName.length) {
+            if (levelNum <= levelsInfo.toArray().length) {
                 // Level name (Top Layer)
-                CustomJLabel textLabel = new CustomJLabel(levelsName[levelNum - 1], 5f);
+                Level current_lv = levelsInfo.get(levelNum - 1);
+                CustomJLabel textLabel = new CustomJLabel(current_lv.name, 5f);
                 textLabel.setFont(jerseyFont.deriveFont(25f));
                 textLabel.setTextColor(Color.WHITE);
                 textLabel.setAlignmentX(0.5f);
@@ -76,8 +88,8 @@ public class LevelsDisplay extends JPanel {
                     @Override
                     public void mouseEntered(MouseEvent e) {
                         if (iconLevel.getIcon() == icon_Unselected) { iconLevel.setIcon(icon_Selected); }
-                        iconLevel.setBorder(BorderFactory.createEmptyBorder(15, 0, 0, 0));
-                        lockIcon.setBorder(BorderFactory.createEmptyBorder(15, 0, 0, 0));
+                        iconLevel.setBorder(BorderFactory.createEmptyBorder(5, 0, 0, 0));
+                        lockIcon.setBorder(BorderFactory.createEmptyBorder(5, 0, 0, 0));
                         iconShadow.setIcon(shadow_Selected);
                         textLabel.setTextColor(Color.CYAN);
                     }
@@ -91,6 +103,12 @@ public class LevelsDisplay extends JPanel {
                         textLabel.setTextColor(Color.white);
                     }
                 });
+                iconLevel.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        System.out.println("You need "+current_lv.unlockCost+" Noodels to unlock this!");
+                    }
+                });
 
                 levelContainer.add(textLabel);
                 levelContainer.add(lockIcon);
@@ -101,6 +119,18 @@ public class LevelsDisplay extends JPanel {
             }
 
             add(levelContainer);
+        }
+    }
+
+    private static class Level {
+        String name;
+        int unlockCost;
+        boolean isUnlocked;
+
+        public Level(String name, int unlockCost, boolean isUnlocked) {
+            this.name = name;
+            this.unlockCost = unlockCost;
+            this.isUnlocked = isUnlocked;
         }
     }
 }

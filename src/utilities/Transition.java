@@ -10,6 +10,7 @@ import java.awt.image.BufferedImage;
  * This class uses a {@link Timer} to animate a transition.
  */
 public class Transition {
+
     private final JButton target;
     private final Image originalImage;
     private Timer timer;

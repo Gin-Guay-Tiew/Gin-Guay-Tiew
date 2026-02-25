@@ -4,7 +4,6 @@ import javax.swing.*;
 import java.awt.*;
 
 public class IconBtn extends JButton {
-
     public IconBtn(ImageIcon normal, ImageIcon hover, ImageIcon pressed) {
 
         setIcon(normal);

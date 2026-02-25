@@ -11,6 +11,7 @@ import java.awt.geom.*;
  * Supports basic multi-line text using the {@code <br>} tag.
  */
 public class CustomJLabel extends JLabel {
+
     private float strokePixels;
     private Color outlineColor = Color.BLACK;
 
