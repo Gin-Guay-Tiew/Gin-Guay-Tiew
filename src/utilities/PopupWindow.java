@@ -53,7 +53,7 @@ public class PopupWindow {
     }
 
     /* ===================== BOUNCE EFFECT ===================== */
-    private void showWithBounceEffect(JFrame frame) {
+    private void showWithBounceEffect(JFrame frame, JDialog overlay) {
 
         final int targetWidth = Math.min(dialog.getWidth() + 25, 550);
         final int targetHeight = dialog.getHeight();
@@ -102,19 +102,38 @@ public class PopupWindow {
         });
 
         timer.start();
+
+        // Show the dark background overlay before the main dialog
+        if (overlay != null) {
+            overlay.setVisible(true);
+        }
+
         dialog.setVisible(true);
     }
 
 
     /* ===================== CREATE POPUP ===================== */
-
-    public JDialog createPopup(JFrame frame, String title, boolean modal, String text, String bgPath, String[] images, String[] buttonTexts, ActionListener[] actions) {
+    public JDialog createPopup(JFrame frame, String text, String bgPath, String[] images, String[] buttonTexts, ActionListener[] actions) {
 
         if (frame == null)
             throw new IllegalArgumentException("Frame cannot be null");
 
-        dialog = new JDialog(frame, title, modal);
+        /* ===== DARK OVERLAY SETUP ===== */
+        JDialog overlay = new JDialog(frame, false);
+        overlay.setUndecorated(true);
+        overlay.setBackground(new Color(0, 0, 0, 150));
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        overlay.setBounds(0, 0, screenSize.width, screenSize.height);
+
+        /* ===== MAIN DIALOG SETUP ===== */
+        dialog = new JDialog(overlay, true);
         dialog.setUndecorated(true);
+        dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosed(java.awt.event.WindowEvent e) {
+                overlay.dispose();
+            }
+        });
 
         /* ===== BACKGROUND IMAGE ===== */
         ImageIcon backgroundIcon = IconImage.create(bgPath, 200, 200);
@@ -147,12 +166,10 @@ public class PopupWindow {
                 btn = new ImageJButton(images[i], ".png", 30, 70, 40);
             }
 
-            // ถ้าเป็น No → ปิด dialog
             if (buttonTexts[i].equalsIgnoreCase("No")) {
                 btn.addActionListener(e -> dialog.dispose());
             }
 
-            // ถ้ามี action ส่งมา
             if (actions != null && i < actions.length && actions[i] != null) {
                 int index = i;
                 btn.addActionListener(e -> {
@@ -171,7 +188,9 @@ public class PopupWindow {
         dialog.setContentPane(bgPanel);
         dialog.setBackground(new Color(0, 0, 0, 0));
         dialog.pack();
-        showWithBounceEffect(frame);
+
+        // Pass the overlay into the bounce animation
+        showWithBounceEffect(frame, overlay);
 
         return dialog;
     }
