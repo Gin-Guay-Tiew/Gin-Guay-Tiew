@@ -33,7 +33,8 @@ public class MainBtn implements ActionListener {
                     frame,
                     "tutorial",
                     true,
-                    "Do you want to play Tutorial",
+                    "Do you wa" +
+                            "n\nnt to play jkljjjjjjjj\njjjjjjjj\njjjjjjjj\njjjjjjj\njjjjjjjjjjjjjjjjjjjjjjjjjjjjjj\njjjjTuto\nrial",
                     "resources/images/mainMenu/PopupBgTest.jpg",
                     new String[]{"resources/images/shared/buttons/No", "resources/images/shared/buttons/Yes"},
                     new String[]{"No", "Yes"},

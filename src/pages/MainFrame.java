@@ -2,7 +2,6 @@ package pages;
 
 import pages.mainMenu.MainMenuPage;
 import pages.levelSelection.LevelSelectPage;
-import pages.settingMenu.MainSettingPage;
 import utilities.IconImage;
 import utilities.PageNavigator;
 import utilities.Transition;
@@ -26,6 +25,8 @@ public class MainFrame extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setResizable(false);
+        ImageIcon img = new ImageIcon("resources/images/shared/AppIcon.png");
+        setIconImage(img.getImage());
 
         // Layered Position Setup (TransitionFrame Positioning :D)
         JPanel glass = (JPanel) getGlassPane();
@@ -45,6 +46,16 @@ public class MainFrame extends JFrame {
 
         // Initialize the navigator before adding pages
         navigator = new PageNavigator(mainPanel, cardLayout, animator);
+
+
+
+
+
+
+
+
+
+
 
         mainPanel.add(new MainMenuPage(this), MAIN_MENU); // + MainMenu
         mainPanel.add(new LevelSelectPage(this), LEVEL_SELECT); // + LevelSelection
