@@ -1,30 +1,45 @@
 package utilities;
 
-import javax.swing.BorderFactory;
-import javax.swing.border.Border;
 import javax.swing.*;
+import javax.swing.border.Border;
+import java.awt.event.ActionListener;
+import javax.swing.border.EmptyBorder;
+import javax.swing.text.*;
 import java.awt.*;
 
 public class PopupWindow {
 
     private JDialog dialog;
-    private JButton btn1;
-    private JButton btn2;
+    private final Font loadedFont = CustomFontLoader.loadCustomFont("resources/Jersey10.ttf");
+    private final Border customBorder = BorderFactory.createLineBorder(Color.WHITE, 4);
 
-    private final Font loadedFont =
-            CustomFontLoader.loadCustomFont("resources/Jersey10.ttf");
+    /* ===================== IMAGE BUTTONS ===================== */
+    ImageIcon normalBtn = IconImage.create("resources/images/mainMenu/btn-start-main.png", 200, 45);
+    ImageIcon hover = IconImage.create("resources/images/mainMenu/btn-start-hover.png", 200, 45);
+    ImageIcon pressed = IconImage.create("resources/images/mainMenu/btn-start-press.png", 200, 45);
 
-    private final Color color = Color.BLACK;
-    private final int borderWidth = 4;
-    private final Border customBorder =
-            BorderFactory.createLineBorder(color, borderWidth);
+    /* ===================== BACKGROUND PANEL ===================== */
+    class BackgroundPanel extends JPanel {
+
+        private final Image image;
+
+        public BackgroundPanel(ImageIcon icon) {
+            this.image = icon.getImage();
+            setLayout(new BorderLayout());
+        }
+
+        @Override
+        protected void paintComponent(Graphics g) {
+            super.paintComponent(g);
+            g.drawImage(image, 0, 0, getWidth(), getHeight(), this);
+        }
+    }
 
     /* ===================== BOUNCE EFFECT ===================== */
-
     private void showWithBounceEffect(JFrame frame) {
-        System.out.println("test01");
-        int targetWidth = 442;
-        int targetHeight = 108;
+
+        final int targetWidth = Math.min(dialog.getWidth()+100,550);
+        final int targetHeight = dialog.getHeight();
 
         final double[] scale = {0.1};
         final double[] velocity = {0.15};
@@ -73,9 +88,10 @@ public class PopupWindow {
         dialog.setVisible(true);
     }
 
-    /* ===================== CREATE CONTENT ===================== */
 
-    public JDialog createPopup(JFrame frame, String title, boolean modal, String text, String... buttonTexts) {
+    /* ===================== CREATE POPUP ===================== */
+
+    public JDialog createPopup(JFrame frame, String title, boolean modal, String text, String bgPath, String[] buttonTexts,ActionListener[] actions) {
 
         if (frame == null)
             throw new IllegalArgumentException("Frame cannot be null");
@@ -83,7 +99,22 @@ public class PopupWindow {
         dialog = new JDialog(frame, title, modal);
         dialog.setUndecorated(true);
 
-        JLabel question = new JLabel(text, SwingConstants.CENTER);
+        /* ===== BACKGROUND IMAGE ===== */
+        ImageIcon backgroundIcon = IconImage.create(bgPath, 400, 250);
+        BackgroundPanel bgPanel = new BackgroundPanel(backgroundIcon);
+
+        /* ===== TEXT ===== */
+        JTextPane question = new JTextPane();
+        question.setText(text);
+        question.setEditable(false);
+        question.setOpaque(false);
+        question.setFocusable(false);
+        question.setMargin(new Insets(20, 20, 0, 20));
+
+        StyledDocument doc = question.getStyledDocument();
+        SimpleAttributeSet center = new SimpleAttributeSet();
+        StyleConstants.setAlignment(center, StyleConstants.ALIGN_CENTER);
+        doc.setParagraphAttributes(0, doc.getLength(), center, false);
 
         if (loadedFont != null) {
             question.setFont(loadedFont.deriveFont(35f));
@@ -91,20 +122,37 @@ public class PopupWindow {
             question.setFont(new Font("Arial", Font.BOLD, 20));
         }
 
-        JPanel btnPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 15, 10));
+        /* ===== BUTTON PANEL ===== */
+        JPanel btnPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 18, 0));
+        btnPanel.setBorder(new EmptyBorder(40,0,20,0));
+        btnPanel.setOpaque(false);
 
-        for (String text_btn : buttonTexts){
-            JButton btn = new JButton(text_btn);
-            btn.setPreferredSize(new Dimension(97,32));
+        for (int i = 0; i < buttonTexts.length; i++) {
+
+            JButton btn = new IconBtn(normalBtn,hover,pressed);
+
+            // ถ้าเป็น No → ปิด dialog
+            if (buttonTexts[i].equalsIgnoreCase("No")) {
+                btn.addActionListener(e -> dialog.dispose());
+            }
+
+            // ถ้ามี action ส่งมา
+            if (actions != null && i < actions.length && actions[i] != null) {
+                int index = i;
+                btn.addActionListener( e -> {
+                    dialog.dispose();
+                    actions[index].actionPerformed(e);
+                });
+            }
+
             btnPanel.add(btn);
         }
 
-        JPanel container = new JPanel(new GridLayout(2, 1));
-        container.add(question);
-        container.add(btnPanel);
+        /* ===== ADD TO BACKGROUND ===== */
+        bgPanel.add(question, BorderLayout.CENTER);
+        bgPanel.add(btnPanel, BorderLayout.SOUTH);
 
-        dialog.add(container);
-
+        dialog.setContentPane(bgPanel);
         ((JComponent) dialog.getContentPane()).setBorder(customBorder);
 
         dialog.pack();
@@ -112,6 +160,4 @@ public class PopupWindow {
 
         return dialog;
     }
-
-    /* ===================== OPTIONAL GETTERS ===================== */
 }

@@ -15,7 +15,6 @@ public class IconBtn extends JButton {
         setBorderPainted(false);
         setContentAreaFilled(false);
         setFocusPainted(false);
-        setOpaque(false);
         setMargin(new Insets(0,0,0,0));
         setIconTextGap(0);
 
