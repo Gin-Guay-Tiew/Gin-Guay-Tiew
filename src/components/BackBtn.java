@@ -9,7 +9,6 @@ import java.awt.geom.*;
 
 public class BackBtn extends JButton {
     private final Font jerseyFont = CustomFontLoader.loadCustomFont("resources/Jersey10.ttf");
-    ;
 
     public BackBtn() {
         super("< Back");
