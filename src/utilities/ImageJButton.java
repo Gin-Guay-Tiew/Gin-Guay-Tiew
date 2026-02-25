@@ -1,21 +1,19 @@
 package utilities;
 
-import utilities.IconImage;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public class IconBtn extends JButton {
+public class ImageJButton extends JButton {
     ImageIcon btnImage;
     ImageIcon btnImage_Hover;
     ImageIcon btnImage_Clicked;
-    public IconBtn(String label, String btnImagePath, String btnImageType, float fontSize) {
+    public ImageJButton(String btnImagePath, String btnImageType, float fontSize, int widht, int height) {
 
-        super(label);
-        btnImage = IconImage.create(btnImagePath+btnImageType, 250, 50);
-        btnImage_Hover = IconImage.create(btnImagePath+"_Hover"+btnImageType, 250, 50);
-        btnImage_Clicked = IconImage.create(btnImagePath+"_Clicked"+btnImageType, 250, 50);
+        btnImage = IconImage.create(btnImagePath+btnImageType, widht, height);
+        btnImage_Hover = IconImage.create(btnImagePath+"_Hover"+btnImageType, widht, height);
+        btnImage_Clicked = IconImage.create(btnImagePath+"_Clicked"+btnImageType, widht, height);
         setIcon(btnImage);
         setHorizontalTextPosition(SwingConstants.CENTER);
         setVerticalTextPosition(SwingConstants.CENTER);
@@ -24,8 +22,14 @@ public class IconBtn extends JButton {
         setFocusPainted(false);
         setOpaque(false);
 
+        setMargin(new Insets(0, 0, 0, 0));
+        setBorder(BorderFactory.createEmptyBorder());
+        setIconTextGap(0);
+
+
         Font jerseyFont = CustomFontLoader.loadCustomFont("resources/Jersey10.ttf");
         setFont(jerseyFont.deriveFont(16f));
+
 
         addMouseListener(new MouseAdapter() {
             @Override

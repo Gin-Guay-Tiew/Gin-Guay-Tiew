@@ -14,9 +14,6 @@ public class PopupWindow {
     private final Border customBorder = BorderFactory.createLineBorder(Color.WHITE, 4);
 
     /* ===================== IMAGE BUTTONS ===================== */
-    ImageIcon normalBtn = IconImage.create("resources/images/mainMenu/BtnShort.png", 200, 45);
-    ImageIcon hover = IconImage.create("resources/images/mainMenu/BtnShort_Hover.png", 200, 45);
-    ImageIcon pressed = IconImage.create("resources/images/mainMenu/BtnShort_Clicked.png", 200, 45);
 
     /* ===================== BACKGROUND PANEL ===================== */
     class BackgroundPanel extends JPanel {
@@ -91,7 +88,7 @@ public class PopupWindow {
 
     /* ===================== CREATE POPUP ===================== */
 
-    public JDialog createPopup(JFrame frame, String title, boolean modal, String text, String bgPath, String[] buttonTexts,ActionListener[] actions) {
+    public JDialog createPopup(JFrame frame, String title, boolean modal, String text, String bgPath,String[] images, String[] buttonTexts,ActionListener[] actions) {
 
         if (frame == null)
             throw new IllegalArgumentException("Frame cannot be null");
@@ -127,26 +124,31 @@ public class PopupWindow {
         btnPanel.setBorder(new EmptyBorder(40,0,20,0));
         btnPanel.setOpaque(false);
 
-//        for (int i = 0; i < buttonTexts.length; i++) {
-//
-//            JButton btn = new IconBtn(normalBtn,hover,pressed);
-//
-//            // ถ้าเป็น No → ปิด dialog
-//            if (buttonTexts[i].equalsIgnoreCase("No")) {
-//                btn.addActionListener(e -> dialog.dispose());
-//            }
-//
-//            // ถ้ามี action ส่งมา
-//            if (actions != null && i < actions.length && actions[i] != null) {
-//                int index = i;
-//                btn.addActionListener( e -> {
-//                    dialog.dispose();
-//                    actions[index].actionPerformed(e);
-//                });
-//            }
-//
-//            btnPanel.add(btn);
-//        }
+        for (int i = 0; i < buttonTexts.length; i++) {
+            JButton btn;
+            if (images == null || images[i] == null || i >= images.length){
+                btn = new ImageJButton("resources/images/mainMenu/BtnLong", ".png", 30,150,50);
+            }
+            else {
+                btn = new ImageJButton(images[i], ".png", 30,150,50);
+            }
+
+            // ถ้าเป็น No → ปิด dialog
+            if (buttonTexts[i].equalsIgnoreCase("No")) {
+                btn.addActionListener(e -> dialog.dispose());
+            }
+
+            // ถ้ามี action ส่งมา
+            if (actions != null && i < actions.length && actions[i] != null) {
+                int index = i;
+                btn.addActionListener( e -> {
+                    dialog.dispose();
+                    actions[index].actionPerformed(e);
+                });
+            }
+
+            btnPanel.add(btn);
+        }
 
         /* ===== ADD TO BACKGROUND ===== */
         bgPanel.add(question, BorderLayout.CENTER);
