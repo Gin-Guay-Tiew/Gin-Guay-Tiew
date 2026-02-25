@@ -27,7 +27,7 @@ public class TopBar extends JPanel {
         backBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                mainFrame.getNavigator().toPage("mainMenu", true, 1000);
+                mainFrame.getNavigator().toPage("mainMenu", true);
             }
         });
 
