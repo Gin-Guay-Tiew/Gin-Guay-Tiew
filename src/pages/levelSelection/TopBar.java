@@ -26,7 +26,7 @@ public class TopBar extends JPanel {
         JPanel moneyDisplay = new MoneyDisplay();
 
         backBtn.addActionListener(e -> {
-            mainFrame.showPage("mainMenu");
+            mainFrame.getNavigator().toPage("mainMenu", true, 1000);
         });
 
         add(backBtn, BorderLayout.WEST);
