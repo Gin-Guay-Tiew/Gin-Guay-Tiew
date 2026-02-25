@@ -38,7 +38,7 @@ public class MainBtn implements ActionListener {
                    new String[]{"Yes", "No"},
                    new ActionListener[]{
                           ev -> {
-                               frame.getNavigator().toPage("levelSelect",true,250);
+                               frame.getNavigator().toPage("tutorial",true,250);
                             },
                            null
                   }

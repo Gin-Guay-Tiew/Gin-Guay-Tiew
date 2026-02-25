@@ -2,7 +2,7 @@ package pages;
 
 import pages.mainMenu.MainMenuPage;
 import pages.levelSelection.LevelSelectPage;
-import pages.settingMenu.MainSettingPage;
+import pages.tutorialMenu.MainTutorialPage;
 import utilities.IconImage;
 import utilities.PageNavigator;
 import utilities.Transition;
@@ -14,6 +14,7 @@ public class MainFrame extends JFrame {
 
     public static final String MAIN_MENU = "mainMenu";
     public static final String LEVEL_SELECT = "levelSelect";
+    public static final String TUTORIAL = "tutorial";
 
     private CardLayout cardLayout = new CardLayout();
     private JPanel mainPanel = new JPanel(cardLayout);
@@ -48,6 +49,7 @@ public class MainFrame extends JFrame {
 
         mainPanel.add(new MainMenuPage(this), MAIN_MENU); // + MainMenu
         mainPanel.add(new LevelSelectPage(this), LEVEL_SELECT); // + LevelSelection
+        mainPanel.add(new MainTutorialPage(), TUTORIAL); // + TUTORIAL
 
         navigator.toPage(MAIN_MENU, false);
 
