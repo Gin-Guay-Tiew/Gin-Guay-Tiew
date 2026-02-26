@@ -32,7 +32,7 @@ public class MainBtn implements ActionListener {
             String[] btnLabels = {"No", "Yes"};
             ActionListener[] btnActions = {
                     null, // The "No" button logic is handled internally (dispose)
-                    ex -> frame.getNavigator().toPage("levelSelect", true, 250)
+                    ex -> frame.getNavigator().toPage("loadingScreen", true, 250)
             };
             dialog = pop.createPopup(
                     frame,

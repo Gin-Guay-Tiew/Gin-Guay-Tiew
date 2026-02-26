@@ -7,7 +7,7 @@ import java.awt.*;
 
 public class LevelSelectPage extends JPanel {
 
-    private Image bgImage;
+    private final Image bgImage;
 
     public LevelSelectPage(MainFrame mainFrame) {
         this.bgImage = new ImageIcon("resources/images/levelSelection/Background.png").getImage();
