@@ -147,7 +147,7 @@ public class MainFrame extends JFrame implements WindowListener {
         mainPanel.add(new WinLosePage(this), ENDGAME);
         mainPanel.add(new MainSettingPage(), SETTING);
 
-        navigator.toPage(SETTING, false);
+        navigator.toPage(MAIN_MENU, false);
 
         add(mainPanel);
         setVisible(true);
