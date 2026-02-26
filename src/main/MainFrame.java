@@ -1,17 +1,10 @@
 package main;
 
-
-
-//============= Step 1 import หน้าหลักที่ต้องการให้โชว์ =============
-
 import ui.pages.levelSelection.LevelSelectPage;
+import ui.pages.loadingScreen.LoadingPage;
 import ui.pages.mainMenu.MainMenuPage;
 import ui.pages.tutorialGame.GameTutorialPage;
-import ui.pages.settingMenu.MainSettingPage;
-
-//======================== END ==============================
-
-
+import ui.pages.engGame.WinLosePage;
 import utilities.IconImage;
 import utilities.PageNavigator;
 import ui.components.PopupWindow;
@@ -21,16 +14,13 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-public class MainFrame extends JFrame {
-
-    //============= Step 2 สร้างตัวแปลและกำหนดชื่อ ที่จะใช้ในการเชื่อมไปหน้านั้น =============
+public class MainFrame extends JFrame implements WindowListener {
 
     public static final String MAIN_MENU = "mainMenu";
     public static final String LEVEL_SELECT = "levelSelect";
     public static final String TUTORIAL = "tutorial";
-    public static final String SETTING = "setting";
-
-    //================================ END ===================================
+    public static final String LOADING_SCREEN = "loadingScreen";
+    public static final String ENDGAME = "winlosepage";
 
     private CardLayout cardLayout = new CardLayout();
     private JPanel mainPanel = new JPanel(cardLayout);
@@ -43,25 +33,19 @@ public class MainFrame extends JFrame {
         System.exit(0);
     }
 
+    public PageNavigator getNavigator() {
+        return navigator;
+    }
+
     public MainFrame() {
         setTitle("Gin-Guay-Tiew");
         setSize(800, 600);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+        addWindowListener(this);
         setLocationRelativeTo(null);
         setResizable(false);
         ImageIcon img = new ImageIcon("resources/images/shared/AppIcon.png");
         setIconImage(img.getImage());
-
-        //============= Step 3 นำหน้าPage ที่ importเข้ามาและให้นำที่ใช้ในการเชื่อมไปหน้า มาใส่ใน =============
-        // mainPanel.add(new XXXXXXXX(this), XXXXXX);
-
-        mainPanel.add(new MainMenuPage(this), MAIN_MENU); // + MainMenu
-        mainPanel.add(new LevelSelectPage(this), LEVEL_SELECT); // + LevelSelection
-        mainPanel.add(new GameTutorialPage(), TUTORIAL); // + Tutorial
-        mainPanel.add(new MainSettingPage(), SETTING); // + Setting
-
-        //========================== END ==========================
-
 
         // Keep window on screen
         Timer snapTimer = new Timer(100, e -> {
@@ -157,15 +141,57 @@ public class MainFrame extends JFrame {
         mainPanel.add(new MainMenuPage(this), MAIN_MENU); // + MainMenu
         mainPanel.add(new LevelSelectPage(this), LEVEL_SELECT); // + LevelSelection
         mainPanel.add(new GameTutorialPage(), TUTORIAL); // + Tutorial
-        mainPanel.add(new MainSettingPage(), SETTING); // + Setting
+        mainPanel.add(new LoadingPage(), LOADING_SCREEN); // + Loading Screen
+        mainPanel.add(new WinLosePage(this), ENDGAME);
 
-        navigator.toPage(SETTING, false);
+        navigator.toPage(MAIN_MENU, false);
 
         add(mainPanel);
         setVisible(true);
     }
 
-    public PageNavigator getNavigator() {
-        return navigator;
+    @Override
+    public void windowClosing(WindowEvent e) {
+        String[] btnPaths = {
+                "resources/images/shared/buttons/Yes",
+                "resources/images/shared/buttons/No"
+        };
+        String[] btnLabels = {"Yes", "No"};
+        ActionListener[] btnActions = {
+                ex -> closeApp(),
+                null
+        };
+        pop.createPopup(
+                this,
+                "Are you sure you want to leave the kitchen?", // Message
+                "resources/images/shared/popups/Demo.png", // Background Path
+                btnPaths,
+                btnLabels,
+                btnActions
+        );
+    }
+
+    @Override
+    public void windowOpened(WindowEvent e) {
+    }
+
+    @Override
+    public void windowClosed(WindowEvent e) {
+    }
+
+    @Override
+    public void windowIconified(WindowEvent e) {
+    }
+
+    @Override
+    public void windowDeiconified(WindowEvent e) {
+    }
+
+    @Override
+    public void windowActivated(WindowEvent e) {
+    }
+
+    @Override
+    public void windowDeactivated(WindowEvent e) {
     }
 }

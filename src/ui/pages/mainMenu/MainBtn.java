@@ -3,11 +3,11 @@ package ui.pages.mainMenu;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import main.MainFrame;
 import ui.components.PopupWindow;
 
 public class MainBtn implements ActionListener {
-    private JDialog dialog;
     private MainFrame frame;
     PopupWindow pop = new PopupWindow();
 
@@ -26,15 +26,15 @@ public class MainBtn implements ActionListener {
         if (e.getActionCommand().equals("Tutorial")) {
             // Create popUp
             String[] btnPaths = {
-                    "resources/images/shared/buttons/No",
-                    "resources/images/shared/buttons/Yes"
+                    "resources/images/shared/buttons/Yes",
+                    "resources/images/shared/buttons/No"
             };
-            String[] btnLabels = {"No", "Yes"};
+            String[] btnLabels = {"Yes", "No"};
             ActionListener[] btnActions = {
-                    null, // The "No" button logic is handled internally (dispose)
-                    ex -> frame.getNavigator().toPage("loadingScreen", true, 250)
+                    ex -> frame.getNavigator().toPage("loadingScreen", true, 250),
+                    null // Use "Null" if btnLabels == "No"
             };
-            dialog = pop.createPopup(
+            pop.createPopup(
                     frame,
                     "Do you want to play the tutorial?", // Message
                     "resources/images/shared/popups/Demo.png", // Background Path
@@ -55,17 +55,17 @@ public class MainBtn implements ActionListener {
         if (e.getActionCommand().equals("Exit")) {
             // Create popUp
             String[] btnPaths = {
-                    "resources/images/shared/buttons/No",
-                    "resources/images/shared/buttons/Yes"
+                    "resources/images/shared/buttons/Yes",
+                    "resources/images/shared/buttons/No"
             };
-            String[] btnLabels = {"No", "Yes"};
+            String[] btnLabels = {"Yes", "No"};
             ActionListener[] btnActions = {
-                    null, // The "No" button logic is handled internally (dispose)
-                    ex -> frame.closeApp()
+                    ex -> frame.closeApp(),
+                    null
             };
-            dialog = pop.createPopup(
+            pop.createPopup(
                     frame,
-                    "Do you want to close the game?", // Message
+                    "Are you sure you want to leave the kitchen?", // Message
                     "resources/images/shared/popups/Demo.png", // Background Path
                     btnPaths,
                     btnLabels,

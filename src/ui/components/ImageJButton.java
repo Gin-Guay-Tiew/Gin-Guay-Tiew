@@ -30,7 +30,7 @@ public class ImageJButton extends JButton {
         setIconTextGap(0);
 
 
-        Font jerseyFont = FontLoader.loadCustomFont("resources/Jersey10.ttf");
+        Font jerseyFont = FontLoader.loadCustomFont("resources/font/Jersey10.ttf");
         setFont(jerseyFont.deriveFont(16f));
 
 

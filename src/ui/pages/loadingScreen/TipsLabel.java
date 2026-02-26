@@ -15,7 +15,8 @@ public class TipsLabel extends JPanel {
             "Use your inner noodle spirit to serve customer faster!",
             "Keep an eye on heat meter next to the pot.",
             "Remember to save your progress frequently!",
-            "Check out 'Tutorial' if you don't know how to play."
+            "Check out 'Tutorial' if you don't know how to play.",
+            "Nanny :O"
     };
     private final Timer tipTimer;
     private final Random random = new Random();

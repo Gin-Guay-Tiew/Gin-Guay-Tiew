@@ -13,7 +13,7 @@ public class FontLoader {
      * Loads a custom font from the specified file path
      * Usage Example:
      * <pre>
-     * Font jerseyFont = CustomFontLoader.loadCustomFont("resources/Jersey10.ttf");
+     * Font jerseyFont = CustomFontLoader.loadCustomFont("resources/font/Jersey10.ttf");
      * myLabel.setFont(jerseyFont.deriveFont(32f));
      * </pre>
      *
