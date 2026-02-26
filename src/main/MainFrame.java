@@ -154,27 +154,41 @@ public class MainFrame extends JFrame implements WindowListener {
                 "resources/images/shared/buttons/No"
         };
         String[] btnLabels = {"Yes", "No"};
-
-        // Actions for the buttons
         ActionListener[] btnActions = {
-                ae -> closeApp(),
+                ex -> closeApp(),
                 null
         };
-
         pop.createPopup(
                 this,
-                "Are you sure you want to leave the kitchen?",
-                "resources/images/shared/popups/Demo.png",
+                "Are you sure you want to leave the kitchen?", // Message
+                "resources/images/shared/popups/Demo.png", // Background Path
                 btnPaths,
                 btnLabels,
                 btnActions
         );
     }
 
-    @Override public void windowOpened(WindowEvent e) {}
-    @Override public void windowClosed(WindowEvent e) {}
-    @Override public void windowIconified(WindowEvent e) {}
-    @Override public void windowDeiconified(WindowEvent e) {}
-    @Override public void windowActivated(WindowEvent e) {}
-    @Override public void windowDeactivated(WindowEvent e) {}
+    @Override
+    public void windowOpened(WindowEvent e) {
+    }
+
+    @Override
+    public void windowClosed(WindowEvent e) {
+    }
+
+    @Override
+    public void windowIconified(WindowEvent e) {
+    }
+
+    @Override
+    public void windowDeiconified(WindowEvent e) {
+    }
+
+    @Override
+    public void windowActivated(WindowEvent e) {
+    }
+
+    @Override
+    public void windowDeactivated(WindowEvent e) {
+    }
 }
