@@ -3,8 +3,8 @@ package pages.endGame;
 import pages.MainFrame;
 import utilities.CustomFontLoader;
 import utilities.IconFilter;
-
 import javax.swing.*;
+import javax.swing.border.*;
 import java.awt.*;
 
 public class WinLosePage extends JPanel {
@@ -37,6 +37,7 @@ public class WinLosePage extends JPanel {
         statusLabel.setHorizontalAlignment(JLabel.CENTER);
         statusLabel.setVerticalAlignment(JLabel.TOP);
         statusLabel.setFont(jerseyFont.deriveFont(100f));
+        statusLabel.setBorder(new EmptyBorder(20,0,0,0));
 
         if (isWin) { statusLabel.setText("You win!"); }
         else  { statusLabel.setText("You lose!"); }
@@ -48,9 +49,8 @@ public class WinLosePage extends JPanel {
         add(scorePanel, BorderLayout.CENTER);
 
         // Botton
-        JLabel winLoseLabel = new JLabel("Botton");
-        winLoseLabel.setFont(jerseyFont.deriveFont(50f));
-        add(winLoseLabel);
+        ManageBtn manageBtn = new ManageBtn(mainFrame);
+        add(manageBtn, BorderLayout.SOUTH);
     }
 
     @Override
