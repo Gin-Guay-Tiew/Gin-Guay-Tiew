@@ -1,6 +1,7 @@
 package main;
 
 import ui.pages.levelSelection.LevelSelectPage;
+import ui.pages.loadingScreen.LoadingPage;
 import ui.pages.mainMenu.MainMenuPage;
 import ui.pages.tutorialGame.GameTutorialPage;
 import utilities.IconImage;
@@ -17,6 +18,7 @@ public class MainFrame extends JFrame {
     public static final String MAIN_MENU = "mainMenu";
     public static final String LEVEL_SELECT = "levelSelect";
     public static final String TUTORIAL = "tutorial";
+    public static final String LOADING_SCREEN = "loadingScreen";
 
     private CardLayout cardLayout = new CardLayout();
     private JPanel mainPanel = new JPanel(cardLayout);
@@ -131,6 +133,7 @@ public class MainFrame extends JFrame {
         mainPanel.add(new MainMenuPage(this), MAIN_MENU); // + MainMenu
         mainPanel.add(new LevelSelectPage(this), LEVEL_SELECT); // + LevelSelection
         mainPanel.add(new GameTutorialPage(), TUTORIAL); // + Tutorial
+        mainPanel.add(new LoadingPage(), LOADING_SCREEN); // + Loading Screen
 
         navigator.toPage(MAIN_MENU, false);
 
