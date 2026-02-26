@@ -49,7 +49,7 @@ public class MainBtn implements ActionListener {
         }
 
         if (e.getActionCommand().equals("Setting")) {
-            System.out.println("Setting");
+            frame.getNavigator().toPage("setting", true, 250);
         }
 
         if (e.getActionCommand().equals("Exit")) {
