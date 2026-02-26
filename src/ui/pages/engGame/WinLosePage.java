@@ -1,14 +1,14 @@
-package pages.endGame;
+package ui.pages.engGame;
 
-import pages.MainFrame;
-import utilities.CustomFontLoader;
+import main.MainFrame;
+import utilities.FontLoader;
 import utilities.IconFilter;
 import javax.swing.*;
 import javax.swing.border.*;
 import java.awt.*;
 
 public class WinLosePage extends JPanel {
-    private final Font jerseyFont = CustomFontLoader.loadCustomFont("resources/Jersey10.ttf");
+    private final Font jerseyFont = FontLoader.loadCustomFont("resources/font/Jersey10.ttf");
     private MainFrame mainFrame;
     private Image bgImage;
     private boolean isWin;
@@ -24,8 +24,6 @@ public class WinLosePage extends JPanel {
         ImageIcon original = new ImageIcon(
                 "resources/images/mainMenu/image-from-rawpixel-id-14653376-jpeg.jpg"
         );
-        ImageIcon newBackground = IconFilter.setOpacity(original, 0.35f);
-        this.bgImage = newBackground.getImage();
 
         setLayout(new BorderLayout());
         setOpaque(false);

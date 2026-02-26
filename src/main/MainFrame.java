@@ -4,6 +4,7 @@ import ui.pages.levelSelection.LevelSelectPage;
 import ui.pages.loadingScreen.LoadingPage;
 import ui.pages.mainMenu.MainMenuPage;
 import ui.pages.tutorialGame.GameTutorialPage;
+import ui.pages.engGame.WinLosePage;
 import utilities.IconImage;
 import utilities.PageNavigator;
 import ui.components.PopupWindow;
@@ -19,6 +20,7 @@ public class MainFrame extends JFrame implements WindowListener {
     public static final String LEVEL_SELECT = "levelSelect";
     public static final String TUTORIAL = "tutorial";
     public static final String LOADING_SCREEN = "loadingScreen";
+    public static final String ENDGAME = "winlosepage";
 
     private CardLayout cardLayout = new CardLayout();
     private JPanel mainPanel = new JPanel(cardLayout);
@@ -140,8 +142,9 @@ public class MainFrame extends JFrame implements WindowListener {
         mainPanel.add(new LevelSelectPage(this), LEVEL_SELECT); // + LevelSelection
         mainPanel.add(new GameTutorialPage(), TUTORIAL); // + Tutorial
         mainPanel.add(new LoadingPage(), LOADING_SCREEN); // + Loading Screen
+        mainPanel.add(new WinLosePage(this), ENDGAME);
 
-        navigator.toPage(MAIN_MENU, false);
+        navigator.toPage(ENDGAME, false);
 
         add(mainPanel);
         setVisible(true);

@@ -1,14 +1,14 @@
-package pages.endGame;
+package ui.pages.engGame;
 
-import pages.MainFrame;
-import utilities.CustomFontLoader;
+import main.MainFrame;
+import utilities.FontLoader;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
 public class ShowMeTheMoney extends JPanel {
     private MainFrame mainFrame;
-    private final Font jerseyFont = CustomFontLoader.loadCustomFont("resources/Jersey10.ttf");
+    private final Font jerseyFont = FontLoader.loadCustomFont("resources/font/Jersey10.ttf");
     private double TotalMoney;
 
     private JPanel OrderPanel, MoneyPanel, BonusPanel, TotalPanel;
