@@ -1,23 +1,17 @@
 package main;
 
-<<<<<<< Updated upstream:src/main/MainFrame.java
-import ui.pages.levelSelection.LevelSelectPage;
-import ui.pages.mainMenu.MainMenuPage;
-import ui.pages.tutorialGame.GameTutorialPage;
-=======
-import pages.mainMenu.MainMenuPage;
 
 
 //============= Step 1 import หน้าหลักที่ต้องการให้โชว์ =============
 
-import pages.levelSelection.LevelSelectPage;
-import pages.tutorialMenu.MainTutorialPage;
-import pages.settingGame.MainSettingPage;
+import ui.pages.levelSelection.LevelSelectPage;
+import ui.pages.mainMenu.MainMenuPage;
+import ui.pages.tutorialGame.GameTutorialPage;
+import ui.pages.settingMenu.MainSettingPage;
 
 //======================== END ==============================
 
 
->>>>>>> Stashed changes:src/pages/MainFrame.java
 import utilities.IconImage;
 import utilities.PageNavigator;
 import ui.components.PopupWindow;
@@ -63,7 +57,7 @@ public class MainFrame extends JFrame {
 
         mainPanel.add(new MainMenuPage(this), MAIN_MENU); // + MainMenu
         mainPanel.add(new LevelSelectPage(this), LEVEL_SELECT); // + LevelSelection
-        mainPanel.add(new MainTutorialPage(), TUTORIAL); // + Tutorial
+        mainPanel.add(new GameTutorialPage(), TUTORIAL); // + Tutorial
         mainPanel.add(new MainSettingPage(), SETTING); // + Setting
 
         //========================== END ==========================
@@ -160,15 +154,12 @@ public class MainFrame extends JFrame {
         JPanel mainPanel = new JPanel(cardLayout);
         navigator = new PageNavigator(mainPanel, cardLayout, animator);
 
-<<<<<<< Updated upstream:src/main/MainFrame.java
         mainPanel.add(new MainMenuPage(this), MAIN_MENU); // + MainMenu
         mainPanel.add(new LevelSelectPage(this), LEVEL_SELECT); // + LevelSelection
         mainPanel.add(new GameTutorialPage(), TUTORIAL); // + Tutorial
+        mainPanel.add(new MainSettingPage(), SETTING); // + Setting
 
-        navigator.toPage(MAIN_MENU, false);
-=======
         navigator.toPage(SETTING, false);
->>>>>>> Stashed changes:src/pages/MainFrame.java
 
         add(mainPanel);
         setVisible(true);

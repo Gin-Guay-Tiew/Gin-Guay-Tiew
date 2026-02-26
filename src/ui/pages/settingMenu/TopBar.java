@@ -1,8 +1,8 @@
-package pages.settingGame;
+package ui.pages.settingMenu;
 
-import components.BackBtn;
-import utilities.CustomFontLoader;
-import pages.MainFrame;
+import ui.components.BackBtn;
+import utilities.FontLoader;
+import main.MainFrame;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,7 +11,7 @@ import java.awt.event.ActionListener;
 
 public class TopBar extends JPanel {
 
-    private final Font loadedFont = CustomFontLoader.loadCustomFont("resources/Jersey10.ttf");
+    private final Font loadedFont = FontLoader.loadCustomFont("resources/Jersey10.ttf");
 
 
     public TopBar(MainFrame mainFrame,String str) {
