@@ -145,7 +145,7 @@ public class MainFrame extends JFrame implements WindowListener {
         mainPanel.add(new GameTutorialPage(), TUTORIAL); // + Tutorial
         mainPanel.add(new LoadingPage(), LOADING_SCREEN); // + Loading Screen
         mainPanel.add(new WinLosePage(this), ENDGAME);
-        mainPanel.add(new MainSettingPage(), SETTING);
+        mainPanel.add(new MainSettingPage(this), SETTING);
 
         navigator.toPage(MAIN_MENU, false);
 

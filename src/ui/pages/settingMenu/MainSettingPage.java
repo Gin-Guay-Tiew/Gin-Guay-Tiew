@@ -10,14 +10,13 @@ import java.awt.*;
 
 public class MainSettingPage extends JPanel{
 
-    MainFrame frame;
     JSlider slider;
     JLabel images01;
 
 
     private final Font loadedFont = FontLoader.loadCustomFont("resources/font/Jersey10.ttf");
 
-    public MainSettingPage(){
+    public MainSettingPage(MainFrame frame){
         setLayout(new BorderLayout());
         JPanel container = new JPanel();
         container.setLayout(new BoxLayout(container, BoxLayout.Y_AXIS));
