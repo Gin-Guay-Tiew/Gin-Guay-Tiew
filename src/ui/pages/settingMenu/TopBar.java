@@ -23,7 +23,7 @@ public class TopBar extends JPanel {
 
         // Components
         JPanel nevText = new JPanel(new FlowLayout());
-        JButton backBtn = new BackBtn();
+        JButton backBtn = new BackBtn(mainFrame, "mainMenu");
         JLabel text = new JLabel(str);
         text.setFont(loadedFont.deriveFont(50f));
         nevText.setBorder(BorderFactory.createEmptyBorder(4, 0, 0, 55));
