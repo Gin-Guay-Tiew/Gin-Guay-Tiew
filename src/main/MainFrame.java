@@ -4,7 +4,7 @@ import ui.pages.levelSelection.LevelSelectPage;
 import ui.pages.loadingScreen.LoadingPage;
 import ui.pages.mainMenu.MainMenuPage;
 import ui.pages.tutorialGame.GameTutorialPage;
-import ui.pages.engGame.WinLosePage;
+import ui.pages.endGame.WinLosePage;
 import ui.pages.settingMenu.MainSettingPage;
 import utilities.IconImage;
 import utilities.PageNavigator;

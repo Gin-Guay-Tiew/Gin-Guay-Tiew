@@ -1,4 +1,4 @@
-package ui.pages.engGame;
+package ui.pages.endGame;
 
 import main.MainFrame;
 import utilities.FontLoader;

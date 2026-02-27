@@ -1,8 +1,8 @@
-package ui.pages.engGame;
+package ui.pages.endGame;
 
 import main.MainFrame;
 import utilities.FontLoader;
-import utilities.IconFilter;
+
 import javax.swing.*;
 import javax.swing.border.*;
 import java.awt.*;
