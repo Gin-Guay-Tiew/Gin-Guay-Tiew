@@ -8,9 +8,9 @@ import java.awt.*;
 
 public class MoneyDisplay extends JPanel {
     private final Font jerseyFont = FontLoader.loadCustomFont("resources/font/Jersey10.ttf");
-    ;
+    private JLabel moneyAmount;
 
-    public MoneyDisplay() {
+    public MoneyDisplay(int amount) {
         // Display
         setLayout(new BorderLayout());
         setBorder(BorderFactory.createEmptyBorder(10, 15, 5, 15));
@@ -25,7 +25,7 @@ public class MoneyDisplay extends JPanel {
         moneyLabel.setVerticalAlignment(JLabel.CENTER);
 
         // MoneyAmount
-        JLabel moneyAmount = new JLabel("100,000 N");
+        moneyAmount = new JLabel(String.format("%,d N", amount));
         moneyAmount.setFont(jerseyFont.deriveFont(25f));
 
         add(moneyLabel, BorderLayout.NORTH);
