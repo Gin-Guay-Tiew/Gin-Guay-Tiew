@@ -22,7 +22,7 @@ public class GameController {
 
     public List<UpgradeItem> getAvailableItems() {
         List<UpgradeItem> items = new ArrayList<>();
-        items.add(new UpgradeItem("เส้นเล็ก", 50, "resources/images/shared/items/noodle.png"));
+        items.add(new UpgradeItem("เส้นเล็ก", 50, "resources/images/loadingScreen/Money.png"));
         return items;
     }
 
