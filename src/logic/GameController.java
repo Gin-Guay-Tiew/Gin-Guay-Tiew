@@ -1,7 +1,29 @@
 package logic;
 
-public int getTotalMoney() { return 1000; } // สมมติว่ามีเงิน 1000
-public List<UpgradeItem> getAvailableItems() {
-    return new ArrayList<>(); // คืนค่าลิสต์ว่างไปก่อน จะได้ไม่ Error
+import java.util.ArrayList;
+import java.util.List;
+
+public class GameController {
+
+    // จำลองเงินเริ่มต้น
+    private int totalMoney = 1000;
+
+    public int getTotalMoney() {
+        return totalMoney;
+    }
+
+    public List<UpgradeItem> getAvailableItems() {
+        List<UpgradeItem> items = new ArrayList<>();
+        // ลองเพิ่มของเล่นๆ 1 ชิ้นดูว่าขึ้นไหม
+        items.add(new UpgradeItem("เส้นเล็ก", 50, "resources/images/shared/items/noodle.png"));
+        return items;
+    }
+
+    public boolean purchaseItem(UpgradeItem item) {
+        if (totalMoney >= item.getPrice()) {
+            totalMoney -= item.getPrice();
+            return true;
+        }
+        return false;
+    }
 }
-public boolean purchaseItem(UpgradeItem item) { return true; }
