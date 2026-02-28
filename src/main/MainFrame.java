@@ -6,6 +6,8 @@ import ui.pages.mainMenu.MainMenuPage;
 import ui.pages.tutorialGame.GameTutorialPage;
 import ui.pages.endGame.WinLosePage;
 import ui.pages.settingMenu.MainSettingPage;
+import ui.pages.shopUI.ShopScreen;
+import logic.GameController;
 import utilities.IconImage;
 import utilities.PageNavigator;
 import ui.components.PopupWindow;
@@ -23,6 +25,7 @@ public class MainFrame extends JFrame implements WindowListener {
     public static final String LOADING_SCREEN = "loadingScreen";
     public static final String ENDGAME = "winlosepage";
     public static final String SETTING = "setting";
+    public static final String SHOP_UI = "shop";
 
     private CardLayout cardLayout = new CardLayout();
     private JPanel mainPanel = new JPanel(cardLayout);
@@ -132,6 +135,8 @@ public class MainFrame extends JFrame implements WindowListener {
         transFrame.setFocusPainted(false);
         transFrame.setBounds(400, 300, 0, 0);
 
+        GameController gameController = new GameController(this);
+
         animator = new Transition(transFrame, transIcon);
         glass.add(transFrame);
 
@@ -145,7 +150,8 @@ public class MainFrame extends JFrame implements WindowListener {
         mainPanel.add(new GameTutorialPage(), TUTORIAL); // + Tutorial
         mainPanel.add(new LoadingPage(), LOADING_SCREEN); // + Loading Screen
         mainPanel.add(new WinLosePage(this), ENDGAME);
-        mainPanel.add(new MainSettingPage(), SETTING);
+        mainPanel.add(new MainSettingPage(this), SETTING);
+        mainPanel.add(new ShopScreen(gameController), SHOP_UI);
 
         navigator.toPage(ENDGAME, false);
 

@@ -163,9 +163,9 @@ public class PopupWindow {
         for (int i = 0; i < buttonTexts.length; i++) {
             JButton btn;
             if (images == null || images[i] == null) {
-                btn = new ImageJButton("resources/images/shared/buttons/Yes", ".png", 30, 70, 40);
+                btn = new ImageJButton("resources/images/shared/buttons/Yes", ".png", 30, 94, 37);
             } else {
-                btn = new ImageJButton(images[i], ".png", 30, 70, 40);
+                btn = new ImageJButton(images[i], ".png", 30, 94, 37);
             }
 
             if (buttonTexts[i].equalsIgnoreCase("No")) {
