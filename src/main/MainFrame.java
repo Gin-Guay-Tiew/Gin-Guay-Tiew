@@ -26,6 +26,7 @@ public class MainFrame extends JFrame implements WindowListener {
     public static final String LOADING_SCREEN = "loadingScreen";
     public static final String ENDGAME = "winlosepage";
     public static final String SETTING = "setting";
+    public static final String GAME = "gamePlay";
     public static final String SHOP_UI = "shop";
     public static final String GAME = "gameplay";
 
