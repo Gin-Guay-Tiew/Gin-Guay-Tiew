@@ -6,12 +6,17 @@ import javax.swing.*;
 import java.awt.*;
 
 public class counterBar extends JPanel {
+    private Image counterBarimage;
+
     public counterBar(MainFrame mainFrame){
-        this.setBackground(Color.GREEN);
+        //set layout
+        setLayout(new BorderLayout());
+        setBackground(Color.GREEN);
+        setBorder(BorderFactory.createEmptyBorder(250,0,0,0));
         setOpaque(true);
 
-        setLayout(new BorderLayout());
-        setBorder(BorderFactory.createEmptyBorder(250,0,0,0));
     }
+
+
 
 }
