@@ -75,6 +75,7 @@ public class ShopScreen extends JPanel {
 
         // 4. ส่วนขวา (East): ปุ่ม BUY ตามสถานะเงินและเลเวล
         String buttonPath;
+<<<<<<< HEAD
         boolean isClickable = true;
 
         if (!item.isUnlocked()) { // เช็คเงื่อนไขปลดล็อค
@@ -115,6 +116,30 @@ public class ShopScreen extends JPanel {
                 MainFrame mf = controller.getMainFrame();
                 mf.getNavigator().toPage(MainFrame.SHOP_UI, false);
             } else {
+=======
+        boolean canClick = true;
+
+        // ลอจิกเลือกรูปปุ่มตามที่คุณต้องการ:
+        if (controller.getTotalMoney() < item.getPrice()) {
+            // เลเวลถึงแต่ตังไม่พอ -> ใช้ปุ่มสีแดง (noMoneyBuy.png)
+            buttonPath = "resources/images/shared/buttons/noMoneyBuy";
+        } else {
+            // ตังพอและปลดล็อคแล้ว -> ใช้ปุ่มปกติ (canBuy.png)
+            buttonPath = "resources/images/shared/buttons/canBuy";
+        }
+
+        // หมายเหตุ: หากมีลอจิกเลเวล (Locked) ให้เช็คและใช้ "lockedBuy" สีเทา
+
+        JButton buyBtn = new ui.components.ImageJButton(buttonPath, ".png", 30, 90, 40);
+
+        buyBtn.addActionListener(e -> {
+            if (controller.purchaseItem(item)) {
+                // ซื้อสำเร็จ: Refresh หน้าเดิมเพื่ออัปเดตยอดเงิน
+                MainFrame mf = controller.getMainFrame();
+                mf.getNavigator().toPage(MainFrame.SHOP_UI, false);
+            } else {
+                // เงินไม่พอ: แสดง Popup ตามที่ออกแบบไว้
+>>>>>>> master
                 new ui.components.PopupWindow().createPopup(
                         controller.getMainFrame(),
                         "Not enough money!",

@@ -32,6 +32,7 @@ public class MainSettingPage extends JPanel{
         con_2.setPreferredSize(new Dimension(0, 60));
         con_2.setMaximumSize(new Dimension(Integer.MAX_VALUE, 60));
 
+
         JButton startGame = new ImageJButton("resources/images/mainMenu/buttons/StartGame", ".png", 30, 250, 40);
         main_container.setLayout(new BorderLayout());
 
@@ -78,9 +79,13 @@ public class MainSettingPage extends JPanel{
         // =====================================================================================
 
         // ======================== BUTTON ========================
+        startGame.setActionCommand("reset");
         btn2.setActionCommand("fx");
 
-        slider.addChangeListener(new ButtonSetting(slider,images01));
+        ButtonSetting evenset = new ButtonSetting(frame,btn2,slider,images01);
+        slider.addChangeListener(evenset);
+        btn2.addActionListener(new ButtonSetting(btn2));
+        startGame.addActionListener(evenset);
 
 
         // ====================== CONTAINER =================

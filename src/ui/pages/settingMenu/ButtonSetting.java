@@ -1,5 +1,6 @@
 package ui.pages.settingMenu;
 
+import ui.components.PopupWindow;
 import utilities.IconImage;
 import main.MainFrame;
 import javax.swing.*;
@@ -10,6 +11,8 @@ import java.awt.event.ActionListener;
 
 public class ButtonSetting implements ChangeListener, ActionListener {
 
+
+    PopupWindow pop = new PopupWindow();
 
     String path = "resources/images/settingMenu/tree";
     ImageIcon slider100 = IconImage.create(path+"100"+".png", 50, 50);
@@ -25,14 +28,41 @@ public class ButtonSetting implements ChangeListener, ActionListener {
     private JButton btn;
     private boolean state =  true;
     private MainFrame frame;
-
-    public ButtonSetting(JButton btn){
+    public ButtonSetting(JButton btn) {
         this.btn = btn;
     }
-    public ButtonSetting(JSlider slider,JLabel label) {
+
+    public ButtonSetting(MainFrame frame,JButton btn,JSlider slider,JLabel label) {
+        this.btn = btn;
         this.slider = slider;
         this.label = label;
+        this.frame = frame;
     }
+
+    public void setvalue(){
+        /*
+        slider.setValue(50);
+        label.setIcon(slider50);
+        btn.setIcon(off);
+         */
+        String[] btnPaths = {
+                "resources/images/shared/buttons/No"
+        };
+        String[] btnLabels = {"Ok"};
+        ActionListener[] btnActions = {
+                ex ->frame.getNavigator().toPage("mainMenu", true, 250)
+                ,
+                null // Use "Null" if btnLabels == "No"
+        };
+        pop.createPopup(
+                frame,
+                "There is no information to reset.", // Message
+                "resources/images/shared/popups/Demo.png", // Background Path
+                btnPaths,
+                btnLabels,
+                btnActions
+        );
+     }
 
     @Override
     public void stateChanged(ChangeEvent e) {
@@ -64,6 +94,26 @@ public class ButtonSetting implements ChangeListener, ActionListener {
                 btn.setIcon(off);
                 state = true;
             }
+        }
+        if (e.getActionCommand().equals("reset")){
+            String[] btnPaths = {
+                    "resources/images/shared/buttons/Yes",
+                    "resources/images/shared/buttons/No"
+            };
+            String[] btnLabels = {"Yes", "No"};
+            ActionListener[] btnActions = {
+                    ex ->setvalue()
+                    ,
+                    null // Use "Null" if btnLabels == "No"
+            };
+            pop.createPopup(
+                    frame,
+                    "Are you confirm to reset the game?", // Message
+                    "resources/images/shared/popups/Demo.png", // Background Path
+                    btnPaths,
+                    btnLabels,
+                    btnActions
+            );
         }
     }
 }
