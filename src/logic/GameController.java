@@ -1,33 +1,31 @@
 package logic;
 
-import main.MainFrame; // import เพิ่ม
+import main.MainFrame;
 import java.util.ArrayList;
 import java.util.List;
 
 public class GameController {
-    private MainFrame mainFrame; // เก็บอ้างอิงของหน้าต่างหลักไว้
-    private int totalMoney = 1000;
+    private MainFrame mainFrame;
+    private int totalMoney = 2000; // ลองตั้งเงินเยอะๆ ไว้ทดสอบ
 
-    // Constructor รับค่า MainFrame มาเก็บไว้
     public GameController(MainFrame frame) {
         this.mainFrame = frame;
     }
 
-    // สร้าง Method นี้เพื่อให้หน้า Shop ดึง MainFrame ไปใช้กับปุ่ม Back และ Popup
-    public MainFrame getMainFrame() {
-        return mainFrame;
-    }
-
+    public MainFrame getMainFrame() { return mainFrame; }
     public int getTotalMoney() { return totalMoney; }
 
     public List<UpgradeItem> getAvailableItems() {
         List<UpgradeItem> items = new ArrayList<>();
-        items.add(new UpgradeItem("เส้นเล็ก", 50, "resources/images/loadingScreen/Money.png"));
+        // (ชื่อ, ราคา, Path รูป, ปลดล็อคหรือยัง)
+        items.add(new UpgradeItem("เส้นเล็ก", 50, "resources/images/shared/items/noodle.png", true));
+        items.add(new UpgradeItem("เนื้อวัว", 200, "resources/images/shared/items/beef.png", false));
+        items.add(new UpgradeItem("ลูกชิ้น", 150, "resources/images/shared/items/meatball.png", true));
         return items;
     }
 
     public boolean purchaseItem(UpgradeItem item) {
-        if (totalMoney >= item.getPrice()) {
+        if (totalMoney >= item.getPrice() && item.isUnlocked()) {
             totalMoney -= item.getPrice();
             return true;
         }

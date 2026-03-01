@@ -75,28 +75,46 @@ public class ShopScreen extends JPanel {
 
         // 4. ส่วนขวา (East): ปุ่ม BUY ตามสถานะเงินและเลเวล
         String buttonPath;
-        boolean canClick = true;
+        boolean isClickable = true;
 
-        // ลอจิกเลือกรูปปุ่มตามที่คุณต้องการ:
-        if (controller.getTotalMoney() < item.getPrice()) {
-            // เลเวลถึงแต่ตังไม่พอ -> ใช้ปุ่มสีแดง (noMoneyBuy.png)
+        if (!item.isUnlocked()) { // เช็คเงื่อนไขปลดล็อค
+            buttonPath = "resources/images/shared/buttons/lockedBuy";
+            isClickable = false;
+        } else if (controller.getTotalMoney() < item.getPrice()) {
             buttonPath = "resources/images/shared/buttons/noMoneyBuy";
         } else {
-            // ตังพอและปลดล็อคแล้ว -> ใช้ปุ่มปกติ (canBuy.png)
             buttonPath = "resources/images/shared/buttons/canBuy";
         }
 
-        // หมายเหตุ: หากมีลอจิกเลเวล (Locked) ให้เช็คและใช้ "lockedBuy" สีเทา
+        // ประกาศตัวแปรแค่ครั้งเดียว และส่ง buttonPath ที่เลือกแล้วเข้าไป
+        // ImageJButton ของเพื่อนมักจะมี Logic Hover/Clicked ในตัวอยู่แล้ว (ถ้าตั้งชื่อไฟล์ตาม Pattern)
+        ui.components.ImageJButton buyBtn = new ui.components.ImageJButton(buttonPath, ".png", 30, 90, 40);
+        buyBtn.setEnabled(isClickable);
 
-        JButton buyBtn = new ui.components.ImageJButton(buttonPath, ".png", 30, 90, 40);
+        // ใน ShopScreen.java ส่วนที่สร้าง MouseAdapter
+        buyBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent e) {
+                if(buyBtn.isEnabled()) buyBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
+            }
+
+            public void mousePressed(java.awt.event.MouseEvent e) {
+                if(buyBtn.isEnabled()) {
+                    // ใช้ Margin แทนการ setBounds เพื่อเลียนแบบการ "กดลง"
+                    buyBtn.setBorder(BorderFactory.createEmptyBorder(4, 4, 0, 0));
+                }
+            }
+
+            public void mouseReleased(java.awt.event.MouseEvent e) {
+                // คืนค่าขอบกลับมาเท่าเดิม
+                buyBtn.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
+            }
+        });
 
         buyBtn.addActionListener(e -> {
             if (controller.purchaseItem(item)) {
-                // ซื้อสำเร็จ: Refresh หน้าเดิมเพื่ออัปเดตยอดเงิน
                 MainFrame mf = controller.getMainFrame();
                 mf.getNavigator().toPage(MainFrame.SHOP_UI, false);
             } else {
-                // เงินไม่พอ: แสดง Popup ตามที่ออกแบบไว้
                 new ui.components.PopupWindow().createPopup(
                         controller.getMainFrame(),
                         "Not enough money!",
@@ -108,6 +126,20 @@ public class ShopScreen extends JPanel {
             }
         });
 
+        buyBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent e) {
+                buyBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
+                // ตัวอย่าง: ถ้าเพื่อนมี Method ปรับขนาด หรือเปลี่ยน Icon
+            }
+            public void mousePressed(java.awt.event.MouseEvent e) {
+                // ทำ Animation ปุ่มยุบลงเล็กน้อย
+                buyBtn.setBounds(buyBtn.getX()+2, buyBtn.getY()+2, buyBtn.getWidth()-4, buyBtn.getHeight()-4);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent e) {
+                // กลับมาขนาดเดิม
+                buyBtn.setBounds(buyBtn.getX()-2, buyBtn.getY()-2, buyBtn.getWidth()+4, buyBtn.getHeight()+4);
+            }
+        });
         card.add(buyBtn, BorderLayout.EAST);
         return card;
     }
