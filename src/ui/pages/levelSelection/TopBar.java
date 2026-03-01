@@ -19,15 +19,8 @@ public class TopBar extends JPanel {
         setOpaque(false);
 
         // Components
-        JButton backBtn = new BackBtn();
-        JPanel moneyDisplay = new MoneyDisplay();
-
-        backBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                mainFrame.getNavigator().toPage("mainMenu", true);
-            }
-        });
+        JButton backBtn = new BackBtn(mainFrame, "mainMenu");
+        JPanel moneyDisplay = new MoneyDisplay(1000);
 
         add(backBtn, BorderLayout.WEST);
         add(moneyDisplay, BorderLayout.EAST);

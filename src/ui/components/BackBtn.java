@@ -1,49 +1,18 @@
 package ui.components;
 
-import utilities.FontLoader;
+import main.MainFrame;
 
-import javax.swing.*;
-import java.awt.*;
-import java.awt.font.*;
-import java.awt.geom.*;
+import java.awt.event.*;
 
-public class BackBtn extends JButton {
+public class BackBtn extends ImageJButton {
 
-    public BackBtn() {
-        super("< Back");
-        setBorderPainted(false);
-        setContentAreaFilled(false);
-        setFocusPainted(false);
-
-        Font jerseyFont = FontLoader.loadCustomFont("resources/font/Jersey10.ttf");
-        setFont(jerseyFont.deriveFont(32f));
-    }
-
-    // Graphics2D Outline & Hover Effects
-    @Override
-    protected void paintComponent(Graphics g) {
-        Graphics2D g2 = (Graphics2D) g.create();
-        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-
-        String text = getText();
-        FontMetrics fm = g2.getFontMetrics(getFont());
-        int x = (getWidth() - fm.stringWidth(text)) / 2;
-        int y = (getHeight() + fm.getAscent() - fm.getDescent()) / 2;
-
-        TextLayout tl = new TextLayout(text, getFont(), g2.getFontRenderContext());
-        Shape shape = tl.getOutline(AffineTransform.getTranslateInstance(x, y));
-
-        // Draw Outline
-        if (getModel().isRollover()) {
-            g2.setColor(Color.BLACK);
-            g2.setStroke(new BasicStroke(5));
-            g2.draw(shape);
-        }
-
-        // Fill Text
-        g2.setColor(getModel().isRollover() ? Color.WHITE : Color.BLACK);
-        g2.fill(shape);
-
-        g2.dispose();
+    public BackBtn(MainFrame mainFrame, String pageName) {
+        super("resources/images/shared/buttons/BackMini", ".png", 30, 100, 35);
+        addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                mainFrame.getNavigator().toPage(pageName, true);
+            }
+        });
     }
 }

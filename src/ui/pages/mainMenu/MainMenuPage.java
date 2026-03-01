@@ -92,6 +92,7 @@ public class MainMenuPage extends JPanel {
         shop.addActionListener(actionBtn);
         setting.addActionListener(actionBtn);
         exit.addActionListener(actionBtn);
+
     }
 
     @Override

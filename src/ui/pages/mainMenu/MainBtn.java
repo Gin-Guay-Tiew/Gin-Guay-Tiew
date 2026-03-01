@@ -45,7 +45,7 @@ public class MainBtn implements ActionListener {
         }
 
         if (e.getActionCommand().equals("Shop")) {
-            System.out.println("Shop");
+            frame.getNavigator().toPage(MainFrame.SHOP_UI, true);
         }
 
         if (e.getActionCommand().equals("Setting")) {

@@ -29,8 +29,8 @@ public class TopBar extends JPanel {
         mtPanel.setOpaque(false);
 
         // Money box
-        JPanel money = new MoneyDisplay();
-        JPanel money2 = new MoneyDisplay();
+        JPanel money = new MoneyDisplay(1000);
+        JPanel money2 = new MoneyDisplay(1000);
         mtPanel.add(money);
         mtPanel.add(money2);
 
