@@ -8,13 +8,14 @@ public class gamePlayScreen extends JPanel {
 
 
     public gamePlayScreen(MainFrame mainFrame){
-        this.setBackground(Color.DARK_GRAY);
+        this.setBackground(Color.white);
 
         setLayout(new BorderLayout());
         setOpaque(true);
 
 
         add(new TopBar(mainFrame),BorderLayout.NORTH);
+        add(new counterBar(mainFrame),BorderLayout.SOUTH);
     }
 
 

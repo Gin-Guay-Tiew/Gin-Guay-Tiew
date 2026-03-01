@@ -28,7 +28,6 @@ public class MainFrame extends JFrame implements WindowListener {
     public static final String SETTING = "setting";
     public static final String GAME = "gamePlay";
     public static final String SHOP_UI = "shop";
-    public static final String GAME = "gameplay";
 
     private CardLayout cardLayout = new CardLayout();
     private JPanel mainPanel = new JPanel(cardLayout);
