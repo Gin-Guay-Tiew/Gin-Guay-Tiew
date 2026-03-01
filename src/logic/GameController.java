@@ -18,9 +18,9 @@ public class GameController {
     public List<UpgradeItem> getAvailableItems() {
         List<UpgradeItem> items = new ArrayList<>();
         // (ชื่อ, ราคา, Path รูป, ปลดล็อคหรือยัง)
-        items.add(new UpgradeItem("เส้นเล็ก", 50, "resources/images/shared/items/noodle.png", true));
-        items.add(new UpgradeItem("เนื้อวัว", 200, "resources/images/shared/items/beef.png", false));
-        items.add(new UpgradeItem("ลูกชิ้น", 150, "resources/images/shared/items/meatball.png", true));
+        items.add(new UpgradeItem("Thin rice noodles", 50, "resources/images/gamePlay/ingredients/noodles/category/thinRice/idle.png", true));
+        items.add(new UpgradeItem("Wide rice noodles", 200, "resources/images/gamePlay/ingredients/noodles/category/wideRice/idle.png", false));
+        items.add(new UpgradeItem("Green egg noodles", 150, "resources/images/gamePlay/ingredients/noodles/category/greenEgg/idle.png", true));
         return items;
     }
 
