@@ -22,7 +22,9 @@ public class MainBtn implements ActionListener {
         if (e.getActionCommand().equals("Start Game")) {
             frame.getNavigator().toPage("levelSelect", true, 250);
         }
-
+        if (e.getActionCommand().equals("Main Menu")){
+            frame.getNavigator().toPage("mainMenu", true, 250);
+        }
         if (e.getActionCommand().equals("Tutorial")) {
             // Create popUp
             String[] btnPaths = {
