@@ -1,5 +1,6 @@
 package main;
 
+import ui.pages.gamePlay.gamePlayScreen;
 import ui.pages.levelSelection.LevelSelectPage;
 import ui.pages.loadingScreen.LoadingPage;
 import ui.pages.mainMenu.MainMenuPage;
@@ -25,6 +26,7 @@ public class MainFrame extends JFrame implements WindowListener {
     public static final String LOADING_SCREEN = "loadingScreen";
     public static final String ENDGAME = "winlosepage";
     public static final String SETTING = "setting";
+    public static final String GAME = "gamePlay";
     public static final String SHOP_UI = "shop";
 
     private CardLayout cardLayout = new CardLayout();
@@ -152,8 +154,10 @@ public class MainFrame extends JFrame implements WindowListener {
         mainPanel.add(new WinLosePage(this), ENDGAME);
         mainPanel.add(new MainSettingPage(this), SETTING);
         mainPanel.add(new ShopScreen(gameController), SHOP_UI);
+        mainPanel.add(new gamePlayScreen(this),GAME); // + gamePlayScreen
 
         navigator.toPage(MAIN_MENU, false);
+        navigator.toPage(GAME,false);
 
         add(mainPanel);
         setVisible(true);
