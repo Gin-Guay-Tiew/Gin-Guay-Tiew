@@ -151,7 +151,7 @@ public class MainFrame extends JFrame implements WindowListener {
         mainPanel.add(new MainSettingPage(), SETTING);
         mainPanel.add(new tutorialFinished(this), FIN_TUTOTRIAL);
 
-        navigator.toPage(FIN_TUTOTRIAL, false);
+        navigator.toPage(FIN_TUTOTRIAL, false); // if this in main then i'm fucked something up
 
         add(mainPanel);
         setVisible(true);
