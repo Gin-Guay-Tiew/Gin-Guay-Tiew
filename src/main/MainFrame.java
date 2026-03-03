@@ -156,12 +156,9 @@ public class MainFrame extends JFrame implements WindowListener {
         mainPanel.add(new ShopScreen(gameController), SHOP_UI);
         mainPanel.add(new gamePlayScreen(this),GAME); // + gamePlayScreen
 
-<<<<<<< HEAD
         navigator.toPage(ENDGAME, false);
-=======
         navigator.toPage(MAIN_MENU, false);
-        navigator.toPage(GAME,false);
->>>>>>> master
+        //navigator.toPage(GAME,false);
 
         add(mainPanel);
         setVisible(true);
