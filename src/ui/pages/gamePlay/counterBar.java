@@ -62,15 +62,12 @@ public class counterBar extends JPanel {
 
 
 
-
-
-
         // create a button and set button
         for (SlotSpec s : slots){
             JButton btn = new JButton(new ImageIcon(s.getIconPath()));
             btn.setBounds(s.getX(),s.getY(),s.getWidth(),s.getHeight());
 
-            btn.setBorderPainted(true);
+            btn.setBorderPainted(false);
             btn.setContentAreaFilled(false);
             btn.setFocusPainted(false);
             btn.setOpaque(false);
