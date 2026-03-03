@@ -23,9 +23,9 @@ public class ManageBtn extends JPanel implements ActionListener {
 
         // ================= Button Images =================
 
-        backBtn = new ImageJButton("resources/images/mainMenu/buttons/Shop", ".png", 30, 250, 40);
-        playAgainBtn = new ImageJButton("resources/images/mainMenu/buttons/StartGame", ".png", 30, 250, 40);
-        shopBtn = new ImageJButton("resources/images/mainMenu/buttons/StartGame", ".png", 30, 250, 40);
+        backBtn = new ImageJButton("resources/images/endGame/backToMenu",".png", 30, 250, 40);
+        playAgainBtn = new ImageJButton("resources/images/endGame/playAgain", ".png", 30, 250, 40);
+        shopBtn = new ImageJButton("resources/images/endGame/shop", ".png", 30, 250, 40);
 
         add(backBtn);
         add(playAgainBtn);
@@ -45,6 +45,12 @@ public class ManageBtn extends JPanel implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("backToMainMenu")) {
             mainFrame.getNavigator().toPage("mainMenu",true,500);
+        }
+        else if (e.getActionCommand().equals("playAgain")) {
+            mainFrame.getNavigator().toPage("gamePlay",true,500);
+        }
+        else if (e.getActionCommand().equals("shop")) {
+            mainFrame.getNavigator().toPage("shop",true,500);
         }
     }
 }
