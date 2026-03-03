@@ -21,6 +21,7 @@ public class TopBar extends JPanel {
         // TopPanel
         setLayout(new BorderLayout());
         setBorder(BorderFactory.createEmptyBorder(0, 20, 0, 55)); // Padding :3
+        setBackground(Color.GREEN);
         setOpaque(false);
 
         // money and time panel
