@@ -24,20 +24,27 @@ public class TipsLabel extends JPanel {
 
     public TipsLabel() {
         setLayout(new BorderLayout());
-        setBorder(BorderFactory.createEmptyBorder(5, 50, 100, 35));
-        setOpaque(true);
-        setBackground(Color.cyan);
+        setBorder(BorderFactory.createEmptyBorder(5, 50, 25, 35));
+        setOpaque(false);
 
         tipsPanel = new JTextPane();
         tipsPanel.setEditable(false);
         tipsPanel.setOpaque(false);
         tipsPanel.setFocusable(false);
-        tipsPanel.setFont(jersyFont.deriveFont(24f));
+        tipsPanel.setFont(jersyFont.deriveFont(27f));
 
         // Initial tip
         setTipText(tips[random.nextInt(tips.length)]);
 
-        add(tipsPanel, BorderLayout.CENTER);
+        // Loading
+        JLabel loadLabel = new JLabel("Loading ");
+        loadLabel.setFont(jersyFont.deriveFont(25f));
+        loadLabel.setHorizontalTextPosition(SwingConstants.LEFT);
+        loadLabel.setHorizontalAlignment(SwingConstants.RIGHT);
+        loadLabel.setIcon(new ImageIcon("resources/images/loadingScreen/Loading.gif"));
+
+        add(tipsPanel, BorderLayout.NORTH);
+        add(loadLabel, BorderLayout.SOUTH);
 
         tipTimer = new Timer(5000, e -> showNextTip());
         tipTimer.start();
