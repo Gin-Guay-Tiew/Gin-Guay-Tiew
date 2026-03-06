@@ -15,7 +15,7 @@ public class TopBar extends JPanel {
 
         // TopPanel
         setLayout(new BorderLayout());
-        setBorder(BorderFactory.createEmptyBorder(0, 10, 0, 55)); // Padding :3
+        setBorder(BorderFactory.createEmptyBorder(0, 20, 0, 55)); // Padding :3
         setOpaque(false);
 
         // Components

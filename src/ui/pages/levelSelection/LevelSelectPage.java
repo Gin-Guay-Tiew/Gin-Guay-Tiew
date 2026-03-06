@@ -6,12 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class LevelSelectPage extends JPanel {
-
-    private final Image bgImage;
-
     public LevelSelectPage(MainFrame mainFrame) {
-        this.bgImage = new ImageIcon("resources/images/levelSelection/Background.png").getImage();
-
         setLayout(new BorderLayout());
         setOpaque(true);
 
@@ -23,6 +18,6 @@ public class LevelSelectPage extends JPanel {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        g.drawImage(bgImage, 0, 0, getWidth(), getHeight(), this);
+        g.drawImage(new ImageIcon("resources/images/levelSelection/Background.png").getImage(), 0, 0, getWidth(), getHeight(), this);
     }
 }
