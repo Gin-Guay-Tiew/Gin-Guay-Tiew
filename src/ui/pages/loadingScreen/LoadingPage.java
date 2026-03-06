@@ -3,18 +3,29 @@ package ui.pages.loadingScreen;
 import javax.swing.*;
 import java.awt.*;
 
-public class LoadingPage extends JPanel {
+public class LoadingPage extends JLayeredPane {
 
     private final Image bgImage;
 
-    public LoadingPage() {
-        this.bgImage = new ImageIcon("resources/images/loadingScreen/Level1.png").getImage();
+    public LoadingPage(String SelectedLevel) {
+        this.bgImage = new ImageIcon("resources/images/shared/levelBackgrounds/" + SelectedLevel + ".gif").getImage();
+        this.setLayout(new BorderLayout());
 
-        setLayout(new BorderLayout());
-        setOpaque(true);
+        JPanel frame = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                Image frameImg = new ImageIcon("resources/images/loadingScreen/Frame.png").getImage();
+                g.drawImage(frameImg, 0, 0, getWidth(), getHeight(), this);
+            }
+        };
 
-        add(new JLabel(), BorderLayout.CENTER);
-        add(new TipsLabel(), BorderLayout.SOUTH);
+        frame.setOpaque(false);
+        frame.setLayout(new BorderLayout());
+        frame.add(new JLabel(), BorderLayout.CENTER);
+        frame.add(new TipsLabel(), BorderLayout.SOUTH);
+
+        add(frame, BorderLayout.CENTER, JLayeredPane.PALETTE_LAYER);
     }
 
     // Draw BG Image

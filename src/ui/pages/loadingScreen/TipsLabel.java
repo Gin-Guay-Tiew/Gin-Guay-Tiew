@@ -32,6 +32,7 @@ public class TipsLabel extends JPanel {
         tipsPanel.setOpaque(false);
         tipsPanel.setFocusable(false);
         tipsPanel.setFont(jersyFont.deriveFont(27f));
+        tipsPanel.setForeground(new Color(156,48,85));
 
         // Initial tip
         setTipText(tips[random.nextInt(tips.length)]);
