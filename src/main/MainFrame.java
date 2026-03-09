@@ -36,6 +36,23 @@ public class MainFrame extends JFrame implements WindowListener {
     PopupWindow pop = new PopupWindow();
     private boolean isWarningActive = false;
 
+    private JPanel currentGameScreen;
+
+    // สำหรับสร้างหน้าเกมใหม่ตอนกด play again
+    public void startNewGame() {
+        if (currentGameScreen != null) {
+            mainPanel.remove(currentGameScreen);
+        }
+
+        currentGameScreen = new gamePlayScreen(this);
+        mainPanel.add(currentGameScreen, "gamePlay");
+
+        mainPanel.revalidate();
+        mainPanel.repaint();
+
+        navigator.toPage("gamePlay", true, 500);
+    }
+
     public void closeApp() {
         System.exit(0);
     }
@@ -143,8 +160,11 @@ public class MainFrame extends JFrame implements WindowListener {
         glass.add(transFrame);
 
         // Initialize the navigator before adding ui.pages
+        /*
+        อันนี้ลบได้ไหมอ่ะ เหมือนจะสร้างเป็น attribute ไว้ด้านบนแล้วนะ
         CardLayout cardLayout = new CardLayout();
         JPanel mainPanel = new JPanel(cardLayout);
+        */
         navigator = new PageNavigator(mainPanel, cardLayout, animator);
 
         mainPanel.add(new MainMenuPage(this), MAIN_MENU); // + MainMenu
