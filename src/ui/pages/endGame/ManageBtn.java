@@ -45,12 +45,15 @@ public class ManageBtn extends JPanel implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("backToMainMenu")) {
             mainFrame.getNavigator().toPage("mainMenu",true,500);
+            System.out.println("winlosepage to mainMenu");
         }
         else if (e.getActionCommand().equals("playAgain")) {
             mainFrame.getNavigator().toPage("gamePlay",true,500);
+            System.out.println("winlosepage to gamePlay");
         }
         else if (e.getActionCommand().equals("shop")) {
             mainFrame.getNavigator().toPage("shop",true,500);
+            System.out.println("winlosepage to shop");
         }
     }
 }
