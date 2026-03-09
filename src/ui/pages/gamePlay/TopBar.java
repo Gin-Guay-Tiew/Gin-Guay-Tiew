@@ -14,7 +14,7 @@ import java.awt.event.ActionListener;
 public class TopBar extends JPanel {
 
     private final Font loadedFont = FontLoader.loadCustomFont("resources/font/Jersey10.ttf");
-    private JLabel timeLabel; // add timeLabel to update time
+    private TimeDisplay timeDisplay;
 
     public TopBar(MainFrame mainFrame) {
 
@@ -31,12 +31,15 @@ public class TopBar extends JPanel {
 
         // Money box
         JPanel money = new MoneyDisplay(1000);
-        JPanel time = new TimeDisplay();
-        mtPanel.add(time);
+        timeDisplay = new TimeDisplay();
+        mtPanel.add(timeDisplay);
         mtPanel.add(money);
 
         add(mtPanel, BorderLayout.EAST);
 
+    }
 
+    public TimeDisplay getTimeDisplay() {
+        return timeDisplay;
     }
 }
