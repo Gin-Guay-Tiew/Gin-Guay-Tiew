@@ -19,6 +19,9 @@ public class gamePlayScreen extends JPanel {
         TopBar topBar = new TopBar(mainFrame);
         add(topBar,BorderLayout.NORTH);
 
+        // ดึง timeDisplay จาก topBar
+        TimeDisplay screenTime = topBar.getTimeDisplay();
+
         //background
         this.setBackground(Color.white);
         ImageIcon counter = new ImageIcon("resources/images/gamePlay/counter/counter_bar.png");
@@ -47,6 +50,9 @@ public class gamePlayScreen extends JPanel {
         gameLayer.add(status, Integer.valueOf(2));
 
         add(gameLayer, BorderLayout.CENTER);
+
+        GameTimer myTimer = new GameTimer(90,this,screenTime);
+        myTimer.startTimer();
 
     }
 
