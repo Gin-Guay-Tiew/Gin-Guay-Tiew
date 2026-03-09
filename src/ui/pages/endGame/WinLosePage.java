@@ -57,5 +57,10 @@ public class WinLosePage extends JPanel {
         if (bgImage != null) {
             g.drawImage(bgImage, 0, 0, getWidth(), getHeight(), this);
         }
+
+        // พื้นหลังสีดำจางๆ
+        Graphics2D g2d = (Graphics2D) g;
+        g2d.setColor(new Color(0, 0, 0, 100));
+        g2d.fillRect(0, 0, getWidth(), getHeight());
     }
 }
