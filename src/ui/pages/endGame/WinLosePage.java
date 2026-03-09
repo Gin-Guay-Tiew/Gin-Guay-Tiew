@@ -1,6 +1,7 @@
 package ui.pages.endGame;
 
 import main.MainFrame;
+import ui.components.CustomJLabel;
 import utilities.FontLoader;
 
 import javax.swing.*;
@@ -12,7 +13,7 @@ public class WinLosePage extends JPanel {
     private MainFrame mainFrame;
     private Image bgImage;
     private boolean isWin;
-    private JLabel statusLabel;
+    private CustomJLabel statusLabel;
 
     public WinLosePage(MainFrame mainFrame) {
         this(mainFrame,true,0,0);
@@ -31,7 +32,8 @@ public class WinLosePage extends JPanel {
         this.isWin = isWin;
 
         // Status Win or Lose
-        statusLabel = new JLabel();
+        statusLabel = new CustomJLabel("status", 13f);
+        statusLabel.setOutlineColor(Color.white);
         statusLabel.setHorizontalAlignment(JLabel.CENTER);
         statusLabel.setVerticalAlignment(JLabel.TOP);
         statusLabel.setFont(jerseyFont.deriveFont(100f));
@@ -60,7 +62,7 @@ public class WinLosePage extends JPanel {
 
         // พื้นหลังสีดำจางๆ
         Graphics2D g2d = (Graphics2D) g;
-        g2d.setColor(new Color(0, 0, 0, 100));
+        g2d.setColor(new Color(0, 0, 0, 140));
         g2d.fillRect(0, 0, getWidth(), getHeight());
     }
 }
