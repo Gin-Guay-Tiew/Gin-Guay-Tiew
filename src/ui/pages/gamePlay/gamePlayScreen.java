@@ -13,19 +13,24 @@ public class gamePlayScreen extends JPanel {
 
     public gamePlayScreen(MainFrame mainFrame){
 
-        setLayout(new BorderLayout());
+        setLayout(new OverlayLayout(this));
 
-        //top bar
-        TopBar topBar = new TopBar(mainFrame);
-        add(topBar,BorderLayout.NORTH);
-
-        // ดึง timeDisplay จาก topBar
-        TimeDisplay screenTime = topBar.getTimeDisplay();
-
-        //background
+        // background
         this.setBackground(Color.white);
         ImageIcon counter = new ImageIcon("resources/images/gamePlay/counter/counter_bar.png");
         counterBarimage = counter.getImage();
+
+        // status endgame
+        status = new WinLosePage(mainFrame);
+        status.setBounds(0,0,800,520);
+        status.setVisible(false); // โชว์ตอนจบเกม
+
+        JPanel mainGameArea = new JPanel(new BorderLayout());
+        mainGameArea.setOpaque(false);
+
+        // top bar
+        TopBar topBar = new TopBar(mainFrame);
+        mainGameArea.add(topBar,BorderLayout.NORTH);
 
         // Game layer
         JLayeredPane gameLayer = new JLayeredPane();
@@ -40,18 +45,18 @@ public class gamePlayScreen extends JPanel {
         counterBar counterBarPanel = new counterBar(mainFrame);
         counterBarPanel.setBounds(0,0,800,520);
 
-        // Layer 2 : status endgame
-        status = new WinLosePage(mainFrame);
-        status.setBounds(0,0,800,520);
-        status.setVisible(false); // โชว์ตอนจบเกม
-
         gameLayer.add(customerPanel, Integer.valueOf(0));
         gameLayer.add(counterBarPanel, Integer.valueOf(1));
-        gameLayer.add(status, Integer.valueOf(2));
 
-        add(gameLayer, BorderLayout.CENTER);
+        mainGameArea.add(gameLayer, BorderLayout.CENTER);
 
-        GameTimer myTimer = new GameTimer(90,this,screenTime);
+        add(status);
+        add(mainGameArea);
+
+        // ดึง timeDisplay จาก topBar
+        TimeDisplay screenTime = topBar.getTimeDisplay();
+
+        GameTimer myTimer = new GameTimer(10,this,screenTime);
         myTimer.startTimer();
 
     }
