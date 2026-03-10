@@ -104,7 +104,7 @@ public class MainFrame extends JFrame implements WindowListener {
                 isWarningActive = true;
 
                 // Create warning popUp
-                Timer popupDelayTimer = new Timer(25, delayEvent -> {
+                Timer popupDelayTimer = new Timer(500, delayEvent -> {
 
                     String[] btnPaths = {"resources/images/shared/buttons/Ok"};
                     String[] btnLabels = {"No"}; // "No" triggers dialog.dispose() will close popup naja!

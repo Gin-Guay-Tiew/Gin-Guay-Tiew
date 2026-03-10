@@ -13,22 +13,33 @@ public class MoneyDisplay extends JPanel {
     public MoneyDisplay(int amount) {
         // Display
         setLayout(new BorderLayout());
-        setBorder(BorderFactory.createEmptyBorder(10, 15, 5, 15));
-        setBackground(new Color(225, 225, 225));
+        setBorder(BorderFactory.createEmptyBorder(10, 37, 10, 37));
+
+        // PaddingLabel
+        JLabel paddingLabel = new JLabel(" ");
+        paddingLabel.setFont(jerseyFont.deriveFont(17f));
 
         // MoneyLabel
         JLabel moneyLabel = new JLabel("Money");
         ImageIcon icon = IconImage.create("resources/images/shared/Money.png", 20, 20); // Icon for JLabel
         moneyLabel.setFont(jerseyFont.deriveFont(17f));
         moneyLabel.setIcon(icon);
-        moneyLabel.setForeground(new Color(100, 100, 100));
         moneyLabel.setVerticalAlignment(JLabel.CENTER);
 
         // MoneyAmount
         moneyAmount = new JLabel(String.format("%,d N", amount));
         moneyAmount.setFont(jerseyFont.deriveFont(25f));
+        moneyAmount.setVerticalAlignment(JLabel.CENTER);
 
-        add(moneyLabel, BorderLayout.NORTH);
+        add(paddingLabel, BorderLayout.NORTH);
+        add(moneyLabel, BorderLayout.CENTER);
         add(moneyAmount, BorderLayout.SOUTH);
+    }
+
+    // Draw BG Image
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        g.drawImage(new ImageIcon("resources/images/shared/SignFrame.png").getImage(), 0, 0, getWidth(), getHeight(), this);
     }
 }
