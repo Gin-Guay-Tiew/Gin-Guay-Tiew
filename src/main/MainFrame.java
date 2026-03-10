@@ -170,7 +170,7 @@ public class MainFrame extends JFrame implements WindowListener {
         mainPanel.add(new MainMenuPage(this), MAIN_MENU); // + MainMenu
         mainPanel.add(new LevelSelectPage(this), LEVEL_SELECT); // + LevelSelection
         mainPanel.add(new GameTutorialPage(), TUTORIAL); // + Tutorial
-        mainPanel.add(new LoadingPage(), LOADING_SCREEN); // + Loading Screen
+        mainPanel.add(new LoadingPage("Level1"), LOADING_SCREEN); // + Loading Screen
         mainPanel.add(new WinLosePage(this), ENDGAME);
         mainPanel.add(new MainSettingPage(this), SETTING);
         mainPanel.add(new ShopScreen(gameController), SHOP_UI);

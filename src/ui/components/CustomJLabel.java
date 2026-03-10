@@ -8,24 +8,37 @@ import java.awt.geom.*;
 /**
  * A custom JLabel that renders text with a decorative outline (stroke).
  * <p>
- * Supports basic multi-line text using the {@code <br>} tag.
+ * Supports basic multi-line text using the {@code <br>} tag and optional top-left alignment.
  */
 public class CustomJLabel extends JLabel {
 
     private float strokePixels;
     private Color outlineColor = Color.BLACK;
+    private boolean alignTopLeft = false;
 
     /**
      * Constructs a new CustomJLabel with a specified outline thickness.
-     * <p>
-     * Usage: {@code new CustomJLabel("HELLO<br>WORLD", 2.0f);}
+     * Default behavior centers the text.
      *
      * @param text         The string to display (supports {@code <br>} for line breaks).
      * @param strokePixels The thickness of the text outline in pixels.
      */
     public CustomJLabel(String text, float strokePixels) {
-        super(text.trim());
+        super(text != null ? text.trim() : "");
         this.strokePixels = strokePixels;
+    }
+
+    /**
+     * Constructs a new CustomJLabel with specified outline thickness and alignment behavior.
+     *
+     * @param text         The string to display (supports {@code <br>} for line breaks).
+     * @param strokePixels The thickness of the text outline in pixels.
+     * @param alignTopLeft If true, text is pinned to the top-left; if false, text is centered.
+     */
+    public CustomJLabel(String text, float strokePixels, boolean alignTopLeft) {
+        super(text != null ? text.trim() : "");
+        this.strokePixels = strokePixels;
+        this.alignTopLeft = alignTopLeft;
     }
 
     /**
@@ -41,7 +54,7 @@ public class CustomJLabel extends JLabel {
      */
     public void setOutlineColor(Color color) {
         this.outlineColor = color;
-        repaint(); // Refresh the component to show the new color
+        repaint();
     }
 
     /**
@@ -57,28 +70,44 @@ public class CustomJLabel extends JLabel {
         Graphics2D g2 = (Graphics2D) g.create();
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
-        String[] lines = getText().split("<br>");
+        String text = getText();
+        if (text == null || text.isEmpty()) {
+            g2.dispose();
+            return;
+        }
+
+        String[] lines = text.split("<br>");
         FontMetrics fm = g2.getFontMetrics(getFont());
         int lineHeight = fm.getHeight();
         int totalHeight = lineHeight * lines.length;
 
-        int y = (getHeight() - totalHeight) / 2 + fm.getAscent();
+        int y;
+        if (alignTopLeft) {
+            y = fm.getAscent();
+        } else {
+            y = (getHeight() - totalHeight) / 2 + fm.getAscent();
+        }
 
         for (String line : lines) {
-            String paddedLine = " " + line.trim() + " ";
-            int x = (getWidth() - fm.stringWidth(paddedLine)) / 2;
+            String cleanLine = line.trim();
+            int x;
+            if (alignTopLeft) {
+                x = (int) strokePixels;
+            } else {
+                x = (getWidth() - fm.stringWidth(cleanLine)) / 2;
+            }
 
-            TextLayout tl = new TextLayout(paddedLine, getFont(), g2.getFontRenderContext());
-            Shape shape = tl.getOutline(AffineTransform.getTranslateInstance(x, y));
+            if (!cleanLine.isEmpty()) {
+                TextLayout tl = new TextLayout(cleanLine, getFont(), g2.getFontRenderContext());
+                Shape shape = tl.getOutline(AffineTransform.getTranslateInstance(x, y));
 
-            // Draw Outline
-            g2.setColor(outlineColor);
-            g2.setStroke(new BasicStroke(strokePixels));
-            g2.draw(shape);
+                g2.setColor(outlineColor);
+                g2.setStroke(new BasicStroke(strokePixels, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
+                g2.draw(shape);
 
-            // Fill Text
-            g2.setColor(getForeground());
-            g2.fill(shape);
+                g2.setColor(getForeground());
+                g2.fill(shape);
+            }
 
             y += lineHeight;
         }
