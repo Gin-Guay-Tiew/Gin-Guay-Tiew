@@ -1,15 +1,17 @@
 package ui.pages.loadingScreen;
 
+import ui.components.CustomJLabel;
 import utilities.FontLoader;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import javax.swing.text.*;
 import java.awt.*;
 import java.util.*;
 import javax.swing.Timer;
 
 public class TipsLabel extends JPanel {
-    private final JTextPane tipsPanel;
+    private final CustomJLabel tipsPanel;
     private final String[] tips = {
             "Did you know? You can adjust you volume in the settings.",
             "Use your inner noodle spirit to serve customer faster!",
@@ -27,19 +29,20 @@ public class TipsLabel extends JPanel {
         setBorder(BorderFactory.createEmptyBorder(5, 50, 25, 35));
         setOpaque(false);
 
-        tipsPanel = new JTextPane();
-        tipsPanel.setEditable(false);
+        tipsPanel = new CustomJLabel("", 5f, true);
         tipsPanel.setOpaque(false);
         tipsPanel.setFocusable(false);
-        tipsPanel.setFont(jersyFont.deriveFont(27f));
-        tipsPanel.setForeground(new Color(156,48,85));
+        tipsPanel.setFont(jersyFont.deriveFont(30f));
+        tipsPanel.setForeground(Color.white);
+        tipsPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 90, 0));
+        setTipText(tips[random.nextInt(tips.length)]);
 
         // Initial tip
         setTipText(tips[random.nextInt(tips.length)]);
 
         // Loading
         JLabel loadLabel = new JLabel("Loading ");
-        loadLabel.setFont(jersyFont.deriveFont(25f));
+        loadLabel.setFont(jersyFont.deriveFont(32f));
         loadLabel.setHorizontalTextPosition(SwingConstants.LEFT);
         loadLabel.setHorizontalAlignment(SwingConstants.RIGHT);
         loadLabel.setIcon(new ImageIcon("resources/images/loadingScreen/Loading.gif"));
@@ -56,16 +59,8 @@ public class TipsLabel extends JPanel {
         setTipText(newTip);
     }
 
-    private void centerText() {
-        StyledDocument doc = tipsPanel.getStyledDocument();
-        SimpleAttributeSet center = new SimpleAttributeSet();
-        StyleConstants.setAlignment(center, StyleConstants.ALIGN_LEFT);
-        doc.setParagraphAttributes(0, doc.getLength(), center, false);
-    }
-
     public void setTipText(String text) {
         tipsPanel.setText("TIP: "+text);
-        centerText();
     }
 
     public void stopTimer() {

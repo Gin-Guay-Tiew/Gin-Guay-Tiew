@@ -9,7 +9,8 @@ public class LoadingPage extends JLayeredPane {
 
     public LoadingPage(String SelectedLevel) {
         this.bgImage = new ImageIcon("resources/images/shared/levelBackgrounds/" + SelectedLevel + ".gif").getImage();
-        this.setLayout(new BorderLayout());
+
+        setLayout(new OverlayLayout(this));
 
         JPanel frame = new JPanel() {
             @Override
@@ -22,13 +23,17 @@ public class LoadingPage extends JLayeredPane {
 
         frame.setOpaque(false);
         frame.setLayout(new BorderLayout());
+
         frame.add(new JLabel(), BorderLayout.CENTER);
         frame.add(new TipsLabel(), BorderLayout.SOUTH);
 
-        add(frame, BorderLayout.CENTER, JLayeredPane.PALETTE_LAYER);
+        TripleIcons icons = new TripleIcons();
+        icons.setOpaque(false);
+
+        add(icons, JLayeredPane.DRAG_LAYER);
+        add(frame, JLayeredPane.PALETTE_LAYER);
     }
 
-    // Draw BG Image
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
