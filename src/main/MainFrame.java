@@ -158,13 +158,6 @@ public class MainFrame extends JFrame implements WindowListener {
 
         animator = new Transition(transFrame, transIcon);
         glass.add(transFrame);
-
-        // Initialize the navigator before adding ui.pages
-        /*
-        อันนี้ลบได้ไหมอ่ะ เหมือนจะสร้างเป็น attribute ไว้ด้านบนแล้วนะ
-        CardLayout cardLayout = new CardLayout();
-        JPanel mainPanel = new JPanel(cardLayout);
-        */
         navigator = new PageNavigator(mainPanel, cardLayout, animator);
 
         mainPanel.add(new MainMenuPage(this), MAIN_MENU); // + MainMenu
@@ -177,7 +170,6 @@ public class MainFrame extends JFrame implements WindowListener {
         mainPanel.add(new gamePlayScreen(this),GAME); // + gamePlayScreen
 
         navigator.toPage(MAIN_MENU, false);
-        navigator.toPage(GAME, false);
 
         add(mainPanel);
         setVisible(true);
