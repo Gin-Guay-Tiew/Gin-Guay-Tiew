@@ -1,14 +1,16 @@
 package ui.pages.gamePlay;
 
-import java.awt.*;
 import java.awt.event.*;
-import javax.swing.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.SwingUtilities;
 
-public class GameTimer {
-    private Timer timer;
+public class GameTimer implements Runnable {
     private int timeLeft;
     private gamePlayScreen screen;
     private TimeDisplay timeDisplay;
+    private Thread timer;
+    private volatile boolean isRunning = false;
 
     // รับค่า เวลา, หน้าจอเกม, หน้าปัดเวลา
     public GameTimer(int seconds, gamePlayScreen screen, TimeDisplay timeDisplay) {
@@ -20,32 +22,47 @@ public class GameTimer {
         if (this.timeDisplay != null) {
             this.timeDisplay.updateTime(timeLeft);
         }
+    }
 
-        // ให้ timer ทำงานทุกๆ 1 วิ
-        timer = new Timer(1000, new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                timeLeft--;
-
-                if (timeDisplay != null) {
-                    timeDisplay.updateTime(timeLeft);
-                }
-
-                if (timeLeft <= 0) {
-                    stopTimer();
-                    screen.gameOver();
-                }
+    @Override
+    public void run() {
+        while (isRunning && this.timeLeft > 0) {
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException ex) {
+                ex.printStackTrace();
+                break;
             }
-        });
+            this.timeLeft--;
+
+            SwingUtilities.invokeLater(new Runnable() {
+                @Override
+                public void run() {
+                    if (timeDisplay != null) {
+                        timeDisplay.updateTime(timeLeft);
+                    }
+
+                    if (timeLeft <= 0) {
+                        stopTimer();
+                        screen.gameOver();
+                    }
+                }
+            });
+        }
     }
 
     public void startTimer() {
-        timer.start();
+        if (!isRunning) {
+            isRunning = true;
+            timer = new Thread(this);
+            timer.start();
+        }
     }
 
     public void stopTimer() {
-        if (timer.isRunning()) {
-            timer.stop();
+        isRunning = false;
+        if (timer != null) {
+            timer.interrupt();
         }
     }
 }
