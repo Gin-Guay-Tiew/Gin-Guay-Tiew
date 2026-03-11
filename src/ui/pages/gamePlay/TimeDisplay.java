@@ -13,10 +13,10 @@ public class TimeDisplay extends JPanel {
     public TimeDisplay(){
 
         setLayout(new FlowLayout(FlowLayout.CENTER,0,0));
-        setBorder(BorderFactory.createEmptyBorder(15, 15, 0, 15));
-        setBackground(new Color(225, 225, 225));
+        setBorder(BorderFactory.createEmptyBorder(35, 15, 0, 15));
+        setOpaque(false);
 
-        Font font25 =  jerseyFont.deriveFont(30f);
+        Font font25 =  jerseyFont.deriveFont(35f);
 
         JLabel timeLabel = new JLabel("Time : ");
         timeLabel.setFont(font25);
@@ -24,7 +24,7 @@ public class TimeDisplay extends JPanel {
         minLabel = new JLabel("00");
         minLabel.setFont(font25);
         minLabel.setHorizontalAlignment(SwingConstants.RIGHT);
-        minLabel.setPreferredSize(new Dimension(25,25));
+        minLabel.setPreferredSize(new Dimension(30,30));
 
         JLabel colonLabel = new JLabel(":");
         colonLabel.setFont(font25);
@@ -32,7 +32,7 @@ public class TimeDisplay extends JPanel {
         secLabel = new JLabel("00");
         secLabel.setFont(font25);
         secLabel.setHorizontalAlignment(SwingConstants.LEFT);
-        secLabel.setPreferredSize(new Dimension(25,25));
+        secLabel.setPreferredSize(new Dimension(30,30));
 
         add(timeLabel);
         add(minLabel);
@@ -46,5 +46,12 @@ public class TimeDisplay extends JPanel {
 
         minLabel.setText(String.format("%02d",min));
         secLabel.setText(String.format("%02d",sec));
+    }
+
+    // Draw BG Image
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        g.drawImage(new ImageIcon("resources/images/shared/SignFrame.png").getImage(), 0, 0, getWidth(), getHeight(), this);
     }
 }
