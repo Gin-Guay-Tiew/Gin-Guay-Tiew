@@ -104,7 +104,7 @@ public class MainFrame extends JFrame implements WindowListener {
                 isWarningActive = true;
 
                 // Create warning popUp
-                Timer popupDelayTimer = new Timer(25, delayEvent -> {
+                Timer popupDelayTimer = new Timer(500, delayEvent -> {
 
                     String[] btnPaths = {"resources/images/shared/buttons/Ok"};
                     String[] btnLabels = {"No"}; // "No" triggers dialog.dispose() will close popup naja!
@@ -158,26 +158,18 @@ public class MainFrame extends JFrame implements WindowListener {
 
         animator = new Transition(transFrame, transIcon);
         glass.add(transFrame);
-
-        // Initialize the navigator before adding ui.pages
-        /*
-        อันนี้ลบได้ไหมอ่ะ เหมือนจะสร้างเป็น attribute ไว้ด้านบนแล้วนะ
-        CardLayout cardLayout = new CardLayout();
-        JPanel mainPanel = new JPanel(cardLayout);
-        */
         navigator = new PageNavigator(mainPanel, cardLayout, animator);
 
         mainPanel.add(new MainMenuPage(this), MAIN_MENU); // + MainMenu
         mainPanel.add(new LevelSelectPage(this), LEVEL_SELECT); // + LevelSelection
         mainPanel.add(new GameTutorialPage(), TUTORIAL); // + Tutorial
-        mainPanel.add(new LoadingPage(), LOADING_SCREEN); // + Loading Screen
+        mainPanel.add(new LoadingPage("Level1"), LOADING_SCREEN); // + Loading Screen
         mainPanel.add(new WinLosePage(this), ENDGAME);
         mainPanel.add(new MainSettingPage(this), SETTING);
         mainPanel.add(new ShopScreen(gameController), SHOP_UI);
         mainPanel.add(new gamePlayScreen(this),GAME); // + gamePlayScreen
 
         navigator.toPage(MAIN_MENU, false);
-        navigator.toPage(GAME, false);
 
         add(mainPanel);
         setVisible(true);
