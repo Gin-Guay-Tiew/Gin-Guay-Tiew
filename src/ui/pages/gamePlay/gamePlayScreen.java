@@ -7,18 +7,19 @@ import javax.swing.*;
 import java.awt.*;
 
 public class gamePlayScreen extends JPanel {
-    private Image counterBarimage;
     private WinLosePage status;
+    private bgPanel bgPanel;
+    private counterBar counterBarPanel;
+    private TopBar topBar;
 
 
-    public gamePlayScreen(MainFrame mainFrame){
+    public gamePlayScreen(MainFrame mainFrame,int levelId){
 
         setLayout(new OverlayLayout(this));
 
         // background
         this.setBackground(Color.white);
-        ImageIcon counter = new ImageIcon("resources/images/gamePlay/counter/counter_bar.png");
-        counterBarimage = counter.getImage();
+
 
         // status endgame
         status = new WinLosePage(mainFrame);
@@ -28,25 +29,37 @@ public class gamePlayScreen extends JPanel {
         JPanel mainGameArea = new JPanel(new BorderLayout());
         mainGameArea.setOpaque(false);
 
-        // top bar
-        TopBar topBar = new TopBar(mainFrame);
-        mainGameArea.add(topBar,BorderLayout.NORTH);
+
 
         // Game layer
         JLayeredPane gameLayer = new JLayeredPane();
         gameLayer.setLayout(null);
-        gameLayer.setPreferredSize(new Dimension(800,520));
+        gameLayer.setBounds(0,0,800,520);
 
-        //Layer 0 : customer
+
+
+        //Layer 0 : background
+        bgPanel = new bgPanel();
+        bgPanel.setBounds(0,0,800,400);
+
+        //Layer 1 :top bar
+        topBar = new TopBar(mainFrame);
+        topBar.setBounds(0,0,800,100);
+
+        //Layer 2 : customer
         customer customerPanel =  new customer(mainFrame);
-        customerPanel.setBounds(0,0,800, 520);
+        customerPanel.setBounds(0,0,800, 600);
 
-        //Layer 1 : counter bar
-        counterBar counterBarPanel = new counterBar(mainFrame);
-        counterBarPanel.setBounds(0,0,800,520);
+        //Layer 3 : counter bar
+        counterBarPanel = new counterBar(mainFrame);
+        counterBarPanel.setBounds(0,90,800,600);
 
-        gameLayer.add(customerPanel, Integer.valueOf(0));
-        gameLayer.add(counterBarPanel, Integer.valueOf(1));
+
+        gameLayer.add(bgPanel,Integer.valueOf(0));
+        gameLayer.add(topBar,Integer.valueOf(1));
+        gameLayer.add(customerPanel, Integer.valueOf(2));
+        gameLayer.add(counterBarPanel, Integer.valueOf(3));
+
 
         mainGameArea.add(gameLayer, BorderLayout.CENTER);
 
@@ -59,6 +72,20 @@ public class gamePlayScreen extends JPanel {
         GameTimer myTimer = new GameTimer(10,this,screenTime);
         myTimer.startTimer();
 
+        //UI level
+        showLevel(levelId);
+
+
+    }
+
+    public void showLevel(int levelId) {
+        bgPanel.setBackgroundImage(
+                "resources/images/gamePlay/bg/LV" + levelId + ".gif"
+        );
+
+        counterBarPanel.setSlots(
+                LevelFactory.getlevel(levelId).slots
+        );
     }
 
     // โชว์หน้า status จบเกม
@@ -66,12 +93,6 @@ public class gamePlayScreen extends JPanel {
         status.setVisible(true);
     }
 
-    //background
-    @Override
-    protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        g.drawImage(counterBarimage, 0, 0, getWidth(), getHeight(), this);
-    }
-
-
 }
+
+

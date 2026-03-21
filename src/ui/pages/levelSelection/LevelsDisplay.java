@@ -100,7 +100,8 @@ public class LevelsDisplay extends JPanel {
                     public void actionPerformed(ActionEvent e) {
                         System.out.println("You need " + current_lv.unlockCost + " Noodles to unlock this!");
                         if (current_lv.isUnlocked) {
-                            mainFrame.startNewGame();
+                            int realLevel = Math.min(levelNum, levelsInfo.size());
+                            mainFrame.startNewGame(realLevel);
                             return;
                         }
                         String[] btnPaths = {

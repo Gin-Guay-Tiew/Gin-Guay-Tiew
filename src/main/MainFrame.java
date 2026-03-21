@@ -37,20 +37,27 @@ public class MainFrame extends JFrame implements WindowListener {
     private boolean isWarningActive = false;
 
     private JPanel currentGameScreen;
+    private int currentLevel;
 
     // สำหรับสร้างหน้าเกมใหม่ตอนกด play again
-    public void startNewGame() {
+    public void startNewGame(int levelID) {
+
+        currentLevel = levelID;
         if (currentGameScreen != null) {
             mainPanel.remove(currentGameScreen);
         }
 
-        currentGameScreen = new gamePlayScreen(this);
+        currentGameScreen = new gamePlayScreen(this,levelID);
         mainPanel.add(currentGameScreen, "gamePlay");
 
         mainPanel.revalidate();
         mainPanel.repaint();
 
         navigator.toPage("gamePlay", true, 500);
+    }
+    // ขอสร้างส่วนเสริมเพิ่มสำหรับกดเล่นใหม่
+    public void replayGame(){
+        startNewGame(currentLevel);
     }
 
     public void closeApp() {
@@ -167,7 +174,7 @@ public class MainFrame extends JFrame implements WindowListener {
         mainPanel.add(new WinLosePage(this), ENDGAME);
         mainPanel.add(new MainSettingPage(this), SETTING);
         mainPanel.add(new ShopScreen(gameController), SHOP_UI);
-        mainPanel.add(new gamePlayScreen(this),GAME); // + gamePlayScreen
+
 
         navigator.toPage(MAIN_MENU, false);
 
