@@ -102,19 +102,18 @@ public class gamePlayScreen extends JPanel {
                 break;
             case 4:
                 bgPanel.setBackgroundImage(
-                        "resources/images/gamePlay/bg/LV3.gif",
+                        "resources/images/gamePlay/bg/LV4.gif",
                         0, 0, 800, 400
                 );
             case 5:
                 bgPanel.setBackgroundImage(
-                        "resources/images/gamePlay/bg/LV3.gif",
+                        "resources/images/gamePlay/bg/LV5.gif",
                         0, 0, 800, 400
                 );
-
-                counterBarPanel.setSlots(
-                        LevelFactory.getlevel(levelId).slots
-                );
         }
+        counterBarPanel.setSlots(
+                LevelFactory.getlevel(levelId).slots
+        );
     }
     // โชว์หน้า status จบเกม
     public void gameOver(){
