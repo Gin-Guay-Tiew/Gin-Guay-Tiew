@@ -105,11 +105,13 @@ public class gamePlayScreen extends JPanel {
                         "resources/images/gamePlay/bg/LV4.gif",
                         0, 0, 800, 400
                 );
+                break;
             case 5:
                 bgPanel.setBackgroundImage(
                         "resources/images/gamePlay/bg/LV5.gif",
                         0, 0, 800, 400
                 );
+                break;
         }
         counterBarPanel.setSlots(
                 LevelFactory.getlevel(levelId).slots
