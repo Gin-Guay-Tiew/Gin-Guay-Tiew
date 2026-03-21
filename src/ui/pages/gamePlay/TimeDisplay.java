@@ -16,7 +16,7 @@ public class TimeDisplay extends JPanel {
         setBorder(BorderFactory.createEmptyBorder(35, 15, 0, 15));
         setOpaque(false);
 
-        Font font25 =  jerseyFont.deriveFont(35f);
+        Font font25 =  jerseyFont.deriveFont(25f);
 
         JLabel timeLabel = new JLabel("Time : ");
         timeLabel.setFont(font25);

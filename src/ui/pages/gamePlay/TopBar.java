@@ -19,15 +19,14 @@ public class TopBar extends JPanel {
     public TopBar(MainFrame mainFrame) {
 
         // TopPanel
-        setLayout(new BorderLayout());
-        setBorder(BorderFactory.createEmptyBorder(0, 20, 0, 55)); // Padding :3
-        setBackground(Color.GREEN);
+        setLayout(null);
         setOpaque(false);
 
         // money and time panel
         JPanel mtPanel = new JPanel();
         mtPanel.setLayout(new GridLayout(1, 2, 20, 0));
         mtPanel.setOpaque(false);
+        mtPanel.setBounds(450,-10,320,85);
 
         // Money box
         JPanel money = new MoneyDisplay(1000);
@@ -35,7 +34,7 @@ public class TopBar extends JPanel {
         mtPanel.add(timeDisplay);
         mtPanel.add(money);
 
-        add(mtPanel, BorderLayout.EAST);
+        add(mtPanel);
 
     }
 
