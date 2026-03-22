@@ -12,200 +12,211 @@ public class LevelFactory {
         switch (levelId) {
             case 1:
                 bg = "resources/images/gamePlay/bg/LV1.gif";
-                // down counter
-                slots.add(new SlotSpec("pot",-86,240,387,387,"resources/images/gamePlay/counter/potter.png"));
-                slots.add(new SlotSpec("bucket lv3",230,350,120,120,"resources/images/gamePlay/ingredients/drinks/lv3.png"));
-                slots.add(new SlotSpec("trash",620,400,162,73,"resources/images/gamePlay/binn/empty.png"));
+
+                //mai
+                slots.add(new SlotSpec("mai1",-2,200,120,114,"resources/images/gamePlay/aquiment/mai1.png",true));
+                slots.add(new SlotSpec("mai2",95,200,120,120,"resources/images/gamePlay/aquiment/mai2.png",true));
+
+                slots.add(new SlotSpec("pot",-86,240,387,387,"resources/images/gamePlay/counter/potter.png",false));
+                slots.add(new SlotSpec("bucket lv3",230,350,120,120,"resources/images/gamePlay/ingredients/drinks/lv3.png",false));
+                slots.add(new SlotSpec("trash",620,400,162,73,"resources/images/gamePlay/binn/empty.png",false));
 
                 //on counter
 
-                //mai
-                slots.add(new SlotSpec("mai1",-2,200,120,114,"resources/images/gamePlay/aquiment/mai1.png"));
-                slots.add(new SlotSpec("mai2",95,200,120,120,"resources/images/gamePlay/aquiment/mai2.png"));
-
                 //soup row 1
-                slots.add(new SlotSpec("yenTafo",238,210,70,70,"resources/images/gamePlay/ingredients/soups/category/yenTaFo/idle.png"));
-                slots.add(new SlotSpec("tomYum",308,210,70,70,"resources/images/gamePlay/ingredients/soups/category/tomYum/idle.png"));
+                slots.add(new SlotSpec("yenTafo",238,210,70,70,"resources/images/gamePlay/ingredients/soups/category/yenTaFo/idle.png",false));
+                slots.add(new SlotSpec("tomYum",308,210,70,70,"resources/images/gamePlay/ingredients/soups/category/tomYum/idle.png",false));
 
                 //soup row2
-                slots.add(new SlotSpec("namTok",238,280,70,70,"resources/images/gamePlay/ingredients/soups/category/namTok/idle.png"));
-                slots.add(new SlotSpec("Pork",308,280,70,70,"resources/images/gamePlay/ingredients/soups/category/braisedPork/idle.png"));
+                slots.add(new SlotSpec("namTok",238,280,70,70,"resources/images/gamePlay/ingredients/soups/category/namTok/idle.png",false));
+                slots.add(new SlotSpec("Pork",308,280,70,70,"resources/images/gamePlay/ingredients/soups/category/braisedPork/idle.png",false));
 
                 //towel
-                slots.add(new SlotSpec("towel",360,150,240,240,"resources/images/gamePlay/counter/towel.png"));
+                slots.add(new SlotSpec("towel",360,150,240,240,"resources/images/gamePlay/counter/towel.png",false));
 
                 //add on
-                slots.add(new SlotSpec("vegetable",575,170,120,120,"resources/images/gamePlay/ingredients/vegetables/idle.png"));
-                slots.add(new SlotSpec("porkSlice",570,260,102,102,"resources/images/gamePlay/ingredients/addOn/porkSlices/idle.png"));
-                slots.add(new SlotSpec("meatball",634,260,102,102,"resources/images/gamePlay/ingredients/addOn/meatball/idle.png"));
-                slots.add(new SlotSpec("porkRind",694,260,102,102,"resources/images/gamePlay/ingredients/addOn/porkRind/idle.png"));
+                slots.add(new SlotSpec("vegetable",575,170,120,120,"resources/images/gamePlay/ingredients/vegetables/idle.png",true));
+                slots.add(new SlotSpec("porkSlice",570,260,102,102,"resources/images/gamePlay/ingredients/addOn/porkSlices/idle.png",true));
+                slots.add(new SlotSpec("meatball",634,260,102,102,"resources/images/gamePlay/ingredients/addOn/meatball/idle.png",true));
+                slots.add(new SlotSpec("porkRind",694,260,102,102,"resources/images/gamePlay/ingredients/addOn/porkRind/idle.png",true));
 
                 //up counter
 
-                slots.add(new SlotSpec("container",2,14,182,182,"resources/images/gamePlay/ingredients/noodles/container/lv5.png"));
-                slots.add(new SlotSpec("noodles",143,115,107,92,"resources/images/gamePlay/ingredients/noodles/category/greenEgg/idle.png"));
-                slots.add(new SlotSpec("decorate",226,120,76,76,"resources/images/gamePlay/bowl/decorate.png"));
-                slots.add(new SlotSpec("chopsticks",282,110,86,86,"resources/images/gamePlay/counter/chopsticks.png"));
-                slots.add(new SlotSpec("kanomTuay",670,150,113,55,"resources/images/gamePlay/ingredients/kanomTuay/idle.png"));
+                slots.add(new SlotSpec("container",2,14,182,182,"resources/images/gamePlay/ingredients/noodles/container/lv5.png",false));
+                slots.add(new SlotSpec("noodlesBowl",143,115,107,92,"resources/images/gamePlay/ingredients/noodles/category/greenEgg/idle.png",false));
+                slots.add(new SlotSpec("decorate",226,120,76,76,"resources/images/gamePlay/bowl/decorate.png",false));
+                slots.add(new SlotSpec("chopsticks",282,110,86,86,"resources/images/gamePlay/counter/chopsticks.png",false));
+                slots.add(new SlotSpec("kanomTuay",670,150,113,55,"resources/images/gamePlay/ingredients/kanomTuay/idle.png",false));
+
 
                 break;
 
             case 2:
                 bg = "resources/images/gamePlay/bg/LV2.gif";
+                //mai
+                slots.add(new SlotSpec("mai1",-2,200,120,114,"resources/images/gamePlay/aquiment/mai1.png",true));
+                slots.add(new SlotSpec("mai2",95,200,120,120,"resources/images/gamePlay/aquiment/mai2.png",true));
+
                 // down counter
-                slots.add(new SlotSpec("pot",-86,240,387,387,"resources/images/gamePlay/counter/potter.png"));
-                slots.add(new SlotSpec("bucket lv3",230,350,120,120,"resources/images/gamePlay/ingredients/drinks/lv3.png"));
-                slots.add(new SlotSpec("trash",620,400,162,73,"resources/images/gamePlay/binn/empty.png"));
+                slots.add(new SlotSpec("pot",-86,240,387,387,"resources/images/gamePlay/counter/potter.png",false));
+                slots.add(new SlotSpec("bucket lv3",230,350,120,120,"resources/images/gamePlay/ingredients/drinks/lv3.png",false));
+                slots.add(new SlotSpec("trash",620,400,162,73,"resources/images/gamePlay/binn/empty.png",false));
 
                 //on counter
 
-                //mai
-                slots.add(new SlotSpec("mai1",-2,200,120,114,"resources/images/gamePlay/aquiment/mai1.png"));
-                slots.add(new SlotSpec("mai2",95,200,120,120,"resources/images/gamePlay/aquiment/mai2.png"));
+
 
                 //soup row 1
-                slots.add(new SlotSpec("yenTafo",238,210,70,70,"resources/images/gamePlay/ingredients/soups/category/yenTaFo/idle.png"));
-                slots.add(new SlotSpec("tomYum",308,210,70,70,"resources/images/gamePlay/ingredients/soups/category/tomYum/idle.png"));
+                slots.add(new SlotSpec("yenTafo",238,210,70,70,"resources/images/gamePlay/ingredients/soups/category/yenTaFo/idle.png",false));
+                slots.add(new SlotSpec("tomYum",308,210,70,70,"resources/images/gamePlay/ingredients/soups/category/tomYum/idle.png",false));
 
                 //soup row2
-                slots.add(new SlotSpec("namTok",238,280,70,70,"resources/images/gamePlay/ingredients/soups/category/namTok/idle.png"));
-                slots.add(new SlotSpec("Pork",308,280,70,70,"resources/images/gamePlay/ingredients/soups/category/braisedPork/idle.png"));
+                slots.add(new SlotSpec("namTok",238,280,70,70,"resources/images/gamePlay/ingredients/soups/category/namTok/idle.png",false));
+                slots.add(new SlotSpec("Pork",308,280,70,70,"resources/images/gamePlay/ingredients/soups/category/braisedPork/idle.png",false));
 
                 //towel
-                slots.add(new SlotSpec("towel",360,150,240,240,"resources/images/gamePlay/counter/towel.png"));
+                slots.add(new SlotSpec("towel",360,150,240,240,"resources/images/gamePlay/counter/towel.png",false));
 
                 //add on
-                slots.add(new SlotSpec("vegetable",575,170,120,120,"resources/images/gamePlay/ingredients/vegetables/idle.png"));
-                slots.add(new SlotSpec("porkSlice",570,260,102,102,"resources/images/gamePlay/ingredients/addOn/porkSlices/idle.png"));
-                slots.add(new SlotSpec("meatball",634,260,102,102,"resources/images/gamePlay/ingredients/addOn/meatball/idle.png"));
-                slots.add(new SlotSpec("porkRind",694,260,102,102,"resources/images/gamePlay/ingredients/addOn/porkRind/idle.png"));
+                slots.add(new SlotSpec("vegetable",575,170,120,120,"resources/images/gamePlay/ingredients/vegetables/idle.png",true));
+                slots.add(new SlotSpec("porkSlice",570,260,102,102,"resources/images/gamePlay/ingredients/addOn/porkSlices/idle.png",true));
+                slots.add(new SlotSpec("meatball",634,260,102,102,"resources/images/gamePlay/ingredients/addOn/meatball/idle.png",true));
+                slots.add(new SlotSpec("porkRind",694,260,102,102,"resources/images/gamePlay/ingredients/addOn/porkRind/idle.png",true));
 
                 //up counter
 
-                slots.add(new SlotSpec("container",2,14,182,182,"resources/images/gamePlay/ingredients/noodles/container/lv5.png"));
-                slots.add(new SlotSpec("noodles",143,115,107,92,"resources/images/gamePlay/ingredients/noodles/category/greenEgg/idle.png"));
-                slots.add(new SlotSpec("decorate",226,120,76,76,"resources/images/gamePlay/bowl/decorate.png"));
-                slots.add(new SlotSpec("chopsticks",282,110,86,86,"resources/images/gamePlay/counter/chopsticks.png"));
-                slots.add(new SlotSpec("kanomTuay",670,150,113,55,"resources/images/gamePlay/ingredients/kanomTuay/idle.png"));
+                slots.add(new SlotSpec("container",2,14,182,182,"resources/images/gamePlay/ingredients/noodles/container/lv5.png",false));
+                slots.add(new SlotSpec("noodlesBowl",143,115,107,92,"resources/images/gamePlay/ingredients/noodles/category/greenEgg/idle.png",false));
+                slots.add(new SlotSpec("decorate",226,120,76,76,"resources/images/gamePlay/bowl/decorate.png",false));
+                slots.add(new SlotSpec("chopsticks",282,110,86,86,"resources/images/gamePlay/counter/chopsticks.png",false));
+                slots.add(new SlotSpec("kanomTuay",670,150,113,55,"resources/images/gamePlay/ingredients/kanomTuay/idle.png",false));
+
 
                 break;
 
             case 3:
                 bg = "resources/images/gamePlay/bg/LV3.gif";
+
+                //mai
+                slots.add(new SlotSpec("mai1",-2,200,120,114,"resources/images/gamePlay/aquiment/mai1.png",true));
+                slots.add(new SlotSpec("mai2",95,200,120,120,"resources/images/gamePlay/aquiment/mai2.png",true));
+
                 // down counter
-                slots.add(new SlotSpec("pot",-86,240,387,387,"resources/images/gamePlay/counter/potter.png"));
-                slots.add(new SlotSpec("bucket lv3",230,350,120,120,"resources/images/gamePlay/ingredients/drinks/lv3.png"));
-                slots.add(new SlotSpec("trash",620,400,162,73,"resources/images/gamePlay/binn/empty.png"));
+                slots.add(new SlotSpec("pot",-86,240,387,387,"resources/images/gamePlay/counter/potter.png",false));
+                slots.add(new SlotSpec("bucket lv3",230,350,120,120,"resources/images/gamePlay/ingredients/drinks/lv3.png",false));
+                slots.add(new SlotSpec("trash",620,400,162,73,"resources/images/gamePlay/binn/empty.png",false));
 
                 //on counter
 
                 //mai
-                slots.add(new SlotSpec("mai1",-2,200,120,114,"resources/images/gamePlay/aquiment/mai1.png"));
-                slots.add(new SlotSpec("mai2",95,200,120,120,"resources/images/gamePlay/aquiment/mai2.png"));
+                slots.add(new SlotSpec("mai1",-2,200,120,114,"resources/images/gamePlay/aquiment/mai1.png",true));
+                slots.add(new SlotSpec("mai2",95,200,120,120,"resources/images/gamePlay/aquiment/mai2.png",true));
 
                 //soup row 1
-                slots.add(new SlotSpec("yenTafo",238,210,70,70,"resources/images/gamePlay/ingredients/soups/category/yenTaFo/idle.png"));
-                slots.add(new SlotSpec("tomYum",308,210,70,70,"resources/images/gamePlay/ingredients/soups/category/tomYum/idle.png"));
+                slots.add(new SlotSpec("yenTafo",238,210,70,70,"resources/images/gamePlay/ingredients/soups/category/yenTaFo/idle.png",false));
+                slots.add(new SlotSpec("tomYum",308,210,70,70,"resources/images/gamePlay/ingredients/soups/category/tomYum/idle.png",false));
 
                 //soup row2
-                slots.add(new SlotSpec("namTok",238,280,70,70,"resources/images/gamePlay/ingredients/soups/category/namTok/idle.png"));
-                slots.add(new SlotSpec("emptyPot",308,280,70,70,"resources/images/gamePlay/aquiment/emptyPot.png"));
+                slots.add(new SlotSpec("namTok",238,280,70,70,"resources/images/gamePlay/ingredients/soups/category/namTok/idle.png",false));
+                slots.add(new SlotSpec("emptyPot",308,280,70,70,"resources/images/gamePlay/aquiment/emptyPot.png",false));
 
                 //towel
-                slots.add(new SlotSpec("towel",360,150,240,240,"resources/images/gamePlay/counter/towel.png"));
+                slots.add(new SlotSpec("towel",360,150,240,240,"resources/images/gamePlay/counter/towel.png",false));
 
                 //add on
-                slots.add(new SlotSpec("vegetable",575,170,120,120,"resources/images/gamePlay/ingredients/vegetables/idle.png"));
-                slots.add(new SlotSpec("porkSlice",570,260,102,102,"resources/images/gamePlay/ingredients/addOn/porkSlices/idle.png"));
-                slots.add(new SlotSpec("meatball",634,260,102,102,"resources/images/gamePlay/ingredients/addOn/meatball/idle.png"));
-                slots.add(new SlotSpec("emptyBox",694,260,102,102,"resources/images/gamePlay/aquiment/emptyBox.png"));
+                slots.add(new SlotSpec("vegetable",575,170,120,120,"resources/images/gamePlay/ingredients/vegetables/idle.png",true));
+                slots.add(new SlotSpec("porkSlice",570,260,102,102,"resources/images/gamePlay/ingredients/addOn/porkSlices/idle.png",true));
+                slots.add(new SlotSpec("meatball",634,260,102,102,"resources/images/gamePlay/ingredients/addOn/meatball/idle.png",true));
+                slots.add(new SlotSpec("emptyBox",694,260,102,102,"resources/images/gamePlay/aquiment/emptyBox.png",false));
 
                 //up counter
 
-                slots.add(new SlotSpec("container",2,14,182,182,"resources/images/gamePlay/ingredients/noodles/container/lv5.png"));
-                slots.add(new SlotSpec("decorate",153,115,107,92,"resources/images/gamePlay/bowl/decorate.png"));
-                slots.add(new SlotSpec("chopsticks",226,120,76,76,"resources/images/gamePlay/counter/chopsticks.png"));
+                slots.add(new SlotSpec("container",2,14,182,182,"resources/images/gamePlay/ingredients/noodles/container/lv5.png",false));
+                slots.add(new SlotSpec("decorate",153,115,107,92,"resources/images/gamePlay/bowl/decorate.png",false));
+                slots.add(new SlotSpec("chopsticks",226,120,76,76,"resources/images/gamePlay/counter/chopsticks.png",false));
 
                 break;
 
             case 4:
                 bg = "resources/images/gamePlay/bg/LV4.gif";
+
+                //mai
+                slots.add(new SlotSpec("mai1",-2,200,120,114,"resources/images/gamePlay/aquiment/mai1.png",true));
+                slots.add(new SlotSpec("mai2",95,200,120,120,"resources/images/gamePlay/aquiment/mai2.png",true));
                 // down counter
-                slots.add(new SlotSpec("pot",-86,240,387,387,"resources/images/gamePlay/counter/potter.png"));
-                slots.add(new SlotSpec("bucket lv3",230,350,120,120,"resources/images/gamePlay/ingredients/drinks/lv3.png"));
-                slots.add(new SlotSpec("trash",620,400,162,73,"resources/images/gamePlay/binn/empty.png"));
+                slots.add(new SlotSpec("pot",-86,240,387,387,"resources/images/gamePlay/counter/potter.png",false));
+                slots.add(new SlotSpec("bucket lv3",230,350,120,120,"resources/images/gamePlay/ingredients/drinks/lv3.png",false));
+                slots.add(new SlotSpec("trash",620,400,162,73,"resources/images/gamePlay/binn/empty.png",false));
 
                 //on counter
 
-                //mai
-                slots.add(new SlotSpec("mai1",-2,200,120,114,"resources/images/gamePlay/aquiment/mai1.png"));
-                slots.add(new SlotSpec("mai2",95,200,120,120,"resources/images/gamePlay/aquiment/mai2.png"));
+
 
                 //soup row 1
-                slots.add(new SlotSpec("yenTafo",238,210,70,70,"resources/images/gamePlay/ingredients/soups/category/yenTaFo/idle.png"));
-                slots.add(new SlotSpec("tomYum",308,210,70,70,"resources/images/gamePlay/ingredients/soups/category/tomYum/idle.png"));
+                slots.add(new SlotSpec("yenTafo",238,210,70,70,"resources/images/gamePlay/ingredients/soups/category/yenTaFo/idle.png",false));
+                slots.add(new SlotSpec("tomYum",308,210,70,70,"resources/images/gamePlay/ingredients/soups/category/tomYum/idle.png",false));
 
                 //soup row2
-                slots.add(new SlotSpec("namTok",238,280,70,70,"resources/images/gamePlay/ingredients/soups/category/namTok/idle.png"));
-                slots.add(new SlotSpec("Pork",308,280,70,70,"resources/images/gamePlay/ingredients/soups/category/braisedPork/idle.png"));
+                slots.add(new SlotSpec("namTok",238,280,70,70,"resources/images/gamePlay/ingredients/soups/category/namTok/idle.png",false));
+                slots.add(new SlotSpec("Pork",308,280,70,70,"resources/images/gamePlay/ingredients/soups/category/braisedPork/idle.png",false));
 
                 //towel
-                slots.add(new SlotSpec("towel",360,150,240,240,"resources/images/gamePlay/counter/towel.png"));
+                slots.add(new SlotSpec("towel",360,150,240,240,"resources/images/gamePlay/counter/towel.png",false));
 
                 //add on
-                slots.add(new SlotSpec("vegetable",575,170,120,120,"resources/images/gamePlay/ingredients/vegetables/idle.png"));
-                slots.add(new SlotSpec("porkSlice",570,260,102,102,"resources/images/gamePlay/ingredients/addOn/porkSlices/idle.png"));
-                slots.add(new SlotSpec("meatball",634,260,102,102,"resources/images/gamePlay/ingredients/addOn/meatball/idle.png"));
-                slots.add(new SlotSpec("porkRind",694,260,102,102,"resources/images/gamePlay/ingredients/addOn/porkRind/idle.png"));
+                slots.add(new SlotSpec("vegetable",575,170,120,120,"resources/images/gamePlay/ingredients/vegetables/idle.png",true));
+                slots.add(new SlotSpec("porkSlice",570,260,102,102,"resources/images/gamePlay/ingredients/addOn/porkSlices/idle.png",true));
+                slots.add(new SlotSpec("meatball",634,260,102,102,"resources/images/gamePlay/ingredients/addOn/meatball/idle.png",true));
+                slots.add(new SlotSpec("porkRind",694,260,102,102,"resources/images/gamePlay/ingredients/addOn/porkRind/idle.png",true));
 
                 //up counter
 
-                slots.add(new SlotSpec("container",2,14,182,182,"resources/images/gamePlay/ingredients/noodles/container/lv5.png"));
-                slots.add(new SlotSpec("noodles",143,115,107,92,"resources/images/gamePlay/ingredients/noodles/category/greenEgg/idle.png"));
-                slots.add(new SlotSpec("decorate",226,120,76,76,"resources/images/gamePlay/bowl/decorate.png"));
-                slots.add(new SlotSpec("chopsticks",282,110,86,86,"resources/images/gamePlay/counter/chopsticks.png"));
-                slots.add(new SlotSpec("kanomTuay",670,150,113,55,"resources/images/gamePlay/ingredients/kanomTuay/idle.png"));
+                slots.add(new SlotSpec("container",2,14,182,182,"resources/images/gamePlay/ingredients/noodles/container/lv5.png",false));
+                slots.add(new SlotSpec("noodlesBowl",143,115,107,92,"resources/images/gamePlay/ingredients/noodles/category/greenEgg/idle.png",false));
+                slots.add(new SlotSpec("decorate",226,120,76,76,"resources/images/gamePlay/bowl/decorate.png",false));
+                slots.add(new SlotSpec("chopsticks",282,110,86,86,"resources/images/gamePlay/counter/chopsticks.png",false));
+                slots.add(new SlotSpec("kanomTuay",670,150,113,55,"resources/images/gamePlay/ingredients/kanomTuay/idle.png",false));
 
                 break;
 
             case 5:
                 bg = "resources/images/gamePlay/bg/LV5.gif";
+
+                //mai
+                slots.add(new SlotSpec("mai1",-2,200,120,114,"resources/images/gamePlay/aquiment/mai1.png",true));
+                slots.add(new SlotSpec("mai2",95,200,120,120,"resources/images/gamePlay/aquiment/mai2.png",true));
+
                 // down counter
-                slots.add(new SlotSpec("pot",-86,240,387,387,"resources/images/gamePlay/counter/potter.png"));
-                slots.add(new SlotSpec("bucket lv3",230,350,120,120,"resources/images/gamePlay/ingredients/drinks/lv3.png"));
-                slots.add(new SlotSpec("trash",620,400,162,73,"resources/images/gamePlay/binn/empty.png"));
+                slots.add(new SlotSpec("pot",-86,240,387,387,"resources/images/gamePlay/counter/potter.png",false));
+                slots.add(new SlotSpec("bucket lv3",230,350,120,120,"resources/images/gamePlay/ingredients/drinks/lv3.png",false));
+                slots.add(new SlotSpec("trash",620,400,162,73,"resources/images/gamePlay/binn/empty.png",false));
 
                 //on counter
 
-                //mai
-                slots.add(new SlotSpec("mai1",-2,200,120,114,"resources/images/gamePlay/aquiment/mai1.png"));
-                slots.add(new SlotSpec("mai2",95,200,120,120,"resources/images/gamePlay/aquiment/mai2.png"));
-
                 //soup row 1
-                slots.add(new SlotSpec("yenTafo",238,210,70,70,"resources/images/gamePlay/ingredients/soups/category/yenTaFo/idle.png"));
-                slots.add(new SlotSpec("tomYum",308,210,70,70,"resources/images/gamePlay/ingredients/soups/category/tomYum/idle.png"));
+                slots.add(new SlotSpec("yenTafo",238,210,70,70,"resources/images/gamePlay/ingredients/soups/category/yenTaFo/idle.png",false));
+                slots.add(new SlotSpec("tomYum",308,210,70,70,"resources/images/gamePlay/ingredients/soups/category/tomYum/idle.png",false));
 
                 //soup row2
-                slots.add(new SlotSpec("namTok",238,280,70,70,"resources/images/gamePlay/ingredients/soups/category/namTok/idle.png"));
-                slots.add(new SlotSpec("Pork",308,280,70,70,"resources/images/gamePlay/ingredients/soups/category/braisedPork/idle.png"));
+                slots.add(new SlotSpec("namTok",238,280,70,70,"resources/images/gamePlay/ingredients/soups/category/namTok/idle.png",false));
+                slots.add(new SlotSpec("Pork",308,280,70,70,"resources/images/gamePlay/ingredients/soups/category/braisedPork/idle.png",false));
 
                 //towel
-                slots.add(new SlotSpec("towel",360,150,240,240,"resources/images/gamePlay/counter/towel.png"));
+                slots.add(new SlotSpec("towel",360,150,240,240,"resources/images/gamePlay/counter/towel.png",false));
 
                 //add on
-                slots.add(new SlotSpec("vegetable",575,170,120,120,"resources/images/gamePlay/ingredients/vegetables/idle.png"));
-                slots.add(new SlotSpec("porkSlice",570,260,102,102,"resources/images/gamePlay/ingredients/addOn/porkSlices/idle.png"));
-                slots.add(new SlotSpec("meatball",634,260,102,102,"resources/images/gamePlay/ingredients/addOn/meatball/idle.png"));
-                slots.add(new SlotSpec("porkRind",694,260,102,102,"resources/images/gamePlay/ingredients/addOn/porkRind/idle.png"));
+                slots.add(new SlotSpec("vegetable",575,170,120,120,"resources/images/gamePlay/ingredients/vegetables/idle.png",true));
+                slots.add(new SlotSpec("porkSlice",570,260,102,102,"resources/images/gamePlay/ingredients/addOn/porkSlices/idle.png",true));
+                slots.add(new SlotSpec("meatball",634,260,102,102,"resources/images/gamePlay/ingredients/addOn/meatball/idle.png",true));
+                slots.add(new SlotSpec("porkRind",694,260,102,102,"resources/images/gamePlay/ingredients/addOn/porkRind/idle.png",true));
 
                 //up counter
 
-                slots.add(new SlotSpec("container",2,14,182,182,"resources/images/gamePlay/ingredients/noodles/container/lv5.png"));
-                slots.add(new SlotSpec("noodles",143,115,107,92,"resources/images/gamePlay/ingredients/noodles/category/greenEgg/idle.png"));
-                slots.add(new SlotSpec("decorate",226,120,76,76,"resources/images/gamePlay/bowl/decorate.png"));
-                slots.add(new SlotSpec("chopsticks",282,110,86,86,"resources/images/gamePlay/counter/chopsticks.png"));
-                slots.add(new SlotSpec("kanomTuay",670,150,113,55,"resources/images/gamePlay/ingredients/kanomTuay/idle.png"));
-
+                slots.add(new SlotSpec("container",2,14,182,182,"resources/images/gamePlay/ingredients/noodles/container/lv5.png",false));
+                slots.add(new SlotSpec("noodlesBowl",143,115,107,92,"resources/images/gamePlay/ingredients/noodles/category/greenEgg/idle.png",false));
+                slots.add(new SlotSpec("decorate",226,120,76,76,"resources/images/gamePlay/bowl/decorate.png",false));
+                slots.add(new SlotSpec("chopsticks",282,110,86,86,"resources/images/gamePlay/counter/chopsticks.png",false));
+                slots.add(new SlotSpec("kanomTuay",670,150,113,55,"resources/images/gamePlay/ingredients/kanomTuay/idle.png",false));
 
                 break;
         }
