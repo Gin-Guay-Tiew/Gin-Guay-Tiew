@@ -18,9 +18,9 @@ public class customer extends JPanel {
         List<SlotSpec> slots = new ArrayList<>();
 
         //Customer
-        slots.add(new SlotSpec("Customer 1",220,30,172,259,"resources/images/gamePlay/customer/Alien_angry2.png"));
-        slots.add(new SlotSpec("Customer 2",400,30,172,259,"resources/images/gamePlay/customer/JarnBank3 1.png"));
-        slots.add(new SlotSpec("Customer 3",594,35,172,259,"resources/images/gamePlay/customer/CollegeStudent_female01_angry 1.png"));
+        slots.add(new SlotSpec("Customer 1",220,30,172,259,"resources/images/gamePlay/customer/Alien_angry2.png",false));
+        slots.add(new SlotSpec("Customer 2",400,30,172,259,"resources/images/gamePlay/customer/JarnBank3 1.png",false));
+        slots.add(new SlotSpec("Customer 3",594,35,172,259,"resources/images/gamePlay/customer/CollegeStudent_female01_angry 1.png",false));
 
         // create a customer
         for (SlotSpec s : slots){
