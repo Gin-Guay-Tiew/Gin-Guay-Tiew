@@ -43,7 +43,7 @@ public class LevelFactory {
                 //up counter
 
                 slots.add(new SlotSpec("container",2,14,182,182,"resources/images/gamePlay/ingredients/noodles/container/lv5.png",false));
-                slots.add(new SlotSpec("noodlesBowl",143,115,107,92,"resources/images/gamePlay/ingredients/noodles/category/greenEgg/idle.png",false));
+                slots.add(new SlotSpec("noodlesBowl",143,117,107,92,"resources/images/gamePlay/ingredients/noodles/category/greenEgg/idle.png",false));
                 slots.add(new SlotSpec("decorate",226,120,76,76,"resources/images/gamePlay/bowl/decorate.png",false));
                 slots.add(new SlotSpec("chopsticks",282,110,86,86,"resources/images/gamePlay/counter/chopsticks.png",false));
                 slots.add(new SlotSpec("kanomTuay",670,150,113,55,"resources/images/gamePlay/ingredients/kanomTuay/idle.png",false));
@@ -86,7 +86,7 @@ public class LevelFactory {
                 //up counter
 
                 slots.add(new SlotSpec("container",2,14,182,182,"resources/images/gamePlay/ingredients/noodles/container/lv5.png",false));
-                slots.add(new SlotSpec("noodlesBowl",143,115,107,92,"resources/images/gamePlay/ingredients/noodles/category/greenEgg/idle.png",false));
+                slots.add(new SlotSpec("noodlesBowl",143,117,107,92,"resources/images/gamePlay/ingredients/noodles/category/greenEgg/idle.png",false));
                 slots.add(new SlotSpec("decorate",226,120,76,76,"resources/images/gamePlay/bowl/decorate.png",false));
                 slots.add(new SlotSpec("chopsticks",282,110,86,86,"resources/images/gamePlay/counter/chopsticks.png",false));
                 slots.add(new SlotSpec("kanomTuay",670,150,113,55,"resources/images/gamePlay/ingredients/kanomTuay/idle.png",false));
@@ -132,7 +132,7 @@ public class LevelFactory {
                 //up counter
 
                 slots.add(new SlotSpec("container",2,14,182,182,"resources/images/gamePlay/ingredients/noodles/container/lv5.png",false));
-                slots.add(new SlotSpec("decorate",153,115,107,92,"resources/images/gamePlay/bowl/decorate.png",false));
+                slots.add(new SlotSpec("noodlesBowl",153,117,107,92,"resources/images/gamePlay/ingredients/noodles/category/greenEgg/idle.png",false));
                 slots.add(new SlotSpec("chopsticks",226,120,76,76,"resources/images/gamePlay/counter/chopsticks.png",false));
 
                 break;
@@ -172,7 +172,7 @@ public class LevelFactory {
                 //up counter
 
                 slots.add(new SlotSpec("container",2,14,182,182,"resources/images/gamePlay/ingredients/noodles/container/lv5.png",false));
-                slots.add(new SlotSpec("noodlesBowl",143,115,107,92,"resources/images/gamePlay/ingredients/noodles/category/greenEgg/idle.png",false));
+                slots.add(new SlotSpec("noodlesBowl",143,117,107,92,"resources/images/gamePlay/ingredients/noodles/category/greenEgg/idle.png",false));
                 slots.add(new SlotSpec("decorate",226,120,76,76,"resources/images/gamePlay/bowl/decorate.png",false));
                 slots.add(new SlotSpec("chopsticks",282,110,86,86,"resources/images/gamePlay/counter/chopsticks.png",false));
                 slots.add(new SlotSpec("kanomTuay",670,150,113,55,"resources/images/gamePlay/ingredients/kanomTuay/idle.png",false));
@@ -213,7 +213,7 @@ public class LevelFactory {
                 //up counter
 
                 slots.add(new SlotSpec("container",2,14,182,182,"resources/images/gamePlay/ingredients/noodles/container/lv5.png",false));
-                slots.add(new SlotSpec("noodlesBowl",143,115,107,92,"resources/images/gamePlay/ingredients/noodles/category/greenEgg/idle.png",false));
+                slots.add(new SlotSpec("noodlesBowl",143,117,107,92,"resources/images/gamePlay/ingredients/noodles/category/greenEgg/idle.png",false));
                 slots.add(new SlotSpec("decorate",226,120,76,76,"resources/images/gamePlay/bowl/decorate.png",false));
                 slots.add(new SlotSpec("chopsticks",282,110,86,86,"resources/images/gamePlay/counter/chopsticks.png",false));
                 slots.add(new SlotSpec("kanomTuay",670,150,113,55,"resources/images/gamePlay/ingredients/kanomTuay/idle.png",false));
