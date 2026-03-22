@@ -18,7 +18,6 @@ public class counterBar extends JPanel {
         setOpaque(false);
         counterBarimage = new ImageIcon("resources/images/gamePlay/counter/counter_bar.png").getImage();
 
-
     }
 
 
@@ -56,12 +55,14 @@ public class counterBar extends JPanel {
             public void mousePressed(MouseEvent e) {
                 offset[0] = e.getPoint();
                 originalPos[0] = comp.getLocation();
+                // ให้ตอนเลือกมันอยู่เหนือทุกตัวใน component
+                Container parent = comp.getParent();
+                parent.setComponentZOrder(comp,0);
             }
 
             // ตอนปล่อยแล้วจะให้กลับที่เดิม
-
             @Override
-            public void mouseReleased(MouseEvent e) {
+            public void mouseReleased(MouseEvent e){
                 comp.setLocation(originalPos[0]);
             }
         });

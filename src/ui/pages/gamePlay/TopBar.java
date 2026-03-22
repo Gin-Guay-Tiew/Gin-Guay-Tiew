@@ -34,6 +34,7 @@ public class TopBar extends JPanel {
         mtPanel.add(timeDisplay);
         mtPanel.add(money);
 
+
         add(mtPanel);
 
     }
