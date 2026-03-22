@@ -171,22 +171,23 @@ public class ShopScreen extends JPanel {
 
         // --- 2. ส่วนรายการ (Center) ---
         // ใช้ FlowLayout เพื่อให้ Card ไม่ขยายจนเต็มหน้าจอ และปรับ Gap ให้พอดี
-        JPanel gridPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 15, 15));
+        JPanel gridPanel = new JPanel(new GridLayout(0, 2, 15, 15));
         gridPanel.setOpaque(false);
         // ปรับ Padding ด้านข้างเพื่อบีบให้ Card เรียงตัวสวยๆ และไม่เกิด Scroll แนวนอน
-        gridPanel.setPreferredSize(new Dimension(750, 1000));
+        gridPanel.setBorder(BorderFactory.createEmptyBorder(10, 20, 10, 20));
 
         for (UpgradeItem item : gm.getAvailableItems()) {
             gridPanel.add(createItemCard(item));
         }
 
-        // ตั้งค่า ScrollPane ให้เลื่อนได้เฉพาะแนวตั้ง (อยู่ด้านขวา)
+        // setting ScrollPane
         JScrollPane scrollPane = new JScrollPane(gridPanel);
         scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
         scrollPane.setBorder(null);
         scrollPane.setOpaque(false);
         scrollPane.getViewport().setOpaque(false);
+        scrollPane.getVerticalScrollBar().setUnitIncrement(16);
 
         add(scrollPane, BorderLayout.CENTER);
     }
