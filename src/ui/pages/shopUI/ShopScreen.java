@@ -188,6 +188,7 @@ public class ShopScreen extends JPanel {
         scrollPane.setOpaque(false);
         scrollPane.getViewport().setOpaque(false);
         scrollPane.getVerticalScrollBar().setUnitIncrement(16);
+        System.out.println("Yo");
 
         add(scrollPane, BorderLayout.CENTER);
     }
