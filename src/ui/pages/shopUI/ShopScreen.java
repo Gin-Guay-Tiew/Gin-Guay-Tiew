@@ -150,6 +150,8 @@ import ui.components.ImageJButton;
 import main.MainFrame;
 
 public class ShopScreen extends JPanel {
+
+
     private GameController controller;
 
     public ShopScreen(GameController gm) {
@@ -203,9 +205,26 @@ public class ShopScreen extends JPanel {
         ));
 
         // [West] รูปวัตถุดิบ (ขนาดเล็กลงเล็กน้อยให้สมดุล)
-        ImageIcon itemIcon = utilities.IconImage.create(item.getImagePath(), 50, 50);
+        JPanel imagePanel = new JPanel(new BorderLayout());
+        imagePanel.setPreferredSize(new Dimension(120, 120));
+        imagePanel.setOpaque(false);
+
+//        ImageIcon itemIcon = utilities.IconImage.create(item.getImagePath(), 80, 80);
+        int iconSize = 80;
+
+        if (item.getName().equals("Thin rice noodles") ||
+            item.getName().equals("Wide rice noodles") ||
+            item.getName().equals("Green egg noodles")
+        ){
+            iconSize = 160;
+        }
+        ImageIcon itemIcon = utilities.IconImage.create(item.getImagePath(), iconSize, iconSize);
         JLabel imageLabel = new JLabel(itemIcon);
-        card.add(imageLabel, BorderLayout.WEST);
+        imageLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        imageLabel.setVerticalAlignment(SwingConstants.CENTER);
+
+        imagePanel.add(imageLabel, BorderLayout.CENTER);
+        card.add(imagePanel, BorderLayout.WEST);
 
         // [Center] ชื่อและราคา (จัดให้ชิดกัน)
         JPanel infoPanel = new JPanel();
