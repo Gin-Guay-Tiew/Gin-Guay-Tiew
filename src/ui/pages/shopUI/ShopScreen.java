@@ -188,7 +188,6 @@ public class ShopScreen extends JPanel {
         scrollPane.setOpaque(false);
         scrollPane.getViewport().setOpaque(false);
         scrollPane.getVerticalScrollBar().setUnitIncrement(16);
-        System.out.println("Yo");
 
         add(scrollPane, BorderLayout.CENTER);
     }
@@ -238,7 +237,6 @@ public class ShopScreen extends JPanel {
 
         if (!item.isUnlocked()) {
             buttonPath = "resources/images/shared/buttons/lockedBuy";
-            isClickable = false;
         } else if (controller.getTotalMoney() < item.getPrice()) {
             buttonPath = "resources/images/shared/buttons/noMoneyBuy";
         } else {
@@ -247,20 +245,39 @@ public class ShopScreen extends JPanel {
 
         // ปรับขนาดปุ่มให้เล็กลงตาม Card
         ImageJButton buyBtn = new ImageJButton(buttonPath, ".png", 25, 75, 30);
-        buyBtn.setEnabled(isClickable);
+//        buyBtn.setEnabled(true);
 
         buyBtn.addActionListener(e -> {
-            if (controller.purchaseItem(item)) {
-                controller.getMainFrame().getNavigator().toPage(MainFrame.SHOP_UI, false);
-            } else {
+            if (!item.isUnlocked()) {
+                new PopupWindow().createPopup(
+                        controller.getMainFrame(),
+                        "Your level is too low!",
+                        "resources/images/shared/popups/Demo.png",
+                        new String[]{"resources/images/shared/buttons/lockedBuy"},
+                        new String[]{"resources/images/shared/buttons/Ok"},
+                        new ActionListener[]{
+                                ex -> ((Window)SwingUtilities.getWindowAncestor((Component)ex.getSource())).dispose()
+                        }
+                );
+                return;
+            }
+
+            if (controller.getTotalMoney() < item.getPrice()) {
                 new PopupWindow().createPopup(
                         controller.getMainFrame(),
                         "Not enough money!",
                         "resources/images/shared/popups/Demo.png",
-                        new String[]{"resources/images/shared/buttons/No"},
-                        new String[]{"No"},
-                        null
+                        new String[]{"resources/images/shared/buttons/noMoneyBuy"},
+                        new String[]{"resources/images/shared/buttons/Ok"},
+                        new ActionListener[]{
+                                ex -> ((Window)SwingUtilities.getWindowAncestor((Component)ex.getSource())).dispose()
+                        }
                 );
+                return;
+            }
+
+            if (controller.purchaseItem(item)) {
+                controller.getMainFrame().getNavigator().toPage(MainFrame.SHOP_UI, false);
             }
         });
 
