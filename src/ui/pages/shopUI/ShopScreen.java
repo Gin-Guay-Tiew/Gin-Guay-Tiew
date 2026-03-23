@@ -212,16 +212,32 @@ public class ShopScreen extends JPanel {
 //        ImageIcon itemIcon = utilities.IconImage.create(item.getImagePath(), 80, 80);
         int iconSize = 80;
 
-        if (item.getName().equals("Thin rice noodles") ||
-            item.getName().equals("Wide rice noodles") ||
-            item.getName().equals("Green egg noodles")
-        ){
-            iconSize = 160;
+        if (item.getImagePath().contains("noodles")
+        && !item.getName().equals("Green egg noodles")){
+            iconSize = 150;
         }
         ImageIcon itemIcon = utilities.IconImage.create(item.getImagePath(), iconSize, iconSize);
         JLabel imageLabel = new JLabel(itemIcon);
         imageLabel.setHorizontalAlignment(SwingConstants.CENTER);
         imageLabel.setVerticalAlignment(SwingConstants.CENTER);
+
+        String name = item.getName();
+
+        if (name.equals("Thin rice noodles")) {
+            imageLabel.setBorder(BorderFactory.createEmptyBorder(-80, -60, 0, 0));
+        }
+        else if (name.equals("Wide rice noodles")) {
+            imageLabel.setBorder(BorderFactory.createEmptyBorder(40, -50, 0, 0));
+        }
+        else if (name.equals("Rice vermicelli noodles")) {
+            imageLabel.setBorder(BorderFactory.createEmptyBorder(50, 40, 0, 0));
+        }
+        else if (name.equals("Yellow egg noodles")) {
+            imageLabel.setBorder(BorderFactory.createEmptyBorder(-80, 40, 0, 0));
+        }
+        else if (name.equals("Vegetable")) {
+            imageLabel.setBorder(BorderFactory.createEmptyBorder(0, -20, 0, 0));
+        }
 
         imagePanel.add(imageLabel, BorderLayout.CENTER);
         card.add(imagePanel, BorderLayout.WEST);
