@@ -141,7 +141,7 @@ package ui.pages.shopUI;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import logic.GameController;
+import logic.ShopManager;
 import logic.UpgradeItem;
 import ui.components.BackBtn;
 import ui.components.MoneyDisplay;
@@ -154,12 +154,12 @@ import java.util.List;
 public class ShopScreen extends JPanel {
 
 
-    private GameController controller;
+    private ShopManager controller;
     private MoneyDisplay moneyPanel;
     private List<ImageJButton> buyButtons = new ArrayList<>();
     private List<UpgradeItem> items = new ArrayList<>();
 
-    public ShopScreen(GameController gm) {
+    public ShopScreen(ShopManager gm) {
         this.controller = gm;
         setLayout(new BorderLayout());
         setBackground(new Color(245, 245, 245));

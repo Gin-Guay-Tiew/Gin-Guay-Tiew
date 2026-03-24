@@ -8,7 +8,7 @@ import ui.pages.tutorialGame.GameTutorialPage;
 import ui.pages.endGame.WinLosePage;
 import ui.pages.settingMenu.MainSettingPage;
 import ui.pages.shopUI.ShopScreen;
-import logic.GameController;
+import logic.ShopManager;
 import utilities.IconImage;
 import utilities.PageNavigator;
 import ui.components.PopupWindow;
@@ -161,7 +161,7 @@ public class MainFrame extends JFrame implements WindowListener {
         transFrame.setFocusPainted(false);
         transFrame.setBounds(400, 300, 0, 0);
 
-        GameController gameController = new GameController(this);
+        ShopManager gameController = new ShopManager(this);
 
         animator = new Transition(transFrame, transIcon);
         glass.add(transFrame);
