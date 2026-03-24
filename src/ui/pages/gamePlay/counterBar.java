@@ -34,8 +34,20 @@ public class counterBar extends JPanel {
             btn.setOpaque(false);
             btn.setBorder(null);
 
-            if (s.isDraggable()){
-                enableDrag(btn);
+            switch (s.getType()) {
+                case "SPAWN":
+                    btn.addMouseListener(new MouseAdapter() {
+                        @Override
+                        public void mousePressed(MouseEvent e) {
+                            spawItem(s.getSpawnPath(),btn,e);
+                        }
+                    });
+                    break;
+
+                case "DRAG":
+                    enableDrag(btn);
+                    break;
+
             }
 
             add(btn);
@@ -45,39 +57,63 @@ public class counterBar extends JPanel {
         repaint();
     }
 
-    public void enableDrag(JComponent comp) {
+    // method for item can drag
+    public void enableDrag(JComponent c) {
         final Point[] offset = {null};
-        final Point[] originalPos = {comp.getLocation()};
+        final Point[] originalPos = {c.getLocation()};
 
         // ตอนลากให้จำตำแหน่งเดิมไว้
-        comp.addMouseListener(new MouseAdapter() {
+        c.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
                 offset[0] = e.getPoint();
-                originalPos[0] = comp.getLocation();
+                originalPos[0] = c.getLocation();
                 // ให้ตอนเลือกมันอยู่เหนือทุกตัวใน component
-                Container parent = comp.getParent();
-                parent.setComponentZOrder(comp,0);
+                Container parent = c.getParent();
+                parent.setComponentZOrder(c,0);
             }
 
             // ตอนปล่อยแล้วจะให้กลับที่เดิม
             @Override
             public void mouseReleased(MouseEvent e){
-                comp.setLocation(originalPos[0]);
+                c.setLocation(originalPos[0]);
             }
         });
 
 
 
-        comp.addMouseMotionListener(new MouseMotionAdapter() {
+        c.addMouseMotionListener(new MouseMotionAdapter() {
             public void mouseDragged(MouseEvent e) {
-                int x = comp.getX() + e.getX() - offset[0].x;
-                int y = comp.getY() + e.getY() - offset[0].y;
-                comp.setLocation(x, y);
+                int x = c.getX() + e.getX() - offset[0].x;
+                int y = c.getY() + e.getY() - offset[0].y;
+                c.setLocation(x, y);
             }
         });
 
     }
+
+    //method for item can spawn and item spawn can drag
+    public void spawItem(String imgPath, JButton sourceBtn , MouseEvent e){
+         JButton item = new JButton(new ImageIcon(imgPath));
+
+         Point p = sourceBtn.getLocation();
+
+
+         item.setBounds(p.x,p.y,120,120);
+         item.setBorderPainted(false);
+         item.setContentAreaFilled(false);
+         item.setFocusPainted(false);
+         item.setOpaque(false);
+         enableDrag(item);
+
+         add(item);
+         setComponentZOrder(item,0);
+
+         repaint();
+
+    }
+
+
 
     @Override
     protected void paintComponent(Graphics g) {

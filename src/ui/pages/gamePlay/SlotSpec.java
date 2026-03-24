@@ -7,9 +7,10 @@ public class SlotSpec {
     private final int width;
     private final int height;
     private final String iconPath;
-    private boolean draggaable;
+    private String type;
+    private String spawnPath;
 
-    public SlotSpec(String id ,int x ,int y , int width , int height,String iconPath,boolean draggaable) {
+    public SlotSpec(String id ,int x ,int y , int width , int height,String iconPath,String type,String spawnPath) {
         //record image property
         this.id = id;
         this.x = x;
@@ -17,7 +18,8 @@ public class SlotSpec {
         this.width = width;
         this.height = height;
         this.iconPath = iconPath;
-        this.draggaable = draggaable;
+        this.type = type;
+        this.spawnPath = spawnPath;
     }
 
     public String getId() {
@@ -42,7 +44,7 @@ public class SlotSpec {
         return iconPath;
     }
 
-    public boolean isDraggable() {
-        return draggaable;
-    }
+    public String getType() { return type;}
+
+    public String getSpawnPath() {return spawnPath;}
 }

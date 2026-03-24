@@ -34,7 +34,7 @@ public class gamePlayScreen extends JPanel {
         // Game layer
         JLayeredPane gameLayer = new JLayeredPane();
         gameLayer.setLayout(null);
-        gameLayer.setBounds(0,0,800,520);
+        gameLayer.setBounds(0,0,800,600);
 
 
 
