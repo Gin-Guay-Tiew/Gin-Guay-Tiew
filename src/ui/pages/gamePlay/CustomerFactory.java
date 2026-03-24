@@ -31,19 +31,19 @@ public class CustomerFactory {
             case 2:
 
                 list.add(new CustomerData(
-                        "resources/images/gamePlay/customer/general/CollegeStudent_male02 2.png",
+                        "resources/images/gamePlay/customer/general/CollegeStudent_female01_bored 1.png",
                         "resources/images/gamePlay/customer/Time/general.gif",
                         211,
                         78
                 ));
                 list.add(new CustomerData(
-                        "resources/images/gamePlay/customer/general/Oldman_bored 1.png",
+                        "resources/images/gamePlay/customer/working/WorkingWoman_happy 1.png",
                         "resources/images/gamePlay/customer/Time/general.gif",
                         397,
                         59
                 ));
                 list.add(new CustomerData(
-                        "resources/images/gamePlay/customer/general/CollegeStudent_female01_angry 1.png",
+                        "resources/images/gamePlay/customer/hungry/HungryMan_happy 1.png",
                         "resources/images/gamePlay/customer/Time/general.gif",
                         591,
                         80
