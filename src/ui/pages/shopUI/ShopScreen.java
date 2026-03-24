@@ -195,7 +195,7 @@ public class ShopScreen extends JPanel {
     }
 
     private JPanel createItemCard(UpgradeItem item) {
-        // ปรับขนาด Card ให้เล็กลงและเพรียวขึ้น
+
         JPanel card = new JPanel(new BorderLayout(15, 0));
         card.setPreferredSize(new Dimension(320, 80));
         card.setBackground(Color.WHITE);
@@ -204,7 +204,6 @@ public class ShopScreen extends JPanel {
                 BorderFactory.createEmptyBorder(5, 10, 5, 10)
         ));
 
-        // [West] รูปวัตถุดิบ (ขนาดเล็กลงเล็กน้อยให้สมดุล)
         JPanel imagePanel = new JPanel(new BorderLayout());
         imagePanel.setPreferredSize(new Dimension(120, 120));
         imagePanel.setOpaque(false);
@@ -270,7 +269,8 @@ public class ShopScreen extends JPanel {
         String buttonPath;
         boolean isClickable = true;
 
-        if (!item.isUnlocked()) {
+        boolean unlocked = controller.isItemUnlocked(item.getName());
+        if (!unlocked) {
             buttonPath = "resources/images/shared/buttons/lockedBuy";
         } else if (controller.getTotalMoney() < item.getPrice()) {
             buttonPath = "resources/images/shared/buttons/noMoneyBuy";
@@ -283,7 +283,7 @@ public class ShopScreen extends JPanel {
 //        buyBtn.setEnabled(true);
 
         buyBtn.addActionListener(e -> {
-            if (!item.isUnlocked()) {
+            if (!controller.isItemUnlocked(item.getName())) {
                 new PopupWindow().createPopup(
                         controller.getMainFrame(),
                         "Your level is too low!",

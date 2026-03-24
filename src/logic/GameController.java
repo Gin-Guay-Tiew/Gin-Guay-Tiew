@@ -34,6 +34,44 @@ public class GameController {
         return items;
     }
 
+    private int playerLevel = 1;
+
+    public int getPlayerLevel() {
+        return playerLevel;
+    }
+
+    public boolean isItemUnlocked(String itemName) {
+        int level = playerLevel;
+
+        switch(itemName) {
+            case "Thin rice noodles":
+            case "Yellow egg noodles":
+            case "Vegetable":
+            case "Meatball":
+            case "Cola":
+                return level >= 1;
+
+            case "Rice vermicelli noodles":
+            case "Pork slices":
+            case "Sprite":
+                return level >= 2;
+
+            case "Wide rice noodles":
+            case "Orange":
+                return level >= 3;
+
+            case "Green egg noodles":
+            case "Kanom tuay":
+                return level >= 4;
+
+            case "Pork rind":
+                return level >= 5;
+
+            default:
+                return false;
+        }
+    }
+
     public boolean purchaseItem(UpgradeItem item) {
         if (totalMoney >= item.getPrice() && item.isUnlocked()) {
             totalMoney -= item.getPrice();
