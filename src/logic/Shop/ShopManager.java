@@ -59,7 +59,7 @@ public class ShopManager {
 
         items.add(new ShopItem(
                 "Thin rice noodles",
-                50,
+                100,
                 "resources/images/gamePlay/ingredients/noodles/category/thinRice/idle.png",
                 1
         ));
@@ -73,7 +73,7 @@ public class ShopManager {
 
         items.add(new ShopItem(
                 "Green egg noodles",
-                150,
+                250,
                 "resources/images/gamePlay/ingredients/noodles/category/greenEgg/idle.png",
                 4
         ));
@@ -87,28 +87,28 @@ public class ShopManager {
 
         items.add(new ShopItem(
                 "Yellow egg noodles",
-                150,
+                100,
                 "resources/images/gamePlay/ingredients/noodles/category/yellowEgg/idle.png",
                 1
         ));
 
         items.add(new ShopItem(
                 "Vegetable",
-                150,
+                100,
                 "resources/images/gamePlay/ingredients/vegetables/picked.png",
                 1
         ));
 
         items.add(new ShopItem(
                 "Cola",
-                150,
+                100,
                 "resources/images/gamePlay/ingredients/drinks/picked/cola.png",
                 1
         ));
 
         items.add(new ShopItem(
                 "Orange",
-                150,
+                200,
                 "resources/images/gamePlay/ingredients/drinks/picked/orange.png",
                 3
         ));
@@ -122,21 +122,21 @@ public class ShopManager {
 
         items.add(new ShopItem(
                 "Kanom tuay",
-                150,
+                250,
                 "resources/images/gamePlay/ingredients/kanomTuay/idle.png",
                 4
         ));
 
         items.add(new ShopItem(
                 "Meatball",
-                150,
+                100,
                 "resources/images/gamePlay/ingredients/addOn/meatball/idle.png",
                 1
         ));
 
         items.add(new ShopItem(
                 "Pork rind",
-                150,
+                300,
                 "resources/images/gamePlay/ingredients/addOn/porkRind/idle.png",
                 5
         ));
