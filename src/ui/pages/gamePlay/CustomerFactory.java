@@ -94,22 +94,22 @@ public class CustomerFactory {
 
             case 5:
                 list.add(new CustomerData(
-                        "resources/images/gamePlay/customer/general/CollegeStudent_male02 2.png",
+                        "resources/images/gamePlay/customer/mars/Alien_angry 1.png",
                         "resources/images/gamePlay/customer/Time/general.gif",
                         211,
-                        78
+                        60
                 ));
                 list.add(new CustomerData(
-                        "resources/images/gamePlay/customer/general/Oldman_bored 1.png",
-                        "resources/images/gamePlay/customer/Time/general.gif",
+                        "resources/images/gamePlay/customer/JarnBank/JarnBank3 2.png",
+                        "resources/images/gamePlay/customer/Time/jarnBank.gif",
                         397,
                         59
                 ));
                 list.add(new CustomerData(
-                        "resources/images/gamePlay/customer/general/CollegeStudent_female01_angry 1.png",
+                        "resources/images/gamePlay/customer/mars/Astronaut_bored 1.png",
                         "resources/images/gamePlay/customer/Time/general.gif",
                         591,
-                        80
+                        60
                 ));
                 break;
         }

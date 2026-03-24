@@ -1,6 +1,7 @@
 package ui.pages.gamePlay;
 
 import main.MainFrame;
+import utilities.IconImage;
 
 import javax.swing.*;
 import java.awt.*;
@@ -25,7 +26,18 @@ public class counterBar extends JPanel {
         removeAll();
 
         for (SlotSpec s : slots) {
-            JButton btn = new JButton(new ImageIcon(s.getIconPath()));
+            ImageIcon icon ;
+
+            if (s.getIconPath() != null) {
+                icon = IconImage.create(s.getIconPath(), s.getWidth(), s.getHeight());
+
+            }
+
+            else{
+                icon = new ImageIcon(s.getIconPath());
+            }
+            JButton btn = new JButton(icon);
+
             btn.setBounds(s.getX(), s.getY(), s.getWidth(), s.getHeight());
 
             btn.setBorderPainted(false);
@@ -94,7 +106,10 @@ public class counterBar extends JPanel {
 
     //method for item can spawn and item spawn can drag
     public void spawItem(String imgPath, JButton sourceBtn , MouseEvent e){
-         JButton item = new JButton(new ImageIcon(imgPath));
+
+        ImageIcon icon ;
+        icon = IconImage.create(imgPath,120,120);
+        JButton item = new JButton(icon);
 
          Point p = sourceBtn.getLocation();
 

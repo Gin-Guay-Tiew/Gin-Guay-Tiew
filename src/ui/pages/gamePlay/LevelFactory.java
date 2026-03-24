@@ -26,7 +26,7 @@ public class LevelFactory {
                 //mock up
                 slots.add(new SlotSpec("bucket lv3",230,350,120,120,"resources/images/gamePlay/ingredients/drinks/lv3.png","STATIC",null));
 
-                slots.add(new SlotSpec("pot",-86,240,380,380,"resources/images/gamePlay/counter/potter.png","STATIC",null));
+                slots.add(new SlotSpec("pot",-86,240,380,380,"resources/images/gamePlay/ingredients/noodles/boilingPot/not_boiling.png","STATIC",null));
                 slots.add(new SlotSpec("trash",620,400,162,73,"resources/images/gamePlay/binn/empty.png","STATIC",null));
 
                 //on counter
@@ -45,7 +45,7 @@ public class LevelFactory {
                 slots.add(new SlotSpec("towel",360,150,240,240,"resources/images/gamePlay/counter/towel.png","STATIC",null));
 
                 //add on
-                slots.add(new SlotSpec("vegetable",575,170,120,120,"resources/images/gamePlay/ingredients/vegetables/idle.png","SPAWN","resources/images/gamePlay/ingredients/vegetables/picked.png"));
+                slots.add(new SlotSpec("vegetable",580,190,98,98,"resources/images/gamePlay/ingredients/vegetables/idle.png","SPAWN","resources/images/gamePlay/ingredients/vegetables/picked.png"));
                 slots.add(new SlotSpec("porkSlice",570,260,102,102,"resources/images/gamePlay/ingredients/addOn/porkSlices/idle.png","SPAWN","resources/images/gamePlay/ingredients/addOn/porkSlices/picked.png"));
                 slots.add(new SlotSpec("meatball",634,260,102,102,"resources/images/gamePlay/ingredients/addOn/meatball/idle.png","SPAWN","resources/images/gamePlay/ingredients/addOn/meatball/picked.png"));
                 slots.add(new SlotSpec("porkRind",694,260,102,102,"resources/images/gamePlay/ingredients/addOn/porkRind/idle.png","SPAWN","resources/images/gamePlay/ingredients/addOn/porkRind/picked.png"));
@@ -65,6 +65,8 @@ public class LevelFactory {
                 slots.add(new SlotSpec("container",2,14,182,182,"resources/images/gamePlay/ingredients/noodles/container/lv5.png","STATIC",null));
 
                 slots.add(new SlotSpec("greenEgg",143,117,107,92,"resources/images/gamePlay/ingredients/noodles/category/greenEgg/idle.png","SPAWN","resources/images/gamePlay/ingredients/noodles/category/greenEgg/picked.png"));
+
+                // noodlesbowl DropArea
                 slots.add(new SlotSpec("noodlesBowl",226,120,76,76,"resources/images/gamePlay/bowl/decorate.png","STATIC",null));
                 slots.add(new SlotSpec("chopsticks",282,110,86,86,"resources/images/gamePlay/counter/chopsticks.png","STATIC",null));
                 slots.add(new SlotSpec("kanomTuay",670,150,113,55,"resources/images/gamePlay/ingredients/kanomTuay/idle.png","SPAWN","resources/images/gamePlay/ingredients/kanomTuay/picked.png"));
@@ -87,7 +89,7 @@ public class LevelFactory {
                 //mock up
                 slots.add(new SlotSpec("bucket lv2",230,350,120,120,"resources/images/gamePlay/ingredients/drinks/lv2.png","STATIC",null));
 
-                slots.add(new SlotSpec("pot",-86,240,380,380,"resources/images/gamePlay/counter/potter.png","STATIC",null));
+                slots.add(new SlotSpec("pot",-86,240,380,380,"resources/images/gamePlay/ingredients/noodles/boilingPot/not_boiling.png","STATIC",null));
                 slots.add(new SlotSpec("trash",620,400,162,73,"resources/images/gamePlay/binn/empty.png","STATIC",null));
 
                 //on counter
@@ -104,7 +106,7 @@ public class LevelFactory {
                 slots.add(new SlotSpec("towel",360,150,240,240,"resources/images/gamePlay/counter/towel.png","STATIC",null));
 
                 //add on
-                slots.add(new SlotSpec("vegetable",575,170,120,120,"resources/images/gamePlay/ingredients/vegetables/idle.png","SPAWN","resources/images/gamePlay/ingredients/vegetables/picked.png"));
+                slots.add(new SlotSpec("vegetable",580,190,98,98,"resources/images/gamePlay/ingredients/vegetables/idle.png","SPAWN","resources/images/gamePlay/ingredients/vegetables/picked.png"));
                 slots.add(new SlotSpec("porkSlice",570,260,102,102,"resources/images/gamePlay/ingredients/addOn/porkSlices/idle.png","SPAWN","resources/images/gamePlay/ingredients/addOn/porkSlices/picked.png"));
                 slots.add(new SlotSpec("meatball",634,260,102,102,"resources/images/gamePlay/ingredients/addOn/meatball/idle.png","SPAWN","resources/images/gamePlay/ingredients/addOn/meatball/picked.png"));
 
@@ -142,7 +144,7 @@ public class LevelFactory {
                 //mock up
                 slots.add(new SlotSpec("bucket lv3",230,350,120,120,"resources/images/gamePlay/ingredients/drinks/lv3.png","STATIC",null));
 
-                slots.add(new SlotSpec("pot",-86,240,380,380,"resources/images/gamePlay/counter/potter.png","STATIC",null));
+                slots.add(new SlotSpec("pot",-86,240,380,380,"resources/images/gamePlay/ingredients/noodles/boilingPot/not_boiling.png","STATIC",null));
                 slots.add(new SlotSpec("trash",620,400,162,73,"resources/images/gamePlay/binn/empty.png","STATIC",null));
 
                 //on counter
@@ -161,7 +163,7 @@ public class LevelFactory {
                 slots.add(new SlotSpec("towel",360,150,240,240,"resources/images/gamePlay/counter/towel.png","STATIC",null));
 
                 //add on
-                slots.add(new SlotSpec("vegetable",575,170,120,120,"resources/images/gamePlay/ingredients/vegetables/idle.png","SPAWN","resources/images/gamePlay/ingredients/vegetables/picked.png"));
+                slots.add(new SlotSpec("vegetable",580,190,98,98,"resources/images/gamePlay/ingredients/vegetables/idle.png","SPAWN","resources/images/gamePlay/ingredients/vegetables/picked.png"));
                 slots.add(new SlotSpec("porkSlice",570,260,102,102,"resources/images/gamePlay/ingredients/addOn/porkSlices/idle.png","SPAWN","resources/images/gamePlay/ingredients/addOn/porkSlices/picked.png"));
                 slots.add(new SlotSpec("meatball",634,260,102,102,"resources/images/gamePlay/ingredients/addOn/meatball/idle.png","SPAWN","resources/images/gamePlay/ingredients/addOn/meatball/picked.png"));
                 slots.add(new SlotSpec("emptyBox",694,260,102,102,"resources/images/gamePlay/aquiment/emptyBox.png","STATIC",null));
@@ -182,7 +184,6 @@ public class LevelFactory {
 
                 // mock up
                 slots.add(new SlotSpec("container",2,14,182,182,"resources/images/gamePlay/ingredients/noodles/container/lv5.png","STATIC",null));
-
 
 
 
@@ -207,7 +208,7 @@ public class LevelFactory {
                 //mock up
                 slots.add(new SlotSpec("bucket lv3",230,350,120,120,"resources/images/gamePlay/ingredients/drinks/lv3.png","STATIC",null));
 
-                slots.add(new SlotSpec("pot",-86,240,380,380,"resources/images/gamePlay/counter/potter.png","STATIC",null));
+                slots.add(new SlotSpec("pot",-86,240,380,380,"resources/images/gamePlay/ingredients/noodles/boilingPot/not_boiling.png","STATIC",null));
                 slots.add(new SlotSpec("trash",620,400,162,73,"resources/images/gamePlay/binn/empty.png","STATIC",null));
 
                 //on counter
@@ -226,7 +227,7 @@ public class LevelFactory {
                 slots.add(new SlotSpec("towel",360,150,240,240,"resources/images/gamePlay/counter/towel.png","STATIC",null));
 
                 //add on
-                slots.add(new SlotSpec("vegetable",575,170,120,120,"resources/images/gamePlay/ingredients/vegetables/idle.png","SPAWN","resources/images/gamePlay/ingredients/vegetables/picked.png"));
+                slots.add(new SlotSpec("vegetable",580,190,98,98,"resources/images/gamePlay/ingredients/vegetables/idle.png","SPAWN","resources/images/gamePlay/ingredients/vegetables/picked.png"));
                 slots.add(new SlotSpec("porkSlice",570,260,102,102,"resources/images/gamePlay/ingredients/addOn/porkSlices/idle.png","SPAWN","resources/images/gamePlay/ingredients/addOn/porkSlices/picked.png"));
                 slots.add(new SlotSpec("meatball",634,260,102,102,"resources/images/gamePlay/ingredients/addOn/meatball/idle.png","SPAWN","resources/images/gamePlay/ingredients/addOn/meatball/picked.png"));
                 slots.add(new SlotSpec("porkRind",694,260,102,102,"resources/images/gamePlay/ingredients/addOn/porkRind/idle.png","SPAWN","resources/images/gamePlay/ingredients/addOn/porkRind/picked.png"));
@@ -268,7 +269,7 @@ public class LevelFactory {
                 //mock up
                 slots.add(new SlotSpec("bucket lv3",230,350,120,120,"resources/images/gamePlay/ingredients/drinks/lv3.png","STATIC",null));
 
-                slots.add(new SlotSpec("pot",-86,240,380,380,"resources/images/gamePlay/counter/potter.png","STATIC",null));
+                slots.add(new SlotSpec("pot",-86,240,380,380,"resources/images/gamePlay/ingredients/noodles/boilingPot/not_boiling.png","STATIC",null));
                 slots.add(new SlotSpec("trash",620,400,162,73,"resources/images/gamePlay/binn/empty.png","STATIC",null));
 
                 //on counter
@@ -287,7 +288,7 @@ public class LevelFactory {
                 slots.add(new SlotSpec("towel",360,150,240,240,"resources/images/gamePlay/counter/towel.png","STATIC",null));
 
                 //add on
-                slots.add(new SlotSpec("vegetable",575,170,120,120,"resources/images/gamePlay/ingredients/vegetables/idle.png","SPAWN","resources/images/gamePlay/ingredients/vegetables/picked.png"));
+                slots.add(new SlotSpec("vegetable",580,190,98,98,"resources/images/gamePlay/ingredients/vegetables/idle.png","SPAWN","resources/images/gamePlay/ingredients/vegetables/picked.png"));
                 slots.add(new SlotSpec("porkSlice",570,260,102,102,"resources/images/gamePlay/ingredients/addOn/porkSlices/idle.png","SPAWN","resources/images/gamePlay/ingredients/addOn/porkSlices/picked.png"));
                 slots.add(new SlotSpec("meatball",634,260,102,102,"resources/images/gamePlay/ingredients/addOn/meatball/idle.png","SPAWN","resources/images/gamePlay/ingredients/addOn/meatball/picked.png"));
                 slots.add(new SlotSpec("porkRind",694,260,102,102,"resources/images/gamePlay/ingredients/addOn/porkRind/idle.png","SPAWN","resources/images/gamePlay/ingredients/addOn/porkRind/picked.png"));
