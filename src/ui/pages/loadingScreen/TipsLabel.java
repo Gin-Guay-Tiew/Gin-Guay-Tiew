@@ -40,7 +40,7 @@ public class TipsLabel extends JPanel {
         setTipText(tips[random.nextInt(tips.length)]);
 
         // Loading
-        JLabel loadLabel = new JLabel("Loading ");
+        JLabel loadLabel = new JLabel("Loading");
         loadLabel.setFont(jersyFont.deriveFont(32f));
         loadLabel.setHorizontalTextPosition(SwingConstants.LEFT);
         loadLabel.setHorizontalAlignment(SwingConstants.RIGHT);
