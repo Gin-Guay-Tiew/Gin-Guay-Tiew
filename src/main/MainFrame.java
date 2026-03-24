@@ -8,7 +8,7 @@ import ui.pages.tutorialGame.GameTutorialPage;
 import ui.pages.endGame.WinLosePage;
 import ui.pages.settingMenu.MainSettingPage;
 import ui.pages.shopUI.ShopScreen;
-import logic.ShopManager;
+import logic.Shop.ShopManager;
 import utilities.IconImage;
 import utilities.PageNavigator;
 import ui.components.PopupWindow;

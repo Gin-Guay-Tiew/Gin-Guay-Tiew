@@ -3,8 +3,8 @@
 //import javax.swing.*;
 //import java.awt.*;
 //import java.awt.event.*;
-//import logic.GameController;
-//import logic.UpgradeItem;
+//import logic.GamePlay.GameController;
+//import logic.Shop.UpgradeItem;
 //import ui.components.BackBtn;
 //import ui.components.MoneyDisplay;
 //import ui.components.PopupWindow;
@@ -141,8 +141,8 @@ package ui.pages.shopUI;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import logic.ShopManager;
-import logic.UpgradeItem;
+import logic.Shop.ShopManager;
+import logic.Shop.ShopItem;
 import ui.components.BackBtn;
 import ui.components.MoneyDisplay;
 import ui.components.PopupWindow;
@@ -157,7 +157,7 @@ public class ShopScreen extends JPanel {
     private ShopManager controller;
     private MoneyDisplay moneyPanel;
     private List<ImageJButton> buyButtons = new ArrayList<>();
-    private List<UpgradeItem> items = new ArrayList<>();
+    private List<ShopItem> items = new ArrayList<>();
 
     public ShopScreen(ShopManager gm) {
         this.controller = gm;
@@ -183,7 +183,7 @@ public class ShopScreen extends JPanel {
         // ปรับ Padding ด้านข้างเพื่อบีบให้ Card เรียงตัวสวยๆ และไม่เกิด Scroll แนวนอน
         gridPanel.setBorder(BorderFactory.createEmptyBorder(10, 20, 10, 20));
 
-        for (UpgradeItem item : gm.getAvailableItems()) {
+        for (ShopItem item : gm.getAvailableItems()) {
             gridPanel.add(createItemCard(item));
         }
 
@@ -203,7 +203,7 @@ public class ShopScreen extends JPanel {
         int money = controller.getTotalMoney();
         for (int i = 0; i < buyButtons.size(); i++) {
             ImageJButton btn = buyButtons.get(i);
-            UpgradeItem item = items.get(i);
+            ShopItem item = items.get(i);
 
             if (!controller.isItemUnlocked(item.getName())) {
                 btn.setImage("resources/images/shared/buttons/lockedBuy", ".png", 75, 30);
@@ -217,7 +217,7 @@ public class ShopScreen extends JPanel {
         }
     }
 
-    private JPanel createItemCard(UpgradeItem item) {
+    private JPanel createItemCard(ShopItem item) {
 
         JPanel card = new JPanel(new BorderLayout(15, 0));
         card.setPreferredSize(new Dimension(320, 80));

@@ -1,13 +1,13 @@
-package logic;
+package logic.Shop;
 
-public class UpgradeItem {
+public class ShopItem {
     private String name;
     private int price;
     private String imagePath;
     private boolean isUnlocked; // เพิ่มตัวแปรสถานะ
     private int levelRequired;  // (เผื่อไว้) ถ้าอยากให้ปลดตามเลเวล
 
-    public UpgradeItem(String name, int price, String imagePath, boolean isUnlocked) {
+    public ShopItem(String name, int price, String imagePath, boolean isUnlocked) {
         this.name = name;
         this.price = price;
         this.imagePath = imagePath;
