@@ -148,12 +148,16 @@ import ui.components.MoneyDisplay;
 import ui.components.PopupWindow;
 import ui.components.ImageJButton;
 import main.MainFrame;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ShopScreen extends JPanel {
 
 
     private GameController controller;
     private MoneyDisplay moneyPanel;
+    private List<ImageJButton> buyButtons = new ArrayList<>();
+    private List<UpgradeItem> items = new ArrayList<>();
 
     public ShopScreen(GameController gm) {
         this.controller = gm;
@@ -193,6 +197,24 @@ public class ShopScreen extends JPanel {
         scrollPane.getVerticalScrollBar().setUnitIncrement(16);
 
         add(scrollPane, BorderLayout.CENTER);
+    }
+
+    private void refreshShopButtons() {
+        int money = controller.getTotalMoney();
+        for (int i = 0; i < buyButtons.size(); i++) {
+            ImageJButton btn = buyButtons.get(i);
+            UpgradeItem item = items.get(i);
+
+            if (!controller.isItemUnlocked(item.getName())) {
+                btn.setImage("resources/images/shared/buttons/lockedBuy", ".png", 75, 30);
+            }
+            else if (money < item.getPrice()) {
+                btn.setImage("resources/images/shared/buttons/noMoneyBuy", ".png", 75, 30);
+            }
+            else {
+                btn.setImage("resources/images/shared/buttons/canBuy", ".png", 75, 30);
+            }
+        }
     }
 
     private JPanel createItemCard(UpgradeItem item) {
@@ -279,6 +301,8 @@ public class ShopScreen extends JPanel {
         }
 
         ImageJButton buyBtn = new ImageJButton(buttonPath, ".png", 25, 75, 30);
+        buyButtons.add(buyBtn);
+        items.add(item);
 
         buyBtn.addActionListener(e -> {
             if (!controller.isItemUnlocked(item.getName())) {
@@ -294,6 +318,7 @@ public class ShopScreen extends JPanel {
                 );
                 return;
             }
+
 
             if (controller.getTotalMoney() < item.getPrice()) {
                 new PopupWindow().createPopup(
@@ -311,7 +336,9 @@ public class ShopScreen extends JPanel {
 
             if (controller.purchaseItem(item)) {
                 moneyPanel.updateMoney(controller.getTotalMoney());
-                controller.getMainFrame().getNavigator().toPage(MainFrame.SHOP_UI, false);
+
+                refreshShopButtons();
+
                 new PopupWindow().createPopup(
                         controller.getMainFrame(),
                         "Purchase successful!",
@@ -341,4 +368,5 @@ public class ShopScreen extends JPanel {
         card.add(buyBtn, BorderLayout.EAST);
         return card;
     }
+
 }
