@@ -14,6 +14,7 @@ public class MoneyDisplay extends JPanel {
         // Display
         setLayout(new BorderLayout());
         setBorder(BorderFactory.createEmptyBorder(10, 37, 10, 37));
+        setOpaque(false);
 
         // PaddingLabel
         JLabel paddingLabel = new JLabel(" ");

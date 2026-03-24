@@ -25,7 +25,7 @@ public class LevelsDisplay extends JPanel {
         levelsInfo.add(new Level("Mars", 4000, false));
     }
 
-    public LevelsDisplay(MainFrame mainFrame) {
+    public LevelsDisplay(MainFrame mainFrame, LevelSelectPage LvPage) {
         initLevels();
 
         // Display
@@ -84,6 +84,7 @@ public class LevelsDisplay extends JPanel {
                         }
                         iconLevel.setBorder(BorderFactory.createEmptyBorder(0, 0, current_lv.iconBtmMargin + 10, 0));
                         textLabel.setTextColor(Color.CYAN);
+                        LvPage.changeBg("resources/images/shared/levelBackgrounds/Level"+levelNum+".png");
                     }
 
                     @Override
@@ -93,6 +94,7 @@ public class LevelsDisplay extends JPanel {
                         }
                         iconLevel.setBorder(BorderFactory.createEmptyBorder(0, 0, current_lv.iconBtmMargin, 0));
                         textLabel.setTextColor(Color.white);
+                        LvPage.changeBg("resources/images/levelSelection/Background.png");
                     }
                 });
                 iconLevel.addActionListener(new ActionListener() {
