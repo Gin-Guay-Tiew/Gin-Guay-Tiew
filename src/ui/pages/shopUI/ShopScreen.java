@@ -42,10 +42,8 @@ public class ShopScreen extends JPanel {
         add(northPanel, BorderLayout.NORTH);
 
         // --- 2. ส่วนรายการ (Center) ---
-        // ใช้ FlowLayout เพื่อให้ Card ไม่ขยายจนเต็มหน้าจอ และปรับ Gap ให้พอดี
         JPanel gridPanel = new JPanel(new GridLayout(0, 2, 15, 15));
         gridPanel.setOpaque(false);
-        // ปรับ Padding ด้านข้างเพื่อบีบให้ Card เรียงตัวสวยๆ และไม่เกิด Scroll แนวนอน
         gridPanel.setBorder(BorderFactory.createEmptyBorder(10, 20, 10, 20));
 
         for (ShopItem item : gm.getAvailableItems()) {
