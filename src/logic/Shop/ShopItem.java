@@ -1,30 +1,32 @@
 package logic.Shop;
 
 public class ShopItem {
-    private String name;
-    private int price;
-    private String imagePath;
-    private boolean isUnlocked; // เพิ่มตัวแปรสถานะ
-    private int levelRequired;  // (เผื่อไว้) ถ้าอยากให้ปลดตามเลเวล
 
-    public ShopItem(String name, int price, String imagePath, boolean isUnlocked) {
+    private final String name;
+    private final int price;
+    private final String imagePath;
+    private final int levelRequired;
+
+    public ShopItem(String name, int price, String imagePath, int levelRequired) {
         this.name = name;
         this.price = price;
         this.imagePath = imagePath;
-        this.isUnlocked = isUnlocked; // กำหนดค่าเริ่มต้น
+        this.levelRequired = levelRequired;
     }
 
-    // เพิ่ม Getter สำหรับเช็คสถานะ
-    public boolean isUnlocked() {
-        return isUnlocked;
+    public String getName() {
+        return name;
     }
 
-    // เพิ่ม Setter ไว้สำหรับเปลี่ยนสถานะเมื่อเลเวลถึงหรือซื้อแล้ว
-    public void setUnlocked(boolean unlocked) {
-        isUnlocked = unlocked;
+    public int getPrice() {
+        return price;
     }
 
-    public String getName() { return name; }
-    public int getPrice() { return price; }
-    public String getImagePath() { return imagePath; }
+    public String getImagePath() {
+        return imagePath;
+    }
+
+    public int getLevelRequired() {
+        return levelRequired;
+    }
 }

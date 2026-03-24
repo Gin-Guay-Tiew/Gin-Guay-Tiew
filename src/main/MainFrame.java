@@ -9,6 +9,7 @@ import ui.pages.endGame.WinLosePage;
 import ui.pages.settingMenu.MainSettingPage;
 import ui.pages.shopUI.ShopScreen;
 import logic.Shop.ShopManager;
+import logic.GamePlay.PlayerData;
 import utilities.IconImage;
 import utilities.PageNavigator;
 import ui.components.PopupWindow;
@@ -38,6 +39,8 @@ public class MainFrame extends JFrame implements WindowListener {
 
     private JPanel currentGameScreen;
     private int currentLevel;
+
+    private PlayerData playerData = new PlayerData();
 
     // สำหรับสร้างหน้าเกมใหม่ตอนกด play again
     public void startNewGame(int levelID) {
@@ -161,7 +164,7 @@ public class MainFrame extends JFrame implements WindowListener {
         transFrame.setFocusPainted(false);
         transFrame.setBounds(400, 300, 0, 0);
 
-        ShopManager gameController = new ShopManager(this);
+        ShopManager gameController = new ShopManager(this, playerData);
 
         animator = new Transition(transFrame, transIcon);
         glass.add(transFrame);
@@ -173,7 +176,7 @@ public class MainFrame extends JFrame implements WindowListener {
         mainPanel.add(new LoadingPage("Level1"), LOADING_SCREEN); // + Loading Screen
         mainPanel.add(new WinLosePage(this), ENDGAME);
         mainPanel.add(new MainSettingPage(this), SETTING);
-        mainPanel.add(new ShopScreen(gameController), SHOP_UI);
+        mainPanel.add(new ShopScreen(this, gameController), SHOP_UI);
 
 
         navigator.toPage(MAIN_MENU, false);
