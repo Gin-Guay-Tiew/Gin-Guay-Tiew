@@ -6,7 +6,7 @@ import java.util.List;
 
 public class GameController {
     private MainFrame mainFrame;
-    private int totalMoney = 2000; // ลองตั้งเงินเยอะๆ ไว้ทดสอบ
+    private int totalMoney = 300; // ลองตั้งเงินเยอะๆ ไว้ทดสอบ
 
     public GameController(MainFrame frame) {
         this.mainFrame = frame;

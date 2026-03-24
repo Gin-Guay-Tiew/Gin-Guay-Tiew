@@ -153,6 +153,7 @@ public class ShopScreen extends JPanel {
 
 
     private GameController controller;
+    private MoneyDisplay moneyPanel;
 
     public ShopScreen(GameController gm) {
         this.controller = gm;
@@ -167,7 +168,7 @@ public class ShopScreen extends JPanel {
         JButton backBtn = new BackBtn(gm.getMainFrame(), MainFrame.MAIN_MENU);
         northPanel.add(backBtn, BorderLayout.WEST);
 
-        MoneyDisplay moneyPanel = new MoneyDisplay(gm.getTotalMoney());
+        moneyPanel = new MoneyDisplay(gm.getTotalMoney());
         northPanel.add(moneyPanel, BorderLayout.EAST);
         add(northPanel, BorderLayout.NORTH);
 
@@ -208,7 +209,6 @@ public class ShopScreen extends JPanel {
         imagePanel.setPreferredSize(new Dimension(120, 120));
         imagePanel.setOpaque(false);
 
-//        ImageIcon itemIcon = utilities.IconImage.create(item.getImagePath(), 80, 80);
         int iconSize = 80;
 
         if (item.getImagePath().contains("noodles")
@@ -278,9 +278,7 @@ public class ShopScreen extends JPanel {
             buttonPath = "resources/images/shared/buttons/canBuy";
         }
 
-        // ปรับขนาดปุ่มให้เล็กลงตาม Card
         ImageJButton buyBtn = new ImageJButton(buttonPath, ".png", 25, 75, 30);
-//        buyBtn.setEnabled(true);
 
         buyBtn.addActionListener(e -> {
             if (!controller.isItemUnlocked(item.getName())) {
@@ -288,7 +286,7 @@ public class ShopScreen extends JPanel {
                         controller.getMainFrame(),
                         "Your level is too low!",
                         "resources/images/shared/popups/Demo.png",
-                        new String[]{"resources/images/shared/buttons/lockedBuy"},
+                        new String[]{"resources/images/shared/buttons/Ok"},
                         new String[]{"resources/images/shared/buttons/Ok"},
                         new ActionListener[]{
                                 ex -> ((Window)SwingUtilities.getWindowAncestor((Component)ex.getSource())).dispose()
@@ -302,7 +300,7 @@ public class ShopScreen extends JPanel {
                         controller.getMainFrame(),
                         "Not enough money!",
                         "resources/images/shared/popups/Demo.png",
-                        new String[]{"resources/images/shared/buttons/noMoneyBuy"},
+                        new String[]{"resources/images/shared/buttons/Ok"},
                         new String[]{"resources/images/shared/buttons/Ok"},
                         new ActionListener[]{
                                 ex -> ((Window)SwingUtilities.getWindowAncestor((Component)ex.getSource())).dispose()
@@ -312,11 +310,25 @@ public class ShopScreen extends JPanel {
             }
 
             if (controller.purchaseItem(item)) {
+                moneyPanel.updateMoney(controller.getTotalMoney());
                 controller.getMainFrame().getNavigator().toPage(MainFrame.SHOP_UI, false);
+                new PopupWindow().createPopup(
+                        controller.getMainFrame(),
+                        "Purchase successful!",
+                        "resources/images/shared/popups/Demo.png",
+                        new String[]{"resources/images/shared/buttons/Ok"},
+                        new String[]{"Ok"},
+                        new ActionListener[] {
+                                ex -> {
+                                    ((Window)SwingUtilities.getWindowAncestor((Component)ex.getSource())).dispose();
+//                                    controller.getMainFrame().getNavigator().toPage(MainFrame.SHOP_UI, false);
+                                }
+                        }
+                );
             }
         });
 
-        // Animation เอฟเฟกต์กด
+        // Animation button
         buyBtn.addMouseListener(new MouseAdapter() {
             public void mousePressed(MouseEvent e) {
                 if (buyBtn.isEnabled()) buyBtn.setBorder(BorderFactory.createEmptyBorder(3, 3, 0, 0));
