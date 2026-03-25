@@ -99,46 +99,41 @@ public class counterBar extends JPanel {
     //method for item can spawn and item spawn can drag
     public void spawnItem(String imgPath, JButton sourceBtn, MouseEvent e) {
         JButton item = new JButton(new ImageIcon(imgPath));
-
         item.setSize(120, 120);
         item.setBorderPainted(false);
         item.setContentAreaFilled(false);
-        item.setFocusPainted(false);
         item.setOpaque(false);
 
-        // Position item center under the cursor
-        Point p = SwingUtilities.convertPoint(sourceBtn, e.getPoint(), this);
-        item.setLocation(p.x - 60, p.y - 60);
+        // 1. Teleport: Convert the click point to the panel's coordinate system
+        Point mouseInPanel = SwingUtilities.convertPoint(sourceBtn, e.getPoint(), this);
+        item.setLocation(mouseInPanel.x - 60, mouseInPanel.y - 60);
 
-        enableDrag(item);
         add(item);
         setComponentZOrder(item, 0);
+        enableDrag(item);
 
-        MouseMotionListener hijackingListener = new MouseMotionAdapter() {
+        // 2. Continuous Hijack: Keep teleporting while dragging
+        MouseMotionListener teleportDrag = new MouseMotionAdapter() {
             @Override
             public void mouseDragged(MouseEvent me) {
-                // 1. Convert the mouse position from sourceBtn's space to the parent's space
-                Point parentPt = SwingUtilities.convertPoint(sourceBtn, me.getPoint(), getParent());
-
-                // 2. Center the 120x120 item on that point
-                int newX = parentPt.x - (item.getWidth() / 2);
-                int newY = parentPt.y - (item.getHeight() / 2);
-
-                item.setLocation(newX, newY);
+                Point p = SwingUtilities.convertPoint(sourceBtn, me.getPoint(), sourceBtn.getParent());
+                item.setLocation(p.x - 60, p.y - 60);
                 repaint();
             }
         };
 
-        sourceBtn.addMouseMotionListener(hijackingListener);
+        sourceBtn.addMouseMotionListener(teleportDrag);
 
-        // Remove the hijacker once the user lets go of the mouse
+        // 3. Cleanup: Stop teleporting when mouse is released
         sourceBtn.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseReleased(MouseEvent me) {
-                sourceBtn.removeMouseMotionListener(hijackingListener);
+                sourceBtn.removeMouseMotionListener(teleportDrag);
                 sourceBtn.removeMouseListener(this);
+                remove(item);
             }
         });
+
         revalidate();
         repaint();
     }
