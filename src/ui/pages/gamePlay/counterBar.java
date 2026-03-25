@@ -55,6 +55,24 @@ public class counterBar extends JPanel {
                 case "DRAG":
                     enableDrag(btn);
                     break;
+//                case "CLICK":
+//                    btn.addMouseListener(new MouseAdapter() {
+//                        @Override
+//                        public void mousePressed(MouseEvent e){
+//                            JButton progress = new JButton(new );
+//                            // me when image flush exist
+//                            gifIcon.getImage().flush();
+//                            progress.setBounds(45, 240, 120, 120);
+//                            progress.setBorderPainted(false);
+//                            progress.setContentAreaFilled(false);
+//                            progress.setFocusPainted(false);
+//                            progress.setOpaque(false);
+//
+//                            add(progress);
+//                            setComponentZOrder(progress, 0);
+//                            enableDrag(btn)
+//                        }
+//                    }
             }
 
             add(btn);
@@ -88,13 +106,13 @@ public class counterBar extends JPanel {
                 if (c.isVisible()) {
                     for (Component cc : getComponents()) {
                         if (cc instanceof JButton btn && cc != c) {
+                            // btn is the where it drag to
+                            // c is the one who got drag
                             try {
                                 Rectangle itemBounds = c.getBounds();
                                 String itemName = c.getName();
-
                                 // Check for collision with the pot and ensure the item is a noodle-type takro
-                                if (btn.getName().equals("pot") && itemBounds.intersects(btn.getBounds()) &&
-                                        itemName != null && itemName.contains("noodle_") && c instanceof JButton takro) {
+                                if (btn.getName().equals("pot") && itemBounds.intersects(btn.getBounds()) && itemName.contains("noodle_") && c instanceof JButton takro) {
 
                                     // Update the Takro (the item being dragged)
                                     takro.setIcon(new ImageIcon("resources/images/gamePlay/aquiment/takronoodle.png"));
@@ -117,6 +135,7 @@ public class counterBar extends JPanel {
                                     // Create and add the progress indicator
                                     ImageIcon gifIcon = new ImageIcon("resources/images/gamePlay/ingredients/noodles/boilingPot/boilingProgress/progress_animation.GIF");
                                     JButton progress = new JButton(gifIcon);
+                                    // me when image flush exist
                                     gifIcon.getImage().flush();
                                     progress.setBounds(45, 240, 120, 120);
                                     progress.setBorderPainted(false);
@@ -216,11 +235,11 @@ public class counterBar extends JPanel {
 
                 Rectangle itemBounds = item.getBounds();
                 String itemName = item.getName();
-
-                // noodle mai swapper
                 for (Component c : getComponents()) {
                     if (c instanceof JButton btn && c != item && c != sourceBtn ) {
                         try {
+                            // btn is the victim
+                            // item is the one who got spawn
                             if (btn.getName() != null && btn.getName().contains("takronoodle") && itemBounds.intersects(btn.getBounds())) {
 
                                 String imagePath = null;
@@ -242,6 +261,23 @@ public class counterBar extends JPanel {
                                     btn.setIcon(new ImageIcon(imagePath));
                                     btn.setName(newName);
                                 }
+                            } else if (btn.getName().equals("placemat") && itemBounds.intersects(btn.getBounds()) && itemName.equals("bowl")) {
+                                ImageIcon icon;
+                                icon = IconImage.create("resources/images/gamePlay/bowl/empty.png", 175, 175);
+                                JButton bowl_empty = new JButton(icon);
+                                bowl_empty.setBounds(390, 169, 175, 175);
+                                bowl_empty.setBorderPainted(false);
+                                bowl_empty.setContentAreaFilled(false);
+                                bowl_empty.setOpaque(false);
+                                bowl_empty.setName("bowl_empty");
+                                add(bowl_empty);
+
+                                setComponentZOrder(bowl_empty, 0);
+                                revalidate();
+                                repaint();
+
+                                btn.setName("Occupied");
+
                             }
                         } catch (NullPointerException npe) {
                             System.err.println("Error: One of the components or names was null during collision check.");
