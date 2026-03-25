@@ -32,7 +32,7 @@ public class ShopScreen extends JPanel {
         // --- 1. ส่วนหัว (North) ---
         JPanel northPanel = new JPanel(new BorderLayout());
         northPanel.setOpaque(false);
-        northPanel.setBorder(BorderFactory.createEmptyBorder(10, 20, 10, 20));
+        northPanel.setBorder(BorderFactory.createEmptyBorder(0, 20, 10, 20));
 
         JButton backBtn = new BackBtn(gm.getMainFrame(), MainFrame.MAIN_MENU);
         northPanel.add(backBtn, BorderLayout.WEST);
