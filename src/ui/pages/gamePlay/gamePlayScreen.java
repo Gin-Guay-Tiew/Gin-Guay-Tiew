@@ -70,7 +70,7 @@ public class gamePlayScreen extends JPanel {
         // ดึง timeDisplay จาก topBar
         TimeDisplay screenTime = topBar.getTimeDisplay();
 
-        GameTimer myTimer = new GameTimer(10,this,screenTime);
+        GameTimer myTimer = new GameTimer(45,this,screenTime);
         myTimer.startTimer();
 
         //UI level
