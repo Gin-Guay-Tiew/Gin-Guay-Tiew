@@ -10,6 +10,7 @@ import ui.pages.settingMenu.MainSettingPage;
 import ui.pages.shopUI.ShopScreen;
 import logic.Shop.ShopManager;
 import logic.GamePlay.PlayerData;
+import utilities.DataManager;
 import utilities.IconImage;
 import utilities.PageNavigator;
 import ui.components.PopupWindow;
@@ -64,11 +65,16 @@ public class MainFrame extends JFrame implements WindowListener {
     }
 
     public void closeApp() {
+        DataManager.savePlayerData(playerData);
         System.exit(0);
     }
 
     public PageNavigator getNavigator() {
         return navigator;
+    }
+
+    public PlayerData getPlayerData(){
+        return playerData;
     }
 
     public MainFrame() {
@@ -80,6 +86,7 @@ public class MainFrame extends JFrame implements WindowListener {
         setResizable(false);
         ImageIcon img = new ImageIcon("resources/images/shared/AppIcon.png");
         setIconImage(img.getImage());
+        this.playerData = utilities.DataManager.loadPlayerData();
 
         // Layered Position Setup (TransitionFrame Positioning :D)
         JPanel glass = (JPanel) getGlassPane();

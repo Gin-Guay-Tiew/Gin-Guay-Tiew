@@ -1,5 +1,6 @@
 package ui.pages.levelSelection;
 
+import logic.GamePlay.PlayerData;
 import main.MainFrame;
 import ui.components.CustomJLabel;
 import ui.components.PopupWindow;
@@ -14,6 +15,7 @@ import java.util.List;
 public class LevelsDisplay extends JPanel {
     private final Font jerseyFont = FontLoader.loadCustomFont("resources/font/Jersey10.ttf");
     private List<Level> levelsInfo;
+    private MainFrame mainFrame;
     PopupWindow pop = new PopupWindow();
 
     private void initLevels() {
@@ -30,8 +32,9 @@ public class LevelsDisplay extends JPanel {
 
         // Display
         setLayout(new GridLayout(2, 3));
-        setBorder(BorderFactory.createEmptyBorder(25, 0, 25, 35));
+        setBorder(BorderFactory.createEmptyBorder(0, 0, 25, 35));
         setOpaque(false);
+        this.mainFrame = mainFrame;
 
         // Mapping array to get 1 2 3 / 6 5 4 order
         int[] displayOrder = {1, 2, 3, 6, 5, 4};
@@ -50,6 +53,10 @@ public class LevelsDisplay extends JPanel {
                 textLabel.setAlignmentX(0.5f);
                 textLabel.setAlignmentY(1f);
                 textLabel.setBorder(BorderFactory.createEmptyBorder(100, 10, 0, 10));
+
+                if (mainFrame.getPlayerData().getLevel() >= levelNum) {
+                    current_lv.isUnlocked = true;
+                }
 
                 // Level Image (Middle Layer)
                 String imagePath = "resources/images/levelSelection/Level" + levelNum + "/Image.png";
@@ -84,7 +91,7 @@ public class LevelsDisplay extends JPanel {
                         }
                         iconLevel.setBorder(BorderFactory.createEmptyBorder(0, 0, current_lv.iconBtmMargin + 10, 0));
                         textLabel.setTextColor(Color.CYAN);
-                        LvPage.changeBg("resources/images/shared/levelBackgrounds/Level"+levelNum+".png");
+                        LvPage.changeBg("resources/images/shared/levelBackgrounds/Level" + levelNum + ".png");
                     }
 
                     @Override
@@ -100,7 +107,6 @@ public class LevelsDisplay extends JPanel {
                 iconLevel.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        System.out.println("You need " + current_lv.unlockCost + " Noodles to unlock this!");
                         if (current_lv.isUnlocked) {
                             int realLevel = Math.min(levelNum, levelsInfo.size());
                             mainFrame.startNewGame(realLevel);
@@ -112,7 +118,7 @@ public class LevelsDisplay extends JPanel {
                         };
                         String[] btnLabels = {"Yes", "No"}; // "No" triggers dialog.dispose() will close popup naja!
                         ActionListener[] btnActions = {
-                                ex -> unlockLevel(levelNum, iconLevel, lockIcon, icon_Unselected),
+                                ex -> unlockLevel(mainFrame.getPlayerData(), levelNum, iconLevel, lockIcon, icon_Unselected),
                                 null
                         };
                         pop.createPopup(
@@ -137,16 +143,56 @@ public class LevelsDisplay extends JPanel {
         }
     }
 
-    public void unlockLevel(int levelNum, JButton iconLevel, JLabel lockIcon, ImageIcon defaultLevelIcon) {
+    public void unlockLevel(PlayerData plrData, int levelNum, JButton iconLevel, JLabel lockIcon, ImageIcon defaultLevelIcon) {
+        Level current_lv = levelsInfo.get(levelNum - 1);
+
+        if (plrData.getMoney() < current_lv.unlockCost) {
+            plrData.setMoney(plrData.getMoney()+1000);
+            System.out.println("Give player +1000 Noodle. Now have "+plrData.getMoney());
+            String[] btnPaths = {
+                    "resources/images/shared/buttons/Ok",
+            };
+            String[] btnLabels = {"No"}; // "No" triggers dialog.dispose() will close popup naja!
+            ActionListener[] btnActions = {
+                    null
+            };
+            pop.createPopup(
+                    mainFrame,
+                    "Not enough Noodles!",
+                    "resources/images/shared/popups/Demo.png",
+                    btnPaths,
+                    btnLabels,
+                    btnActions
+            );
+            return;
+        } else if (plrData.getLevel() != levelNum-1) {
+            String[] btnPaths = {
+                    "resources/images/shared/buttons/Ok",
+            };
+            String[] btnLabels = {"No"}; // "No" triggers dialog.dispose() will close popup naja!
+            ActionListener[] btnActions = {
+                    null
+            };
+            pop.createPopup(
+                    mainFrame,
+                    "Unlock previous level first!",
+                    "resources/images/shared/popups/Demo.png",
+                    btnPaths,
+                    btnLabels,
+                    btnActions
+            );
+            return;
+        }
+
         ImageIcon loadedGif_lv = new ImageIcon("resources/images/levelSelection/Level" + levelNum + "/Cracking.gif");
         loadedGif_lv.getImage().flush();
         iconLevel.setIcon(loadedGif_lv);
         ImageIcon loadedGif_lk = new ImageIcon("resources/images/levelSelection/Unlock.gif");
         loadedGif_lk.getImage().flush();
         lockIcon.setIcon(loadedGif_lk);
-
-        Level current_lv = levelsInfo.get(levelNum - 1);
         current_lv.isUnlocked = true;
+        plrData.spendMoney(current_lv.unlockCost);
+        plrData.setLevel(levelNum);
 
         Timer gifDelay = new Timer(2000, delayEvent -> {
             iconLevel.setIcon(defaultLevelIcon);
