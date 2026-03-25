@@ -2,7 +2,6 @@ package ui.pages.gamePlay;
 
 import main.MainFrame;
 import utilities.IconImage;
-import utilities.GifResizer;
 
 import javax.swing.*;
 import java.awt.*;
@@ -87,25 +86,78 @@ public class counterBar extends JPanel {
             public void mouseReleased(MouseEvent e){
                 // Only reset/hide if the component isn't meant to be deleted
                 if (c.isVisible()) {
-                    Rectangle itemBounds = c.getBounds();
-                    String itemName = c.getName();
                     for (Component cc : getComponents()) {
-                        if (cc instanceof JButton btn && cc != c ) {
-                            if (btn.getName().equals("pot") && itemBounds.intersects(btn.getBounds()) && itemName.contains("noodle_")) {
-                                btn.setIcon(new GifResizer("resources/images/gamePlay/ingredients/noodles/boilingPot/boiling.gif", 380, 380));
-                                btn.setName("boiling"); // to prevent another noodle
+                        if (cc instanceof JButton btn && cc != c) {
+                            try {
+                                Rectangle itemBounds = c.getBounds();
+                                String itemName = c.getName();
 
-                                Timer timer = new Timer(4000, e1 -> {
-                                    // This code runs AFTER 4 seconds
-                                    btn.setName("pot");
-                                    ImageIcon icon = IconImage.create("resources/images/gamePlay/ingredients/noodles/boilingPot/not_boiling.png", 380, 380);
-                                    btn.setIcon(icon);
-                                    System.out.println("Item removed after 4 seconds");
+                                // Check for collision with the pot and ensure the item is a noodle-type takro
+                                if (btn.getName().equals("pot") && itemBounds.intersects(btn.getBounds()) &&
+                                        itemName != null && itemName.contains("noodle_") && c instanceof JButton takro) {
+
+                                    // Update the Takro (the item being dragged)
+                                    takro.setIcon(new ImageIcon("resources/images/gamePlay/aquiment/takronoodle.png"));
+                                    takro.setName("takronoodle");
+                                    // Define animation frames for the pot
+                                    String[] boilingFrames = {
+                                            "resources/images/gamePlay/ingredients/noodles/boilingPot/boiling1.png",
+                                            "resources/images/gamePlay/ingredients/noodles/boilingPot/boiling2.png"
+                                    };
+                                    // to avoid GIF fuckery (it start where it last stops) (obsolete)
+//                                    String[] progressFrame = {
+//                                            "resources/images/gamePlay/ingredients/noodles/boilingPot/boilingProgress/stage1.png",
+//                                            "resources/images/gamePlay/ingredients/noodles/boilingPot/boilingProgress/stage2.png",
+//                                            "resources/images/gamePlay/ingredients/noodles/boilingPot/boilingProgress/stage3.png",
+//                                            "resources/images/gamePlay/ingredients/noodles/boilingPot/boilingProgress/stage4.png",
+//                                            "resources/images/gamePlay/ingredients/noodles/boilingPot/boilingProgress/stage5.png",
+//                                            "resources/images/gamePlay/ingredients/noodles/boilingPot/boilingProgress/finished.png"
+//                                    };
+                                    btn.setName("boiling");
+                                    // Create and add the progress indicator
+                                    ImageIcon gifIcon = new ImageIcon("resources/images/gamePlay/ingredients/noodles/boilingPot/boilingProgress/progress_animation.GIF");
+                                    JButton progress = new JButton(gifIcon);
+                                    gifIcon.getImage().flush();
+                                    progress.setBounds(45, 240, 120, 120);
+                                    progress.setBorderPainted(false);
+                                    progress.setContentAreaFilled(false);
+                                    progress.setFocusPainted(false);
+                                    progress.setOpaque(false);
+
+                                    add(progress);
+                                    setComponentZOrder(progress, 0);
+
+                                    // Trigger the pot animation
+//                                    animateButton(progress, progressFrame, 120, 120, 1000);
+                                    animateButton(btn, boilingFrames, 380, 380, 500);
+
+                                    // Final UI refresh after adding the progress button
+                                    revalidate();
                                     repaint();
-                                });
 
-                                timer.setRepeats(false); // Ensure it only runs once
-                                timer.start();
+                                    // Timer to finish boiling after 4.5 seconds
+                                    Timer stopTimer = new Timer(4500, e1 -> {
+                                        try {
+//                                            Timer animpro = (Timer) progress.getClientProperty("animationTimer");
+                                            Timer animboil = (Timer) btn.getClientProperty("animationTimer");
+                                            if (animboil != null) animboil.stop();
+//                                            if (animpro != null) animpro.stop();
+
+                                            remove(progress);
+                                            btn.setName("pot");
+                                            btn.setIcon(IconImage.create("resources/images/gamePlay/ingredients/noodles/boilingPot/not_boiling.png", 380, 380));
+                                            revalidate();
+                                            repaint();
+                                        } catch (Exception ex) {
+                                            // Silently handle issues during timer execution
+                                        }
+                                    });
+                                    stopTimer.setRepeats(false);
+                                    stopTimer.start();
+                                }
+                            } catch (Exception exd) {
+                                // Log a simple message instead of the full stack trace
+                                System.out.println("Boiling interaction failed");
                             }
                         }
                     }
@@ -167,18 +219,34 @@ public class counterBar extends JPanel {
 
                 // noodle mai swapper
                 for (Component c : getComponents()) {
-                    if (c instanceof JButton btn && c != item && c != sourceBtn) {
-                        if (btn.getName().contains("takronoodle") && itemBounds.intersects(btn.getBounds())) {
-                            if ("greenEgg".equals(itemName)) {
-                                btn.setIcon(new ImageIcon("resources/images/gamePlay/ingredients/noodles/blanchNoodles/takronoodle_green_egg.png"));
-                                btn.setName("takronoodle_green_egg");
-                            } else if ("yellowEgg".equals(itemName)) {
-                                btn.setIcon(new ImageIcon("resources/images/gamePlay/ingredients/noodles/blanchNoodles/takronoodle_yellow.png"));
-                                btn.setName("takronoodle_yellow");
-                            } else if ("thinRice".equals(itemName) || "wideRice".equals(itemName) || "riceVermicelli".equals(itemName)) {
-                                btn.setIcon(new ImageIcon("resources/images/gamePlay/ingredients/noodles/blanchNoodles/takronoodle_rice_thin_wide_vermicelli.png"));
-                                btn.setName("takronoodle_rice_thin_wide_vermicelli");
+                    if (c instanceof JButton btn && c != item && c != sourceBtn ) {
+                        try {
+                            if (btn.getName() != null && btn.getName().contains("takronoodle") && itemBounds.intersects(btn.getBounds())) {
+
+                                String imagePath = null;
+                                String newName = null;
+
+                                if ("greenEgg".equals(itemName)) {
+                                    imagePath = "resources/images/gamePlay/ingredients/noodles/blanchNoodles/takronoodle_green_egg.png";
+                                    newName = "takronoodle_green_egg";
+                                } else if ("yellowEgg".equals(itemName)) {
+                                    imagePath = "resources/images/gamePlay/ingredients/noodles/blanchNoodles/takronoodle_yellow.png";
+                                    newName = "takronoodle_yellow";
+                                } else if ("thinRice".equals(itemName) || "wideRice".equals(itemName) || "riceVermicelli".equals(itemName)) {
+                                    imagePath = "resources/images/gamePlay/ingredients/noodles/blanchNoodles/takronoodle_rice_thin_wide_vermicelli.png";
+                                    newName = "takronoodle_rice_thin_wide_vermicelli";
+                                }
+
+                                // Apply changes only if a match was found
+                                if (imagePath != null) {
+                                    btn.setIcon(new ImageIcon(imagePath));
+                                    btn.setName(newName);
+                                }
                             }
+                        } catch (NullPointerException npe) {
+                            System.err.println("Error: One of the components or names was null during collision check.");
+                        } catch (Exception e) {
+                            System.err.println("An unexpected error occurred while swapping noodle icons: " + e.getMessage());
                         }
                     }
                 }
@@ -204,6 +272,29 @@ public class counterBar extends JPanel {
         }
     }
 
+    private void animateButton(JButton btn, String[] frames, int width, int height, int delay) {
+        // Index to track which frame we are on
+        final int[] frameIndex = {0};
+
+        // Create a timer that fires every delay
+        Timer animationTimer = new Timer(delay, e -> {
+            if (frameIndex[0] < frames.length) {
+                // Use your existing IconImage.create or a standard scaling method
+                btn.setIcon(IconImage.create(frames[frameIndex[0]], width, height));
+                frameIndex[0]++;
+            } else {
+                // Loop back to the start
+                frameIndex[0] = 0;
+                btn.setIcon(IconImage.create(frames[0], width, height));
+            }
+            btn.repaint();
+        });
+
+        animationTimer.start();
+
+        // Store the timer in the button so we can stop it later if needed
+        btn.putClientProperty("animationTimer", animationTimer);
+    }
 
 }
 
