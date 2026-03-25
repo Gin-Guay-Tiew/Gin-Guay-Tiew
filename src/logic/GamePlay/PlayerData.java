@@ -13,6 +13,14 @@ public class PlayerData {
         return level;
     }
 
+    public void setMoney(int money) {
+        this.money = money;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
+    }
+
     public void spendMoney(int amount) {
         money -= amount;
     }
