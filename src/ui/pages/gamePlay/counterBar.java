@@ -145,7 +145,7 @@ public class counterBar extends JPanel {
                 // noodle mai swapper
                 for (Component c : getComponents()) {
                     if (c instanceof JButton btn && c != item && c != sourceBtn) {
-                        if ("takronoodle".equals(btn.getName()) && itemBounds.intersects(btn.getBounds())) {
+                        if (btn.getName().contains("takronoodle") && itemBounds.intersects(btn.getBounds())) {
                             if ("greenEgg".equals(itemName)) {
                                 btn.setIcon(new ImageIcon("resources/images/gamePlay/ingredients/noodles/blanchNoodles/takronoodle_green_egg.png"));
                                 btn.setName("takronoodle_green_egg");
