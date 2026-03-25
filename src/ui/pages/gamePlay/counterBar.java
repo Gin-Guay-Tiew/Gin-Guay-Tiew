@@ -2,7 +2,6 @@ package ui.pages.gamePlay;
 
 import main.MainFrame;
 import utilities.IconImage;
-import utilities.GifResizer;
 
 import javax.swing.*;
 import java.awt.*;
@@ -92,20 +91,32 @@ public class counterBar extends JPanel {
                     for (Component cc : getComponents()) {
                         if (cc instanceof JButton btn && cc != c ) {
                             if (btn.getName().equals("pot") && itemBounds.intersects(btn.getBounds()) && itemName.contains("noodle_")) {
-                                btn.setIcon(new GifResizer("resources/images/gamePlay/ingredients/noodles/boilingPot/boiling.gif", 380, 380));
-                                btn.setName("boiling"); // to prevent another noodle
-
-                                Timer timer = new Timer(4000, e1 -> {
-                                    // This code runs AFTER 4 seconds
+                                String[] boilingFrames = {
+                                        "resources/images/gamePlay/ingredients/noodles/boilingPot/boiling1.png",
+                                        "resources/images/gamePlay/ingredients/noodles/boilingPot/boiling2.png"
+                                };
+                                btn.setName("boiling");
+                                JButton progress = new JButton(new ImageIcon("resources/images/gamePlay/ingredients/noodles/boilingPot/boilingProgress/progress_animation.GIF"));
+                                progress.setBounds(45,240,120,120);
+                                progress.setBorderPainted(false);
+                                progress.setContentAreaFilled(false);
+                                progress.setFocusPainted(false);
+                                progress.setOpaque(false);
+                                add(progress);
+                                setComponentZOrder(progress, 0);
+                                revalidate();
+                                repaint();
+                                animateButton(btn, boilingFrames, 380, 380);
+                                // Stop boiling after 4 seconds
+                                Timer stopTimer = new Timer(4500, e1 -> {
+                                    Timer anim = (Timer) btn.getClientProperty("animationTimer");
+                                    if (anim != null) anim.stop();
+                                    remove(progress);
                                     btn.setName("pot");
-                                    ImageIcon icon = IconImage.create("resources/images/gamePlay/ingredients/noodles/boilingPot/not_boiling.png", 380, 380);
-                                    btn.setIcon(icon);
-                                    System.out.println("Item removed after 4 seconds");
-                                    repaint();
+                                    btn.setIcon(IconImage.create("resources/images/gamePlay/ingredients/noodles/boilingPot/not_boiling.png", 380, 380));
                                 });
-
-                                timer.setRepeats(false); // Ensure it only runs once
-                                timer.start();
+                                stopTimer.setRepeats(false);
+                                stopTimer.start();
                             }
                         }
                     }
@@ -204,6 +215,29 @@ public class counterBar extends JPanel {
         }
     }
 
+    private void animateButton(JButton btn, String[] frames, int width, int height) {
+        // Index to track which frame we are on
+        final int[] frameIndex = {0};
+
+        // Create a timer that fires every 500ms (0.5 seconds)
+        Timer animationTimer = new Timer(500, e -> {
+            if (frameIndex[0] < frames.length) {
+                // Use your existing IconImage.create or a standard scaling method
+                btn.setIcon(IconImage.create(frames[frameIndex[0]], width, height));
+                frameIndex[0]++;
+            } else {
+                // Loop back to the start
+                frameIndex[0] = 0;
+                btn.setIcon(IconImage.create(frames[0], width, height));
+            }
+            btn.repaint();
+        });
+
+        animationTimer.start();
+
+        // Store the timer in the button so we can stop it later if needed
+        btn.putClientProperty("animationTimer", animationTimer);
+    }
 
 }
 
