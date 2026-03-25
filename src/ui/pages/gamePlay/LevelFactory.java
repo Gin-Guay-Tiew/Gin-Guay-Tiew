@@ -26,7 +26,7 @@ public class LevelFactory {
                 //mock up
                 slots.add(new SlotSpec("bucket lv3",230,350,120,120,"resources/images/gamePlay/ingredients/drinks/lv3.png","STATIC",null));
 
-                slots.add(new SlotSpec("pot",-86,240,380,380,"resources/images/gamePlay/counter/potter.png","STATIC",null));
+                slots.add(new SlotSpec("pot",-86,240,380,380,"resources/images/gamePlay/ingredients/noodles/boilingPot/not_boiling.png","STATIC",null));
                 slots.add(new SlotSpec("trash",620,400,162,73,"resources/images/gamePlay/binn/empty.png","STATIC",null));
 
                 //on counter
@@ -87,7 +87,7 @@ public class LevelFactory {
                 //mock up
                 slots.add(new SlotSpec("bucket lv2",230,350,120,120,"resources/images/gamePlay/ingredients/drinks/lv2.png","STATIC",null));
 
-                slots.add(new SlotSpec("pot",-86,240,380,380,"resources/images/gamePlay/counter/potter.png","STATIC",null));
+                slots.add(new SlotSpec("pot",-86,240,380,380,"resources/images/gamePlay/ingredients/noodles/boilingPot/not_boiling.png","STATIC",null));
                 slots.add(new SlotSpec("trash",620,400,162,73,"resources/images/gamePlay/binn/empty.png","STATIC",null));
 
                 //on counter
@@ -142,7 +142,7 @@ public class LevelFactory {
                 //mock up
                 slots.add(new SlotSpec("bucket lv3",230,350,120,120,"resources/images/gamePlay/ingredients/drinks/lv3.png","STATIC",null));
 
-                slots.add(new SlotSpec("pot",-86,240,380,380,"resources/images/gamePlay/counter/potter.png","STATIC",null));
+                slots.add(new SlotSpec("pot",-86,240,380,380,"resources/images/gamePlay/ingredients/noodles/boilingPot/not_boiling.png","STATIC",null));
                 slots.add(new SlotSpec("trash",620,400,162,73,"resources/images/gamePlay/binn/empty.png","STATIC",null));
 
                 //on counter
@@ -207,7 +207,7 @@ public class LevelFactory {
                 //mock up
                 slots.add(new SlotSpec("bucket lv3",230,350,120,120,"resources/images/gamePlay/ingredients/drinks/lv3.png","STATIC",null));
 
-                slots.add(new SlotSpec("pot",-86,240,380,380,"resources/images/gamePlay/counter/potter.png","STATIC",null));
+                slots.add(new SlotSpec("pot",-86,240,380,380,"resources/images/gamePlay/ingredients/noodles/boilingPot/not_boiling.png","STATIC",null));
                 slots.add(new SlotSpec("trash",620,400,162,73,"resources/images/gamePlay/binn/empty.png","STATIC",null));
 
                 //on counter
@@ -268,7 +268,7 @@ public class LevelFactory {
                 //mock up
                 slots.add(new SlotSpec("bucket lv3",230,350,120,120,"resources/images/gamePlay/ingredients/drinks/lv3.png","STATIC",null));
 
-                slots.add(new SlotSpec("pot",-86,240,380,380,"resources/images/gamePlay/counter/potter.png","STATIC",null));
+                slots.add(new SlotSpec("pot",-86,240,380,380,"resources/images/gamePlay/ingredients/noodles/boilingPot/not_boiling.png","STATIC",null));
                 slots.add(new SlotSpec("trash",620,400,162,73,"resources/images/gamePlay/binn/empty.png","STATIC",null));
 
                 //on counter

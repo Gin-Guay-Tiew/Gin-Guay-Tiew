@@ -1,6 +1,7 @@
 package ui.pages.gamePlay;
 
 import main.MainFrame;
+import utilities.IconImage;
 
 import javax.swing.*;
 import java.awt.*;
@@ -26,7 +27,13 @@ public class counterBar extends JPanel {
         removeAll();
 
         for (SlotSpec s : slots) {
-            JButton btn = new JButton(new ImageIcon(s.getIconPath()));
+            ImageIcon icon;
+            if (s.getIconPath() != null) {
+                icon = IconImage.create(s.getIconPath(), s.getWidth(), s.getHeight());
+            }else{
+                icon = new ImageIcon(s.getIconPath());
+            }
+            JButton btn = new JButton(icon);
             btn.setBounds(s.getX(), s.getY(), s.getWidth(), s.getHeight());
             btn.setName(s.getId());
             btn.setBorderPainted(false);
