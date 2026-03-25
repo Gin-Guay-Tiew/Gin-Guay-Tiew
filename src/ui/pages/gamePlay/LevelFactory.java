@@ -5,7 +5,7 @@ import java.util.List;
 
 //หน้านี้สำหรับเก็บข้อมูลในแต่ละเลเวล เราจะเปลี่ยนแค่ของในเลเวล มาเพิ่มเปลี่ยนเอาในนี้ได้เลย case 1,2,3,4,5  แทนเลขในแต่ละเลเวล
 public class LevelFactory {
-    public static LevelUIconfig getlevel(int levelId) {
+    public static LevelUIConfig getLevel(int levelId) {
         List<SlotSpec> slots = new ArrayList<>();
         String bg = "";
 
@@ -313,7 +313,7 @@ public class LevelFactory {
 
                 break;
         }
-        return new LevelUIconfig(bg, slots);
+        return new LevelUIConfig(bg, slots);
     }
 
 }
