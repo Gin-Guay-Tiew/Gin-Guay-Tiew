@@ -11,7 +11,7 @@ import java.awt.event.MouseMotionListener;
 import java.util.List;
 
 public class counterBar extends JPanel {
-    private Image counterBarimage;
+    private final Image counterBarimage;
 
     public counterBar(MainFrame mainFrame) {
         //set layout
@@ -28,7 +28,7 @@ public class counterBar extends JPanel {
         for (SlotSpec s : slots) {
             JButton btn = new JButton(new ImageIcon(s.getIconPath()));
             btn.setBounds(s.getX(), s.getY(), s.getWidth(), s.getHeight());
-
+            btn.setName(s.getId());
             btn.setBorderPainted(false);
             btn.setContentAreaFilled(false);
             btn.setFocusPainted(false);
@@ -48,8 +48,6 @@ public class counterBar extends JPanel {
                 case "DRAG":
                     enableDrag(btn);
                     break;
-                case "EQUIPMENT":
-
             }
 
             add(btn);
@@ -79,8 +77,10 @@ public class counterBar extends JPanel {
             // ตอนปล่อยแล้วจะให้กลับที่เดิม
             @Override
             public void mouseReleased(MouseEvent e){
-                c.setLocation(originalPos[0]);
-                c.setVisible(false);
+                // Only reset/hide if the component isn't meant to be deleted
+                if (c.isVisible()) {
+                    c.setLocation(originalPos[0]);
+                }
             }
         });
 
@@ -107,17 +107,14 @@ public class counterBar extends JPanel {
         item.setBorderPainted(false);
         item.setContentAreaFilled(false);
         item.setOpaque(false);
-        item.putClientProperty("id", result);
+        item.setName(result);
 
-        // 1. Teleport: Convert the click point to the panel's coordinate system
         Point mouseInPanel = SwingUtilities.convertPoint(sourceBtn, e.getPoint(), this);
         item.setLocation(mouseInPanel.x - 60, mouseInPanel.y - 60);
 
         add(item);
         setComponentZOrder(item, 0);
-        enableDrag(item);
 
-        // 2. Continuous Hijack: Keep teleporting while dragging
         MouseMotionListener teleportDrag = new MouseMotionAdapter() {
             @Override
             public void mouseDragged(MouseEvent me) {
@@ -129,19 +126,36 @@ public class counterBar extends JPanel {
 
         sourceBtn.addMouseMotionListener(teleportDrag);
 
-        // 3. Cleanup: Stop teleporting when mouse is released
         sourceBtn.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseReleased(MouseEvent me) {
                 sourceBtn.removeMouseMotionListener(teleportDrag);
                 sourceBtn.removeMouseListener(this);
-                String hiddenId = (String) item.getClientProperty("id");
 
+                Rectangle itemBounds = item.getBounds();
+                String itemName = item.getName();
 
-
-                System.out.println("Dropped Item ID: " + hiddenId);
-
+                // noodle mai swapper
+                for (Component c : getComponents()) {
+                    if (c instanceof JButton btn && c != item && c != sourceBtn) {
+                        if ("takronoodle".equals(btn.getName()) && itemBounds.intersects(btn.getBounds())) {
+                            if ("greenEgg".equals(itemName)) {
+                                btn.setIcon(new ImageIcon("resources/images/gamePlay/ingredients/noodles/blanchNoodles/takronoodle_green_egg.png"));
+                                btn.setName("takronoodle_green_egg");
+                            } else if ("yellowEgg".equals(itemName)) {
+                                btn.setIcon(new ImageIcon("resources/images/gamePlay/ingredients/noodles/blanchNoodles/takronoodle_yellow.png"));
+                                btn.setName("takronoodle_yellow");
+                            } else if ("thinRice".equals(itemName) || "wideRice".equals(itemName) || "riceVermicelli".equals(itemName)) {
+                                btn.setIcon(new ImageIcon("resources/images/gamePlay/ingredients/noodles/blanchNoodles/takronoodle_rice_thin_wide_vermicelli.png"));
+                                btn.setName("takronoodle_rice_thin_wide_vermicelli");
+                            }
+                        }
+                    }
+                }
+                System.out.println("Dropped Item ID: " + item.getName());
                 remove(item);
+                revalidate();
+                repaint();
             }
         });
 
