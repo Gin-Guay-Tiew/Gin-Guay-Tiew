@@ -4,7 +4,7 @@ import ui.components.MoneyDisplay;
 
 public class PlayerData {
 
-    private int money = 300;
+    private int money = 0;
     private int level = 1;
     private MoneyDisplay moneyDisplay;
 
