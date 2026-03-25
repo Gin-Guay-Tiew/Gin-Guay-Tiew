@@ -104,18 +104,20 @@ public class counterBar extends JPanel {
                                             "resources/images/gamePlay/ingredients/noodles/boilingPot/boiling1.png",
                                             "resources/images/gamePlay/ingredients/noodles/boilingPot/boiling2.png"
                                     };
-                                    // to avoid GIF fuckery (it start where it last stops)
-                                    String[] progressFrame = {
-                                            "resources/images/gamePlay/ingredients/noodles/boilingPot/boilingProgress/stage1.png",
-                                            "resources/images/gamePlay/ingredients/noodles/boilingPot/boilingProgress/stage2.png",
-                                            "resources/images/gamePlay/ingredients/noodles/boilingPot/boilingProgress/stage3.png",
-                                            "resources/images/gamePlay/ingredients/noodles/boilingPot/boilingProgress/stage4.png",
-                                            "resources/images/gamePlay/ingredients/noodles/boilingPot/boilingProgress/stage5.png",
-                                            "resources/images/gamePlay/ingredients/noodles/boilingPot/boilingProgress/finished.png"
-                                    };
+                                    // to avoid GIF fuckery (it start where it last stops) (obsolete)
+//                                    String[] progressFrame = {
+//                                            "resources/images/gamePlay/ingredients/noodles/boilingPot/boilingProgress/stage1.png",
+//                                            "resources/images/gamePlay/ingredients/noodles/boilingPot/boilingProgress/stage2.png",
+//                                            "resources/images/gamePlay/ingredients/noodles/boilingPot/boilingProgress/stage3.png",
+//                                            "resources/images/gamePlay/ingredients/noodles/boilingPot/boilingProgress/stage4.png",
+//                                            "resources/images/gamePlay/ingredients/noodles/boilingPot/boilingProgress/stage5.png",
+//                                            "resources/images/gamePlay/ingredients/noodles/boilingPot/boilingProgress/finished.png"
+//                                    };
                                     btn.setName("boiling");
                                     // Create and add the progress indicator
-                                    JButton progress = new JButton(new ImageIcon("resources/images/gamePlay/ingredients/noodles/boilingPot/boilingProgress/stage1.png"));
+                                    ImageIcon gifIcon = new ImageIcon("resources/images/gamePlay/ingredients/noodles/boilingPot/boilingProgress/progress_animation.GIF");
+                                    JButton progress = new JButton(gifIcon);
+                                    gifIcon.getImage().flush();
                                     progress.setBounds(45, 240, 120, 120);
                                     progress.setBorderPainted(false);
                                     progress.setContentAreaFilled(false);
@@ -126,7 +128,7 @@ public class counterBar extends JPanel {
                                     setComponentZOrder(progress, 0);
 
                                     // Trigger the pot animation
-                                    animateButton(progress, progressFrame, 120, 120, 1000);
+//                                    animateButton(progress, progressFrame, 120, 120, 1000);
                                     animateButton(btn, boilingFrames, 380, 380, 500);
 
                                     // Final UI refresh after adding the progress button
@@ -136,15 +138,14 @@ public class counterBar extends JPanel {
                                     // Timer to finish boiling after 4.5 seconds
                                     Timer stopTimer = new Timer(4500, e1 -> {
                                         try {
-                                            Timer animpro = (Timer) progress.getClientProperty("animationTimer");
+//                                            Timer animpro = (Timer) progress.getClientProperty("animationTimer");
                                             Timer animboil = (Timer) btn.getClientProperty("animationTimer");
                                             if (animboil != null) animboil.stop();
-                                            if (animpro != null) animpro.stop();
+//                                            if (animpro != null) animpro.stop();
 
                                             remove(progress);
                                             btn.setName("pot");
                                             btn.setIcon(IconImage.create("resources/images/gamePlay/ingredients/noodles/boilingPot/not_boiling.png", 380, 380));
-
                                             revalidate();
                                             repaint();
                                         } catch (Exception ex) {
@@ -275,7 +276,7 @@ public class counterBar extends JPanel {
         // Index to track which frame we are on
         final int[] frameIndex = {0};
 
-        // Create a timer that fires every 500ms (0.5 seconds)
+        // Create a timer that fires every delay
         Timer animationTimer = new Timer(delay, e -> {
             if (frameIndex[0] < frames.length) {
                 // Use your existing IconImage.create or a standard scaling method
