@@ -182,7 +182,7 @@ public class counterBar extends JPanel {
                                     stopTimer.setRepeats(false);
                                     stopTimer.start();
                                 }
-                                if (c instanceof JButton bowl && bowl.getName().contains("bowl_noodle_") && btn.getName().contains("trash") && itemBounds.intersects(btn.getBounds())){
+                                if (c instanceof JButton bowl && bowl.getName().contains("bowl_") && btn.getName().contains("trash") && itemBounds.intersects(btn.getBounds())){
                                     bowl.setIcon(IconImage.create("resources/images/gamePlay/bowl/empty.png", 175, 175));
                                     bowl.setName("bowl_empty");
                                     disableDrag(bowl);
@@ -190,11 +190,31 @@ public class counterBar extends JPanel {
                                         btn.setName("trashed");
                                     }
                                 }
-                                if (c instanceof JButton ladle && itemBounds.intersects(btn.getBounds()) && btn.getName().contains("pot") && ladle.getName().equals("ladle")){
+                                if (c instanceof JButton ladle && itemBounds.intersects(btn.getBounds()) && btn.getName().contains("pot") && ladle.getName().equals("ladle")) {
                                     for (Component comp : getComponents()) {
-                                        if (comp instanceof JButton bowl) {
-                                            if (bowl.getName().contains("bowl_noodle_")) {
-
+                                        if (comp instanceof JButton bowl && bowl.getName().contains("bowl_noodle_")) {
+                                            String bowlName = bowl.getName();
+                                            // Check if it's a bowl that already has noodles but no soup yet
+                                            String noodleType = "";
+                                            // Identify the noodle type from the previous name set in the boiling timer
+                                            if (bowlName.contains("greenEgg")) {
+                                                noodleType = "greenEgg";
+                                            } else if (bowlName.contains("yellowEgg")) {
+                                                noodleType = "yellow";
+                                            } else if (bowlName.contains("white")) {
+                                                noodleType = "riceThinWideVermicelli";
+                                            }
+                                            if (!noodleType.isEmpty()) {
+                                                try {
+                                                    // Construct path: clearBroth -> [noodleType] -> no_addon.png
+                                                    String brothPath = "resources/images/gamePlay/ingredients/noodles/finishedNoodles/clearBroth/"
+                                                            + noodleType + "/no_addon.png";
+                                                    bowl.setIcon(IconImage.create(brothPath, 175, 175));
+                                                    // Update name to reflect it now has broth and the noodle type
+                                                    bowl.setName("bowl_clearBroth_" + noodleType);
+                                                } catch (Exception ex) {
+                                                    System.out.println("Failed to add broth to bowl");
+                                                }
                                             }
                                         }
                                     }
