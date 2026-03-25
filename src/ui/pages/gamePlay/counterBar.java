@@ -135,18 +135,27 @@ public class counterBar extends JPanel {
                                     setComponentZOrder(progress, 0);
 
                                     // Trigger the pot animation
-                                    animateButton(btn, boilingFrames, 380, 380, 500);
+                                    animateButton(btn, boilingFrames, 380, 380, 844);// 843.75 // no reason
 
                                     // Final UI refresh after adding the progress button
                                     revalidate();
                                     repaint();
 
-                                    // Timer to finish boiling after 4.5 seconds
-                                    Timer stopTimer = new Timer(4500, e1 -> {
+                                    // Timer to finish boiling after 3875 seconds
+                                    Timer stopTimer = new Timer(3875, e1 -> {
                                         try {
                                             Timer animboil = (Timer) btn.getClientProperty("animationTimer");
                                             if (animboil != null) animboil.stop();
-                                            remove(progress);
+
+                                            Timer delayTimer = new Timer(625, e2 -> {
+                                                remove(progress);
+                                                revalidate();
+                                                repaint();
+                                            });
+
+                                            delayTimer.setRepeats(false); // Important! So it only runs once
+                                            delayTimer.start();
+
                                             btn.setName("pot");
                                             btn.setIcon(IconImage.create("resources/images/gamePlay/ingredients/noodles/boilingPot/not_boiling.png", 380, 380));
                                             revalidate();
