@@ -71,6 +71,10 @@ public class MainFrame extends JFrame implements WindowListener {
         return navigator;
     }
 
+    public PlayerData getPlayerData(){
+        return playerData;
+    }
+
     public MainFrame() {
         setTitle("Gin-Guay-Tiew");
         setSize(800, 600);

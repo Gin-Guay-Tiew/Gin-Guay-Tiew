@@ -22,6 +22,7 @@ public class DataManager {
 
     public static Player loadPlayerData() {
         Player player = new Player();
+        player.setNoodle(5000);
         Properties props = new Properties();
 
         File file = new File(SAVE_FILE);
