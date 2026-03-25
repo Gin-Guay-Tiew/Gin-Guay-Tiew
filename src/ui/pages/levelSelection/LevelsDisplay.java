@@ -54,6 +54,10 @@ public class LevelsDisplay extends JPanel {
                 textLabel.setAlignmentY(1f);
                 textLabel.setBorder(BorderFactory.createEmptyBorder(100, 10, 0, 10));
 
+                if (mainFrame.getPlayerData().getLevel() >= levelNum) {
+                    current_lv.isUnlocked = true;
+                }
+
                 // Level Image (Middle Layer)
                 String imagePath = "resources/images/levelSelection/Level" + levelNum + "/Image.png";
                 ImageIcon icon_Selected = new ImageIcon(imagePath);
@@ -143,6 +147,8 @@ public class LevelsDisplay extends JPanel {
         Level current_lv = levelsInfo.get(levelNum - 1);
 
         if (plrData.getMoney() < current_lv.unlockCost) {
+            plrData.setMoney(plrData.getMoney()+1000);
+            System.out.println("Give player +1000 Noodle. Now have "+plrData.getMoney());
             String[] btnPaths = {
                     "resources/images/shared/buttons/Ok",
             };
@@ -159,7 +165,7 @@ public class LevelsDisplay extends JPanel {
                     btnActions
             );
             return;
-        } else if (plrData.getLevel()-1 != levelNum) {
+        } else if (plrData.getLevel() != levelNum-1) {
             String[] btnPaths = {
                     "resources/images/shared/buttons/Ok",
             };
@@ -186,6 +192,7 @@ public class LevelsDisplay extends JPanel {
         lockIcon.setIcon(loadedGif_lk);
         current_lv.isUnlocked = true;
         plrData.spendMoney(current_lv.unlockCost);
+        plrData.setLevel(levelNum);
 
         Timer gifDelay = new Timer(2000, delayEvent -> {
             iconLevel.setIcon(defaultLevelIcon);
