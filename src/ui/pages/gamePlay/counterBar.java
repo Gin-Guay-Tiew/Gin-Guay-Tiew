@@ -99,10 +99,15 @@ public class counterBar extends JPanel {
     //method for item can spawn and item spawn can drag
     public void spawnItem(String imgPath, JButton sourceBtn, MouseEvent e) {
         JButton item = new JButton(new ImageIcon(imgPath));
+
+        String[] parts = imgPath.split("/");
+        String result = parts[parts.length - 2];
+
         item.setSize(120, 120);
         item.setBorderPainted(false);
         item.setContentAreaFilled(false);
         item.setOpaque(false);
+        item.putClientProperty("id", result);
 
         // 1. Teleport: Convert the click point to the panel's coordinate system
         Point mouseInPanel = SwingUtilities.convertPoint(sourceBtn, e.getPoint(), this);
@@ -130,6 +135,8 @@ public class counterBar extends JPanel {
             public void mouseReleased(MouseEvent me) {
                 sourceBtn.removeMouseMotionListener(teleportDrag);
                 sourceBtn.removeMouseListener(this);
+                String hiddenId = (String) item.getClientProperty("id");
+                System.out.println("Dropped Item ID: " + hiddenId);
                 remove(item);
             }
         });
