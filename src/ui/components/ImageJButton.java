@@ -60,4 +60,13 @@ public class ImageJButton extends JButton {
             }
         });
     }
+
+    public void setImage(String path, String type, int width, int height) {
+        btnImage = IconImage.create(path + type, width, height);
+        btnImage_Hover = IconImage.create(path + "_Hover" + type, width, height);
+        btnImage_Clicked = IconImage.create(path + "_Clicked" + type, width, height);
+
+        setIcon(btnImage);
+        repaint();
+    }
 }

@@ -34,7 +34,7 @@ public class gamePlayScreen extends JPanel {
         // Game layer
         JLayeredPane gameLayer = new JLayeredPane();
         gameLayer.setLayout(null);
-        gameLayer.setBounds(0,0,800,520);
+        gameLayer.setBounds(0,0,800,600);
 
 
 
@@ -70,7 +70,7 @@ public class gamePlayScreen extends JPanel {
         // ดึง timeDisplay จาก topBar
         TimeDisplay screenTime = topBar.getTimeDisplay();
 
-        GameTimer myTimer = new GameTimer(10,this,screenTime);
+        GameTimer myTimer = new GameTimer(45,this,screenTime);
         myTimer.startTimer();
 
         //UI level

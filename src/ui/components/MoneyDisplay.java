@@ -31,10 +31,17 @@ public class MoneyDisplay extends JPanel {
         moneyAmount = new JLabel(String.format("%,d N", amount));
         moneyAmount.setFont(jerseyFont.deriveFont(25f));
         moneyAmount.setVerticalAlignment(JLabel.CENTER);
+        moneyAmount.setHorizontalAlignment(JLabel.CENTER);
 
         add(paddingLabel, BorderLayout.NORTH);
         add(moneyLabel, BorderLayout.CENTER);
         add(moneyAmount, BorderLayout.SOUTH);
+    }
+
+    public void updateMoney(int amount) {
+        moneyAmount.setText(String.format("%,d N", amount));
+        revalidate();
+        repaint();
     }
 
     // Draw BG Image
@@ -43,4 +50,5 @@ public class MoneyDisplay extends JPanel {
         super.paintComponent(g);
         g.drawImage(new ImageIcon("resources/images/shared/SignFrame.png").getImage(), 0, 0, getWidth(), getHeight(), this);
     }
+
 }
