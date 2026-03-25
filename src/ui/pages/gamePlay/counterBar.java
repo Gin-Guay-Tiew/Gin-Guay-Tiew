@@ -48,7 +48,7 @@ public class counterBar extends JPanel {
                 case "DRAG":
                     enableDrag(btn);
                     break;
-                case "SPAWNDRAG":
+                case "EQUIPMENT":
 
             }
 
@@ -136,7 +136,11 @@ public class counterBar extends JPanel {
                 sourceBtn.removeMouseMotionListener(teleportDrag);
                 sourceBtn.removeMouseListener(this);
                 String hiddenId = (String) item.getClientProperty("id");
+
+
+
                 System.out.println("Dropped Item ID: " + hiddenId);
+
                 remove(item);
             }
         });

@@ -14,8 +14,8 @@ public class LevelFactory {
                 bg = "resources/images/gamePlay/bg/LV1.gif";
 
                 //mai
-                slots.add(new SlotSpec("mai1",-2,200,120,114,"resources/images/gamePlay/aquiment/mai1.png","DRAG",null));
-                slots.add(new SlotSpec("mai2",95,200,120,120,"resources/images/gamePlay/aquiment/mai2.png","DRAG",null));
+                slots.add(new SlotSpec("mai1",-2,200,120,114,"resources/images/gamePlay/aquiment/takronoodle.png","DRAG",null));
+                slots.add(new SlotSpec("mai2",95,200,120,120,"resources/images/gamePlay/aquiment/takrosoup.png","DRAG",null));
 
                 // down counter
 
@@ -76,8 +76,8 @@ public class LevelFactory {
                 bg = "resources/images/gamePlay/bg/LV2.gif";
 
                 //mai
-                slots.add(new SlotSpec("mai1",-2,200,120,114,"resources/images/gamePlay/aquiment/mai1.png","DRAG",null));
-                slots.add(new SlotSpec("mai2",95,200,120,120,"resources/images/gamePlay/aquiment/mai2.png","DRAG",null));
+                slots.add(new SlotSpec("mai1",-2,200,120,114,"resources/images/gamePlay/aquiment/takronoodle.png","DRAG",null));
+                slots.add(new SlotSpec("mai2",95,200,120,120,"resources/images/gamePlay/aquiment/takrosoup.png","DRAG",null));
 
                 // down counter
 
@@ -130,8 +130,8 @@ public class LevelFactory {
                 bg = "resources/images/gamePlay/bg/LV3.gif";
 
                 //mai
-                slots.add(new SlotSpec("mai1",-2,200,120,114,"resources/images/gamePlay/aquiment/mai1.png","DRAG",null));
-                slots.add(new SlotSpec("mai2",95,200,120,120,"resources/images/gamePlay/aquiment/mai2.png","DRAG",null));
+                slots.add(new SlotSpec("mai1",-2,200,120,114,"resources/images/gamePlay/aquiment/takronoodle.png","DRAG",null));
+                slots.add(new SlotSpec("mai2",95,200,120,120,"resources/images/gamePlay/aquiment/takrosoup.png","DRAG",null));
 
                 // down counter
 
@@ -195,8 +195,8 @@ public class LevelFactory {
                 bg = "resources/images/gamePlay/bg/LV4.gif";
 
                 //mai
-                slots.add(new SlotSpec("mai1",-2,200,120,114,"resources/images/gamePlay/aquiment/mai1.png","DRAG",null));
-                slots.add(new SlotSpec("mai2",95,200,120,120,"resources/images/gamePlay/aquiment/mai2.png","DRAG",null));
+                slots.add(new SlotSpec("mai1",-2,200,120,114,"resources/images/gamePlay/aquiment/takronoodle.png","DRAG",null));
+                slots.add(new SlotSpec("mai2",95,200,120,120,"resources/images/gamePlay/aquiment/takrosoup.png","DRAG",null));
 
                 // down counter
 
@@ -256,8 +256,8 @@ public class LevelFactory {
                 bg = "resources/images/gamePlay/bg/LV5.gif";
 
                 //mai
-                slots.add(new SlotSpec("mai1",-2,200,120,114,"resources/images/gamePlay/aquiment/mai1.png","DRAG",null));
-                slots.add(new SlotSpec("mai2",95,200,120,120,"resources/images/gamePlay/aquiment/mai2.png","DRAG",null));
+                slots.add(new SlotSpec("mai1",-2,200,120,114,"resources/images/gamePlay/aquiment/takronoodle.png","DRAG",null));
+                slots.add(new SlotSpec("mai2",95,200,120,120,"resources/images/gamePlay/aquiment/takrosoup.png","DRAG",null));
 
                 // down counter
 
