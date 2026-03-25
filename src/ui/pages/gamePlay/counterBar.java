@@ -111,6 +111,18 @@ public class counterBar extends JPanel {
                             try {
                                 Rectangle itemBounds = c.getBounds();
                                 String itemName = c.getName();
+
+//                                if (btn.getName().equals("bin") && itemBounds.intersects(btn.getBounds())) {
+//                                    if (itemName != null && itemName.startsWith("bowl_")) {
+//                                        // Reset the bowl to empty instead of deleting the whole button
+//                                        ((JButton)c).setIcon(IconImage.create("resources/images/gamePlay/bowl/empty.png", 175, 175));
+//                                        c.setName("bowl_empty");
+//
+//                                        // Snap it back to its original "Home" position on the counter
+//                                        c.setLocation(originalPos[0]);
+//                                        return; // Exit so it doesn't run other logic
+//                                    }
+//                                }
                                 // Check for collision with the pot and ensure the item is a noodle-type takro
                                 if (btn.getName().equals("pot") && itemBounds.intersects(btn.getBounds()) && itemName.contains("takronoodle_") && c instanceof JButton takro) {
 
@@ -168,24 +180,25 @@ public class counterBar extends JPanel {
                                             revalidate();
                                             repaint();
                                             for (Component comp : getComponents()) {
-                                                if (comp instanceof JButton bowl && "bowl_empty".equals(bowl.getName())) {
-                                                    try {
-                                                        if (itemName.contains("green")){
-                                                            bowl.setIcon(IconImage.create("resources/images/gamePlay/ingredients/noodles/finishedNoodles/justNoodle/greenEgg.png", 175, 175));
-                                                            bowl.setName("bowl_greenEgg");
-                                                        }else if (itemName.contains("yellow")){
-                                                            bowl.setIcon(IconImage.create("resources/images/gamePlay/ingredients/noodles/finishedNoodles/justNoodle/yellow.png", 175, 175));
-                                                            bowl.setName("bowl_yellowEgg");
-                                                        }else{
-                                                            bowl.setIcon(IconImage.create("resources/images/gamePlay/ingredients/noodles/finishedNoodles/justNoodle/riceThinWideVermicelli.png", 175, 175));
-                                                            bowl.setName("bowl_white");
+                                                if (comp instanceof JButton bowl) {
+                                                    if ("bowl_empty".equals(bowl.getName())){
+                                                        try {
+                                                            if (itemName.contains("green")){
+                                                                bowl.setIcon(IconImage.create("resources/images/gamePlay/ingredients/noodles/finishedNoodles/justNoodle/greenEgg.png", 175, 175));
+                                                                bowl.setName("bowl_noodle_greenEgg");
+                                                            }else if (itemName.contains("yellow")){
+                                                                bowl.setIcon(IconImage.create("resources/images/gamePlay/ingredients/noodles/finishedNoodles/justNoodle/yellow.png", 175, 175));
+                                                                bowl.setName("bowl_noodle_yellowEgg");
+                                                            }else{
+                                                                bowl.setIcon(IconImage.create("resources/images/gamePlay/ingredients/noodles/finishedNoodles/justNoodle/riceThinWideVermicelli.png", 175, 175));
+                                                                bowl.setName("bowl_noodle_white");
+                                                            }
+                                                            // Update the bowl to show it now has cooked noodles
+                                                            enableDrag(bowl);
+                                                            break;
+                                                        } catch (Exception ex) {
+                                                            System.err.println("the noodle is a badboy");
                                                         }
-                                                        // Update the bowl to show it now has cooked noodles
-                                                        bowl.setIcon(IconImage.create("resources/images/gamePlay/bowl/noodles_only.png", 175, 175));
-                                                        bowl.setName("bowl_with_noodles");
-                                                        break;
-                                                    } catch (Exception ex) {
-                                                        // Silent catch as requested
                                                     }
                                                 }
                                             }
@@ -195,6 +208,14 @@ public class counterBar extends JPanel {
                                     });
                                     stopTimer.setRepeats(false);
                                     stopTimer.start();
+                                }
+                                if (c instanceof JButton bowl && bowl.getName().contains("bowl_noodle_") && btn.getName().contains("trash") && itemBounds.intersects(btn.getBounds())){
+                                    bowl.setIcon(IconImage.create("resources/images/gamePlay/bowl/empty.png", 175, 175));
+                                    bowl.setName("bowl_empty");
+                                    if (btn.getName().equals("trash")){
+                                        btn.setIcon(IconImage.create("resources/images/gamePlay/binn/trash.png", 162, 73));
+                                        btn.setName("trashed");
+                                    }
                                 }
                             } catch (Exception exd) {
                                 // Log a simple message instead of the full stack trace
