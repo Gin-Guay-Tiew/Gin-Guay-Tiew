@@ -115,7 +115,7 @@ public class gamePlayScreen extends JPanel {
                 break;
         }
         counterBarPanel.setSlots(
-                LevelFactory.getlevel(levelId).slots
+                LevelFactory.getLevel(levelId).slots
         );
     }
     // โชว์หน้า status จบเกม

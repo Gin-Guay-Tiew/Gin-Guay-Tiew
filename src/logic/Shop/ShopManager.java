@@ -102,21 +102,21 @@ public class ShopManager {
         items.add(new ShopItem(
                 "Cola",
                 100,
-                "resources/images/gamePlay/ingredients/drinks/picked/cola.png",
+                "resources/images/gamePlay/ingredients/drinks/cola/cola.png",
                 1
         ));
 
         items.add(new ShopItem(
                 "Orange",
                 200,
-                "resources/images/gamePlay/ingredients/drinks/picked/orange.png",
+                "resources/images/gamePlay/ingredients/drinks/orange/orange.png",
                 3
         ));
 
         items.add(new ShopItem(
                 "Sprite",
                 150,
-                "resources/images/gamePlay/ingredients/drinks/picked/sprite.png",
+                "resources/images/gamePlay/ingredients/drinks/sprite/sprite.png",
                 2
         ));
 
