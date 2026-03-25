@@ -7,6 +7,7 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
+import java.awt.event.MouseMotionListener;
 import java.util.List;
 
 public class counterBar extends JPanel {
@@ -39,7 +40,7 @@ public class counterBar extends JPanel {
                     btn.addMouseListener(new MouseAdapter() {
                         @Override
                         public void mousePressed(MouseEvent e) {
-                            spawItem(s.getSpawnPath(),btn,e);
+                            spawnItem(s.getSpawnPath(),btn,e);
                         }
                     });
                     break;
@@ -47,6 +48,7 @@ public class counterBar extends JPanel {
                 case "DRAG":
                     enableDrag(btn);
                     break;
+                case "SPAWNDRAG":
 
             }
 
@@ -71,12 +73,14 @@ public class counterBar extends JPanel {
                 // ให้ตอนเลือกมันอยู่เหนือทุกตัวใน component
                 Container parent = c.getParent();
                 parent.setComponentZOrder(c,0);
+                c.setVisible(true);
             }
 
             // ตอนปล่อยแล้วจะให้กลับที่เดิม
             @Override
             public void mouseReleased(MouseEvent e){
                 c.setLocation(originalPos[0]);
+                c.setVisible(false);
             }
         });
 
@@ -93,24 +97,50 @@ public class counterBar extends JPanel {
     }
 
     //method for item can spawn and item spawn can drag
-    public void spawItem(String imgPath, JButton sourceBtn , MouseEvent e){
-         JButton item = new JButton(new ImageIcon(imgPath));
+    public void spawnItem(String imgPath, JButton sourceBtn, MouseEvent e) {
+        JButton item = new JButton(new ImageIcon(imgPath));
 
-         Point p = sourceBtn.getLocation();
+        item.setSize(120, 120);
+        item.setBorderPainted(false);
+        item.setContentAreaFilled(false);
+        item.setFocusPainted(false);
+        item.setOpaque(false);
 
+        // Position item center under the cursor
+        Point p = SwingUtilities.convertPoint(sourceBtn, e.getPoint(), this);
+        item.setLocation(p.x - 60, p.y - 60);
 
-         item.setBounds(p.x,p.y,120,120);
-         item.setBorderPainted(false);
-         item.setContentAreaFilled(false);
-         item.setFocusPainted(false);
-         item.setOpaque(false);
-         enableDrag(item);
+        enableDrag(item);
+        add(item);
+        setComponentZOrder(item, 0);
 
-         add(item);
-         setComponentZOrder(item,0);
+        MouseMotionListener hijackingListener = new MouseMotionAdapter() {
+            @Override
+            public void mouseDragged(MouseEvent me) {
+                // 1. Convert the mouse position from sourceBtn's space to the parent's space
+                Point parentPt = SwingUtilities.convertPoint(sourceBtn, me.getPoint(), getParent());
 
-         repaint();
+                // 2. Center the 120x120 item on that point
+                int newX = parentPt.x - (item.getWidth() / 2);
+                int newY = parentPt.y - (item.getHeight() / 2);
 
+                item.setLocation(newX, newY);
+                repaint();
+            }
+        };
+
+        sourceBtn.addMouseMotionListener(hijackingListener);
+
+        // Remove the hijacker once the user lets go of the mouse
+        sourceBtn.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseReleased(MouseEvent me) {
+                sourceBtn.removeMouseMotionListener(hijackingListener);
+                sourceBtn.removeMouseListener(this);
+            }
+        });
+        revalidate();
+        repaint();
     }
 
 
