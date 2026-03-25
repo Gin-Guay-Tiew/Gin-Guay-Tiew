@@ -112,7 +112,7 @@ public class counterBar extends JPanel {
                                 Rectangle itemBounds = c.getBounds();
                                 String itemName = c.getName();
                                 // Check for collision with the pot and ensure the item is a noodle-type takro
-                                if (btn.getName().equals("pot") && itemBounds.intersects(btn.getBounds()) && itemName.contains("noodle_") && c instanceof JButton takro) {
+                                if (btn.getName().equals("pot") && itemBounds.intersects(btn.getBounds()) && itemName.contains("takronoodle_") && c instanceof JButton takro) {
 
                                     // Update the Takro (the item being dragged)
                                     takro.setIcon(new ImageIcon("resources/images/gamePlay/aquiment/takronoodle.png"));
@@ -167,6 +167,28 @@ public class counterBar extends JPanel {
                                             btn.setIcon(IconImage.create("resources/images/gamePlay/ingredients/noodles/boilingPot/not_boiling.png", 380, 380));
                                             revalidate();
                                             repaint();
+                                            for (Component comp : getComponents()) {
+                                                if (comp instanceof JButton bowl && "bowl_empty".equals(bowl.getName())) {
+                                                    try {
+                                                        if (itemName.contains("green")){
+                                                            bowl.setIcon(IconImage.create("resources/images/gamePlay/ingredients/noodles/finishedNoodles/justNoodle/greenEgg.png", 175, 175));
+                                                            bowl.setName("bowl_greenEgg");
+                                                        }else if (itemName.contains("yellow")){
+                                                            bowl.setIcon(IconImage.create("resources/images/gamePlay/ingredients/noodles/finishedNoodles/justNoodle/yellow.png", 175, 175));
+                                                            bowl.setName("bowl_yellowEgg");
+                                                        }else{
+                                                            bowl.setIcon(IconImage.create("resources/images/gamePlay/ingredients/noodles/finishedNoodles/justNoodle/riceThinWideVermicelli.png", 175, 175));
+                                                            bowl.setName("bowl_white");
+                                                        }
+                                                        // Update the bowl to show it now has cooked noodles
+                                                        bowl.setIcon(IconImage.create("resources/images/gamePlay/bowl/noodles_only.png", 175, 175));
+                                                        bowl.setName("bowl_with_noodles");
+                                                        break;
+                                                    } catch (Exception ex) {
+                                                        // Silent catch as requested
+                                                    }
+                                                }
+                                            }
                                         } catch (Exception ex) {
                                             // Silently handle issues during timer execution
                                         }
