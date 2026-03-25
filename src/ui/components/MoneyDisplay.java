@@ -31,6 +31,7 @@ public class MoneyDisplay extends JPanel {
         moneyAmount = new JLabel(String.format("%,d N", amount));
         moneyAmount.setFont(jerseyFont.deriveFont(25f));
         moneyAmount.setVerticalAlignment(JLabel.CENTER);
+        moneyAmount.setHorizontalAlignment(JLabel.CENTER);
 
         add(paddingLabel, BorderLayout.NORTH);
         add(moneyLabel, BorderLayout.CENTER);
