@@ -462,7 +462,12 @@ public class counterBar extends JPanel {
 
         StringBuilder folderName = new StringBuilder();
 
-        // 2. Build the string based on your Priority: meatball -> porkSlices -> porkRind
+        // Build the string based on your Priority: meatball -> porkSlices -> porkRind
+        // Except it's not fahhhhhhhhhhhhhhhhh
+        // if all three it goes like this
+        if (hasMeatball && hasPorkSlices && hasPorkRind) {
+            return "meatball&porkRind&porkSlices";
+        }
 
         // Check Priority 1: Meatball
         if (hasMeatball) {
