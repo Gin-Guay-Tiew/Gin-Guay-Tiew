@@ -8,10 +8,11 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
+import java.awt.event.MouseMotionListener;
 import java.util.List;
 
 public class counterBar extends JPanel {
-    private Image counterBarimage;
+    private final Image counterBarimage;
 
     public counterBar(MainFrame mainFrame) {
         //set layout
@@ -26,20 +27,15 @@ public class counterBar extends JPanel {
         removeAll();
 
         for (SlotSpec s : slots) {
-            ImageIcon icon ;
-
+            ImageIcon icon;
             if (s.getIconPath() != null) {
                 icon = IconImage.create(s.getIconPath(), s.getWidth(), s.getHeight());
-
-            }
-
-            else{
+            }else{
                 icon = new ImageIcon(s.getIconPath());
             }
             JButton btn = new JButton(icon);
-
             btn.setBounds(s.getX(), s.getY(), s.getWidth(), s.getHeight());
-
+            btn.setName(s.getId());
             btn.setBorderPainted(false);
             btn.setContentAreaFilled(false);
             btn.setFocusPainted(false);
@@ -51,7 +47,7 @@ public class counterBar extends JPanel {
                     btn.addMouseListener(new MouseAdapter() {
                         @Override
                         public void mousePressed(MouseEvent e) {
-                            spawItem(s.getSpawnPath(),btn,e);
+                            spawnItem(s.getSpawnPath(),btn,e);
                         }
                     });
                     break;
@@ -59,7 +55,6 @@ public class counterBar extends JPanel {
                 case "DRAG":
                     enableDrag(btn);
                     break;
-
             }
 
             add(btn);
@@ -83,12 +78,16 @@ public class counterBar extends JPanel {
                 // ให้ตอนเลือกมันอยู่เหนือทุกตัวใน component
                 Container parent = c.getParent();
                 parent.setComponentZOrder(c,0);
+                c.setVisible(true);
             }
 
             // ตอนปล่อยแล้วจะให้กลับที่เดิม
             @Override
             public void mouseReleased(MouseEvent e){
-                c.setLocation(originalPos[0]);
+                // Only reset/hide if the component isn't meant to be deleted
+                if (c.isVisible()) {
+                    c.setLocation(originalPos[0]);
+                }
             }
         });
 
@@ -105,27 +104,70 @@ public class counterBar extends JPanel {
     }
 
     //method for item can spawn and item spawn can drag
-    public void spawItem(String imgPath, JButton sourceBtn , MouseEvent e){
+    public void spawnItem(String imgPath, JButton sourceBtn, MouseEvent e) {
+        JButton item = new JButton(new ImageIcon(imgPath));
 
-        ImageIcon icon ;
-        icon = IconImage.create(imgPath,120,120);
-        JButton item = new JButton(icon);
+        String[] parts = imgPath.split("/");
+        String result = parts[parts.length - 2];
 
-         Point p = sourceBtn.getLocation();
+        item.setSize(120, 120);
+        item.setBorderPainted(false);
+        item.setContentAreaFilled(false);
+        item.setOpaque(false);
+        item.setName(result);
 
+        Point mouseInPanel = SwingUtilities.convertPoint(sourceBtn, e.getPoint(), this);
+        item.setLocation(mouseInPanel.x - 60, mouseInPanel.y - 60);
 
-         item.setBounds(p.x,p.y,120,120);
-         item.setBorderPainted(false);
-         item.setContentAreaFilled(false);
-         item.setFocusPainted(false);
-         item.setOpaque(false);
-         enableDrag(item);
+        add(item);
+        setComponentZOrder(item, 0);
 
-         add(item);
-         setComponentZOrder(item,0);
+        MouseMotionListener teleportDrag = new MouseMotionAdapter() {
+            @Override
+            public void mouseDragged(MouseEvent me) {
+                Point p = SwingUtilities.convertPoint(sourceBtn, me.getPoint(), sourceBtn.getParent());
+                item.setLocation(p.x - 60, p.y - 60);
+                repaint();
+            }
+        };
 
-         repaint();
+        sourceBtn.addMouseMotionListener(teleportDrag);
 
+        sourceBtn.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseReleased(MouseEvent me) {
+                sourceBtn.removeMouseMotionListener(teleportDrag);
+                sourceBtn.removeMouseListener(this);
+
+                Rectangle itemBounds = item.getBounds();
+                String itemName = item.getName();
+
+                // noodle mai swapper
+                for (Component c : getComponents()) {
+                    if (c instanceof JButton btn && c != item && c != sourceBtn) {
+                        if ("takronoodle".equals(btn.getName()) && itemBounds.intersects(btn.getBounds())) {
+                            if ("greenEgg".equals(itemName)) {
+                                btn.setIcon(new ImageIcon("resources/images/gamePlay/ingredients/noodles/blanchNoodles/takronoodle_green_egg.png"));
+                                btn.setName("takronoodle_green_egg");
+                            } else if ("yellowEgg".equals(itemName)) {
+                                btn.setIcon(new ImageIcon("resources/images/gamePlay/ingredients/noodles/blanchNoodles/takronoodle_yellow.png"));
+                                btn.setName("takronoodle_yellow");
+                            } else if ("thinRice".equals(itemName) || "wideRice".equals(itemName) || "riceVermicelli".equals(itemName)) {
+                                btn.setIcon(new ImageIcon("resources/images/gamePlay/ingredients/noodles/blanchNoodles/takronoodle_rice_thin_wide_vermicelli.png"));
+                                btn.setName("takronoodle_rice_thin_wide_vermicelli");
+                            }
+                        }
+                    }
+                }
+                System.out.println("Dropped Item ID: " + item.getName());
+                remove(item);
+                revalidate();
+                repaint();
+            }
+        });
+
+        revalidate();
+        repaint();
     }
 
 
