@@ -155,7 +155,7 @@ public class LevelFactory {
 
                 //soup row2
                 slots.add(new SlotSpec("namTok",238,280,70,70,"resources/images/gamePlay/ingredients/soups/category/namTok/idle.png","STATIC",null));
-                slots.add(new SlotSpec("Pork",308,280,70,70,"resources/images/gamePlay/ingredients/soups/category/braisedPork/idle.png","STATIC",null));
+                slots.add(new SlotSpec("emptyPot",308,280,70,70,"resources/images/gamePlay/aquiment/emptyPot.png","STATIC",null));
 
                 //towel
                 slots.add(new SlotSpec("towel",360,150,240,240,"resources/images/gamePlay/counter/towel.png","STATIC",null));
@@ -220,7 +220,7 @@ public class LevelFactory {
 
                 //soup row2
                 slots.add(new SlotSpec("namTok",238,280,70,70,"resources/images/gamePlay/ingredients/soups/category/namTok/idle.png","STATIC",null));
-                slots.add(new SlotSpec("Pork",308,280,70,70,"resources/images/gamePlay/ingredients/soups/category/braisedPork/idle.png","STATIC",null));
+                slots.add(new SlotSpec("emptyPot",308,280,70,70,"resources/images/gamePlay/aquiment/emptyPot.png","STATIC",null));
 
                 //towel
                 slots.add(new SlotSpec("towel",360,150,240,240,"resources/images/gamePlay/counter/towel.png","STATIC",null));
@@ -229,7 +229,8 @@ public class LevelFactory {
                 slots.add(new SlotSpec("vegetable",575,170,120,120,"resources/images/gamePlay/ingredients/vegetables/idle.png","SPAWN","resources/images/gamePlay/ingredients/vegetables/picked.png"));
                 slots.add(new SlotSpec("porkSlice",570,260,102,102,"resources/images/gamePlay/ingredients/addOn/porkSlices/idle.png","SPAWN","resources/images/gamePlay/ingredients/addOn/porkSlices/picked.png"));
                 slots.add(new SlotSpec("meatball",634,260,102,102,"resources/images/gamePlay/ingredients/addOn/meatball/idle.png","SPAWN","resources/images/gamePlay/ingredients/addOn/meatball/picked.png"));
-                slots.add(new SlotSpec("porkRind",694,260,102,102,"resources/images/gamePlay/ingredients/addOn/porkRind/idle.png","SPAWN","resources/images/gamePlay/ingredients/addOn/porkRind/picked.png"));
+                slots.add(new SlotSpec("emptyBox",694,260,102,102,"resources/images/gamePlay/aquiment/emptyBox.png","STATIC",null));
+
 
                 //up counter
 
