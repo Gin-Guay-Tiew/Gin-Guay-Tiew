@@ -30,7 +30,7 @@ public class LevelsDisplay extends JPanel {
 
         // Display
         setLayout(new GridLayout(2, 3));
-        setBorder(BorderFactory.createEmptyBorder(25, 0, 25, 35));
+        setBorder(BorderFactory.createEmptyBorder(0, 0, 25, 35));
         setOpaque(false);
 
         // Mapping array to get 1 2 3 / 6 5 4 order
