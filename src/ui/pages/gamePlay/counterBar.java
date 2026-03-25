@@ -5,10 +5,7 @@ import utilities.IconImage;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseMotionAdapter;
-import java.awt.event.MouseMotionListener;
+import java.awt.event.*;
 import java.util.List;
 
 public class counterBar extends JPanel {
@@ -186,15 +183,16 @@ public class counterBar extends JPanel {
                                                             if (itemName.contains("green")){
                                                                 bowl.setIcon(IconImage.create("resources/images/gamePlay/ingredients/noodles/finishedNoodles/justNoodle/greenEgg.png", 175, 175));
                                                                 bowl.setName("bowl_noodle_greenEgg");
+                                                                enableDrag(bowl);
                                                             }else if (itemName.contains("yellow")){
                                                                 bowl.setIcon(IconImage.create("resources/images/gamePlay/ingredients/noodles/finishedNoodles/justNoodle/yellow.png", 175, 175));
                                                                 bowl.setName("bowl_noodle_yellowEgg");
+                                                                enableDrag(bowl);
                                                             }else{
                                                                 bowl.setIcon(IconImage.create("resources/images/gamePlay/ingredients/noodles/finishedNoodles/justNoodle/riceThinWideVermicelli.png", 175, 175));
                                                                 bowl.setName("bowl_noodle_white");
+                                                                enableDrag(bowl);
                                                             }
-                                                            // Update the bowl to show it now has cooked noodles
-                                                            enableDrag(bowl);
                                                             break;
                                                         } catch (Exception ex) {
                                                             System.err.println("the noodle is a badboy");
@@ -212,6 +210,7 @@ public class counterBar extends JPanel {
                                 if (c instanceof JButton bowl && bowl.getName().contains("bowl_noodle_") && btn.getName().contains("trash") && itemBounds.intersects(btn.getBounds())){
                                     bowl.setIcon(IconImage.create("resources/images/gamePlay/bowl/empty.png", 175, 175));
                                     bowl.setName("bowl_empty");
+                                    disableDrag(bowl);
                                     if (btn.getName().equals("trash")){
                                         btn.setIcon(IconImage.create("resources/images/gamePlay/binn/trash.png", 162, 73));
                                         btn.setName("trashed");
@@ -373,6 +372,18 @@ public class counterBar extends JPanel {
 
         // Store the timer in the button so we can stop it later if needed
         btn.putClientProperty("animationTimer", animationTimer);
+    }
+
+    public void disableDrag(JComponent c) {
+        // Remove all MouseListeners (handles press/release/clicks)
+        for (MouseListener ml : c.getMouseListeners()) {
+            c.removeMouseListener(ml);
+        }
+
+        // Remove all MouseMotionListeners (handles the actual movement)
+        for (MouseMotionListener mml : c.getMouseMotionListeners()) {
+            c.removeMouseMotionListener(mml);
+        }
     }
 
 }
