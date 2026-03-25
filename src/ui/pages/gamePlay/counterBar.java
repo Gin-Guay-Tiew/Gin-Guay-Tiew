@@ -2,6 +2,7 @@ package ui.pages.gamePlay;
 
 import main.MainFrame;
 import utilities.IconImage;
+import utilities.GifResizer;
 
 import javax.swing.*;
 import java.awt.*;
@@ -91,9 +92,7 @@ public class counterBar extends JPanel {
                     for (Component cc : getComponents()) {
                         if (cc instanceof JButton btn && cc != c ) {
                             if (btn.getName().equals("pot") && itemBounds.intersects(btn.getBounds()) && itemName.contains("noodle_")) {
-                                btn.setIcon(new ResizableIcon("resources/images/gamePlay/ingredients/noodles/boilingPot/boiling.gif", 380, 380));
-                                btn.revalidate();
-                                btn.repaint();
+                                btn.setIcon(new GifResizer("resources/images/gamePlay/ingredients/noodles/boilingPot/boiling.gif", 380, 380));
                                 btn.setName("boiling"); // to prevent another noodle
 
                                 Timer timer = new Timer(4000, e1 -> {
