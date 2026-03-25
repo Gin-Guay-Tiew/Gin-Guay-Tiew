@@ -15,7 +15,7 @@ public class LevelFactory {
 
                 //mai
                 slots.add(new SlotSpec("takronoodle",-2,200,120,114,"resources/images/gamePlay/aquiment/takronoodle.png","DRAG",null));
-                slots.add(new SlotSpec("takrosoup",95,200,120,120,"resources/images/gamePlay/aquiment/takrosoup.png","DRAG",null));
+                slots.add(new SlotSpec("takrosoup",95,200,120,120,"resources/images/gamePlay/aquiment/ladle.png","DRAG",null));
 
                 // down counter
 
@@ -27,7 +27,7 @@ public class LevelFactory {
                 slots.add(new SlotSpec("bucket lv3",230,350,120,120,"resources/images/gamePlay/ingredients/drinks/lv3.png","STATIC",null));
 
                 slots.add(new SlotSpec("pot",-86,240,380,380,"resources/images/gamePlay/ingredients/noodles/boilingPot/not_boiling.png","STATIC",null));
-                slots.add(new SlotSpec("trash",620,400,162,73,"resources/images/gamePlay/binn/empty.png","STATIC",null));
+                slots.add(new SlotSpec("trash",620,400,162,73,"resources/images/gamePlay/binn/trash.png","STATIC",null));
 
                 //on counter
 
@@ -77,7 +77,7 @@ public class LevelFactory {
 
                 //mai
                 slots.add(new SlotSpec("takronoodle",-2,200,120,114,"resources/images/gamePlay/aquiment/takronoodle.png","DRAG",null));
-                slots.add(new SlotSpec("takrosoup",95,200,120,120,"resources/images/gamePlay/aquiment/takrosoup.png","DRAG",null));
+                slots.add(new SlotSpec("takrosoup",95,200,120,120,"resources/images/gamePlay/aquiment/ladle.png","DRAG",null));
 
                 // down counter
 
@@ -88,7 +88,7 @@ public class LevelFactory {
                 slots.add(new SlotSpec("bucket lv2",230,350,120,120,"resources/images/gamePlay/ingredients/drinks/lv2.png","STATIC",null));
 
                 slots.add(new SlotSpec("pot",-86,240,380,380,"resources/images/gamePlay/ingredients/noodles/boilingPot/not_boiling.png","STATIC",null));
-                slots.add(new SlotSpec("trash",620,400,162,73,"resources/images/gamePlay/binn/empty.png","STATIC",null));
+                slots.add(new SlotSpec("trash",620,400,162,73,"resources/images/gamePlay/binn/trash.png","STATIC",null));
 
                 //on counter
 
@@ -131,7 +131,7 @@ public class LevelFactory {
 
                 //mai
                 slots.add(new SlotSpec("takronoodle",-2,200,120,114,"resources/images/gamePlay/aquiment/takronoodle.png","DRAG",null));
-                slots.add(new SlotSpec("takrosoup",95,200,120,120,"resources/images/gamePlay/aquiment/takrosoup.png","DRAG",null));
+                slots.add(new SlotSpec("takrosoup",95,200,120,120,"resources/images/gamePlay/aquiment/ladle.png","DRAG",null));
 
                 // down counter
 
@@ -143,7 +143,7 @@ public class LevelFactory {
                 slots.add(new SlotSpec("bucket lv3",230,350,120,120,"resources/images/gamePlay/ingredients/drinks/lv3.png","STATIC",null));
 
                 slots.add(new SlotSpec("pot",-86,240,380,380,"resources/images/gamePlay/ingredients/noodles/boilingPot/not_boiling.png","STATIC",null));
-                slots.add(new SlotSpec("trash",620,400,162,73,"resources/images/gamePlay/binn/empty.png","STATIC",null));
+                slots.add(new SlotSpec("trash",620,400,162,73,"resources/images/gamePlay/binn/trash.png","STATIC",null));
 
                 //on counter
 
@@ -196,7 +196,7 @@ public class LevelFactory {
 
                 //mai
                 slots.add(new SlotSpec("takronoodle",-2,200,120,114,"resources/images/gamePlay/aquiment/takronoodle.png","DRAG",null));
-                slots.add(new SlotSpec("takrosoup",95,200,120,120,"resources/images/gamePlay/aquiment/takrosoup.png","DRAG",null));
+                slots.add(new SlotSpec("takrosoup",95,200,120,120,"resources/images/gamePlay/aquiment/ladle.png","DRAG",null));
 
                 // down counter
 
@@ -208,7 +208,7 @@ public class LevelFactory {
                 slots.add(new SlotSpec("bucket lv3",230,350,120,120,"resources/images/gamePlay/ingredients/drinks/lv3.png","STATIC",null));
 
                 slots.add(new SlotSpec("pot",-86,240,380,380,"resources/images/gamePlay/ingredients/noodles/boilingPot/not_boiling.png","STATIC",null));
-                slots.add(new SlotSpec("trash",620,400,162,73,"resources/images/gamePlay/binn/empty.png","STATIC",null));
+                slots.add(new SlotSpec("trash",620,400,162,73,"resources/images/gamePlay/binn/trash.png","STATIC",null));
 
                 //on counter
 
@@ -257,7 +257,7 @@ public class LevelFactory {
 
                 //mai
                 slots.add(new SlotSpec("takronoodle",-2,200,120,114,"resources/images/gamePlay/aquiment/takronoodle.png","DRAG",null));
-                slots.add(new SlotSpec("takrosoup",95,200,120,120,"resources/images/gamePlay/aquiment/takrosoup.png","DRAG",null));
+                slots.add(new SlotSpec("takrosoup",95,200,120,120,"resources/images/gamePlay/aquiment/ladle.png","DRAG",null));
 
                 // down counter
 
@@ -269,7 +269,7 @@ public class LevelFactory {
                 slots.add(new SlotSpec("bucket lv3",230,350,120,120,"resources/images/gamePlay/ingredients/drinks/lv3.png","STATIC",null));
 
                 slots.add(new SlotSpec("pot",-86,240,380,380,"resources/images/gamePlay/ingredients/noodles/boilingPot/not_boiling.png","STATIC",null));
-                slots.add(new SlotSpec("trash",620,400,162,73,"resources/images/gamePlay/binn/empty.png","STATIC",null));
+                slots.add(new SlotSpec("trash",620,400,162,73,"resources/images/gamePlay/binn/trash.png","STATIC",null));
 
                 //on counter
 

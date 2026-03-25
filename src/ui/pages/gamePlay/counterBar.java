@@ -103,23 +103,11 @@ public class counterBar extends JPanel {
                 if (c.isVisible()) {
                     for (Component cc : getComponents()) {
                         if (cc instanceof JButton btn && cc != c) {
-                            // btn is the where it drag to
+                            // btn is the where it drags to
                             // c is the one who got drag
                             try {
                                 Rectangle itemBounds = c.getBounds();
                                 String itemName = c.getName();
-
-//                                if (btn.getName().equals("bin") && itemBounds.intersects(btn.getBounds())) {
-//                                    if (itemName != null && itemName.startsWith("bowl_")) {
-//                                        // Reset the bowl to empty instead of deleting the whole button
-//                                        ((JButton)c).setIcon(IconImage.create("resources/images/gamePlay/bowl/empty.png", 175, 175));
-//                                        c.setName("bowl_empty");
-//
-//                                        // Snap it back to its original "Home" position on the counter
-//                                        c.setLocation(originalPos[0]);
-//                                        return; // Exit so it doesn't run other logic
-//                                    }
-//                                }
                                 // Check for collision with the pot and ensure the item is a noodle-type takro
                                 if (btn.getName().equals("pot") && itemBounds.intersects(btn.getBounds()) && itemName.contains("takronoodle_") && c instanceof JButton takro) {
 
@@ -131,15 +119,6 @@ public class counterBar extends JPanel {
                                             "resources/images/gamePlay/ingredients/noodles/boilingPot/boiling1.png",
                                             "resources/images/gamePlay/ingredients/noodles/boilingPot/boiling2.png"
                                     };
-                                    // to avoid GIF fuckery (it start where it last stops) (obsolete)
-//                                    String[] progressFrame = {
-//                                            "resources/images/gamePlay/ingredients/noodles/boilingPot/boilingProgress/stage1.png",
-//                                            "resources/images/gamePlay/ingredients/noodles/boilingPot/boilingProgress/stage2.png",
-//                                            "resources/images/gamePlay/ingredients/noodles/boilingPot/boilingProgress/stage3.png",
-//                                            "resources/images/gamePlay/ingredients/noodles/boilingPot/boilingProgress/stage4.png",
-//                                            "resources/images/gamePlay/ingredients/noodles/boilingPot/boilingProgress/stage5.png",
-//                                            "resources/images/gamePlay/ingredients/noodles/boilingPot/boilingProgress/finished.png"
-//                                    };
                                     btn.setName("boiling");
                                     // Create and add the progress indicator
                                     ImageIcon gifIcon = new ImageIcon("resources/images/gamePlay/ingredients/noodles/boilingPot/boilingProgress/progress_animation.GIF");
@@ -156,7 +135,6 @@ public class counterBar extends JPanel {
                                     setComponentZOrder(progress, 0);
 
                                     // Trigger the pot animation
-//                                    animateButton(progress, progressFrame, 120, 120, 1000);
                                     animateButton(btn, boilingFrames, 380, 380, 500);
 
                                     // Final UI refresh after adding the progress button
@@ -166,11 +144,8 @@ public class counterBar extends JPanel {
                                     // Timer to finish boiling after 4.5 seconds
                                     Timer stopTimer = new Timer(4500, e1 -> {
                                         try {
-//                                            Timer animpro = (Timer) progress.getClientProperty("animationTimer");
                                             Timer animboil = (Timer) btn.getClientProperty("animationTimer");
                                             if (animboil != null) animboil.stop();
-//                                            if (animpro != null) animpro.stop();
-
                                             remove(progress);
                                             btn.setName("pot");
                                             btn.setIcon(IconImage.create("resources/images/gamePlay/ingredients/noodles/boilingPot/not_boiling.png", 380, 380));
@@ -201,7 +176,7 @@ public class counterBar extends JPanel {
                                                 }
                                             }
                                         } catch (Exception ex) {
-                                            // Silently handle issues during timer execution
+                                            System.err.println("the pot not cooking");
                                         }
                                     });
                                     stopTimer.setRepeats(false);
@@ -212,7 +187,6 @@ public class counterBar extends JPanel {
                                     bowl.setName("bowl_empty");
                                     disableDrag(bowl);
                                     if (btn.getName().equals("trash")){
-                                        btn.setIcon(IconImage.create("resources/images/gamePlay/binn/trash.png", 162, 73));
                                         btn.setName("trashed");
                                     }
                                 }
