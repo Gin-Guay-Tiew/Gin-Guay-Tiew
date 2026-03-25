@@ -27,6 +27,8 @@ public class LevelFactory {
                 slots.add(new SlotSpec("bucket lv3",230,350,120,120,"resources/images/gamePlay/ingredients/drinks/lv3.png","STATIC",null));
 
                 slots.add(new SlotSpec("pot",-86,240,380,380,"resources/images/gamePlay/ingredients/noodles/boilingPot/not_boiling.png","STATIC",null));
+
+                //empty
                 slots.add(new SlotSpec("trash",620,400,162,73,"resources/images/gamePlay/binn/empty.png","STATIC",null));
 
                 //on counter
@@ -64,7 +66,7 @@ public class LevelFactory {
                 // mock up
                 slots.add(new SlotSpec("container",2,14,182,182,"resources/images/gamePlay/ingredients/noodles/container/lv1.png","STATIC",null));
 
-                slots.add(new SlotSpec("noodlesBowl",169,120,76,76,"resources/images/gamePlay/bowl/decorate.png","STATIC",null));
+                slots.add(new SlotSpec("noodlesBowl",169,120,76,76,"resources/images/gamePlay/bowl/decorate.png","SPAWN","resources/images/gamePlay/bowl/picked.png"));
                 slots.add(new SlotSpec("chopsticks",225,110,86,86,"resources/images/gamePlay/counter/chopsticks.png","STATIC",null));
 
 
@@ -121,7 +123,7 @@ public class LevelFactory {
                 // mock up
                 slots.add(new SlotSpec("container",2,14,182,182,"resources/images/gamePlay/ingredients/noodles/container/lv2.png","STATIC",null));
 
-                slots.add(new SlotSpec("noodlesBowl",169,120,76,76,"resources/images/gamePlay/bowl/decorate.png","STATIC",null));
+                slots.add(new SlotSpec("noodlesBowl",169,120,76,76,"resources/images/gamePlay/bowl/decorate.png","SPAWN","resources/images/gamePlay/bowl/picked.png"));
                 slots.add(new SlotSpec("chopsticks",225,110,86,86,"resources/images/gamePlay/counter/chopsticks.png","STATIC",null));
 
 
@@ -182,7 +184,7 @@ public class LevelFactory {
                 slots.add(new SlotSpec("container",2,14,182,182,"resources/images/gamePlay/ingredients/noodles/container/lv5.png","STATIC",null));
 
 
-                slots.add(new SlotSpec("noodlesBowl",169,120,76,76,"resources/images/gamePlay/bowl/decorate.png","STATIC",null));
+                slots.add(new SlotSpec("noodlesBowl",169,120,76,76,"resources/images/gamePlay/bowl/decorate.png","SPAWN","resources/images/gamePlay/bowl/picked.png"));
                 slots.add(new SlotSpec("chopsticks",225,110,86,86,"resources/images/gamePlay/counter/chopsticks.png","STATIC",null));
 
                 break;
@@ -243,7 +245,7 @@ public class LevelFactory {
                 slots.add(new SlotSpec("container",2,14,182,182,"resources/images/gamePlay/ingredients/noodles/container/lv5.png","STATIC",null));
 
                 slots.add(new SlotSpec("greenEgg",143,117,107,92,"resources/images/gamePlay/ingredients/noodles/category/greenEgg/idle.png","SPAWN","resources/images/gamePlay/ingredients/noodles/category/greenEgg/picked.png"));
-                slots.add(new SlotSpec("noodlesBowl",226,120,76,76,"resources/images/gamePlay/bowl/decorate.png","STATIC",null));
+                slots.add(new SlotSpec("noodlesBowl",169,120,76,76,"resources/images/gamePlay/bowl/decorate.png","SPAWN","resources/images/gamePlay/bowl/picked.png"));
                 slots.add(new SlotSpec("chopsticks",282,110,86,86,"resources/images/gamePlay/counter/chopsticks.png","STATIC",null));
                 slots.add(new SlotSpec("kanomTuay",670,150,113,55,"resources/images/gamePlay/ingredients/kanomTuay/idle.png","SPAWN","resources/images/gamePlay/ingredients/kanomTuay/picked.png"));
 
