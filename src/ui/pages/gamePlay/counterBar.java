@@ -119,7 +119,7 @@ public class counterBar extends JPanel {
                                             "resources/images/gamePlay/ingredients/noodles/boilingPot/boiling1.png",
                                             "resources/images/gamePlay/ingredients/noodles/boilingPot/boiling2.png"
                                     };
-                                    btn.setName("boiling");
+                                    btn.setName("pot_boiling");
                                     // Create and add the progress indicator
                                     ImageIcon gifIcon = new ImageIcon("resources/images/gamePlay/ingredients/noodles/boilingPot/boilingProgress/progress_animation.GIF");
                                     JButton progress = new JButton(gifIcon);
@@ -188,6 +188,15 @@ public class counterBar extends JPanel {
                                     disableDrag(bowl);
                                     if (btn.getName().equals("trash")){
                                         btn.setName("trashed");
+                                    }
+                                }
+                                if (c instanceof JButton ladle && itemBounds.intersects(btn.getBounds()) && btn.getName().contains("pot") && ladle.getName().equals("ladle")){
+                                    for (Component comp : getComponents()) {
+                                        if (comp instanceof JButton bowl) {
+                                            if (bowl.getName().contains("bowl_noodle_")) {
+
+                                            }
+                                        }
                                     }
                                 }
                             } catch (Exception exd) {

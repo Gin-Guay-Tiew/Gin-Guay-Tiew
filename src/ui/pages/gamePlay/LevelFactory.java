@@ -15,7 +15,7 @@ public class LevelFactory {
 
                 //mai
                 slots.add(new SlotSpec("takronoodle",-2,200,120,114,"resources/images/gamePlay/aquiment/takronoodle.png","DRAG",null));
-                slots.add(new SlotSpec("takrosoup",95,200,120,120,"resources/images/gamePlay/aquiment/ladle.png","DRAG",null));
+                slots.add(new SlotSpec("ladle",95,200,120,120,"resources/images/gamePlay/aquiment/ladle.png","DRAG",null));
 
                 // down counter
 
@@ -75,7 +75,7 @@ public class LevelFactory {
 
                 //mai
                 slots.add(new SlotSpec("takronoodle",-2,200,120,114,"resources/images/gamePlay/aquiment/takronoodle.png","DRAG",null));
-                slots.add(new SlotSpec("takrosoup",95,200,120,120,"resources/images/gamePlay/aquiment/ladle.png","DRAG",null));
+                slots.add(new SlotSpec("ladle",95,200,120,120,"resources/images/gamePlay/aquiment/ladle.png","DRAG",null));
 
                 // down counter
 
@@ -132,7 +132,7 @@ public class LevelFactory {
 
                 //mai
                 slots.add(new SlotSpec("takronoodle",-2,200,120,114,"resources/images/gamePlay/aquiment/takronoodle.png","DRAG",null));
-                slots.add(new SlotSpec("takrosoup",95,200,120,120,"resources/images/gamePlay/aquiment/ladle.png","DRAG",null));
+                slots.add(new SlotSpec("ladle",95,200,120,120,"resources/images/gamePlay/aquiment/ladle.png","DRAG",null));
 
                 // down counter
 
@@ -192,7 +192,7 @@ public class LevelFactory {
 
                 //mai
                 slots.add(new SlotSpec("takronoodle",-2,200,120,114,"resources/images/gamePlay/aquiment/takronoodle.png","DRAG",null));
-                slots.add(new SlotSpec("takrosoup",95,200,120,120,"resources/images/gamePlay/aquiment/ladle.png","DRAG",null));
+                slots.add(new SlotSpec("ladle",95,200,120,120,"resources/images/gamePlay/aquiment/ladle.png","DRAG",null));
 
                 // down counter
 
@@ -254,7 +254,7 @@ public class LevelFactory {
 
                 //mai
                 slots.add(new SlotSpec("takronoodle",-2,200,120,114,"resources/images/gamePlay/aquiment/takronoodle.png","DRAG",null));
-                slots.add(new SlotSpec("takrosoup",95,200,120,120,"resources/images/gamePlay/aquiment/ladle.png","DRAG",null));
+                slots.add(new SlotSpec("ladle",95,200,120,120,"resources/images/gamePlay/aquiment/ladle.png","DRAG",null));
 
                 // down counter
 
