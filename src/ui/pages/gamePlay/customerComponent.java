@@ -1,11 +1,14 @@
 package ui.pages.gamePlay;
 
+import utilities.IconImage;
+
 import javax.swing.*;
 
 public class customerComponent extends JPanel {
-    private  JLabel imgLabel;
-    private JLabel patienceLabel;
-    public  customerComponent(String imgPath ,String patiencePath){
+    private  JLabel imgLabel, patienceLabel,bubble,food;
+    private JPanel requestPanel;
+    private ImageIcon icon;
+    public  customerComponent(String imgPath ,String patiencePath,String requestFood){
         setLayout(null);
         setOpaque(false);
         setSize(197,240);
@@ -17,6 +20,28 @@ public class customerComponent extends JPanel {
         //customer patience label
         patienceLabel = new JLabel(new ImageIcon(patiencePath));
         patienceLabel.setBounds(137,83,60,107);
+
+        //Bubble customer
+        requestPanel = new JPanel();
+        requestPanel.setLayout(null);
+        requestPanel.setOpaque(false);
+        requestPanel.setBounds(-5,23,140,140);
+
+        icon = IconImage.create("resources/images/gamePlay/customer/message.png",140,140);
+        bubble = new JLabel(icon);
+        bubble.setBounds(0,0,140,140);
+
+        food = new JLabel();
+        food.setBounds(40,40,76,76);
+
+        switch (requestFood){
+            case "NOODLE":
+                food.setIcon(IconImage.create("",76,76));
+
+        }
+
+
+
 
         add(imgLabel);
         add(patienceLabel);
