@@ -1,8 +1,5 @@
 package ui.pages.gamePlay;
 
-import javax.swing.*;
-import java.awt.*;
-
 public class SlotSpec {
     private final String id;
     private final int x;
@@ -10,8 +7,10 @@ public class SlotSpec {
     private final int width;
     private final int height;
     private final String iconPath;
+    private String type;
+    private String spawnPath;
 
-    public SlotSpec(String id ,int x ,int y , int width , int height,String iconPath) {
+    public SlotSpec(String id ,int x ,int y , int width , int height,String iconPath,String type,String spawnPath) {
         //record image property
         this.id = id;
         this.x = x;
@@ -19,6 +18,8 @@ public class SlotSpec {
         this.width = width;
         this.height = height;
         this.iconPath = iconPath;
+        this.type = type;
+        this.spawnPath = spawnPath;
     }
 
     public String getId() {
@@ -42,4 +43,8 @@ public class SlotSpec {
     public String getIconPath() {
         return iconPath;
     }
+
+    public String getType() { return type;}
+
+    public String getSpawnPath() {return spawnPath;}
 }

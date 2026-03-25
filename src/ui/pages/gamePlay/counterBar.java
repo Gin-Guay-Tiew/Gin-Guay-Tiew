@@ -4,82 +4,126 @@ import main.MainFrame;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionAdapter;
 import java.util.List;
 
 public class counterBar extends JPanel {
     private Image counterBarimage;
 
-    public counterBar(MainFrame mainFrame){
+    public counterBar(MainFrame mainFrame) {
         //set layout
         setLayout(null);// ให้มันกำหนดตำแหน่งจาก figma ได้เลย เลยตั้งค่าเป็น null
-        setPreferredSize(new Dimension(800,600));
         setOpaque(false);
+        counterBarimage = new ImageIcon("resources/images/gamePlay/counter/counter_bar.png").getImage();
+
+    }
 
 
-        // record component
-        List<SlotSpec> slots = new ArrayList<>();
-        // down counter
-        slots.add(new SlotSpec("pot",-86,255,387,387,"resources/images/gamePlay/counter/potter.png"));
-        slots.add(new SlotSpec("bucket lv3",230,380,120,120,"resources/images/gamePlay/ingredients/drinks/lv3.png"));
-        slots.add(new SlotSpec("trash",620,430,162,73,"resources/images/gamePlay/binn/empty.png"));
+    public void setSlots(List<SlotSpec> slots) {
+        removeAll();
 
-        //on counter
-
-        //mai
-        slots.add(new SlotSpec("mai1",-8,220,114,114,"resources/images/gamePlay/aquiment/mai1.png"));
-        slots.add(new SlotSpec("mai2",86,220,120,120,"resources/images/gamePlay/aquiment/mai2.png"));
-
-        //soup row 1
-        slots.add(new SlotSpec("yenTafo",238,240,70,70,"resources/images/gamePlay/ingredients/soups/category/yenTaFo/idle.png"));
-        slots.add(new SlotSpec("tomYum",308,240,70,70,"resources/images/gamePlay/ingredients/soups/category/tomYum/idle.png"));
-
-        //soup row2
-        slots.add(new SlotSpec("namTok",238,300,70,70,"resources/images/gamePlay/ingredients/soups/category/namTok/idle.png"));
-        slots.add(new SlotSpec("Pork",308,300,70,70,"resources/images/gamePlay/ingredients/soups/category/braisedPork/idle.png"));
-
-        //towel
-        slots.add(new SlotSpec("towel",360,180,240,240,"resources/images/gamePlay/counter/towel.png"));
-
-        //add on
-        slots.add(new SlotSpec("vegetable",575,205,120,120,"resources/images/gamePlay/ingredients/vegetables/idle.png"));
-        slots.add(new SlotSpec("porkSlice",570,280,102,102,"resources/images/gamePlay/ingredients/addOn/porkSlices/idle.png"));
-        slots.add(new SlotSpec("meatball",634,280,102,102,"resources/images/gamePlay/ingredients/addOn/meatball/idle.png"));
-        slots.add(new SlotSpec("porkRind",694,280,102,102,"resources/images/gamePlay/ingredients/addOn/porkRind/idle.png"));
-
-        //up counter
-
-        slots.add(new SlotSpec("container",2,56,182,182,"resources/images/gamePlay/ingredients/noodles/container/lv5.png"));
-
-        slots.add(new SlotSpec("noodles",143,158,107,92,"resources/images/gamePlay/ingredients/noodles/category/greenEgg/idle.png"));
-        slots.add(new SlotSpec("decorate",226,163,76,76,"resources/images/gamePlay/bowl/decorate.png"));
-        slots.add(new SlotSpec("chopsticks",282,151,86,86,"resources/images/gamePlay/counter/chopsticks.png"));
-        slots.add(new SlotSpec("kanomTuay",670,191,113,55,"resources/images/gamePlay/ingredients/kanomTuay/idle.png"));
-
-
-
-
-        // create a button and set button
-        for (SlotSpec s : slots){
+        for (SlotSpec s : slots) {
             JButton btn = new JButton(new ImageIcon(s.getIconPath()));
-            btn.setBounds(s.getX(),s.getY(),s.getWidth(),s.getHeight());
+            btn.setBounds(s.getX(), s.getY(), s.getWidth(), s.getHeight());
 
             btn.setBorderPainted(false);
             btn.setContentAreaFilled(false);
             btn.setFocusPainted(false);
             btn.setOpaque(false);
             btn.setBorder(null);
+
+            switch (s.getType()) {
+                case "SPAWN":
+                    btn.addMouseListener(new MouseAdapter() {
+                        @Override
+                        public void mousePressed(MouseEvent e) {
+                            spawItem(s.getSpawnPath(),btn,e);
+                        }
+                    });
+                    break;
+
+                case "DRAG":
+                    enableDrag(btn);
+                    break;
+
+            }
+
             add(btn);
         }
-        // noodle area
-        noodleArea noodleArea =  new noodleArea(mainFrame);
-        add(noodleArea);
-        // set ให้มันอยู่บนสุดจากตำแหน่งเดียวกับ pink towel ปล ที่ตั้ง  2 เพราะ เพราะ customer = 0 , counterBar = 1 ไปแล้ว เลยต้องตั้งให้เลขเยอะกว่ามันจะได้ดันขึนมาบนสุด
-        setComponentZOrder(noodleArea,2);
-        // เอาไว้คอยเปลี่ยนรูปก๋วยเตี๋ยว เวลาเขียน logic
-        noodleArea.setNoodlesImage("resources/images/gamePlay/ingredients/noodles/finishedNoodles/namTok/greenEgg/meatball&PorkRind/haveVegetable.png");
+
+        revalidate();
+        repaint();
+    }
+
+    // method for item can drag
+    public void enableDrag(JComponent c) {
+        final Point[] offset = {null};
+        final Point[] originalPos = {c.getLocation()};
+
+        // ตอนลากให้จำตำแหน่งเดิมไว้
+        c.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                offset[0] = e.getPoint();
+                originalPos[0] = c.getLocation();
+                // ให้ตอนเลือกมันอยู่เหนือทุกตัวใน component
+                Container parent = c.getParent();
+                parent.setComponentZOrder(c,0);
+            }
+
+            // ตอนปล่อยแล้วจะให้กลับที่เดิม
+            @Override
+            public void mouseReleased(MouseEvent e){
+                c.setLocation(originalPos[0]);
+            }
+        });
+
+
+
+        c.addMouseMotionListener(new MouseMotionAdapter() {
+            public void mouseDragged(MouseEvent e) {
+                int x = c.getX() + e.getX() - offset[0].x;
+                int y = c.getY() + e.getY() - offset[0].y;
+                c.setLocation(x, y);
+            }
+        });
+
+    }
+
+    //method for item can spawn and item spawn can drag
+    public void spawItem(String imgPath, JButton sourceBtn , MouseEvent e){
+         JButton item = new JButton(new ImageIcon(imgPath));
+
+         Point p = sourceBtn.getLocation();
+
+
+         item.setBounds(p.x,p.y,120,120);
+         item.setBorderPainted(false);
+         item.setContentAreaFilled(false);
+         item.setFocusPainted(false);
+         item.setOpaque(false);
+         enableDrag(item);
+
+         add(item);
+         setComponentZOrder(item,0);
+
+         repaint();
+
     }
 
 
 
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+
+        if (counterBarimage != null) {
+            g.drawImage(counterBarimage, 0, 0,800,520, this);
+        }
+    }
+
+
 }
+

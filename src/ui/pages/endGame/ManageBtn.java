@@ -48,7 +48,7 @@ public class ManageBtn extends JPanel implements ActionListener {
             System.out.println("winlosepage to mainMenu");
         }
         else if (e.getActionCommand().equals("playAgain")) {
-            mainFrame.startNewGame();
+            mainFrame.replayGame();
             System.out.println("winlosepage to gamePlay");
         }
         else if (e.getActionCommand().equals("shop")) {

@@ -74,8 +74,8 @@ public class Transition {
     private void startAnimation(int step) {
         timer = new Timer(10, e -> {
             currentSize += step;
-            if (currentSize >= 1500) {
-                currentSize = 1500;
+            if (currentSize >= 2000) {
+                currentSize = 2000;
                 timer.stop();
             }
             updateBoundsAndIcon();

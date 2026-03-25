@@ -37,10 +37,17 @@ public class MoneyDisplay extends JPanel {
         add(moneyAmount, BorderLayout.SOUTH);
     }
 
+    public void updateMoney(int amount) {
+        moneyAmount.setText(String.format("%,d N", amount));
+        revalidate();
+        repaint();
+    }
+
     // Draw BG Image
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         g.drawImage(new ImageIcon("resources/images/shared/SignFrame.png").getImage(), 0, 0, getWidth(), getHeight(), this);
     }
+
 }
