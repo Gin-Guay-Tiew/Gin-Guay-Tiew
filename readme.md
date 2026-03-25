@@ -1,4 +1,6 @@
 # 🍜 กกต (กินก๋วยเตี๋ยว)
+This project is created for educational purposes only as part of an Object-Oriented Programming at IT Kmitl.  
+It is not related to any political context.
 
 ## Concept
 **กกต** is a simulation and time-management game built around the idea of *controlled chaos*.  
@@ -58,12 +60,6 @@ This project helps develop:
 ---
 
 ## Additional Resources
-
----
-
-## Disclaimer
-This project is created for educational purposes only as part of an Object-Oriented Programming at IT Kmitl.  
-It is not related to any political context.
 
 ---
 
