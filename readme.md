@@ -19,16 +19,6 @@ The challenge lies in balancing speed, accuracy, and decision-making to achieve 
 
 ---
 
-## Learning Objectives
-This project helps develop:
-- Object-Oriented Programming (OOP)
-- System Design
-- Team Collaboration
-- Problem Solving
-- Time Management
-
----
-
 ## Technologies Used
 - Java (OOP)
 - Java Swing / JavaFX
@@ -40,22 +30,11 @@ This project helps develop:
 
 ---
 
-## Game Features
-
-### Core Systems
-- Order Management System
-- Cooking System
-- Timer System
-- Scoring & Currency System
-- Level Progression System
+## Folder Structure
 
 ---
 
-## Design Highlights
-- Fast-paced gameplay that encourages quick decision-making
-- Increasing difficulty across levels
-- Diverse customer behaviors and timing constraints
-- Random event elements to enhance replayability
+## Installation
 
 ---
 
