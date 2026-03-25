@@ -187,6 +187,10 @@ public class counterBar extends JPanel {
                                     bowl.setName("bowl_empty");
                                     disableDrag(bowl);
                                     if (btn.getName().equals("trash")){
+                                        btn.setIcon(new ImageIcon("resources/images/gamePlay/binn/trash.png"));
+                                        //she so perfect bah bah
+                                        //the + 5 is so on point
+                                        btn.setBounds(btn.getX(),btn.getY() + 5, 162, 68);
                                         btn.setName("trashed");
                                     }
                                 }

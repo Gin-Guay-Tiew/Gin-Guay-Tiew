@@ -37,7 +37,7 @@ public class LevelFactory {
                 //mock up
                 slots.add(new SlotSpec("bucket lv3",230,350,120,120,"resources/images/gamePlay/ingredients/drinks/lv3.png","STATIC",null));
 
-                slots.add(new SlotSpec("trash",620,400,162,73,"resources/images/gamePlay/binn/trash.png","STATIC",null));
+                slots.add(new SlotSpec("trash",620,405,153,73,"resources/images/gamePlay/binn/empty.png","STATIC",null));
 
                 //on counter
 
