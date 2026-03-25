@@ -15,15 +15,16 @@ public class LevelFactory {
 
                 //mai
                 slots.add(new SlotSpec("takronoodle",-2,200,120,114,"resources/images/gamePlay/aquiment/takronoodle.png","DRAG",null));
-                slots.add(new SlotSpec("takrosoup",95,200,120,120,"resources/images/gamePlay/aquiment/takrosoup.png","DRAG",null));
+                slots.add(new SlotSpec("takrosoup",95,200,120,120,"resources/images/gamePlay/aquiment/ladle.png","DRAG",null));
 
                 // down counter
 
                 // drink can change
                 slots.add(new SlotSpec("cola",238,350,40,120,null,"SPAWN","resources/images/gamePlay/ingredients/drinks/cola/cola.png"));
-
+                slots.add(new SlotSpec("sprite",267,350,40,120,null,"SPAWN","resources/images/gamePlay/ingredients/drinks/sprite/sprite.png"));
+                slots.add(new SlotSpec("orange",301,350,40,120,null,"SPAWN","resources/images/gamePlay/ingredients/drinks/orange/orange.png"));
                 //mock up
-                slots.add(new SlotSpec("bucket lv1",230,350,120,120,"resources/images/gamePlay/ingredients/drinks/lv1.png","STATIC",null));
+                slots.add(new SlotSpec("bucket lv3",230,350,120,120,"resources/images/gamePlay/ingredients/drinks/lv3.png","STATIC",null));
 
                 slots.add(new SlotSpec("pot",-86,240,380,380,"resources/images/gamePlay/ingredients/noodles/boilingPot/not_boiling.png","STATIC",null));
                 slots.add(new SlotSpec("trash",620,400,162,73,"resources/images/gamePlay/binn/empty.png","STATIC",null));
@@ -33,25 +34,28 @@ public class LevelFactory {
 
 
                 //soup row 1
-                slots.add(new SlotSpec("emptyPot",238,210,70,70,"resources/images/gamePlay/aquiment/emptyPot.png","STATIC",null));
-                slots.add(new SlotSpec("emptyPot",308,210,70,70,"resources/images/gamePlay/aquiment/emptyPot.png","STATIC",null));
+                slots.add(new SlotSpec("yenTafo",238,210,70,70,"resources/images/gamePlay/ingredients/soups/category/yenTaFo/idle.png","STATIC",null));
+                slots.add(new SlotSpec("tomYum",308,210,70,70,"resources/images/gamePlay/ingredients/soups/category/tomYum/idle.png","STATIC",null));
 
                 //soup row2
                 slots.add(new SlotSpec("namTok",238,280,70,70,"resources/images/gamePlay/ingredients/soups/category/namTok/idle.png","STATIC",null));
-                slots.add(new SlotSpec("emptyPot",308,280,70,70,"resources/images/gamePlay/aquiment/emptyPot.png","STATIC",null));
+                slots.add(new SlotSpec("Pork",308,280,70,70,"resources/images/gamePlay/ingredients/soups/category/braisedPork/idle.png","STATIC",null));
 
-                //towel
-                slots.add(new SlotSpec("towel",360,150,240,240,"resources/images/gamePlay/counter/towel.png","STATIC",null));
+                //placemat
+                slots.add(new SlotSpec("placemat",360,150,240,240,"resources/images/gamePlay/ingredients/noodles/placemat.png","STATIC",null));
 
                 //add on
                 slots.add(new SlotSpec("vegetable",575,190,98,98,"resources/images/gamePlay/ingredients/vegetables/idle.png","SPAWN","resources/images/gamePlay/ingredients/vegetables/picked.png"));
-                slots.add(new SlotSpec("emptyBox",560,260,102,102,"resources/images/gamePlay/aquiment/emptyBox.png","STATIC",null));
+                slots.add(new SlotSpec("porkSlice",570,260,102,102,"resources/images/gamePlay/ingredients/addOn/porkSlices/idle.png","SPAWN","resources/images/gamePlay/ingredients/addOn/porkSlices/picked.png"));
                 slots.add(new SlotSpec("meatball",634,260,102,102,"resources/images/gamePlay/ingredients/addOn/meatball/idle.png","SPAWN","resources/images/gamePlay/ingredients/addOn/meatball/picked.png"));
-                slots.add(new SlotSpec("emptyBox",694,260,102,102,"resources/images/gamePlay/aquiment/emptyBox.png","STATIC",null));
+                slots.add(new SlotSpec("porkRind",694,260,102,102,"resources/images/gamePlay/ingredients/addOn/porkRind/idle.png","SPAWN","resources/images/gamePlay/ingredients/addOn/porkRind/picked.png"));
 
                 //up counter
 
                 // clear button when press and noodles spawn <3333
+                // row1
+                slots.add(new SlotSpec("riceVermicelli",32,40,60,60,null,"SPAWN","resources/images/gamePlay/ingredients/noodles/category/riceVermicelli/picked.png"));
+                slots.add(new SlotSpec("wideRice",94,40,60,60,null,"SPAWN","resources/images/gamePlay/ingredients/noodles/category/wideRice/picked.png"));
 
                 //row2
                 slots.add(new SlotSpec("yellowEgg",30,120,60,60,null,"SPAWN","resources/images/gamePlay/ingredients/noodles/category/yellowEgg/picked.png"));
@@ -71,7 +75,7 @@ public class LevelFactory {
 
                 //mai
                 slots.add(new SlotSpec("takronoodle",-2,200,120,114,"resources/images/gamePlay/aquiment/takronoodle.png","DRAG",null));
-                slots.add(new SlotSpec("takrosoup",95,200,120,120,"resources/images/gamePlay/aquiment/takrosoup.png","DRAG",null));
+                slots.add(new SlotSpec("takrosoup",95,200,120,120,"resources/images/gamePlay/aquiment/ladle.png","DRAG",null));
 
                 // down counter
 
@@ -96,8 +100,8 @@ public class LevelFactory {
                 slots.add(new SlotSpec("namTok",238,280,70,70,"resources/images/gamePlay/ingredients/soups/category/namTok/idle.png","STATIC",null));
                 slots.add(new SlotSpec("emptyPot",308,280,70,70,"resources/images/gamePlay/aquiment/emptyPot.png","STATIC",null));
 
-                //towel
-                slots.add(new SlotSpec("towel",360,150,240,240,"resources/images/gamePlay/counter/towel.png","STATIC",null));
+                //placemat
+                slots.add(new SlotSpec("placemat",360,150,240,240,"resources/images/gamePlay/ingredients/noodles/placemat.png","STATIC",null));
 
                 //add on
                 slots.add(new SlotSpec("vegetable",575,190,98,98,"resources/images/gamePlay/ingredients/vegetables/idle.png","SPAWN","resources/images/gamePlay/ingredients/vegetables/picked.png"));
@@ -109,7 +113,6 @@ public class LevelFactory {
                 // clear button when press and noodles spawn <3333
                 // row1
                 slots.add(new SlotSpec("riceVermicelli",32,40,60,60,null,"SPAWN","resources/images/gamePlay/ingredients/noodles/category/riceVermicelli/picked.png"));
-
 
                 //row2
                 slots.add(new SlotSpec("yellowEgg",30,120,60,60,null,"SPAWN","resources/images/gamePlay/ingredients/noodles/category/yellowEgg/picked.png"));
@@ -129,7 +132,7 @@ public class LevelFactory {
 
                 //mai
                 slots.add(new SlotSpec("takronoodle",-2,200,120,114,"resources/images/gamePlay/aquiment/takronoodle.png","DRAG",null));
-                slots.add(new SlotSpec("takrosoup",95,200,120,120,"resources/images/gamePlay/aquiment/takrosoup.png","DRAG",null));
+                slots.add(new SlotSpec("takrosoup",95,200,120,120,"resources/images/gamePlay/aquiment/ladle.png","DRAG",null));
 
                 // down counter
 
@@ -155,8 +158,8 @@ public class LevelFactory {
                 slots.add(new SlotSpec("namTok",238,280,70,70,"resources/images/gamePlay/ingredients/soups/category/namTok/idle.png","STATIC",null));
                 slots.add(new SlotSpec("emptyPot",308,280,70,70,"resources/images/gamePlay/aquiment/emptyPot.png","STATIC",null));
 
-                //towel
-                slots.add(new SlotSpec("towel",360,150,240,240,"resources/images/gamePlay/counter/towel.png","STATIC",null));
+                //placemat
+                slots.add(new SlotSpec("placemat",360,150,240,240,"resources/images/gamePlay/ingredients/noodles/placemat.png","STATIC",null));
 
                 //add on
                 slots.add(new SlotSpec("vegetable",575,190,98,98,"resources/images/gamePlay/ingredients/vegetables/idle.png","SPAWN","resources/images/gamePlay/ingredients/vegetables/picked.png"));
@@ -189,7 +192,7 @@ public class LevelFactory {
 
                 //mai
                 slots.add(new SlotSpec("takronoodle",-2,200,120,114,"resources/images/gamePlay/aquiment/takronoodle.png","DRAG",null));
-                slots.add(new SlotSpec("takrosoup",95,200,120,120,"resources/images/gamePlay/aquiment/takrosoup.png","DRAG",null));
+                slots.add(new SlotSpec("takrosoup",95,200,120,120,"resources/images/gamePlay/aquiment/ladle.png","DRAG",null));
 
                 // down counter
 
@@ -215,8 +218,8 @@ public class LevelFactory {
                 slots.add(new SlotSpec("namTok",238,280,70,70,"resources/images/gamePlay/ingredients/soups/category/namTok/idle.png","STATIC",null));
                 slots.add(new SlotSpec("emptyPot",308,280,70,70,"resources/images/gamePlay/aquiment/emptyPot.png","STATIC",null));
 
-                //towel
-                slots.add(new SlotSpec("towel",360,150,240,240,"resources/images/gamePlay/counter/towel.png","STATIC",null));
+                //placemat
+                slots.add(new SlotSpec("placemat",360,150,240,240,"resources/images/gamePlay/ingredients/noodles/placemat.png","STATIC",null));
 
                 //add on
                 slots.add(new SlotSpec("vegetable",575,190,98,98,"resources/images/gamePlay/ingredients/vegetables/idle.png","SPAWN","resources/images/gamePlay/ingredients/vegetables/picked.png"));
@@ -251,7 +254,7 @@ public class LevelFactory {
 
                 //mai
                 slots.add(new SlotSpec("takronoodle",-2,200,120,114,"resources/images/gamePlay/aquiment/takronoodle.png","DRAG",null));
-                slots.add(new SlotSpec("takrosoup",95,200,120,120,"resources/images/gamePlay/aquiment/takrosoup.png","DRAG",null));
+                slots.add(new SlotSpec("takrosoup",95,200,120,120,"resources/images/gamePlay/aquiment/ladle.png","DRAG",null));
 
                 // down counter
 
@@ -277,8 +280,8 @@ public class LevelFactory {
                 slots.add(new SlotSpec("namTok",238,280,70,70,"resources/images/gamePlay/ingredients/soups/category/namTok/idle.png","STATIC",null));
                 slots.add(new SlotSpec("Pork",308,280,70,70,"resources/images/gamePlay/ingredients/soups/category/braisedPork/idle.png","STATIC",null));
 
-                //towel
-                slots.add(new SlotSpec("towel",360,150,240,240,"resources/images/gamePlay/counter/towel.png","STATIC",null));
+                //placemat
+                slots.add(new SlotSpec("placemat",360,150,240,240,"resources/images/gamePlay/ingredients/noodles/placemat.png","STATIC",null));
 
                 //add on
                 slots.add(new SlotSpec("vegetable",575,190,98,98,"resources/images/gamePlay/ingredients/vegetables/idle.png","SPAWN","resources/images/gamePlay/ingredients/vegetables/picked.png"));

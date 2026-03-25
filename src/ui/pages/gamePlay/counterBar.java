@@ -5,10 +5,7 @@ import utilities.IconImage;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseMotionAdapter;
-import java.awt.event.MouseMotionListener;
+import java.awt.event.*;
 import java.util.List;
 
 public class counterBar extends JPanel {
@@ -55,6 +52,24 @@ public class counterBar extends JPanel {
                 case "DRAG":
                     enableDrag(btn);
                     break;
+//                case "CLICK":
+//                    btn.addMouseListener(new MouseAdapter() {
+//                        @Override
+//                        public void mousePressed(MouseEvent e){
+//                            JButton progress = new JButton(new );
+//                            // me when image flush exist
+//                            gifIcon.getImage().flush();
+//                            progress.setBounds(45, 240, 120, 120);
+//                            progress.setBorderPainted(false);
+//                            progress.setContentAreaFilled(false);
+//                            progress.setFocusPainted(false);
+//                            progress.setOpaque(false);
+//
+//                            add(progress);
+//                            setComponentZOrder(progress, 0);
+//                            enableDrag(btn)
+//                        }
+//                    }
             }
 
             add(btn);
@@ -88,13 +103,13 @@ public class counterBar extends JPanel {
                 if (c.isVisible()) {
                     for (Component cc : getComponents()) {
                         if (cc instanceof JButton btn && cc != c) {
+                            // btn is the where it drags to
+                            // c is the one who got drag
                             try {
                                 Rectangle itemBounds = c.getBounds();
                                 String itemName = c.getName();
-
                                 // Check for collision with the pot and ensure the item is a noodle-type takro
-                                if (btn.getName().equals("pot") && itemBounds.intersects(btn.getBounds()) &&
-                                        itemName != null && itemName.contains("noodle_") && c instanceof JButton takro) {
+                                if (btn.getName().equals("pot") && itemBounds.intersects(btn.getBounds()) && itemName.contains("takronoodle_") && c instanceof JButton takro) {
 
                                     // Update the Takro (the item being dragged)
                                     takro.setIcon(new ImageIcon("resources/images/gamePlay/aquiment/takronoodle.png"));
@@ -104,19 +119,11 @@ public class counterBar extends JPanel {
                                             "resources/images/gamePlay/ingredients/noodles/boilingPot/boiling1.png",
                                             "resources/images/gamePlay/ingredients/noodles/boilingPot/boiling2.png"
                                     };
-                                    // to avoid GIF fuckery (it start where it last stops) (obsolete)
-//                                    String[] progressFrame = {
-//                                            "resources/images/gamePlay/ingredients/noodles/boilingPot/boilingProgress/stage1.png",
-//                                            "resources/images/gamePlay/ingredients/noodles/boilingPot/boilingProgress/stage2.png",
-//                                            "resources/images/gamePlay/ingredients/noodles/boilingPot/boilingProgress/stage3.png",
-//                                            "resources/images/gamePlay/ingredients/noodles/boilingPot/boilingProgress/stage4.png",
-//                                            "resources/images/gamePlay/ingredients/noodles/boilingPot/boilingProgress/stage5.png",
-//                                            "resources/images/gamePlay/ingredients/noodles/boilingPot/boilingProgress/finished.png"
-//                                    };
                                     btn.setName("boiling");
                                     // Create and add the progress indicator
                                     ImageIcon gifIcon = new ImageIcon("resources/images/gamePlay/ingredients/noodles/boilingPot/boilingProgress/progress_animation.GIF");
                                     JButton progress = new JButton(gifIcon);
+                                    // me when image flush exist
                                     gifIcon.getImage().flush();
                                     progress.setBounds(45, 240, 120, 120);
                                     progress.setBorderPainted(false);
@@ -128,7 +135,6 @@ public class counterBar extends JPanel {
                                     setComponentZOrder(progress, 0);
 
                                     // Trigger the pot animation
-//                                    animateButton(progress, progressFrame, 120, 120, 1000);
                                     animateButton(btn, boilingFrames, 380, 380, 500);
 
                                     // Final UI refresh after adding the progress button
@@ -138,22 +144,51 @@ public class counterBar extends JPanel {
                                     // Timer to finish boiling after 4.5 seconds
                                     Timer stopTimer = new Timer(4500, e1 -> {
                                         try {
-//                                            Timer animpro = (Timer) progress.getClientProperty("animationTimer");
                                             Timer animboil = (Timer) btn.getClientProperty("animationTimer");
                                             if (animboil != null) animboil.stop();
-//                                            if (animpro != null) animpro.stop();
-
                                             remove(progress);
                                             btn.setName("pot");
                                             btn.setIcon(IconImage.create("resources/images/gamePlay/ingredients/noodles/boilingPot/not_boiling.png", 380, 380));
                                             revalidate();
                                             repaint();
+                                            for (Component comp : getComponents()) {
+                                                if (comp instanceof JButton bowl) {
+                                                    if ("bowl_empty".equals(bowl.getName())){
+                                                        try {
+                                                            if (itemName.contains("green")){
+                                                                bowl.setIcon(IconImage.create("resources/images/gamePlay/ingredients/noodles/finishedNoodles/justNoodle/greenEgg.png", 175, 175));
+                                                                bowl.setName("bowl_noodle_greenEgg");
+                                                                enableDrag(bowl);
+                                                            }else if (itemName.contains("yellow")){
+                                                                bowl.setIcon(IconImage.create("resources/images/gamePlay/ingredients/noodles/finishedNoodles/justNoodle/yellow.png", 175, 175));
+                                                                bowl.setName("bowl_noodle_yellowEgg");
+                                                                enableDrag(bowl);
+                                                            }else{
+                                                                bowl.setIcon(IconImage.create("resources/images/gamePlay/ingredients/noodles/finishedNoodles/justNoodle/riceThinWideVermicelli.png", 175, 175));
+                                                                bowl.setName("bowl_noodle_white");
+                                                                enableDrag(bowl);
+                                                            }
+                                                            break;
+                                                        } catch (Exception ex) {
+                                                            System.err.println("the noodle is a badboy");
+                                                        }
+                                                    }
+                                                }
+                                            }
                                         } catch (Exception ex) {
-                                            // Silently handle issues during timer execution
+                                            System.err.println("the pot not cooking");
                                         }
                                     });
                                     stopTimer.setRepeats(false);
                                     stopTimer.start();
+                                }
+                                if (c instanceof JButton bowl && bowl.getName().contains("bowl_noodle_") && btn.getName().contains("trash") && itemBounds.intersects(btn.getBounds())){
+                                    bowl.setIcon(IconImage.create("resources/images/gamePlay/bowl/empty.png", 175, 175));
+                                    bowl.setName("bowl_empty");
+                                    disableDrag(bowl);
+                                    if (btn.getName().equals("trash")){
+                                        btn.setName("trashed");
+                                    }
                                 }
                             } catch (Exception exd) {
                                 // Log a simple message instead of the full stack trace
@@ -216,11 +251,11 @@ public class counterBar extends JPanel {
 
                 Rectangle itemBounds = item.getBounds();
                 String itemName = item.getName();
-
-                // noodle mai swapper
                 for (Component c : getComponents()) {
                     if (c instanceof JButton btn && c != item && c != sourceBtn ) {
                         try {
+                            // btn is the victim
+                            // item is the one who got spawn
                             if (btn.getName() != null && btn.getName().contains("takronoodle") && itemBounds.intersects(btn.getBounds())) {
 
                                 String imagePath = null;
@@ -242,6 +277,23 @@ public class counterBar extends JPanel {
                                     btn.setIcon(new ImageIcon(imagePath));
                                     btn.setName(newName);
                                 }
+                            } else if (btn.getName().equals("placemat") && itemBounds.intersects(btn.getBounds()) && itemName.equals("bowl")) {
+                                ImageIcon icon;
+                                icon = IconImage.create("resources/images/gamePlay/bowl/empty.png", 175, 175);
+                                JButton bowl_empty = new JButton(icon);
+                                bowl_empty.setBounds(390, 169, 175, 175);
+                                bowl_empty.setBorderPainted(false);
+                                bowl_empty.setContentAreaFilled(false);
+                                bowl_empty.setOpaque(false);
+                                bowl_empty.setName("bowl_empty");
+                                add(bowl_empty);
+
+                                setComponentZOrder(bowl_empty, 0);
+                                revalidate();
+                                repaint();
+
+                                btn.setName("Occupied");
+
                             }
                         } catch (NullPointerException npe) {
                             System.err.println("Error: One of the components or names was null during collision check.");
@@ -294,6 +346,18 @@ public class counterBar extends JPanel {
 
         // Store the timer in the button so we can stop it later if needed
         btn.putClientProperty("animationTimer", animationTimer);
+    }
+
+    public void disableDrag(JComponent c) {
+        // Remove all MouseListeners (handles press/release/clicks)
+        for (MouseListener ml : c.getMouseListeners()) {
+            c.removeMouseListener(ml);
+        }
+
+        // Remove all MouseMotionListeners (handles the actual movement)
+        for (MouseMotionListener mml : c.getMouseMotionListeners()) {
+            c.removeMouseMotionListener(mml);
+        }
     }
 
 }
