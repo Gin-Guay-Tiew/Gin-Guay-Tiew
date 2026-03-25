@@ -86,6 +86,30 @@ public class counterBar extends JPanel {
             public void mouseReleased(MouseEvent e){
                 // Only reset/hide if the component isn't meant to be deleted
                 if (c.isVisible()) {
+                    Rectangle itemBounds = c.getBounds();
+                    String itemName = c.getName();
+                    for (Component cc : getComponents()) {
+                        if (cc instanceof JButton btn && cc != c ) {
+                            if (btn.getName().equals("pot") && itemBounds.intersects(btn.getBounds()) && itemName.contains("noodle_")) {
+                                btn.setIcon(new ResizableIcon("resources/images/gamePlay/ingredients/noodles/boilingPot/boiling.gif", 380, 380));
+                                btn.revalidate();
+                                btn.repaint();
+                                btn.setName("boiling"); // to prevent another noodle
+
+                                Timer timer = new Timer(4000, e1 -> {
+                                    // This code runs AFTER 4 seconds
+                                    btn.setName("pot");
+                                    ImageIcon icon = IconImage.create("resources/images/gamePlay/ingredients/noodles/boilingPot/not_boiling.png", 380, 380);
+                                    btn.setIcon(icon);
+                                    System.out.println("Item removed after 4 seconds");
+                                    repaint();
+                                });
+
+                                timer.setRepeats(false); // Ensure it only runs once
+                                timer.start();
+                            }
+                        }
+                    }
                     c.setLocation(originalPos[0]);
                 }
             }
@@ -109,7 +133,7 @@ public class counterBar extends JPanel {
 
         String[] parts = imgPath.split("/");
         String result = parts[parts.length - 2];
-
+        // maybe bugged
         item.setSize(120, 120);
         item.setBorderPainted(false);
         item.setContentAreaFilled(false);
