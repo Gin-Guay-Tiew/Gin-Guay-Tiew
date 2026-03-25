@@ -17,6 +17,17 @@ public class LevelFactory {
                 slots.add(new SlotSpec("takronoodle",-2,200,120,114,"resources/images/gamePlay/aquiment/takronoodle.png","DRAG",null));
                 slots.add(new SlotSpec("ladle",95,200,120,120,"resources/images/gamePlay/aquiment/ladle.png","DRAG",null));
 
+                //soup row 1
+                slots.add(new SlotSpec("yenTafo",238,210,70,70,"resources/images/gamePlay/ingredients/soups/category/yenTaFo/idle.png","SPAWN","resources/images/gamePlay/ingredients/soups/category/yenTaFo/laped.png"));
+                slots.add(new SlotSpec("tomYum",308,210,70,70,"resources/images/gamePlay/ingredients/soups/category/tomYum/idle.png","SPAWN","resources/images/gamePlay/ingredients/soups/category/tomYum/laped.png"));
+
+                //soup row2
+                slots.add(new SlotSpec("namTok",238,280,70,70,"resources/images/gamePlay/ingredients/soups/category/namTok/idle.png","SPAWN","resources/images/gamePlay/ingredients/soups/category/namTok/laped.png"));
+                slots.add(new SlotSpec("braisedPork",308,280,70,70,"resources/images/gamePlay/ingredients/soups/category/braisedPork/idle.png","SPAWN","resources/images/gamePlay/ingredients/soups/category/braisedPork/laped.png"));
+
+                slots.add(new SlotSpec("pot",-86,240,380,380,"resources/images/gamePlay/ingredients/noodles/boilingPot/not_boiling.png","STATIC",null));
+
+
                 // down counter
 
                 // drink can change
@@ -26,20 +37,10 @@ public class LevelFactory {
                 //mock up
                 slots.add(new SlotSpec("bucket lv3",230,350,120,120,"resources/images/gamePlay/ingredients/drinks/lv3.png","STATIC",null));
 
-                slots.add(new SlotSpec("pot",-86,240,380,380,"resources/images/gamePlay/ingredients/noodles/boilingPot/not_boiling.png","STATIC",null));
                 slots.add(new SlotSpec("trash",620,400,162,73,"resources/images/gamePlay/binn/trash.png","STATIC",null));
 
                 //on counter
 
-
-
-                //soup row 1
-                slots.add(new SlotSpec("yenTafo",238,210,70,70,"resources/images/gamePlay/ingredients/soups/category/yenTaFo/idle.png","STATIC",null));
-                slots.add(new SlotSpec("tomYum",308,210,70,70,"resources/images/gamePlay/ingredients/soups/category/tomYum/idle.png","STATIC",null));
-
-                //soup row2
-                slots.add(new SlotSpec("namTok",238,280,70,70,"resources/images/gamePlay/ingredients/soups/category/namTok/idle.png","STATIC",null));
-                slots.add(new SlotSpec("Pork",308,280,70,70,"resources/images/gamePlay/ingredients/soups/category/braisedPork/idle.png","STATIC",null));
 
                 //placemat
                 slots.add(new SlotSpec("placemat",360,150,240,240,"resources/images/gamePlay/ingredients/noodles/placemat.png","STATIC",null));
@@ -95,10 +96,10 @@ public class LevelFactory {
 
 
                 //soup row 1
-                slots.add(new SlotSpec("yenTafo",238,210,70,70,"resources/images/gamePlay/ingredients/soups/category/yenTaFo/idle.png","STATIC",null));
+                slots.add(new SlotSpec("yenTafo",238,210,70,70,"resources/images/gamePlay/ingredients/soups/category/yenTaFo/idle.png","SPAWN","resources/images/gamePlay/ingredients/soups/category/yenTaFo/laped.png"));
 
                 //soup row2
-                slots.add(new SlotSpec("namTok",238,280,70,70,"resources/images/gamePlay/ingredients/soups/category/namTok/idle.png","STATIC",null));
+                slots.add(new SlotSpec("namTok",238,280,70,70,"resources/images/gamePlay/ingredients/soups/category/namTok/idle.png","SPAWN","resources/images/gamePlay/ingredients/soups/category/namTok/laped.png"));
 
                 //placemat
                 slots.add(new SlotSpec("placemat",360,150,240,240,"resources/images/gamePlay/ingredients/noodles/placemat.png","STATIC",null));
@@ -150,12 +151,12 @@ public class LevelFactory {
 
 
                 //soup row 1
-                slots.add(new SlotSpec("yenTafo",238,210,70,70,"resources/images/gamePlay/ingredients/soups/category/yenTaFo/idle.png","STATIC",null));
-                slots.add(new SlotSpec("tomYum",308,210,70,70,"resources/images/gamePlay/ingredients/soups/category/tomYum/idle.png","STATIC",null));
+                slots.add(new SlotSpec("yenTafo",238,210,70,70,"resources/images/gamePlay/ingredients/soups/category/yenTaFo/idle.png","SPAWN","resources/images/gamePlay/ingredients/soups/category/yenTaFo/laped.png"));
+                slots.add(new SlotSpec("tomYum",308,210,70,70,"resources/images/gamePlay/ingredients/soups/category/tomYum/idle.png","SPAWN","resources/images/gamePlay/ingredients/soups/category/tomYum/laped.png"));
 
                 //soup row2
-                slots.add(new SlotSpec("namTok",238,280,70,70,"resources/images/gamePlay/ingredients/soups/category/namTok/idle.png","STATIC",null));
-                slots.add(new SlotSpec("Pork",308,280,70,70,"resources/images/gamePlay/ingredients/soups/category/braisedPork/idle.png","STATIC",null));
+                slots.add(new SlotSpec("namTok",238,280,70,70,"resources/images/gamePlay/ingredients/soups/category/namTok/idle.png","SPAWN","resources/images/gamePlay/ingredients/soups/category/namTok/laped.png"));
+                slots.add(new SlotSpec("braisedPork",308,280,70,70,"resources/images/gamePlay/ingredients/soups/category/braisedPork/idle.png","SPAWN","resources/images/gamePlay/ingredients/soups/category/braisedPork/laped.png"));
 
                 //placemat
                 slots.add(new SlotSpec("placemat",360,150,240,240,"resources/images/gamePlay/ingredients/noodles/placemat.png","STATIC",null));
@@ -215,12 +216,12 @@ public class LevelFactory {
 
 
                 //soup row 1
-                slots.add(new SlotSpec("yenTafo",238,210,70,70,"resources/images/gamePlay/ingredients/soups/category/yenTaFo/idle.png","STATIC",null));
-                slots.add(new SlotSpec("tomYum",308,210,70,70,"resources/images/gamePlay/ingredients/soups/category/tomYum/idle.png","STATIC",null));
+                slots.add(new SlotSpec("yenTafo",238,210,70,70,"resources/images/gamePlay/ingredients/soups/category/yenTaFo/idle.png","SPAWN","resources/images/gamePlay/ingredients/soups/category/yenTaFo/laped.png"));
+                slots.add(new SlotSpec("tomYum",308,210,70,70,"resources/images/gamePlay/ingredients/soups/category/tomYum/idle.png","SPAWN","resources/images/gamePlay/ingredients/soups/category/tomYum/laped.png"));
 
                 //soup row2
-                slots.add(new SlotSpec("namTok",238,280,70,70,"resources/images/gamePlay/ingredients/soups/category/namTok/idle.png","STATIC",null));
-                slots.add(new SlotSpec("Pork",308,280,70,70,"resources/images/gamePlay/ingredients/soups/category/braisedPork/idle.png","STATIC",null));
+                slots.add(new SlotSpec("namTok",238,280,70,70,"resources/images/gamePlay/ingredients/soups/category/namTok/idle.png","SPAWN","resources/images/gamePlay/ingredients/soups/category/namTok/laped.png"));
+                slots.add(new SlotSpec("braisedPork",308,280,70,70,"resources/images/gamePlay/ingredients/soups/category/braisedPork/idle.png","SPAWN","resources/images/gamePlay/ingredients/soups/category/braisedPork/laped.png"));
 
                 //placemat
                 slots.add(new SlotSpec("placemat",360,150,240,240,"resources/images/gamePlay/ingredients/noodles/placemat.png","STATIC",null));
@@ -276,12 +277,12 @@ public class LevelFactory {
 
 
                 //soup row 1
-                slots.add(new SlotSpec("yenTafo",238,210,70,70,"resources/images/gamePlay/ingredients/soups/category/yenTaFo/idle.png","STATIC",null));
-                slots.add(new SlotSpec("tomYum",308,210,70,70,"resources/images/gamePlay/ingredients/soups/category/tomYum/idle.png","STATIC",null));
+                slots.add(new SlotSpec("yenTafo",238,210,70,70,"resources/images/gamePlay/ingredients/soups/category/yenTaFo/idle.png","SPAWN","resources/images/gamePlay/ingredients/soups/category/yenTaFo/laped.png"));
+                slots.add(new SlotSpec("tomYum",308,210,70,70,"resources/images/gamePlay/ingredients/soups/category/tomYum/idle.png","SPAWN","resources/images/gamePlay/ingredients/soups/category/tomYum/laped.png"));
 
                 //soup row2
-                slots.add(new SlotSpec("namTok",238,280,70,70,"resources/images/gamePlay/ingredients/soups/category/namTok/idle.png","STATIC",null));
-                slots.add(new SlotSpec("Pork",308,280,70,70,"resources/images/gamePlay/ingredients/soups/category/braisedPork/idle.png","STATIC",null));
+                slots.add(new SlotSpec("namTok",238,280,70,70,"resources/images/gamePlay/ingredients/soups/category/namTok/idle.png","SPAWN","resources/images/gamePlay/ingredients/soups/category/namTok/laped.png"));
+                slots.add(new SlotSpec("braisedPork",308,280,70,70,"resources/images/gamePlay/ingredients/soups/category/braisedPork/idle.png","SPAWN","resources/images/gamePlay/ingredients/soups/category/braisedPork/laped.png"));
 
                 //placemat
                 slots.add(new SlotSpec("placemat",360,150,240,240,"resources/images/gamePlay/ingredients/noodles/placemat.png","STATIC",null));
