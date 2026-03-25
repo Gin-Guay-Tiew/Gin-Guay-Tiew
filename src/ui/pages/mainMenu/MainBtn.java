@@ -31,7 +31,7 @@ public class MainBtn implements ActionListener {
             };
             String[] btnLabels = {"Yes", "No"};
             ActionListener[] btnActions = {
-                    ex -> frame.getNavigator().toPage("loadingScreen", true, 250),
+                    ex -> frame.getNavigator().toPage("tutorial", true, 250),
                     null // Use "Null" if btnLabels == "No"
             };
             pop.createPopup(
