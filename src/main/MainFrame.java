@@ -1,5 +1,6 @@
 package main;
 
+import logic.Player;
 import ui.pages.gamePlay.gamePlayScreen;
 import ui.pages.levelSelection.LevelSelectPage;
 import ui.pages.loadingScreen.LoadingPage;
@@ -9,6 +10,7 @@ import ui.pages.endGame.WinLosePage;
 import ui.pages.settingMenu.MainSettingPage;
 import ui.pages.shopUI.ShopScreen;
 import logic.GameController;
+import utilities.DataManager;
 import utilities.IconImage;
 import utilities.PageNavigator;
 import ui.components.PopupWindow;
@@ -35,6 +37,7 @@ public class MainFrame extends JFrame implements WindowListener {
     private PageNavigator navigator;
     PopupWindow pop = new PopupWindow();
     private boolean isWarningActive = false;
+    private Player currentPlayer;
 
     private JPanel currentGameScreen;
 
@@ -54,6 +57,7 @@ public class MainFrame extends JFrame implements WindowListener {
     }
 
     public void closeApp() {
+        DataManager.savePlayerData(currentPlayer);
         System.exit(0);
     }
 
@@ -70,6 +74,7 @@ public class MainFrame extends JFrame implements WindowListener {
         setResizable(false);
         ImageIcon img = new ImageIcon("resources/images/shared/AppIcon.png");
         setIconImage(img.getImage());
+        this.currentPlayer = DataManager.loadPlayerData();
 
         // Keep window on screen
         Timer snapTimer = new Timer(100, e -> {
