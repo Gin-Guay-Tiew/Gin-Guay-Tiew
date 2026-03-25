@@ -36,10 +36,13 @@ public class customerComponent extends JPanel {
 
         switch (requestFood){
             case "NOODLE":
-                food.setIcon(IconImage.create("",76,76));
-
+                icon = IconImage.create("resources/images/gamePlay/ingredients/noodles/finishedNoodles/braisedPork/yellow/meatball&porkRind&porkSlices/haveVegetable.png",76,76);
+                food.setIcon(new ImageIcon("resources/images/gamePlay/ingredients/noodles/finishedNoodles/braisedPork/yellow/meatball&porkRind&porkSlices/haveVegetable.png"));
+                break;
         }
 
+        requestPanel.add(bubble);
+        requestPanel.add(food);
 
 
 
