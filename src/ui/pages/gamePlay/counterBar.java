@@ -10,13 +10,15 @@ import java.util.List;
 
 public class counterBar extends JPanel {
     private final Image counterBarimage;
+    private customerPanel cstPanel;
+    private int yOffset = 90;
 
-    public counterBar(MainFrame mainFrame) {
+    public counterBar(MainFrame mainFrame, customerPanel cstPanel) {
         //set layout
         setLayout(null);// ให้มันกำหนดตำแหน่งจาก figma ได้เลย เลยตั้งค่าเป็น null
         setOpaque(false);
         counterBarimage = new ImageIcon("resources/images/gamePlay/counter/counter_bar.png").getImage();
-
+        this.cstPanel = cstPanel;
     }
 
 
@@ -31,7 +33,7 @@ public class counterBar extends JPanel {
                 icon = new ImageIcon(s.getIconPath());
             }
             JButton btn = new JButton(icon);
-            btn.setBounds(s.getX(), s.getY(), s.getWidth(), s.getHeight());
+            btn.setBounds(s.getX(), s.getY()+yOffset, s.getWidth(), s.getHeight());
             btn.setName(s.getId());
             btn.setBorderPainted(false);
             btn.setContentAreaFilled(false);
@@ -125,7 +127,7 @@ public class counterBar extends JPanel {
                                     JButton progress = new JButton(gifIcon);
                                     // me when image flush exist
                                     gifIcon.getImage().flush();
-                                    progress.setBounds(45, 240, 120, 120);
+                                    progress.setBounds(45, 240+yOffset, 120, 120);
                                     progress.setBorderPainted(false);
                                     progress.setContentAreaFilled(false);
                                     progress.setFocusPainted(false);
@@ -165,16 +167,25 @@ public class counterBar extends JPanel {
                                                     if ("bowl_empty".equals(bowl.getName())){
                                                         try {
                                                             if (itemName.contains("green")){
-                                                                bowl.setIcon(IconImage.create("resources/images/gamePlay/ingredients/noodles/finishedNoodles/justNoodle/greenEgg.png", 175, 175));
-                                                                bowl.setName("bowl_noodle_greenEgg");
+                                                                updateBowlVisual(
+                                                                        bowl,
+                                                                        "resources/images/gamePlay/ingredients/noodles/finishedNoodles/justNoodle/greenEgg.png",
+                                                                        "bowl_noodle_greenEgg"
+                                                                );
                                                                 enableDrag(bowl);
                                                             }else if (itemName.contains("yellow")){
-                                                                bowl.setIcon(IconImage.create("resources/images/gamePlay/ingredients/noodles/finishedNoodles/justNoodle/yellow.png", 175, 175));
-                                                                bowl.setName("bowl_noodle_yellow");
+                                                                updateBowlVisual(
+                                                                        bowl,
+                                                                        "resources/images/gamePlay/ingredients/noodles/finishedNoodles/justNoodle/yellow.png",
+                                                                        "bowl_noodle_yellow"
+                                                                );
                                                                 enableDrag(bowl);
                                                             }else{
-                                                                bowl.setIcon(IconImage.create("resources/images/gamePlay/ingredients/noodles/finishedNoodles/justNoodle/riceThinWideVermicelli.png", 175, 175));
-                                                                bowl.setName("bowl_noodle_riceThinWideVermicelli");
+                                                                updateBowlVisual(
+                                                                        bowl,
+                                                                        "resources/images/gamePlay/ingredients/noodles/finishedNoodles/justNoodle/riceThinWideVermicelli.png",
+                                                                        "bowl_noodle_riceThinWideVermicelli"
+                                                                );
                                                                 enableDrag(bowl);
                                                             }
                                                             break;
@@ -191,19 +202,57 @@ public class counterBar extends JPanel {
                                     stopTimer.setRepeats(false);
                                     stopTimer.start();
                                 }
+                                // Serve
+                                if (c instanceof JButton bowl && bowl.getName().contains("bowl_") && itemBounds.intersects(btn.getBounds())) {
+                                    int centerX = bowl.getX() + (bowl.getWidth() / 2);
+                                    int sectionIndex = centerX / 200;
+
+                                    if (sectionIndex >= 1 && sectionIndex <= 3 && bowl.getY() < 150) {
+                                        String rawCurrentPath = (String) bowl.getClientProperty("foodPath");
+                                        String rawTargetPath = cstPanel.getCustomerDataAt(sectionIndex - 1).foodPath;
+                                        String currentFoodPath = (rawCurrentPath != null) ? rawCurrentPath.replace("\\", "/") : "";
+                                        String targetFoodPath = (rawTargetPath != null) ? rawTargetPath.replace("\\", "/") : "";
+
+                                        System.out.println("Serving food from: " + currentFoodPath);
+
+                                        if (currentFoodPath.equals(targetFoodPath)) {
+                                            System.out.println("Match! Customer satisfied.");
+                                            // Remove Bowl
+                                            remove(bowl);
+                                            for (Component comp : getComponents()) {
+                                                if (comp instanceof JButton p && "Occupied".equals(p.getName())) {
+                                                    p.setName("placemat");
+                                                }
+                                            }
+                                            revalidate();
+                                            repaint();
+                                            // Logic to reward player
+                                            cstPanel.removeCustomer(sectionIndex-1,cstPanel.getCustomerDataAt(sectionIndex - 1));
+                                        } else {
+                                            System.out.println("Wrong order! Customer wanted: " + targetFoodPath);
+                                        }
+
+                                        c.setLocation(originalPos[0]);
+                                        break;
+                                    }
+                                }
+                                // Trash Can
                                 if (c instanceof JButton bowl && bowl.getName().contains("bowl_") && btn.getName().contains("trash") && itemBounds.intersects(btn.getBounds())){
-                                    bowl.setIcon(IconImage.create("resources/images/gamePlay/bowl/empty.png", 175, 175));
-                                    System.out.println(bowl.getName());
-                                    bowl.setName("bowl_empty");
+                                    updateBowlVisual(
+                                            bowl,
+                                            "resources/images/gamePlay/bowl/empty.png",
+                                            "bowl_empty"
+                                    );
                                     disableDrag(bowl);
                                     if (btn.getName().equals("trash")){
                                         btn.setIcon(new ImageIcon("resources/images/gamePlay/binn/trash.png"));
                                         //she so perfect bah bah
                                         //the + 5 is so on point
-                                        btn.setBounds(btn.getX(),btn.getY() + 5, 162, 68);
+                                        btn.setBounds(btn.getX(),btn.getY() + yOffset + 5, 162, 68);
                                         btn.setName("trashed");
                                     }
                                 }
+                                // Pot
                                 if (c instanceof JButton ladle && itemBounds.intersects(btn.getBounds()) && btn.getName().contains("pot") && ladle.getName().equals("ladle")) {
                                     for (Component comp : getComponents()) {
                                         if (comp instanceof JButton bowl && bowl.getName().contains("bowl_noodle_")) {
@@ -221,11 +270,12 @@ public class counterBar extends JPanel {
                                             if (!noodleType.isEmpty()) {
                                                 try {
                                                     // Construct path: clearBroth -> [noodleType] -> no_addon.png
-                                                    String brothPath = "resources/images/gamePlay/ingredients/noodles/finishedNoodles/clearBroth/"
-                                                            + noodleType + "/no_addon.png";
-                                                    bowl.setIcon(IconImage.create(brothPath, 175, 175));
-                                                    // Update name to reflect it now has broth and the noodle type
-                                                    bowl.setName("bowl_clearBroth_" + noodleType);
+                                                    String actualPath = "resources/images/gamePlay/ingredients/noodles/finishedNoodles/clearBroth/" + noodleType + "/no_addon.png";
+                                                    updateBowlVisual(
+                                                            bowl,
+                                                            actualPath,
+                                                            "bowl_clearBroth_" + noodleType // Update name to reflect it now has broth and the noodle type
+                                                    );
                                                 } catch (Exception ex) {
                                                     System.out.println("Failed to add broth to bowl");
                                                 }
@@ -325,7 +375,7 @@ public class counterBar extends JPanel {
                                 ImageIcon icon;
                                 icon = IconImage.create("resources/images/gamePlay/bowl/empty.png", 175, 175);
                                 JButton bowl_empty = new JButton(icon);
-                                bowl_empty.setBounds(390, 169, 175, 175);
+                                bowl_empty.setBounds(390, 169+yOffset, 175, 175);
                                 bowl_empty.setBorderPainted(false);
                                 bowl_empty.setContentAreaFilled(false);
                                 bowl_empty.setOpaque(false);
@@ -361,9 +411,7 @@ public class counterBar extends JPanel {
                                     String comboFolder = getUpdatedToppingsPath(bowlName, "");
 
                                     String finalPath = buildFinalPath(newBroth, noodleType, comboFolder, hasVeg);
-
-                                    btn.setIcon(IconImage.create(finalPath, 175, 175));
-                                    btn.setName(bowlName.replace("clearBroth", newBroth));
+                                    updateBowlVisual(btn, finalPath, bowlName.replace("clearBroth", newBroth));
 
                                     revalidate(); repaint(); break;
                                 }
@@ -372,26 +420,24 @@ public class counterBar extends JPanel {
                                 List<String> validToppings = List.of("meatball", "porkSlices", "porkRind", "vegetables");
 
                                 if (validToppings.contains(itemName)) {
-                                    // Determine the meat combo folder
                                     String toppingToAdd = itemName.equals("vegetables") ? "" : itemName;
                                     String comboFolder = getUpdatedToppingsPath(bowlName, toppingToAdd);
 
-                                    // It is illegal if user drops vegetables but there's no meat (no_addon) (no picture) (no maiden)
+                                    // Vegetable safety check
                                     boolean isIllegalVeg = itemName.equals("vegetables") && comboFolder.equals("no_addon");
 
                                     if (isIllegalVeg) {
                                         System.out.println("Vegetables ignored: No meat toppings present.");
-                                        // TODO: playSound("wrong_selection.wav");
                                     } else {
-                                        // check for veg
                                         boolean visualHasVeg = (bowlName.contains("vegetables") || itemName.equals("vegetables"));
-
                                         String finalPath = buildFinalPath(currentBroth, noodleType, comboFolder, visualHasVeg);
-                                        btn.setIcon(IconImage.create(finalPath, 175, 175));
 
+                                        String newName = bowlName;
                                         if (!bowlName.contains(itemName)) {
-                                            btn.setName(bowlName + "_" + itemName);
+                                            newName = bowlName + "_" + itemName;
                                         }
+
+                                        updateBowlVisual(btn, finalPath, newName);
 
                                         revalidate();
                                         repaint();
@@ -419,12 +465,18 @@ public class counterBar extends JPanel {
         repaint();
     }
 
+    private void updateBowlVisual(JButton bowl, String path, String newName) {
+        bowl.setIcon(IconImage.create(path, 175, 175));
+        bowl.setName(newName);
+        bowl.putClientProperty("foodPath", path);
+    }
+
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
 
         if (counterBarimage != null) {
-            g.drawImage(counterBarimage, 0, 0,800,520, this);
+            g.drawImage(counterBarimage, 0, 90,800,520, this);
         }
     }
 

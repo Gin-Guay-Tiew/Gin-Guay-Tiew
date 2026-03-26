@@ -27,19 +27,33 @@ public class customerPanel extends JPanel {
     }
 
 
-    public void showCustomers(int levelID){
+    public void showCustomers(int levelID) {
         removeAll();
-
         queue.clear();
-        Arrays.fill(slots, null); // เคลียร์ slot
+        Arrays.fill(slots, null);
 
         java.util.List<CustomerData> dataList = CustomerFactory.getCustomer(levelID);
         queue.addAll(dataList);
 
-        // เติมให้เต็มตอนเริ่ม
-        for (int i = 0; i < slots.length; i++) {
+        int startWait = 1000 + (int)(Math.random() * 1000);
+        int spawnInterval = 1000 + (int)(Math.random() * 1000);
+        final int[] count = {0};
+
+        Timer staggerTimer = new Timer(spawnInterval, null);
+        staggerTimer.addActionListener(e -> {
             spawnNext();
-        }
+            count[0]++;
+
+            if (count[0] >= slots.length) {
+                staggerTimer.stop();
+            }
+
+            revalidate();
+            repaint();
+        });
+
+        staggerTimer.setInitialDelay(startWait);
+        staggerTimer.start();
 
         revalidate();
         repaint();
@@ -57,6 +71,7 @@ public class customerPanel extends JPanel {
                 JPanel bubblePanel = new JPanel();
 
                 customerComponent c = new customerComponent(
+                        d,
                         d.imgPath,
                         d.patiencePath,
                         d.type,
@@ -97,19 +112,35 @@ public class customerPanel extends JPanel {
         }
     }
 
-    private void removeCustomer(int index,CustomerData d) {
+    public CustomerData getCustomerDataAt(int index) {
+        if (index >= 0 && index < slots.length && slots[index] != null) {
+            return slots[index].getData();
+        }
+        return null;
+    }
+
+    public void removeCustomer(int index, CustomerData d) {
         customerComponent c = slots[index];
 
         if (c == null) return;
-        System.out.println("You received 67 baht from "+d.type+" "+d.foodPath);
+        System.out.println("You received 67 baht from " + d.type + " " + d.foodPath);
+
         remove(c);
         remove(c.getBubble());
         slots[index] = null;
 
-        spawnNext(); // เติมตัวใหม่
-
         revalidate();
         repaint();
+
+        int randomDelay = 1000 + (int)(Math.random() * 2000);
+        Timer delaySpawnTimer = new Timer(randomDelay, e -> {
+            spawnNext();
+            revalidate();
+            repaint();
+        });
+
+        delaySpawnTimer.setRepeats(false);
+        delaySpawnTimer.start();
     }
 
     public void updateCustomers() {

@@ -47,8 +47,8 @@ public class gamePlayScreen extends JPanel {
         customerPanel.showCustomers(levelId);
 
         // counter
-        counterBarPanel = new counterBar(mainFrame);
-        counterBarPanel.setBounds(0,90,800,600);
+        counterBarPanel = new counterBar(mainFrame, customerPanel);
+        counterBarPanel.setBounds(0,0,800,600);
 
         gameLayer.add(bgPanel,Integer.valueOf(0));
         gameLayer.add(topBar,Integer.valueOf(1));

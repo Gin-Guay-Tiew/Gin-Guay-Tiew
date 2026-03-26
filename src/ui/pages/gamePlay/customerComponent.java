@@ -13,8 +13,10 @@ public class customerComponent extends JPanel {
     private String pathImage;
     private int state_bored;
     private int state_angry;
+    private CustomerData data;
 
-    public customerComponent(String imgPath ,String patiencePath,String type,String skin, int life,JPanel bubble, Runnable onClick){
+    public customerComponent(CustomerData data, String imgPath ,String patiencePath,String type,String skin, int life,JPanel bubble, Runnable onClick){
+        this.data = data;
         Object[] results = setState(type);
         pathImage = "resources/images/gamePlay/customer/"+type+"/"+skin;
         state_bored = (int) results[0];
@@ -35,18 +37,10 @@ public class customerComponent extends JPanel {
 
         add(imgLabel);
         add(patienceLabel);
+    }
 
-        MouseAdapter clickHandler = new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                onClick.run();
-            }
-        };
-
-        this.addMouseListener(clickHandler);
-        bubble.addMouseListener(clickHandler);
-        imgLabel.addMouseListener(clickHandler);
-        patienceLabel.addMouseListener(clickHandler);
+    public CustomerData getData() {
+        return data;
     }
 
     public void setPatienceGif(String path){
