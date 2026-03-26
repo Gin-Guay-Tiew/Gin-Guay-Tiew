@@ -7,122 +7,111 @@ import javax.swing.*;
 import java.awt.*;
 
 public class gamePlayScreen extends JPanel {
+
     private WinLosePage status;
     private bgPanel bgPanel;
     private counterBar counterBarPanel;
     private TopBar topBar;
 
+    private customerPanel customerPanel; //  ต้องเป็น field
 
     public gamePlayScreen(MainFrame mainFrame,int levelId){
 
         setLayout(new OverlayLayout(this));
-
-        // background
         this.setBackground(Color.white);
 
-
-        // status endgame
+        // status
         status = new WinLosePage(mainFrame);
         status.setBounds(0,0,800,520);
-        status.setVisible(false); // โชว์ตอนจบเกม
+        status.setVisible(false);
 
         JPanel mainGameArea = new JPanel(new BorderLayout());
         mainGameArea.setOpaque(false);
 
-
-
-        // Game layer
+        // layered
         JLayeredPane gameLayer = new JLayeredPane();
         gameLayer.setLayout(null);
         gameLayer.setBounds(0,0,800,600);
 
-
-
-        //Layer 0 : background
+        // bg
         bgPanel = new bgPanel();
         bgPanel.setBounds(0,0,800,400);
 
-        //Layer 1 :top bar
+        // top bar
         topBar = new TopBar(mainFrame);
         topBar.setBounds(0,0,800,90);
 
-        //Layer 2 : customer
-        customerPanel customerPanel =  new customerPanel(mainFrame);
-        customerPanel.setBounds(0,0,800, 600);
+        // customer panel
+        customerPanel = new customerPanel(topBar);
+        customerPanel.setBounds(0,0,800,600);
         customerPanel.showCustomers(levelId);
 
-        //Layer 3 : counter bar
+        // counter
         counterBarPanel = new counterBar(mainFrame);
         counterBarPanel.setBounds(0,90,800,600);
-
 
         gameLayer.add(bgPanel,Integer.valueOf(0));
         gameLayer.add(topBar,Integer.valueOf(1));
         gameLayer.add(customerPanel, Integer.valueOf(2));
         gameLayer.add(counterBarPanel, Integer.valueOf(3));
 
-
         mainGameArea.add(gameLayer, BorderLayout.CENTER);
 
         add(status);
         add(mainGameArea);
 
-        // ดึง timeDisplay จาก topBar
+        // ⏱ timer
         TimeDisplay screenTime = topBar.getTimeDisplay();
 
-        GameTimer myTimer = new GameTimer(45,this,screenTime);
+        GameTimer myTimer = new GameTimer(1000, this, screenTime){
+            public void onTick() {
+                customerPanel.updateCustomers(); // ⭐ อัปเดตลูกค้า
+
+                if (customerPanel.isFinished()) {
+                    gameOver();
+                }
+            }
+        };
+
         myTimer.startTimer();
 
-        //UI level
         showLevel(levelId);
-
-
     }
 
     public void showLevel(int levelId) {
         switch (levelId) {
             case 1:
-                bgPanel.setBackgroundImage(
-                        "resources/images/gamePlay/bg/LV1.gif",
-                        -3,-100 , 800, 400
-                );
+                bgPanel.setBackgroundImage("resources/images/gamePlay/bg/LV1.gif",-3,-100 , 800, 400);
                 break;
-
             case 2:
-                bgPanel.setBackgroundImage(
-                        "resources/images/gamePlay/bg/LV2.gif",
-                        0, -50, 800, 400
-                );
+                bgPanel.setBackgroundImage("resources/images/gamePlay/bg/LV2.gif",0, -50, 800, 400);
                 break;
-
             case 3:
-                bgPanel.setBackgroundImage(
-                        "resources/images/gamePlay/bg/LV3.gif",
-                        0, -80, 800, 400
-                );
+                bgPanel.setBackgroundImage("resources/images/gamePlay/bg/LV3.gif",0, -80, 800, 400);
                 break;
             case 4:
-                bgPanel.setBackgroundImage(
-                        "resources/images/gamePlay/bg/LV4.gif",
-                        0, 0, 800, 400
-                );
+                bgPanel.setBackgroundImage("resources/images/gamePlay/bg/LV4.gif",0, 0, 800, 400);
                 break;
             case 5:
-                bgPanel.setBackgroundImage(
-                        "resources/images/gamePlay/bg/LV5.gif",
-                        0, 0, 800, 400
-                );
+                bgPanel.setBackgroundImage("resources/images/gamePlay/bg/LV5.gif",0, 0, 800, 400);
                 break;
         }
+
         counterBarPanel.setSlots(
                 LevelFactory.getLevel(levelId).slots
         );
     }
-    // โชว์หน้า status จบเกม
+
+    public void updateGame() {
+        customerPanel.updateCustomers();
+        System.out.println("update");
+        if (customerPanel.isFinished()) {
+            gameOver();
+        }
+    }
+
     public void gameOver(){
         status.setVisible(true);
     }
 
 }
-
-

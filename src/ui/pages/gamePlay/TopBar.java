@@ -13,6 +13,9 @@ import java.awt.event.ActionListener;
 // modify add a time box into it
 public class TopBar extends JPanel {
 
+    int pay = 1000;
+    MoneyDisplay money;
+
     private final Font loadedFont = FontLoader.loadCustomFont("resources/font/Jersey10.ttf");
     private TimeDisplay timeDisplay;
 
@@ -29,14 +32,16 @@ public class TopBar extends JPanel {
         mtPanel.setBounds(450,-10,320,85);
 
         // Money box
-        JPanel money = new MoneyDisplay(1000);
+        money = new MoneyDisplay(pay);
         timeDisplay = new TimeDisplay();
         mtPanel.add(timeDisplay);
         mtPanel.add(money);
-
-
         add(mtPanel);
+    }
 
+    public void setMoney(){
+        pay+=45;
+        money.updateMoney(pay);
     }
 
     public TimeDisplay getTimeDisplay() {
