@@ -24,7 +24,7 @@ public class customerPanel extends JPanel {
         List<CustomerData> dataList = CustomerFactory.getCustomer(levelID);
 
         for (CustomerData d : dataList){
-            customerComponent c = new customerComponent(d.imgPath,d.patiencePath);
+            customerComponent c = new customerComponent(d.imgPath,d.patiencePath,d.requestFood);
             c.setBounds(d.x,d.y,197,240);
             add(c);
         }

@@ -26,7 +26,7 @@ public class TopBar extends JPanel {
         JPanel mtPanel = new JPanel();
         mtPanel.setLayout(new GridLayout(1, 2, 20, 0));
         mtPanel.setOpaque(false);
-        mtPanel.setBounds(450,-10,320,85);
+        mtPanel.setBounds(450,-10,320,90);
 
         // Money box
         JPanel money = new MoneyDisplay(1000);
