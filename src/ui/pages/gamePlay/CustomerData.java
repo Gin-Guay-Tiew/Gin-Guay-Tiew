@@ -5,15 +5,17 @@ public class CustomerData {
     public String skin;
     public String imgPath;
     public String patiencePath;
+    public String foodPath;
     public int x,y;
 
     public int life;
 
-    public CustomerData(String img, String patience,String type,String skin, int x, int y, int life){
+    public CustomerData(String img, String patience,String type,String skin,String foodPath, int x, int y, int life){
         this.type = type;
         this.skin = skin;
         this.imgPath = img;
         this.patiencePath = patience;
+        this.foodPath = foodPath;
         this.x = x;
         this.y = y;
         this.life = life;
