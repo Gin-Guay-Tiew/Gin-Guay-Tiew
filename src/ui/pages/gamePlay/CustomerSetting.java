@@ -59,7 +59,7 @@ public class CustomerSetting {
             customer.add(new CustomerData(
                         "resources/images/gamePlay/customer/"+typeCustomer+"/"+skinCustomer+"_happy.png",
                     "resources/images/gamePlay/customer/Time/"+timeSet+".gif",
-                    typeCustomer,skinCustomer,CustomerMenu(level),
+                    typeCustomer,skinCustomer,CustomerMenu.getRandomFoodImage(level),
                         211,
                         78,
                     patience
