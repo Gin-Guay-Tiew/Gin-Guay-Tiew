@@ -13,7 +13,7 @@ public class PauseScreen extends JPanel {
         add(Box.createVerticalStrut(120));
 
         JLabel logo = new JLabel(
-                IconImage.create("resources/images/shared/AppIcon.png", 300, 120)
+                IconImage.create("resources/images/mainMenu/LogoGame.png", 300, 120)
         );
         logo.setAlignmentX(CENTER_ALIGNMENT);
 
@@ -21,7 +21,7 @@ public class PauseScreen extends JPanel {
         add(Box.createVerticalStrut(40));
 
         JButton resume = new ImageJButton(
-                "resources/images/shared/buttons/BackMini", ".png", 30, 280, 70
+                "resources/images/endGame/BackToTheGame", ".png", 30, 280, 70
         );
 
         JButton setting = new ImageJButton(
