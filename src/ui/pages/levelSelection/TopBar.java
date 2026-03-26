@@ -20,8 +20,7 @@ public class TopBar extends JPanel {
 
         // Components
         JButton backBtn = new BackBtn(mainFrame, "mainMenu");
-        MoneyDisplay moneyDisplay = new MoneyDisplay(mainFrame.getPlayerData().getMoney());
-        mainFrame.getPlayerData().setMoneyDisplay(moneyDisplay);
+        MoneyDisplay moneyDisplay = new MoneyDisplay(mainFrame);
 
         add(backBtn, BorderLayout.WEST);
         add(moneyDisplay, BorderLayout.EAST);

@@ -37,7 +37,7 @@ public class ShopScreen extends JPanel {
         JButton backBtn = new BackBtn(gm.getMainFrame(), MainFrame.MAIN_MENU);
         northPanel.add(backBtn, BorderLayout.WEST);
 
-        moneyPanel = new MoneyDisplay(gm.getTotalMoney());
+        moneyPanel = new MoneyDisplay(mainFrame);
         northPanel.add(moneyPanel, BorderLayout.EAST);
         add(northPanel, BorderLayout.NORTH);
 
