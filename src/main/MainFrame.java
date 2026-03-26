@@ -44,7 +44,7 @@ public class MainFrame extends JFrame implements WindowListener {
     private int currentLevel;
 
     private String previousPage;
-    
+
     private PlayerData playerData = new PlayerData();
 
     // สำหรับสร้างหน้าเกมใหม่ตอนกด play again
@@ -75,6 +75,10 @@ public class MainFrame extends JFrame implements WindowListener {
 
     public PageNavigator getNavigator() {
         return navigator;
+    }
+
+    public String getPreviousPage() {
+        return previousPage;
     }
 
     public PlayerData getPlayerData(){
@@ -159,7 +163,10 @@ public class MainFrame extends JFrame implements WindowListener {
         root.getActionMap().put("pauseGame", new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                navigator.toPage(PAUSE, false);
+                if (!PAUSE.equals(navigator.getCurrentPage())) {
+                    previousPage = navigator.getCurrentPage();
+                    navigator.toPage(PAUSE, false);
+                }
             }
         });
     }

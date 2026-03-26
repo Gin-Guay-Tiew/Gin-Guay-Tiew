@@ -12,6 +12,8 @@ public class PageNavigator {
     private final CardLayout cardLayout;
     private final Transition animator;
 
+    private String currentPage;
+
     /**
      * Constructs a PageNavigator.
      *
@@ -52,17 +54,25 @@ public class PageNavigator {
      * @param waitTime        The delay in milliseconds before switching page. (Ignored if applyTransition is false)
      */
     public void toPage(String pageName, boolean applyTransition, int waitTime) {
+
+        currentPage = pageName;
+
         if (!applyTransition) {
             cardLayout.show(mainPanel, pageName);
             return;
         }
 
         animator.expand(75);
+
         Timer timer = new Timer(waitTime, e -> {
             cardLayout.show(mainPanel, pageName);
             animator.fadeOut(0.1f);
         });
         timer.setRepeats(false);
         timer.start();
+    }
+
+    public String getCurrentPage() {
+        return currentPage;
     }
 }
