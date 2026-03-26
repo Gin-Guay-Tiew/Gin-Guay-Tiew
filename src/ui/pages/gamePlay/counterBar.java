@@ -119,6 +119,15 @@ public class counterBar extends JPanel {
                                             "resources/images/gamePlay/ingredients/noodles/boilingPot/boiling1.png",
                                             "resources/images/gamePlay/ingredients/noodles/boilingPot/boiling2.png"
                                     };
+                                    // for when implementing pot upgrade
+                                    String[] progressFrames = {
+                                            "resources/images/gamePlay/ingredients/noodles/boilingPot/boilingProgress/stage1.png",
+                                            "resources/images/gamePlay/ingredients/noodles/boilingPot/boilingProgress/stage2.png",
+                                            "resources/images/gamePlay/ingredients/noodles/boilingPot/boilingProgress/stage3.png",
+                                            "resources/images/gamePlay/ingredients/noodles/boilingPot/boilingProgress/stage4.png",
+                                            "resources/images/gamePlay/ingredients/noodles/boilingPot/boilingProgress/stage5.png",
+                                            "resources/images/gamePlay/ingredients/noodles/boilingPot/boilingProgress/finished.png"
+                                    };
                                     btn.setName("pot_boiling");
                                     // Create and add the progress indicator
                                     ImageIcon gifIcon = new ImageIcon("resources/images/gamePlay/ingredients/noodles/boilingPot/boilingProgress/progress_animation.GIF");
