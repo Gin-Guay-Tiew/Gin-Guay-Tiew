@@ -60,12 +60,11 @@ public class gamePlayScreen extends JPanel {
         add(status);
         add(mainGameArea);
 
-        // ⏱ timer
         TimeDisplay screenTime = topBar.getTimeDisplay();
 
-        GameTimer myTimer = new GameTimer(1000, this, screenTime){
+        GameTimer myTimer = new GameTimer(400, this, screenTime){
             public void onTick() {
-                customerPanel.updateCustomers(); // ⭐ อัปเดตลูกค้า
+                customerPanel.updateCustomers();
 
                 if (customerPanel.isFinished()) {
                     gameOver();
@@ -104,7 +103,6 @@ public class gamePlayScreen extends JPanel {
 
     public void updateGame() {
         customerPanel.updateCustomers();
-        System.out.println("update");
         if (customerPanel.isFinished()) {
             gameOver();
         }
@@ -113,5 +111,7 @@ public class gamePlayScreen extends JPanel {
     public void gameOver(){
         status.setVisible(true);
     }
+
+
 
 }

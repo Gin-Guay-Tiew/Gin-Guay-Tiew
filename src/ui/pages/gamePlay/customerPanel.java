@@ -1,10 +1,11 @@
 package ui.pages.gamePlay;
 
-import main.MainFrame;
+import utilities.IconImage;
 
 import javax.swing.*;
 import java.awt.*;
 import java.util.*;
+import javax.swing.Timer;
 
 public class customerPanel extends JPanel {
 
@@ -53,6 +54,7 @@ public class customerPanel extends JPanel {
 
                 CustomerData d = queue.poll();
                 int index = i;
+                JPanel bubblePanel = new JPanel();
 
                 customerComponent c = new customerComponent(
                         d.imgPath,
@@ -60,24 +62,49 @@ public class customerPanel extends JPanel {
                         d.type,
                         d.skin,
                         d.life,
+                        bubblePanel,
                         () -> removeCustomer(index,d)
                 );
 
                 c.setBounds(xs[i], ys[i], 197, 240);
+                c.playSpawnBounce(xs[i], ys[i]);
+                bubblePanel.setLayout(null);
+                bubblePanel.setOpaque(false);
+                bubblePanel.setBounds(xs[i] - 80, ys[i] - 50, 120, 120);
+                playBubbleBounce(bubblePanel, xs[i] - 80, ys[i] - 50);
+
+                JLabel bubble = new JLabel(
+                        IconImage.create("resources/images/gamePlay/customer/message.png",140,140)
+                );
+                bubble.setBounds(0,0,120,120);
+
+                JLabel food = new JLabel();
+                food.setBounds(25,15,76,76);
+                food.setIcon(IconImage.create(d.foodPath,76,76));
+
+                bubblePanel.add(bubble);
+                bubblePanel.add(food);
+
+                bubblePanel.setComponentZOrder(food,0);
+                bubblePanel.setComponentZOrder(bubble,1);
+
                 slots[i] = c;
                 add(c);
+                add(bubblePanel);
 
                 break;
             }
         }
     }
+
     private void removeCustomer(int index,CustomerData d) {
         customerComponent c = slots[index];
 
         if (c == null) return;
         bar.setMoney();
-        System.out.println("You received 67 baht from "+d.type);
+        System.out.println("You received 67 baht from "+d.type+" "+d.foodPath);
         remove(c);
+        remove(c.getBubble());
         slots[index] = null;
 
         spawnNext(); // เติมตัวใหม่
@@ -97,6 +124,7 @@ public class customerPanel extends JPanel {
 
             if (c.isExpired()) {
                 remove(c);
+                remove(c.getBubble());
                 slots[i] = null;
 
                 spawnNext(); // เติมช่องนั้นทันที
@@ -115,4 +143,38 @@ public class customerPanel extends JPanel {
         }
         return true;
     }
+
+    private void playBubbleBounce(JPanel panel, int targetX, int targetY) {
+        int startY = targetY + 80;
+        panel.setLocation(targetX, startY);
+
+        int duration = 400;
+        long startTime = System.currentTimeMillis();
+
+        Timer timer = new Timer(16, null);
+        timer.addActionListener(e -> {
+            float t = (System.currentTimeMillis() - startTime) / (float) duration;
+            if (t > 1) t = 1;
+
+            float eased = easeOutBack(t);
+
+            int currentY = (int) (startY + (targetY - startY) * eased);
+            panel.setLocation(targetX, currentY);
+
+            if (t >= 1) {
+                timer.stop();
+            }
+        });
+
+        timer.start();
+    }
+
+    // ใช้ร่วมกันได้
+    private float easeOutBack(float t) {
+        float c1 = 1.70158f;
+        float c3 = c1 + 1;
+        return 1 + c3 * (float)Math.pow(t - 1, 3)
+                + c1 * (float)Math.pow(t - 1, 2);
+    }
+
 }

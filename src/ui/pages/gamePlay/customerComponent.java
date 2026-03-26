@@ -9,16 +9,19 @@ public class customerComponent extends JPanel {
     private JLabel imgLabel;
     private JLabel patienceLabel;
     private int life;
+    private JPanel bubble;
     private String pathImage;
     private int state_bored;
     private int state_angry;
 
-    public customerComponent(String imgPath ,String patiencePath,String type,String skin, int life, Runnable onClick){
+    public customerComponent(String imgPath ,String patiencePath,String type,String skin, int life,JPanel bubble, Runnable onClick){
         Object[] results = setState(type);
         pathImage = "resources/images/gamePlay/customer/"+type+"/"+skin;
         state_bored = (int) results[0];
         state_angry = (int) results[1];
         this.life = life;
+        this.bubble = bubble;
+
         setLayout(null);
         setOpaque(false);
         setSize(197,240);
@@ -33,7 +36,6 @@ public class customerComponent extends JPanel {
         add(imgLabel);
         add(patienceLabel);
 
-
         MouseAdapter clickHandler = new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -42,9 +44,11 @@ public class customerComponent extends JPanel {
         };
 
         this.addMouseListener(clickHandler);
+        bubble.addMouseListener(clickHandler);
         imgLabel.addMouseListener(clickHandler);
         patienceLabel.addMouseListener(clickHandler);
     }
+
     public void setPatienceGif(String path){
         patienceLabel.setIcon(null);
 
@@ -54,7 +58,9 @@ public class customerComponent extends JPanel {
         patienceLabel.setIcon(icon);
     }
 
-
+    public JPanel getBubble(){
+        return bubble;
+    }
 
     public void tick(){
         life--;
@@ -81,4 +87,39 @@ public class customerComponent extends JPanel {
         }
         return new Object[]{30, 21};
     }
+
+
+    public void playSpawnBounce(int targetX, int targetY) {
+        int startY = targetY + 100; // เริ่มต่ำกว่าจริง
+        setLocation(targetX, startY);
+
+        int duration = 400;
+        long startTime = System.currentTimeMillis();
+
+        Timer timer = new Timer(16, null);
+        timer.addActionListener(e -> {
+            float t = (System.currentTimeMillis() - startTime) / (float) duration;
+            if (t > 1) t = 1;
+
+            float eased = easeOutBack(t);
+
+            int currentY = (int) (startY + (targetY - startY) * eased);
+            setLocation(targetX, currentY);
+
+            if (t >= 1) {
+                timer.stop();
+            }
+        });
+
+        timer.start();
+    }
+
+    // easing เด้ง
+    private float easeOutBack(float t) {
+        float c1 = 1.70158f;
+        float c3 = c1 + 1;
+        return 1 + c3 * (float)Math.pow(t - 1, 3)
+                + c1 * (float)Math.pow(t - 1, 2);
+    }
+
 }
