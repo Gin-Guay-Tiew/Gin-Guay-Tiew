@@ -13,6 +13,8 @@ public class GameTutorialPage extends JPanel {
     private JLabel pageLabel;
     private ArrowButton ArrowLeft;
     private ArrowButton ArrowRight;
+    private int btnWidth = 80;
+    private int btnHeight = 80;
 
     private Image backgroundImage;
     private Image backgroundImage_Two;
@@ -28,18 +30,19 @@ public class GameTutorialPage extends JPanel {
         panelFrameImage = new ImageIcon("resources/images/Tutorial/Frame.png").getImage();
 
         pageLabel = new JLabel();
-        //pageLabel.setBounds(39, 29, 575, 362);
-        pageLabel.setBounds(55, 55, 540, 300);
+        pageLabel.setBounds(0, 0, 562, 342);
+        // ใส่เส้นขอบสีแดง pageLabel
+        pageLabel.setBorder(BorderFactory.createLineBorder(Color.RED, 1));
         pageLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        pageLabel.setVerticalAlignment(SwingConstants.CENTER);
         add(pageLabel);
 
         ArrowLeft = new ArrowButton(
                 "resources/images/Tutorial/ArrowInTutorial/ArrowLeft.png",
                 "resources/images/Tutorial/ArrowInTutorial/ArrowLeft_Hover.png",
-                "resources/images/Tutorial/ArrowInTutorial/ArrowLeft_Click.png"
+                "resources/images/Tutorial/ArrowInTutorial/ArrowLeft_Click.png",
+                btnWidth,btnHeight
         );
-        ArrowLeft.setBounds(0, 232, 67, 67);
+        ArrowLeft.setBounds(10, 232, btnWidth, btnHeight);
         ArrowLeft.setClickAction(() -> {
             if (currentPage > 1) {
                 currentPage--;
@@ -51,9 +54,10 @@ public class GameTutorialPage extends JPanel {
         ArrowRight = new ArrowButton(
                 "resources/images/Tutorial/ArrowInTutorial/ArrowRight.png",
                 "resources/images/Tutorial/ArrowInTutorial/ArrowRight_Hover.png",
-                "resources/images/Tutorial/ArrowInTutorial/ArrowRight_Click.png"
+                "resources/images/Tutorial/ArrowInTutorial/ArrowRight_Click.png",
+                btnWidth,80
         );
-        ArrowRight.setBounds(665, 232, 67, 67);
+        ArrowRight.setBounds(710, 232, btnWidth, btnHeight);
         ArrowRight.setClickAction(() -> {
             if (currentPage < TOTAL_PAGES) {
                 currentPage++;
@@ -109,10 +113,21 @@ public class GameTutorialPage extends JPanel {
         private boolean buttonEnabled = true;
         private boolean mouseInside = false;
 
-        public ArrowButton(String normalPath, String hoverPath, String clickPath) {
-            normalIcon = new ImageIcon(normalPath);
-            hoverIcon = new ImageIcon(hoverPath);
-            clickIcon = new ImageIcon(clickPath);
+        public ArrowButton(String normalPath, String hoverPath, String clickPath, int width, int height) {
+            // โหลดรูปต้นฉบับ
+            ImageIcon tempNormal = new ImageIcon(normalPath);
+            ImageIcon tempHover = new ImageIcon(hoverPath);
+            ImageIcon tempClick = new ImageIcon(clickPath);
+
+            // ปรับขนาดรูปภาพ
+            Image imgNormal = tempNormal.getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH);
+            Image imgHover = tempHover.getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH);
+            Image imgClick = tempClick.getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH);
+
+            // บันทึกรูปที่ปรับขนาดแล้ว
+            normalIcon = new ImageIcon(imgNormal);
+            hoverIcon = new ImageIcon(imgHover);
+            clickIcon = new ImageIcon(imgClick);
 
             setIcon(normalIcon);
 
