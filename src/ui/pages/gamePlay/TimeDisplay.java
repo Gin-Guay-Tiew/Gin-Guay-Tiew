@@ -1,5 +1,6 @@
 package ui.pages.gamePlay;
 
+import ui.components.CustomJLabel;
 import utilities.FontLoader;
 
 import javax.swing.*;
@@ -7,51 +8,74 @@ import java.awt.*;
 
 public class TimeDisplay extends JPanel {
     private final Font jerseyFont = FontLoader.loadCustomFont("resources/font/Jersey10.ttf");
-    private JLabel minLabel;
-    private JLabel secLabel;
+    private CustomJLabel minLabel;
+    private CustomJLabel secLabel;
+    private CustomJLabel colonLabel;
+    private CustomJLabel countLabel;
 
-    public TimeDisplay(){
-
-        setLayout(new FlowLayout(FlowLayout.CENTER,0,0));
+    public TimeDisplay() {
+        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         setBorder(BorderFactory.createEmptyBorder(35, 15, 0, 15));
         setOpaque(false);
 
-        Font font25 =  jerseyFont.deriveFont(25f);
+        Font timerFont = jerseyFont.deriveFont(35f);
+        Font smallFont = jerseyFont.deriveFont(20f);
 
-        JLabel timeLabel = new JLabel("Time : ");
-        timeLabel.setFont(font25);
+        JPanel timerPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
+        timerPanel.setOpaque(false);
 
-        minLabel = new JLabel("00");
-        minLabel.setFont(font25);
+        minLabel = new CustomJLabel("00", 5f);
+        minLabel.setFont(timerFont);
         minLabel.setHorizontalAlignment(SwingConstants.RIGHT);
-        minLabel.setPreferredSize(new Dimension(30,30));
+        minLabel.setPreferredSize(new Dimension(35, 35));
+        minLabel.setForeground(Color.white);
 
-        JLabel colonLabel = new JLabel(":");
-        colonLabel.setFont(font25);
+        colonLabel = new CustomJLabel(":", 5f);
+        colonLabel.setFont(timerFont);
+        colonLabel.setForeground(Color.white);
+        colonLabel.setBorder(BorderFactory.createEmptyBorder(0, 2, 0, 2));
 
-        secLabel = new JLabel("00");
-        secLabel.setFont(font25);
+        secLabel = new CustomJLabel("00", 5f);
+        secLabel.setFont(timerFont);
         secLabel.setHorizontalAlignment(SwingConstants.LEFT);
-        secLabel.setPreferredSize(new Dimension(30,30));
+        secLabel.setPreferredSize(new Dimension(35, 35));
+        secLabel.setForeground(Color.white);
 
-        add(timeLabel);
-        add(minLabel);
-        add(colonLabel);
-        add(secLabel);
+        timerPanel.add(minLabel);
+        timerPanel.add(colonLabel);
+        timerPanel.add(secLabel);
+
+        countLabel = new CustomJLabel("0/20", 3.5f);
+        countLabel.setFont(smallFont);
+        countLabel.setForeground(new Color(200, 200, 200));
+        countLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        countLabel.setBorder(BorderFactory.createEmptyBorder(0, 2, 0, 2));
+
+        add(timerPanel);
+        add(Box.createVerticalStrut(-5));
+        add(countLabel);
     }
 
-    public void updateTime(int totalSeconds){
+    public void updateTime(int totalSeconds) {
         int min = totalSeconds / 60;
         int sec = totalSeconds % 60;
 
-        minLabel.setText(String.format("%02d",min));
-        secLabel.setText(String.format("%02d",sec));
+        if (totalSeconds <= 10) {
+            Color urgencyColor = new Color(255, 75, 75);
+            minLabel.setForeground(urgencyColor);
+            secLabel.setForeground(urgencyColor);
+            colonLabel.setForeground(urgencyColor);
+        } else {
+            minLabel.setForeground(Color.white);
+            secLabel.setForeground(Color.white);
+            colonLabel.setForeground(Color.white);
+        }
+
+        minLabel.setText(String.format("%02d", min));
+        secLabel.setText(String.format("%02d", sec));
     }
 
-    // Draw BG Image
-    @Override
-    protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        g.drawImage(new ImageIcon("resources/images/shared/SignFrame.png").getImage(), 0, 0, getWidth(), getHeight(), this);
+    public void updateCount(int current, int max) {
+        countLabel.setText(current + "/" + max);
     }
 }

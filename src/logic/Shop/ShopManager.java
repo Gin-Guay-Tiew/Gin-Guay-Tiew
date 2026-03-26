@@ -49,7 +49,7 @@ public class ShopManager {
             return false;
         }
 
-        player.spendMoney(item.getPrice());
+        player.spendMoney((int) item.getPrice());
         return true;
     }
 

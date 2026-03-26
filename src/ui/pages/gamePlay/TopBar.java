@@ -24,16 +24,15 @@ public class TopBar extends JPanel {
 
         // money and time panel
         JPanel mtPanel = new JPanel();
-        mtPanel.setLayout(new GridLayout(1, 2, 20, 0));
+        mtPanel.setLayout(new BorderLayout());
         mtPanel.setOpaque(false);
-        mtPanel.setBounds(450,-10,320,90);
+        mtPanel.setBounds(0, -10, 775, 90);
 
         // Money box
-        JPanel money = new MoneyDisplay(1000);
+        JPanel money = new MoneyDisplay(mainFrame);
         timeDisplay = new TimeDisplay();
-        mtPanel.add(timeDisplay);
-        mtPanel.add(money);
-
+        mtPanel.add(timeDisplay, BorderLayout.WEST);
+        mtPanel.add(money, BorderLayout.EAST);
 
         add(mtPanel);
 
