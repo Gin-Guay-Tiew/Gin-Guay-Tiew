@@ -101,7 +101,6 @@ public class customerPanel extends JPanel {
         customerComponent c = slots[index];
 
         if (c == null) return;
-        bar.setMoney();
         System.out.println("You received 67 baht from "+d.type+" "+d.foodPath);
         remove(c);
         remove(c.getBubble());
