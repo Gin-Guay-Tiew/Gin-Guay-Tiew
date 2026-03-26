@@ -6,6 +6,8 @@ public class PlayerData {
 
     private int money = 0;
     private int level = 1;
+    private int volumeLv = 100;
+    private boolean stateSFX = true;
     private MoneyDisplay moneyDisplay;
 
     public int getMoney() {
@@ -16,8 +18,12 @@ public class PlayerData {
         return level;
     }
 
-    public MoneyDisplay getMoneyDisplay() {
-        return moneyDisplay;
+    public int getVolumeLv() {
+        return volumeLv;
+    }
+
+    public boolean isStateSFX() {
+        return stateSFX;
     }
 
     public void setMoney(int money) {
@@ -31,6 +37,14 @@ public class PlayerData {
         this.level = level;
     }
 
+    public void setVolumeLv(int volumeLv) {
+        this.volumeLv = volumeLv;
+    }
+
+    public void setStateSFX(boolean stateSFX) {
+        this.stateSFX = stateSFX;
+    }
+
     public void setMoneyDisplay(MoneyDisplay display) {
         this.moneyDisplay = display;
     }
@@ -41,5 +55,4 @@ public class PlayerData {
             this.moneyDisplay.updateMoney(this.money);
         }
     }
-
 }
