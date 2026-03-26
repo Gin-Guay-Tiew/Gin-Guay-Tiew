@@ -10,6 +10,8 @@ public class DataManager {
         try (DataOutputStream dos = new DataOutputStream(new FileOutputStream(SAVE_FILE))) {
             dos.writeInt(player.getMoney()); // Save money
             dos.writeInt(player.getLevel()); // Save level
+            dos.writeInt(player.getVolumeLv()); // Save volume
+            dos.writeBoolean(player.isStateSFX()); // Save SFX toggle
             dos.flush();
         } catch (IOException e) {
             e.printStackTrace();
@@ -25,6 +27,8 @@ public class DataManager {
         try (DataInputStream dis = new DataInputStream(new FileInputStream(file))) {
             player.setMoney(dis.readInt());
             player.setLevel(dis.readInt());
+            player.setVolumeLv(dis.readInt());
+            player.setStateSFX(dis.readBoolean());
         } catch (IOException e) {
             System.err.println("Could not load save data. Starting fresh.");
         }

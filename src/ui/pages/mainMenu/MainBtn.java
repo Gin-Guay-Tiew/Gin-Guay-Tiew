@@ -36,7 +36,7 @@ public class MainBtn implements ActionListener {
             };
             pop.createPopup(
                     frame,
-                    "Do you want to play the tutorial?", // Message
+                    "Do you want to see the tutorial?", // Message
                     "resources/images/shared/popups/Demo.png", // Background Path
                     btnPaths,
                     btnLabels,
