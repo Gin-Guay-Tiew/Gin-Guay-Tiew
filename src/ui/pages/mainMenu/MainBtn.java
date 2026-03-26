@@ -31,12 +31,12 @@ public class MainBtn implements ActionListener {
             };
             String[] btnLabels = {"Yes", "No"};
             ActionListener[] btnActions = {
-                    ex -> frame.getNavigator().toPage("loadingScreen", true, 250),
+                    ex -> frame.getNavigator().toPage("tutorial", true, 250),
                     null // Use "Null" if btnLabels == "No"
             };
             pop.createPopup(
                     frame,
-                    "Do you want to play the tutorial?", // Message
+                    "Do you want to see the tutorial?", // Message
                     "resources/images/shared/popups/Demo.png", // Background Path
                     btnPaths,
                     btnLabels,

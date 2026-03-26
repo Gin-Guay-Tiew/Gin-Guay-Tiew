@@ -4,12 +4,14 @@ import ui.pages.gamePlay.gamePlayScreen;
 import ui.pages.levelSelection.LevelSelectPage;
 import ui.pages.loadingScreen.LoadingPage;
 import ui.pages.mainMenu.MainMenuPage;
+import ui.pages.pressESC.PauseScreen;
 import ui.pages.tutorialGame.GameTutorialPage;
 import ui.pages.endGame.WinLosePage;
 import ui.pages.settingMenu.MainSettingPage;
 import ui.pages.shopUI.ShopScreen;
 import logic.Shop.ShopManager;
 import logic.GamePlay.PlayerData;
+import utilities.DataManager;
 import utilities.IconImage;
 import utilities.PageNavigator;
 import ui.components.PopupWindow;
@@ -24,11 +26,11 @@ public class MainFrame extends JFrame implements WindowListener {
     public static final String MAIN_MENU = "mainMenu";
     public static final String LEVEL_SELECT = "levelSelect";
     public static final String TUTORIAL = "tutorial";
-    public static final String LOADING_SCREEN = "loadingScreen";
     public static final String ENDGAME = "winlosepage";
     public static final String SETTING = "setting";
     public static final String GAME = "gamePlay";
     public static final String SHOP_UI = "shop";
+    public static final String PAUSE = "pause";
 
     private CardLayout cardLayout = new CardLayout();
     private JPanel mainPanel = new JPanel(cardLayout);
@@ -39,6 +41,8 @@ public class MainFrame extends JFrame implements WindowListener {
 
     private JPanel currentGameScreen;
     private int currentLevel;
+
+    private String previousPage;
 
     private PlayerData playerData = new PlayerData();
 
@@ -64,11 +68,20 @@ public class MainFrame extends JFrame implements WindowListener {
     }
 
     public void closeApp() {
+        DataManager.savePlayerData(playerData);
         System.exit(0);
     }
 
     public PageNavigator getNavigator() {
         return navigator;
+    }
+
+    public String getPreviousPage() {
+        return previousPage;
+    }
+
+    public PlayerData getPlayerData(){
+        return playerData;
     }
 
     public MainFrame() {
@@ -80,6 +93,7 @@ public class MainFrame extends JFrame implements WindowListener {
         setResizable(false);
         ImageIcon img = new ImageIcon("resources/images/shared/AppIcon.png");
         setIconImage(img.getImage());
+        this.playerData = utilities.DataManager.loadPlayerData();
 
         // Layered Position Setup (TransitionFrame Positioning :D)
         JPanel glass = (JPanel) getGlassPane();
@@ -102,16 +116,23 @@ public class MainFrame extends JFrame implements WindowListener {
 
         mainPanel.add(new MainMenuPage(this), MAIN_MENU); // + MainMenu
         mainPanel.add(new LevelSelectPage(this), LEVEL_SELECT); // + LevelSelection
-        mainPanel.add(new GameTutorialPage(), TUTORIAL); // + Tutorial
-        mainPanel.add(new LoadingPage("Level1"), LOADING_SCREEN); // + Loading Screen
+        mainPanel.add(new GameTutorialPage(this), TUTORIAL); // + Tutorial
+        mainPanel.add(new LoadingPage("Level1"), "loading_1"); // + Loading Screen
+        mainPanel.add(new LoadingPage("Level2"), "loading_2"); // + Loading Screen
+        mainPanel.add(new LoadingPage("Level3"), "loading_3"); // + Loading Screen
+        mainPanel.add(new LoadingPage("Level4"), "loading_4"); // + Loading Screen
+        mainPanel.add(new LoadingPage("Level5"), "loading_5"); // + Loading Screen
         mainPanel.add(new WinLosePage(this), ENDGAME);
-        mainPanel.add(new MainSettingPage(this), SETTING);
+        mainPanel.add(new MainSettingPage(this, this.playerData), SETTING);
         mainPanel.add(new ShopScreen(this, gameController), SHOP_UI);
-
+        mainPanel.add(new PauseScreen(this), PAUSE);
 
         navigator.toPage(MAIN_MENU, false);
 
         add(mainPanel);
+
+        setupGlobalESC();
+
         setVisible(true);
     }
 
@@ -134,6 +155,75 @@ public class MainFrame extends JFrame implements WindowListener {
                 btnLabels,
                 btnActions
         );
+    }
+
+    private void setupGlobalESC() {
+        JRootPane root = this.getRootPane();
+
+        root.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
+                .put(KeyStroke.getKeyStroke("ESCAPE"), "pauseGame");
+
+        root.getActionMap().put("pauseGame", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (!PAUSE.equals(navigator.getCurrentPage())) {
+                    previousPage = navigator.getCurrentPage();
+                    navigator.toPage(PAUSE, false);
+                }
+            }
+        });
+    }
+
+    private void setupGlassPane() {
+        JPanel glass = (JPanel) getGlassPane();
+        glass.setLayout(null);
+        glass.setVisible(true);
+
+        ImageIcon transIcon = IconImage.create("resources/images/shared/Transition.png", 50, 50);
+        JButton transFrame = new JButton();
+        transFrame.setIcon(transIcon);
+        transFrame.setBorderPainted(false);
+        transFrame.setContentAreaFilled(false);
+        transFrame.setFocusPainted(false);
+        transFrame.setBounds(400, 300, 0, 0);
+
+        animator = new Transition(transFrame, transIcon);
+        glass.add(transFrame);
+        navigator = new PageNavigator(mainPanel, cardLayout, animator);
+    }
+
+    // Handles adding all pages to the CardLayout
+    private void initPages() {
+        mainPanel.removeAll(); // Clear everything
+        ShopManager gameController = new ShopManager(this, playerData);
+
+        // Add every page
+        mainPanel.add(new MainMenuPage(this), MAIN_MENU);
+        mainPanel.add(new LevelSelectPage(this), LEVEL_SELECT);
+        mainPanel.add(new GameTutorialPage(this), TUTORIAL);
+        mainPanel.add(new LoadingPage("Level1"), "loading_1");
+        mainPanel.add(new LoadingPage("Level2"), "loading_2");
+        mainPanel.add(new LoadingPage("Level3"), "loading_3");
+        mainPanel.add(new LoadingPage("Level4"), "loading_4");
+        mainPanel.add(new LoadingPage("Level5"), "loading_5");
+        mainPanel.add(new WinLosePage(this), ENDGAME);
+        mainPanel.add(new MainSettingPage(this, this.playerData), SETTING);
+        mainPanel.add(new ShopScreen(this, gameController), SHOP_UI);
+        mainPanel.add(new PauseScreen(this), PAUSE);
+
+        mainPanel.revalidate();
+        mainPanel.repaint();
+    }
+
+    public void resetAndRefresh() {
+        int oldVolume = this.playerData.getVolumeLv();
+        boolean oldSfx = this.playerData.isStateSFX();
+        this.playerData = new PlayerData();
+        playerData.setStateSFX(oldSfx);
+        playerData.setVolumeLv(oldVolume);
+        DataManager.savePlayerData(playerData);
+        initPages();
+        navigator.toPage(MAIN_MENU, false);
     }
 
     @Override

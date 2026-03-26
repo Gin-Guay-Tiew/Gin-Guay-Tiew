@@ -1,9 +1,14 @@
 package logic.GamePlay;
 
+import ui.components.MoneyDisplay;
+
 public class PlayerData {
 
-    private int money = 300;
+    private int money = 0;
     private int level = 1;
+    private int volumeLv = 100;
+    private boolean stateSFX = true;
+    private MoneyDisplay moneyDisplay;
 
     public int getMoney() {
         return money;
@@ -13,8 +18,41 @@ public class PlayerData {
         return level;
     }
 
-    public void spendMoney(int amount) {
-        money -= amount;
+    public int getVolumeLv() {
+        return volumeLv;
     }
 
+    public boolean isStateSFX() {
+        return stateSFX;
+    }
+
+    public void setMoney(int money) {
+        this.money = money;
+        if (this.moneyDisplay != null) {
+            this.moneyDisplay.updateMoney(this.money);
+        }
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
+    }
+
+    public void setVolumeLv(int volumeLv) {
+        this.volumeLv = volumeLv;
+    }
+
+    public void setStateSFX(boolean stateSFX) {
+        this.stateSFX = stateSFX;
+    }
+
+    public void setMoneyDisplay(MoneyDisplay display) {
+        this.moneyDisplay = display;
+    }
+
+    public void spendMoney(int amount) {
+        money -= amount;
+        if (this.moneyDisplay != null) {
+            this.moneyDisplay.updateMoney(this.money);
+        }
+    }
 }
