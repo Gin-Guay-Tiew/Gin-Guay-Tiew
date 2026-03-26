@@ -1,11 +1,16 @@
 package ui.pages.tutorialGame;
 
+import main.MainFrame;
+import ui.components.ImageJButton;
+
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
 
 public class GameTutorialPage extends JPanel {
+    private MainFrame mainFrame;
 
     private static final int TOTAL_PAGES = 8;
     private int currentPage = 1;
@@ -20,7 +25,10 @@ public class GameTutorialPage extends JPanel {
     private Image backgroundImage_Two;
     private Image panelFrameImage;
 
-    public GameTutorialPage() {
+    private JButton backToMenuBtn;
+
+    public GameTutorialPage(MainFrame mainFrame) {
+        this.mainFrame = mainFrame;
         //JLabel t = new JLabel("Welcome, new player. This is a training session.");
         //add(t);
         setLayout(null);
@@ -30,10 +38,9 @@ public class GameTutorialPage extends JPanel {
         panelFrameImage = new ImageIcon("resources/images/Tutorial/Frame.png").getImage();
 
         pageLabel = new JLabel();
-        pageLabel.setBounds(0, 0, 562, 342);
-        // ใส่เส้นขอบสีแดง pageLabel
-        pageLabel.setBorder(BorderFactory.createLineBorder(Color.RED, 1));
+        pageLabel.setBounds(100, 90, 600, 380);
         pageLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        pageLabel.setVerticalAlignment(SwingConstants.CENTER);
         add(pageLabel);
 
         ArrowLeft = new ArrowButton(
@@ -65,6 +72,17 @@ public class GameTutorialPage extends JPanel {
             }
         });
         add(ArrowRight);
+
+        backToMenuBtn = new ImageJButton("resources/images/endGame/backToMenu",".png", 30, 250, 40);
+        backToMenuBtn.setBounds(275, 500, 250, 40);
+        add(backToMenuBtn);
+        backToMenuBtn.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        mainFrame.getNavigator().toPage("mainMenu",true,500);
+                    }
+                }
+        );
 
         updatePage();
     }
