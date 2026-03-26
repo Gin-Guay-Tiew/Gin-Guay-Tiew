@@ -20,9 +20,9 @@ public class LevelFactory {
                 // down counter
 
                 // drink can change
-                slots.add(new SlotSpec("cola",238,350,40,120,null,"SPAWN","resources/images/gamePlay/ingredients/drinks/cola/cola.png"));
+                slots.add(new SlotSpec("cola",238,355,40,120,null,"SPAWN","resources/images/gamePlay/ingredients/drinks/cola/cola.png"));
                 //mock up
-                slots.add(new SlotSpec("bucket lv1",230,350,120,120,"resources/images/gamePlay/ingredients/drinks/lv1.png","STATIC",null));
+                slots.add(new SlotSpec("bucket lv1",230,355,120,120,"resources/images/gamePlay/ingredients/drinks/lv1.png","STATIC",null));
 
 
                 //on counter
@@ -36,7 +36,7 @@ public class LevelFactory {
                 slots.add(new SlotSpec("emptyPot",308,280,70,70,"resources/images/gamePlay/aquiment/emptyPot.png","STATIC",null));
 
                 //placemat
-                slots.add(new SlotSpec("placemat",360,150,240,240,"resources/images/gamePlay/ingredients/noodles/placemat.png","STATIC",null));
+                slots.add(new SlotSpec("placemat",355,150,240,240,"resources/images/gamePlay/ingredients/noodles/placemat.png","STATIC",null));
 
                 //add on
                 slots.add(new SlotSpec("vegetable",575,190,98,98,"resources/images/gamePlay/ingredients/vegetables/idle.png","SPAWN","resources/images/gamePlay/ingredients/vegetables/picked.png"));
@@ -77,10 +77,10 @@ public class LevelFactory {
                 // down counter
 
                 // drink can change
-                slots.add(new SlotSpec("cola",238,350,40,120,null,"SPAWN","resources/images/gamePlay/ingredients/drinks/cola/cola.png"));
-                slots.add(new SlotSpec("sprite",267,350,40,120,null,"SPAWN","resources/images/gamePlay/ingredients/drinks/sprite/sprite.png"));
+                slots.add(new SlotSpec("cola",238,355,40,120,null,"SPAWN","resources/images/gamePlay/ingredients/drinks/cola/cola.png"));
+                slots.add(new SlotSpec("sprite",267,355,40,120,null,"SPAWN","resources/images/gamePlay/ingredients/drinks/sprite/sprite.png"));
                 //mock up
-                slots.add(new SlotSpec("bucket lv2",230,350,120,120,"resources/images/gamePlay/ingredients/drinks/lv2.png","STATIC",null));
+                slots.add(new SlotSpec("bucket lv2",230,355,120,120,"resources/images/gamePlay/ingredients/drinks/lv2.png","STATIC",null));
 
 
 
@@ -97,7 +97,7 @@ public class LevelFactory {
                 slots.add(new SlotSpec("emptyPot",308,280,70,70,"resources/images/gamePlay/aquiment/emptyPot.png","STATIC",null));
 
                 //placemat
-                slots.add(new SlotSpec("placemat",360,150,240,240,"resources/images/gamePlay/ingredients/noodles/placemat.png","STATIC",null));
+                slots.add(new SlotSpec("placemat",355,150,240,240,"resources/images/gamePlay/ingredients/noodles/placemat.png","STATIC",null));
 
                 //add on
                 slots.add(new SlotSpec("vegetable",575,190,98,98,"resources/images/gamePlay/ingredients/vegetables/idle.png","SPAWN","resources/images/gamePlay/ingredients/vegetables/picked.png"));
@@ -136,11 +136,11 @@ public class LevelFactory {
                 // down counter
 
                 // drink can change
-                slots.add(new SlotSpec("cola",238,350,40,120,null,"SPAWN","resources/images/gamePlay/ingredients/drinks/cola/cola.png"));
-                slots.add(new SlotSpec("sprite",267,350,40,120,null,"SPAWN","resources/images/gamePlay/ingredients/drinks/sprite/sprite.png"));
-                slots.add(new SlotSpec("orange",301,350,40,120,null,"SPAWN","resources/images/gamePlay/ingredients/drinks/orange/orange.png"));
+                slots.add(new SlotSpec("cola",238,355,40,120,null,"SPAWN","resources/images/gamePlay/ingredients/drinks/cola/cola.png"));
+                slots.add(new SlotSpec("sprite",267,355,40,120,null,"SPAWN","resources/images/gamePlay/ingredients/drinks/sprite/sprite.png"));
+                slots.add(new SlotSpec("orange",301,355,40,120,null,"SPAWN","resources/images/gamePlay/ingredients/drinks/orange/orange.png"));
                 //mock up
-                slots.add(new SlotSpec("bucket lv3",230,350,120,120,"resources/images/gamePlay/ingredients/drinks/lv3.png","STATIC",null));
+                slots.add(new SlotSpec("bucket lv3",230,355,120,120,"resources/images/gamePlay/ingredients/drinks/lv3.png","STATIC",null));
 
 
 
@@ -158,7 +158,7 @@ public class LevelFactory {
 
 
                 //placemat
-                slots.add(new SlotSpec("placemat",360,150,240,240,"resources/images/gamePlay/ingredients/noodles/placemat.png","STATIC",null));
+                slots.add(new SlotSpec("placemat",355,150,240,240,"resources/images/gamePlay/ingredients/noodles/placemat.png","STATIC",null));
 
                 //add on
                 slots.add(new SlotSpec("vegetable",575,190,98,98,"resources/images/gamePlay/ingredients/vegetables/idle.png","SPAWN","resources/images/gamePlay/ingredients/vegetables/picked.png"));
@@ -202,11 +202,11 @@ public class LevelFactory {
                 // down counter
 
                 // drink can change
-                slots.add(new SlotSpec("cola",238,350,40,120,null,"SPAWN","resources/images/gamePlay/ingredients/drinks/cola/cola.png"));
-                slots.add(new SlotSpec("sprite",267,350,40,120,null,"SPAWN","resources/images/gamePlay/ingredients/drinks/sprite/sprite.png"));
-                slots.add(new SlotSpec("orange",301,350,40,120,null,"SPAWN","resources/images/gamePlay/ingredients/drinks/orange/orange.png"));
+                slots.add(new SlotSpec("cola",238,355,40,120,null,"SPAWN","resources/images/gamePlay/ingredients/drinks/cola/cola.png"));
+                slots.add(new SlotSpec("sprite",267,355,40,120,null,"SPAWN","resources/images/gamePlay/ingredients/drinks/sprite/sprite.png"));
+                slots.add(new SlotSpec("orange",301,355,40,120,null,"SPAWN","resources/images/gamePlay/ingredients/drinks/orange/orange.png"));
                 //mock up
-                slots.add(new SlotSpec("bucket lv3",230,350,120,120,"resources/images/gamePlay/ingredients/drinks/lv3.png","STATIC",null));
+                slots.add(new SlotSpec("bucket lv3",230,355,120,120,"resources/images/gamePlay/ingredients/drinks/lv3.png","STATIC",null));
 
 
 
@@ -223,7 +223,7 @@ public class LevelFactory {
                 slots.add(new SlotSpec("emptyPot",308,280,70,70,"resources/images/gamePlay/aquiment/emptyPot.png","STATIC",null));
 
                 //placemat
-                slots.add(new SlotSpec("placemat",360,150,240,240,"resources/images/gamePlay/ingredients/noodles/placemat.png","STATIC",null));
+                slots.add(new SlotSpec("placemat",355,150,240,240,"resources/images/gamePlay/ingredients/noodles/placemat.png","STATIC",null));
 
                 //add on
                 slots.add(new SlotSpec("vegetable",575,190,98,98,"resources/images/gamePlay/ingredients/vegetables/idle.png","SPAWN","resources/images/gamePlay/ingredients/vegetables/picked.png"));
@@ -274,11 +274,11 @@ public class LevelFactory {
                 // down counter
 
                 // drink can change
-                slots.add(new SlotSpec("cola",238,350,40,120,null,"SPAWN","resources/images/gamePlay/ingredients/drinks/cola/cola.png"));
-                slots.add(new SlotSpec("sprite",267,350,40,120,null,"SPAWN","resources/images/gamePlay/ingredients/drinks/sprite/sprite.png"));
-                slots.add(new SlotSpec("orange",301,350,40,120,null,"SPAWN","resources/images/gamePlay/ingredients/drinks/orange/orange.png"));
+                slots.add(new SlotSpec("cola",238,355,40,120,null,"SPAWN","resources/images/gamePlay/ingredients/drinks/cola/cola.png"));
+                slots.add(new SlotSpec("sprite",267,355,40,120,null,"SPAWN","resources/images/gamePlay/ingredients/drinks/sprite/sprite.png"));
+                slots.add(new SlotSpec("orange",301,355,40,120,null,"SPAWN","resources/images/gamePlay/ingredients/drinks/orange/orange.png"));
                 //mock up
-                slots.add(new SlotSpec("bucket lv3",230,350,120,120,"resources/images/gamePlay/ingredients/drinks/lv3.png","STATIC",null));
+                slots.add(new SlotSpec("bucket lv3",230,355,120,120,"resources/images/gamePlay/ingredients/drinks/lv3.png","STATIC",null));
 
                 slots.add(new SlotSpec("trash",620,405,153,73,"resources/images/gamePlay/binn/empty.png","STATIC",null));
 
@@ -287,7 +287,7 @@ public class LevelFactory {
 
 
                 //placemat
-                slots.add(new SlotSpec("placemat",360,150,240,240,"resources/images/gamePlay/ingredients/noodles/placemat.png","STATIC",null));
+                slots.add(new SlotSpec("placemat",355,150,240,240,"resources/images/gamePlay/ingredients/noodles/placemat.png","STATIC",null));
 
                 //add on
                 slots.add(new SlotSpec("vegetable",575,190,98,98,"resources/images/gamePlay/ingredients/vegetables/idle.png","SPAWN","resources/images/gamePlay/ingredients/vegetables/picked.png"));

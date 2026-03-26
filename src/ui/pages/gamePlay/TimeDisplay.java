@@ -12,6 +12,10 @@ public class TimeDisplay extends JPanel {
     private CustomJLabel secLabel;
     private CustomJLabel colonLabel;
     private CustomJLabel countLabel;
+    private final Color defaultGrey = new Color(200, 200, 200);
+    private final Color flashGreen = new Color(100, 255, 100);
+    private final Color flashRed = new Color(255, 100, 100);
+    private Timer flashTimer;
 
     public TimeDisplay() {
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
@@ -47,7 +51,7 @@ public class TimeDisplay extends JPanel {
 
         countLabel = new CustomJLabel("0/20", 3.5f);
         countLabel.setFont(smallFont);
-        countLabel.setForeground(new Color(200, 200, 200));
+        countLabel.setTextColor(new Color(200, 200, 200));
         countLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         countLabel.setBorder(BorderFactory.createEmptyBorder(0, 2, 0, 2));
 
@@ -77,5 +81,20 @@ public class TimeDisplay extends JPanel {
 
     public void updateCount(int current, int max) {
         countLabel.setText(current + "/" + max);
+    }
+
+    public void playCountFlash(boolean isSuccess) {
+        if (flashTimer != null && flashTimer.isRunning()) {
+            flashTimer.stop();
+        }
+        System.out.println("E");
+
+        countLabel.setTextColor(isSuccess ? flashGreen : flashRed);
+
+        flashTimer = new Timer(500, e -> {
+            countLabel.setTextColor(defaultGrey);
+        });
+        flashTimer.setRepeats(false);
+        flashTimer.start();
     }
 }

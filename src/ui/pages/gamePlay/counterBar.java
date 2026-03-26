@@ -202,12 +202,12 @@ public class counterBar extends JPanel {
                                     stopTimer.setRepeats(false);
                                     stopTimer.start();
                                 }
-                                // Serve
+                                // Serve Bowl
                                 if (c instanceof JButton bowl && bowl.getName().contains("bowl_") && itemBounds.intersects(btn.getBounds())) {
                                     int centerX = bowl.getX() + (bowl.getWidth() / 2);
                                     int sectionIndex = centerX / 200;
 
-                                    if (sectionIndex >= 1 && sectionIndex <= 3 && bowl.getY() < 150) {
+                                    if (sectionIndex >= 1 && sectionIndex <= 3 && bowl.getY() < 175) {
                                         String rawCurrentPath = (String) bowl.getClientProperty("foodPath");
                                         String rawTargetPath = cstPanel.getCustomerDataAt(sectionIndex - 1).foodPath;
                                         String currentFoodPath = (rawCurrentPath != null) ? rawCurrentPath.replace("\\", "/") : "";
@@ -226,10 +226,10 @@ public class counterBar extends JPanel {
                                             }
                                             revalidate();
                                             repaint();
-                                            // Logic to reward player
                                             cstPanel.removeCustomer(sectionIndex-1,cstPanel.getCustomerDataAt(sectionIndex - 1));
                                         } else {
                                             System.out.println("Wrong order! Customer wanted: " + targetFoodPath);
+                                            cstPanel.wrongOrder(sectionIndex - 1);
                                         }
 
                                         c.setLocation(originalPos[0]);
@@ -248,7 +248,7 @@ public class counterBar extends JPanel {
                                         btn.setIcon(new ImageIcon("resources/images/gamePlay/binn/trash.png"));
                                         //she so perfect bah bah
                                         //the + 5 is so on point
-                                        btn.setBounds(btn.getX(),btn.getY() + yOffset + 5, 162, 68);
+                                        btn.setBounds(btn.getX(),btn.getY() + 5, 162, 68);
                                         btn.setName("trashed");
                                     }
                                 }
@@ -318,6 +318,7 @@ public class counterBar extends JPanel {
         item.setContentAreaFilled(false);
         item.setOpaque(false);
         item.setName(result);
+        item.putClientProperty("foodPath", imgPath.replace("\\", "/"));
 
         Point mouseInPanel = SwingUtilities.convertPoint(sourceBtn, e.getPoint(), this);
         item.setLocation(mouseInPanel.x - 60, mouseInPanel.y - 60);
@@ -441,6 +442,40 @@ public class counterBar extends JPanel {
 
                                         revalidate();
                                         repaint();
+                                    }
+                                    break;
+                                }
+                            }
+                            // Serve Drinks
+                            if (item.getName().contains("cola") || item.getName().contains("sprite") || item.getName().contains("orange")) {
+                                int centerX = item.getX() + (item.getWidth() / 2);
+                                int sectionIndex = centerX / 200;
+
+                                if (sectionIndex >= 1 && sectionIndex <= 3 && item.getY() < 175) {
+
+                                    CustomerData target = cstPanel.getCustomerDataAt(sectionIndex - 1);
+
+                                    if (target != null) {
+                                        String rawCurrentPath = (String) item.getClientProperty("foodPath");
+                                        String rawTargetPath = target.foodPath;
+
+                                        String currentDrinkPath = (rawCurrentPath != null) ? rawCurrentPath.replace("\\", "/") : "";
+                                        String targetDrinkPath = (rawTargetPath != null) ? rawTargetPath.replace("\\", "/") : "";
+
+                                        System.out.println("Serving drink: " + currentDrinkPath);
+
+                                        if (currentDrinkPath.equals(targetDrinkPath)) {
+                                            System.out.println("Drink served correctly!");
+
+                                            remove(item);
+                                            cstPanel.removeCustomer(sectionIndex - 1, target);
+
+                                            revalidate();
+                                            repaint();
+                                        } else {
+                                            System.out.println("Wrong drink! Customer wanted: " + targetDrinkPath);
+                                            cstPanel.wrongOrder(sectionIndex - 1);
+                                        }
                                     }
                                     break;
                                 }
