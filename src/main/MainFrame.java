@@ -4,6 +4,7 @@ import ui.pages.gamePlay.gamePlayScreen;
 import ui.pages.levelSelection.LevelSelectPage;
 import ui.pages.loadingScreen.LoadingPage;
 import ui.pages.mainMenu.MainMenuPage;
+import ui.pages.pressESC.PauseScreen;
 import ui.pages.tutorialGame.GameTutorialPage;
 import ui.pages.endGame.WinLosePage;
 import ui.pages.settingMenu.MainSettingPage;
@@ -30,6 +31,7 @@ public class MainFrame extends JFrame implements WindowListener {
     public static final String SETTING = "setting";
     public static final String GAME = "gamePlay";
     public static final String SHOP_UI = "shop";
+    public static final String PAUSE = "pause";
 
     private CardLayout cardLayout = new CardLayout();
     private JPanel mainPanel = new JPanel(cardLayout);
@@ -41,6 +43,8 @@ public class MainFrame extends JFrame implements WindowListener {
     private JPanel currentGameScreen;
     private int currentLevel;
 
+    private String previousPage;
+    
     private PlayerData playerData = new PlayerData();
 
     // สำหรับสร้างหน้าเกมใหม่ตอนกด play again
@@ -114,11 +118,14 @@ public class MainFrame extends JFrame implements WindowListener {
         mainPanel.add(new WinLosePage(this), ENDGAME);
         mainPanel.add(new MainSettingPage(this), SETTING);
         mainPanel.add(new ShopScreen(this, gameController), SHOP_UI);
-
+        mainPanel.add(new PauseScreen(this), PAUSE);
 
         navigator.toPage(MAIN_MENU, false);
 
         add(mainPanel);
+
+        setupGlobalESC();
+
         setVisible(true);
     }
 
@@ -141,6 +148,20 @@ public class MainFrame extends JFrame implements WindowListener {
                 btnLabels,
                 btnActions
         );
+    }
+
+    private void setupGlobalESC() {
+        JRootPane root = this.getRootPane();
+
+        root.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW)
+                .put(KeyStroke.getKeyStroke("ESCAPE"), "pauseGame");
+
+        root.getActionMap().put("pauseGame", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                navigator.toPage(PAUSE, false);
+            }
+        });
     }
 
     @Override
