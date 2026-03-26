@@ -58,7 +58,7 @@ public class LevelFactory {
                 // mock up
                 slots.add(new SlotSpec("container",2,14,182,182,"resources/images/gamePlay/ingredients/noodles/container/lv1.png","STATIC",null));
 
-                slots.add(new SlotSpec("noodlesBowl",169,120,76,76,"resources/images/gamePlay/bowl/decorate.png","SPAWN","resources/images/gamePlay/bowl/picked.png"));
+                slots.add(new SlotSpec("noodlesBowl",169,122,76,76,"resources/images/gamePlay/bowl/decorate.png","SPAWN","resources/images/gamePlay/bowl/picked.png"));
                 slots.add(new SlotSpec("chopsticks",225,110,86,86,"resources/images/gamePlay/counter/chopsticks.png","STATIC",null));
 
                 slots.add(new SlotSpec("pot",-86,240,380,380,"resources/images/gamePlay/ingredients/noodles/boilingPot/not_boiling.png","STATIC",null));

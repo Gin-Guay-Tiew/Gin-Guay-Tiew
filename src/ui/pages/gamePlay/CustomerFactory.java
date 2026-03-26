@@ -14,7 +14,7 @@ public class CustomerFactory {
                         "resources/images/gamePlay/customer/Time/general.gif",
                         "NOODLE",
                         211,
-                        78
+                        65
                 ));
                 list.add(new CustomerData(
                         "resources/images/gamePlay/customer/general/Oldman_bored 1.png",
@@ -28,7 +28,7 @@ public class CustomerFactory {
                         "resources/images/gamePlay/customer/Time/general.gif",
                         "NOODLE",
                         591,
-                        80
+                        50
                 ));
                 break;
             case 2:
