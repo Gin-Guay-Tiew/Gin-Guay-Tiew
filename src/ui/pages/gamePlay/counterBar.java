@@ -193,6 +193,7 @@ public class counterBar extends JPanel {
                                 }
                                 if (c instanceof JButton bowl && bowl.getName().contains("bowl_") && btn.getName().contains("trash") && itemBounds.intersects(btn.getBounds())){
                                     bowl.setIcon(IconImage.create("resources/images/gamePlay/bowl/empty.png", 175, 175));
+                                    System.out.println(bowl.getName());
                                     bowl.setName("bowl_empty");
                                     disableDrag(bowl);
                                     if (btn.getName().equals("trash")){
