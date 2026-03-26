@@ -22,7 +22,7 @@ public class LevelsDisplay extends JPanel {
         levelsInfo = new ArrayList<>();
         levelsInfo.add(new Level("IT Building", 0, true));
         levelsInfo.add(new Level("Faculty Of<br>Architecture", 1000, false, 50));
-        levelsInfo.add(new Level("Vidya Garden<br>Market", 2000, false));
+        levelsInfo.add(new Level("Vidva Garden<br>Market", 2000, false));
         levelsInfo.add(new Level("Suvarnabhumi<br>Airport", 3000, false));
         levelsInfo.add(new Level("Mars", 4000, false));
     }
