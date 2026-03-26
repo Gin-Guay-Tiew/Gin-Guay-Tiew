@@ -25,7 +25,7 @@ public class customerPanel extends JPanel {
         List<CustomerData> dataList = CustomerFactory.getCustomer(levelID);
 
         for (CustomerData d : dataList){
-            customerComponent c = new customerComponent(d.imgPath,d.patiencePath,d.requestFood);
+            customerComponent c = new customerComponent(d.imgPath,d.patiencePath);
             c.setBounds(d.x,d.y,197,240);
             add(c);
 
@@ -43,14 +43,7 @@ public class customerPanel extends JPanel {
             JLabel food = new JLabel();
             food.setBounds(25,15,76,76);
 
-            if (d.requestFood.equals("NOODLE")){
-                food.setIcon(
-                        IconImage.create("resources/images/gamePlay/ingredients/noodles/finishedNoodles/braisedPork/yellow/meatball&porkRind&porkSlices/haveVegetable.png",
-                                76,
-                                76
-                        )
-                );
-            }
+            food.setIcon(IconImage.create(d.foodPath,76,76));
 
             bubblePanel.add(bubble);
             bubblePanel.add(food);

@@ -6,7 +6,7 @@ import javax.swing.*;
 
 public class customerComponent extends JPanel {
     private  JLabel imgLabel, patienceLabel;
-    public  customerComponent(String imgPath ,String patiencePath,String requestFood){
+    public  customerComponent(String imgPath ,String patiencePath){
         setLayout(null);
         setOpaque(false);
         setSize(500,500);
@@ -18,6 +18,8 @@ public class customerComponent extends JPanel {
         //customer patience label
         patienceLabel = new JLabel(new ImageIcon(patiencePath));
         patienceLabel.setBounds(137,83,60,107);
+
+
 
         add(imgLabel);
         add(patienceLabel);
