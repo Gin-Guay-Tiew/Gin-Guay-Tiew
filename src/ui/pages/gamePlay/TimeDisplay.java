@@ -24,7 +24,6 @@ public class TimeDisplay extends JPanel {
         Font timerFont = jerseyFont.deriveFont(35f);
         Font smallFont = jerseyFont.deriveFont(22f);
 
-        // --- Timer Row ---
         JPanel timerPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
         timerPanel.setOpaque(false);
         timerPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
@@ -48,28 +47,26 @@ public class TimeDisplay extends JPanel {
         timerPanel.add(colonLabel);
         timerPanel.add(secLabel);
 
-        // --- Money Row ---
-        countLabel = new CustomJLabel("NA / NA", 4f);
+        countLabel = new CustomJLabel("NA / NA", 4.5f);
         countLabel.setFont(smallFont);
         countLabel.setTextColor(new Color(200, 200, 200));
         countLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
         countLabel.setBorder(BorderFactory.createEmptyBorder(0, 5, 0, 5));
 
-        // --- Lives Row ---
-        JPanel livesPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 5, 0));
+        JPanel livesPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 3, 0));
         livesPanel.setOpaque(false);
         livesPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
+
+        livesValueLabel = new CustomJLabel("N/A", 4.5f);
+        livesValueLabel.setFont(smallFont);
+        livesValueLabel.setTextColor(new Color(255, 50, 50));
+        livesValueLabel.setBorder(BorderFactory.createEmptyBorder(0, 5, 0, 1));
 
         heartIcon = new JLabel(IconImage.create("resources/images/shared/Heart.png", 20, 20));
         heartIcon.setBorder(BorderFactory.createEmptyBorder(0, 1, 0, 1));
 
-        livesValueLabel = new CustomJLabel(": 10", 4f);
-        livesValueLabel.setFont(smallFont);
-        livesValueLabel.setTextColor(new Color(255, 50, 50));
-        livesValueLabel.setBorder(BorderFactory.createEmptyBorder(0, 2, 0, 5));
-
-        livesPanel.add(heartIcon);
         livesPanel.add(livesValueLabel);
+        livesPanel.add(heartIcon);
 
         add(timerPanel);
         add(Box.createVerticalStrut(-5));
@@ -95,7 +92,7 @@ public class TimeDisplay extends JPanel {
     }
 
     public void updateLives(int health) {
-        livesValueLabel.setText(": " + health);
+        livesValueLabel.setText(String.valueOf(health));
 
         if (health <= 3) {
             livesValueLabel.setTextColor(new Color(255, 0, 0));

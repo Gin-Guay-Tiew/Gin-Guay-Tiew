@@ -203,11 +203,11 @@ public class counterBar extends JPanel {
                                     stopTimer.start();
                                 }
                                 // Serve Bowl
-                                if (c instanceof JButton bowl && bowl.getName().contains("bowl_") && itemBounds.intersects(btn.getBounds())) {
+                                if (c instanceof JButton bowl && bowl.getName().contains("bowl_")) {
                                     int centerX = bowl.getX() + (bowl.getWidth() / 2);
                                     int sectionIndex = centerX / 200;
 
-                                    if (sectionIndex >= 1 && sectionIndex <= 3 && bowl.getY() < 175) {
+                                    if (sectionIndex >= 1 && sectionIndex <= 3 && bowl.getY() < 200) {
                                         String rawCurrentPath = (String) bowl.getClientProperty("foodPath");
                                         String rawTargetPath = cstPanel.getCustomerDataAt(sectionIndex - 1).foodPath;
                                         String currentFoodPath = (rawCurrentPath != null) ? rawCurrentPath.replace("\\", "/") : "";
@@ -451,7 +451,7 @@ public class counterBar extends JPanel {
                                 int centerX = item.getX() + (item.getWidth() / 2);
                                 int sectionIndex = centerX / 200;
 
-                                if (sectionIndex >= 1 && sectionIndex <= 3 && item.getY() < 175) {
+                                if (sectionIndex >= 1 && sectionIndex <= 3 && item.getY() < 200) {
 
                                     CustomerData target = cstPanel.getCustomerDataAt(sectionIndex - 1);
 
