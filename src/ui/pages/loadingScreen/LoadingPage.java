@@ -11,8 +11,6 @@ public class LoadingPage extends JLayeredPane {
 
     public LoadingPage(String SelectedLevel) {
 
-        SoundManager.playWaiting();
-
         this.bgImage = new ImageIcon("resources/images/shared/levelBackgrounds/" + SelectedLevel + ".gif").getImage();
 
         setLayout(new OverlayLayout(this));

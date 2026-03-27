@@ -18,6 +18,7 @@ public class SoundManager {
 
         currentMusic = path;
         System.out.println("PLAY MUSIC: " + path);
+        System.out.println("PLAY MUSIC FROM: " + Thread.currentThread().getStackTrace()[3]);
 
         musicThread = new Thread(() -> {
             try {
@@ -63,11 +64,11 @@ public class SoundManager {
         isLevelMusic = true;
 
         switch(level) {
-            case 1 -> playMusic("resources/audio/lv1.mp3");
-            case 2 -> playMusic("resources/audio/lv2.mp3");
-            case 3 -> playMusic("resources/audio/lv3.mp3");
-            case 4 -> playMusic("resources/audio/lv4.mp3");
-            case 5 -> playMusic("resources/audio/lv5.mp3");
+            case 1 -> playMusic("resources/audio_bg/lv1.mp3");
+            case 2 -> playMusic("resources/audio_bg/lv2.mp3");
+            case 3 -> playMusic("resources/audio_bg/lv3.mp3");
+            case 4 -> playMusic("resources/audio_bg/lv4.mp3");
+            case 5 -> playMusic("resources/audio_bg/lv5.mp3");
         }
 
     }

@@ -36,11 +36,9 @@ public class WinLosePage extends JPanel {
         statusLabel.setBorder(new EmptyBorder(20,0,0,0));
 
         if (isWin) {
-            SoundManager.playWin();
             statusLabel.setText("You win!");
         }
         else  {
-            SoundManager.playLose();
             statusLabel.setText("You lose!");
         }
 
