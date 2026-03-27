@@ -12,16 +12,18 @@ public class gamePlayScreen extends JPanel {
     private bgPanel bgPanel;
     private counterBar counterBarPanel;
     private TopBar topBar;
+    private int levelId;
+    boolean isGameOver = false;
 
     private customerPanel customerPanel; //  ต้องเป็น field
-
+    private MainFrame mainFrame;
     private GameTimer gameTimer;
 
     public gamePlayScreen(MainFrame mainFrame,int levelId){
 
+        this.mainFrame = mainFrame;
         setLayout(new OverlayLayout(this));
         this.setBackground(Color.white);
-
         // status
         status = new WinLosePage(mainFrame);
         status.setBounds(0,0,800,520);
@@ -44,7 +46,7 @@ public class gamePlayScreen extends JPanel {
         topBar.setBounds(0,0,800,90);
 
         // customer panel
-        customerPanel = new customerPanel(topBar, mainFrame);
+        customerPanel = new customerPanel(topBar,this , mainFrame);
         customerPanel.setBounds(0,0,800,600);
         customerPanel.showCustomers(levelId);
 
@@ -63,9 +65,18 @@ public class gamePlayScreen extends JPanel {
         add(mainGameArea);
 
         TimeDisplay screenTime = topBar.getTimeDisplay();
-        gameTimer = new GameTimer(400, this, screenTime);
+        if (levelId == 1){
+            gameTimer = new GameTimer(180, this, screenTime,customerPanel);
+        } else if (levelId == 2) {
+            gameTimer = new GameTimer(225, this, screenTime,customerPanel);
+        } else if (levelId == 3) {
+            gameTimer = new GameTimer(270, this, screenTime,customerPanel);
+        } else if (levelId == 4) {
+            gameTimer = new GameTimer(315, this, screenTime,customerPanel);
+        } else if (levelId == 5) {
+            gameTimer = new GameTimer(360, this, screenTime,customerPanel);
+        }
         gameTimer.startTimer();
-
 //        GameTimer myTimer = new GameTimer(400, this, screenTime){
 //            public void onTick() {
 //                customerPanel.updateCustomers();
@@ -82,6 +93,7 @@ public class gamePlayScreen extends JPanel {
     }
 
     public void showLevel(int levelId) {
+        this.levelId = levelId;
         switch (levelId) {
             case 1:
                 bgPanel.setBackgroundImage("resources/images/gamePlay/bg/LV1.gif",-3,-100 , 800, 400);
@@ -106,15 +118,39 @@ public class gamePlayScreen extends JPanel {
     }
 
     public void updateGame() {
+
+        if (isGameOver) return;
         customerPanel.updateCustomers();
         if (customerPanel.isFinished()) {
-            gameOver();
+            int reqMoney = LevelFactory.getReqMoney(levelId);
+            if (customerPanel.getcurrentMoney() < reqMoney){
+                gameWiner(false);
+            }else{
+                mainFrame.getPlayerData().addMoney(customerPanel.getcurrentMoney()+customerPanel.getBonus());
+                gameWiner(true);
+            }
+            isGameOver = true;
+        }
+        else if ((gameTimer.getTimeLeft() <= 0)) {
+            int reqMoney = LevelFactory.getReqMoney(levelId);
+            if (customerPanel.getcurrentMoney() < reqMoney){
+                gameWiner(false);
+            }else{
+                mainFrame.getPlayerData().addMoney(customerPanel.getcurrentMoney()+customerPanel.getBonus());
+                gameWiner(true);
+            }
+            isGameOver = true;
         }
     }
 
-    public void gameOver(){
+    public void gameWiner(boolean state){
+        pauseGame();
+        int saveMoney = customerPanel.getcurrentMoney();
+        System.out.println(saveMoney);
+        status.setState(state,saveMoney,customerPanel.getBonus());
         status.setVisible(true);
     }
+
 
     public void pauseGame() {
         if (gameTimer != null) {

@@ -7,13 +7,15 @@ public class GameTimer implements Runnable {
     private gamePlayScreen screen;
     private TimeDisplay timeDisplay;
     private Thread timer;
+    private customerPanel c;
     private volatile boolean isRunning = false;
     private volatile boolean isPaused = false;
 
-    public GameTimer(int seconds, gamePlayScreen screen, TimeDisplay timeDisplay) {
+    public GameTimer(int seconds, gamePlayScreen screen, TimeDisplay timeDisplay,customerPanel c) {
         this.timeLeft = seconds;
         this.screen = screen;
         this.timeDisplay = timeDisplay;
+        this.c = c;
 
         if (this.timeDisplay != null) {
             this.timeDisplay.updateTime(timeLeft);
@@ -44,7 +46,7 @@ public class GameTimer implements Runnable {
 
                 if (timeLeft <= 0) {
                     stopTimer();
-                    screen.gameOver();
+                    screen.updateGame();
                 }
             });
         }
@@ -71,5 +73,9 @@ public class GameTimer implements Runnable {
 
     public void resumeTimer() {
         isPaused = false;
+    }
+
+    public int getTimeLeft(){
+        return timeLeft;
     }
 }

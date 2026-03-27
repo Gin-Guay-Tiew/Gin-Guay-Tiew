@@ -39,8 +39,10 @@ public class CustomerSetting {
 
     String typeCustomer;
     String skinCustomer;
+    Object[] result;
 
     public List<CustomerData> Setting(int quantity,int level){
+        int Teacher_Bank_wallet = (int)(Math.random() * 251) + 50;
         List<CustomerData> customer = new ArrayList<>();
         List<List<String>> list = new ArrayList<>();
         setNPC(list, level);
@@ -50,16 +52,30 @@ public class CustomerSetting {
             typeCustomer = list.get(randomInt).get(0);
             skinCustomer = list.get(randomInt).get(1);
 
-            Object[] result = tSet(typeCustomer);
+            if (level == 1) {
+                result = tSet(typeCustomer,50,0,0,Teacher_Bank_wallet,55);
+            } else if (level == 2) {
+                result = tSet(typeCustomer,55,55,0,Teacher_Bank_wallet,60);
+            } else if (level == 3) {
+                result = tSet(typeCustomer,60,60,0,Teacher_Bank_wallet,65);
+            } else if (level == 4) {
+                result = tSet(typeCustomer,65,65,0,Teacher_Bank_wallet,70);
+            } else if (level == 5) {
+                result = tSet(typeCustomer,70,70,95,Teacher_Bank_wallet,75);
+            }
+
 
             String timeSet = (String) result[0];
             int patience = (int) result[1];
+            int money = (int) result[2];
 
 
             customer.add(new CustomerData(
+                    level,
                         "resources/images/gamePlay/customer/"+typeCustomer+"/"+skinCustomer+"_happy.png",
                     "resources/images/gamePlay/customer/Time/"+timeSet+".gif",
                     typeCustomer,skinCustomer,CustomerMenu.getRandomFoodImage(level),
+                        money,
                         211,
                         78,
                     patience
@@ -70,17 +86,20 @@ public class CustomerSetting {
 
 
 
-    public Object[] tSet(String typeCustomer){
+    public Object[] tSet(String typeCustomer,int general, int hungry,int vip, int JarnBank, int working){
         if (typeCustomer.equals("general") || typeCustomer.equals("mars")){
-            return new Object[]{"general", 46};
-        } else if (typeCustomer.equals("hungry") || typeCustomer.equals("VIP")){
-            return new Object[]{"hungry-vip", 21};
+            return new Object[]{"general", 46,general};
+        } else if (typeCustomer.equals("hungry")){
+            return new Object[]{"hungry-vip", 21,hungry};
         } else if (typeCustomer.equals("JarnBank")){
-            return new Object[]{"jarnBank", 17};
+            return new Object[]{"jarnBank", 17,JarnBank};
         } else if (typeCustomer.equals("working")){
-            return new Object[]{"working", 32};
+            return new Object[]{"working", 32,working};
+        } else if (typeCustomer.equals("VIP")) {
+            return new Object[]{"hungry-vip", 21,vip};
         }
-        return new Object[]{"general", 46};
+        System.out.println("Unknown type: " + typeCustomer);
+        return new Object[]{"general", 46,general};
     }
 
     public void setNPC(List<List<String>> list, int level){

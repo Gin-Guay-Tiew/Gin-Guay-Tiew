@@ -11,12 +11,16 @@ public class customerComponent extends JPanel {
     private int life;
     private JPanel bubble;
     private String pathImage;
+    private String typeCustomer;
     private int state_bored;
     private int state_angry;
+    private int money_bored;
+    private int money_angry;
     private CustomerData data;
 
     public customerComponent(CustomerData data, String imgPath ,String patiencePath,String type,String skin, int life,JPanel bubble, Runnable onClick){
         this.data = data;
+        this.typeCustomer = type;
         Object[] results = setState(type);
         pathImage = "resources/images/gamePlay/customer/"+type+"/"+skin;
         state_bored = (int) results[0];
@@ -59,9 +63,15 @@ public class customerComponent extends JPanel {
     public void tick(){
         life--;
         if (life == state_bored){
+            changeMoney();
+            data.setMoney(money_bored);
             imgLabel.setIcon( new ImageIcon(pathImage+"_bored.png"));
+            System.out.println(data.toString()+"bored");
         } else if (life == state_angry){
+            changeMoney();
+            data.setMoney(money_angry);
             imgLabel.setIcon( new ImageIcon(pathImage+"_angry.png"));
+            System.out.println(data.toString()+"angry");
         }
     }
 
@@ -84,7 +94,7 @@ public class customerComponent extends JPanel {
 
 
     public void playSpawnBounce(int targetX, int targetY) {
-        int startY = targetY + 100; // เริ่มต่ำกว่าจริง
+        int startY = targetY + 100;
         setLocation(targetX, startY);
 
         int duration = 400;
@@ -114,6 +124,50 @@ public class customerComponent extends JPanel {
         float c3 = c1 + 1;
         return 1 + c3 * (float)Math.pow(t - 1, 3)
                 + c1 * (float)Math.pow(t - 1, 2);
+    }
+
+    public void changeMoney() {
+        int levelId = data.getlevelID();
+
+        switch (typeCustomer) {
+
+            case "general":
+            case "mars":
+                setMoneyByLevel(levelId,
+                        new int[]{40,45,50,55,60},
+                        new int[]{30,35,40,45,50});
+                break;
+
+            case "hungry":
+                setMoneyByLevel(levelId,
+                        new int[]{0,55,50,55,60},
+                        new int[]{0,45,50,55,60});
+                break;
+
+            case "VIP":
+                setMoneyByLevel(levelId,
+                        new int[]{0,0,70,75,80},
+                        new int[]{0,0,70,75,80});
+                break;
+
+            case "working":
+                setMoneyByLevel(levelId,
+                        new int[]{45,50,55,50,65},
+                        new int[]{35,40,45,50,55});
+                break;
+
+            case "JarnBank":
+                money_bored = data.getMoney();
+                money_angry = data.getMoney();
+                break;
+        }
+    }
+
+    private void setMoneyByLevel(int level, int[] bored, int[] angry) {
+        if (level >= 1 && level <= bored.length) {
+            money_bored = bored[level - 1];
+            money_angry = angry[level - 1];
+        }
     }
 
 }

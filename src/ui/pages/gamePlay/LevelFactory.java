@@ -8,22 +8,22 @@ public class LevelFactory {
 
     public static int getReqMoney(int levelId) {
         switch (levelId) {
-            case 1: return 1000;
-            case 2: return 1100;
-            case 3: return 1200;
-            case 4: return 1300;
-            case 5: return 1400;
+            case 1: return 350;
+            case 2: return 550;
+            case 3: return 850;
+            case 4: return 1100;
+            case 5: return 1300;
             default: return 0;
         }
     }
 
     public static int getLives(int levelId) {
         switch (levelId) {
-            case 1: return 8;
-            case 2: return 11;
-            case 3: return 13;
-            case 4: return 16;
-            case 5: return 17;
+            case 1: return 5;
+            case 2: return 7;
+            case 3: return 7;
+            case 4: return 8;
+            case 5: return 10;
             default: return 10;
         }
     }

@@ -1,6 +1,7 @@
 package ui.pages.gamePlay;
 
 import main.MainFrame;
+import ui.pages.endGame.WinLosePage;
 import utilities.IconImage;
 
 import javax.swing.*;
@@ -13,9 +14,11 @@ public class customerPanel extends JPanel {
 
     TopBar bar;
     MainFrame mainFrame;
+    gamePlayScreen state;
     private int targetMoney;
-    private int currentMoney = 0;
+    private int currentMoney;
     private int health;
+    public int levelID;
 
     // คิวลูกค้าทั้งหมดในด่าน
     private Queue<CustomerData> queue = new LinkedList<>();
@@ -25,8 +28,9 @@ public class customerPanel extends JPanel {
     private int[] xs = {211, 397, 591};
     private int[] ys = {78, 59, 80};
 
-    public customerPanel(TopBar bar, MainFrame mainFrame) {
+    public customerPanel(TopBar bar,gamePlayScreen state, MainFrame mainFrame) {
         this.bar = bar;
+        this.state = state;
         this.mainFrame = mainFrame;
         setLayout(null);
         setPreferredSize(new Dimension(800, 600));
@@ -35,6 +39,7 @@ public class customerPanel extends JPanel {
 
 
     public void showCustomers(int levelID) {
+        this.levelID = levelID;
         removeAll();
         queue.clear();
         Arrays.fill(slots, null);
@@ -71,7 +76,6 @@ public class customerPanel extends JPanel {
         repaint();
     }
 
-    // ➕ เติมลูกค้าในช่องว่าง
     private void spawnNext() {
         if (queue.isEmpty()) return;
 
@@ -79,6 +83,7 @@ public class customerPanel extends JPanel {
             if (slots[i] == null) {
 
                 CustomerData d = queue.poll();
+                // System.out.println(d.toString());
                 int index = i;
                 JPanel bubblePanel = new JPanel();
 
@@ -176,10 +181,9 @@ public class customerPanel extends JPanel {
         customerComponent c = slots[index];
         if (c == null) return;
 
-        // Reward Logic tong nee!
-        currentMoney += 67;
+        currentMoney += d.money;
         bar.getTimeDisplay().updateCount(currentMoney, targetMoney);
-        System.out.println("You received 67 baht from " + d.type);
+        // System.out.println("You received "+d.money+" baht from " + d.type);
         if (currentMoney >= targetMoney) {
             bar.getTimeDisplay().setCountColor(new Color(110, 207, 106));
         }
@@ -207,13 +211,17 @@ public class customerPanel extends JPanel {
                 int index = i;
                 customerComponent expiringComp = slots[i];
                 health--;
-                bar.getTimeDisplay().updateLives(health);
-
+                bar.getTimeDisplay().updateLives(Math.max(0, health));
                 playExitAnimation(expiringComp, expiringComp.getBubble(), index, () -> {
                     spawnNext();
                 });
 
-                slots[i] = null;
+                if (health <= 0){
+                    state.pauseGame();
+                    state.gameWiner(false);
+                    return;
+                }
+
             }
         }
         revalidate();
@@ -221,13 +229,16 @@ public class customerPanel extends JPanel {
     }
 
     public boolean isFinished() {
-        if (!queue.isEmpty()) return false;
+
+        if (!queue.isEmpty()) {
+            return false;
+        }
 
         for (customerComponent c : slots) {
-            if (c != null) return false;
+            if (c != null) {
+                return false;
+            }
         }
-        // Finish level check if failed or not then add Money! :3
-        mainFrame.getPlayerData().addMoney(currentMoney);
         return true;
     }
 
@@ -300,4 +311,16 @@ public class customerPanel extends JPanel {
                 + c1 * (float) Math.pow(t - 1, 2);
     }
 
+
+    public int getBonus() {
+        return health*20;
+    }
+
+    public int getHealth() {
+        return health;
+    }
+
+    public int getcurrentMoney() {
+        return currentMoney;
+    }
 }
