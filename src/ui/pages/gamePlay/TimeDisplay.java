@@ -49,7 +49,8 @@ public class TimeDisplay extends JPanel {
 
         countLabel = new CustomJLabel("NA / NA", 4.5f);
         countLabel.setFont(smallFont);
-        countLabel.setTextColor(new Color(200, 200, 200));
+        countLabel.setForeground(new Color(230, 181, 42));
+        countLabel.setOutlineColor(new Color(115, 51, 12));
         countLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
         countLabel.setBorder(BorderFactory.createEmptyBorder(0, 5, 0, 5));
 

@@ -3,11 +3,14 @@ package ui.pages.loadingScreen;
 import javax.swing.*;
 import java.awt.*;
 
+import utilities.SoundManager;
+
 public class LoadingPage extends JLayeredPane {
 
     private final Image bgImage;
 
     public LoadingPage(String SelectedLevel) {
+
         this.bgImage = new ImageIcon("resources/images/shared/levelBackgrounds/" + SelectedLevel + ".gif").getImage();
 
         setLayout(new OverlayLayout(this));

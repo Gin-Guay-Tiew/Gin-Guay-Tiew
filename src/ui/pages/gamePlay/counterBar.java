@@ -446,8 +446,8 @@ public class counterBar extends JPanel {
                                     break;
                                 }
                             }
-                            // Serve Drinks
-                            if (item.getName().contains("cola") || item.getName().contains("sprite") || item.getName().contains("orange")) {
+                            // Serve Drinks & KanomTuay
+                            if (item.getName().contains("cola") || item.getName().contains("sprite") || item.getName().contains("orange") || item.getName().contains("kanom")) {
                                 int centerX = item.getX() + (item.getWidth() / 2);
                                 int sectionIndex = centerX / 200;
 

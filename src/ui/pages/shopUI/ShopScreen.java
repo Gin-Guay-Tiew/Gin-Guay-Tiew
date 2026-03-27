@@ -1,47 +1,87 @@
 package ui.pages.shopUI;
 
 import javax.swing.*;
+import javax.swing.plaf.basic.BasicScrollBarUI;
 import java.awt.*;
 import java.awt.event.*;
+
 import logic.Shop.ShopManager;
 import logic.Shop.ShopItem;
-import ui.components.BackBtn;
-import ui.components.MoneyDisplay;
 import ui.components.PopupWindow;
 import ui.components.ImageJButton;
+import ui.components.CustomJLabel;
 import main.MainFrame;
+import utilities.IconImage;
+
 import java.util.ArrayList;
 import java.util.List;
 
+import static utilities.IconFilter.setOpacity;
+
 public class ShopScreen extends JPanel {
 
-
     private ShopManager controller;
-    private MoneyDisplay moneyPanel;
     private List<ImageJButton> buyButtons = new ArrayList<>();
+    private List<CustomJLabel> priceLabels = new ArrayList<>();
     private List<ShopItem> items = new ArrayList<>();
-
     private MainFrame mainFrame;
+    private Image backgroundImage;
+    private Timer updateTimer;
+
+    // 9-Slice Background Panel
+    static class BackgroundPanel extends JPanel {
+        private final Image image;
+        private final int margin;
+
+        public BackgroundPanel(ImageIcon icon, int margin) {
+            this.image = icon.getImage();
+            this.margin = margin;
+            setOpaque(false);
+            setLayout(new BorderLayout(5, 0));
+        }
+
+        @Override
+        protected void paintComponent(Graphics g) {
+            int iw = image.getWidth(this);
+            int ih = image.getHeight(this);
+            int cw = getWidth();
+            int ch = getHeight();
+
+            Graphics2D g2 = (Graphics2D) g;
+            g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+
+            // Top row
+            g.drawImage(image, 0, 0, margin, margin, 0, 0, margin, margin, this);
+            g.drawImage(image, margin, 0, cw - margin, margin, margin, 0, iw - margin, margin, this);
+            g.drawImage(image, cw - margin, 0, cw, margin, iw - margin, 0, iw, margin, this);
+
+            // Middle row
+            g.drawImage(image, 0, margin, margin, ch - margin, 0, margin, margin, ih - margin, this);
+            g.drawImage(image, margin, margin, cw - margin, ch - margin, margin, margin, iw - margin, ih - margin, this);
+            g.drawImage(image, cw - margin, margin, cw, ch - margin, iw - margin, margin, iw, ih - margin, this);
+
+            // Bottom row
+            g.drawImage(image, 0, ch - margin, margin, ch, 0, ih - margin, margin, ih, this);
+            g.drawImage(image, margin, ch - margin, cw - margin, ch, margin, ih - margin, iw - margin, ih, this);
+            g.drawImage(image, cw - margin, ch - margin, cw, ch, iw - margin, ih - margin, iw, ih, this);
+        }
+    }
 
     public ShopScreen(MainFrame frame, ShopManager gm) {
         this.mainFrame = frame;
         this.controller = gm;
+
+        // Setup Main Background
+        ImageIcon newBg = new ImageIcon("resources/images/shared/levelBackgrounds/Level3.png");
+        newBg = setOpacity(newBg, 0.5f);
+        this.backgroundImage = newBg.getImage();
+
         setLayout(new BorderLayout());
-        setBackground(new Color(245, 245, 245));
 
-        // --- 1. ส่วนหัว (North) ---
-        JPanel northPanel = new JPanel(new BorderLayout());
-        northPanel.setOpaque(false);
-        northPanel.setBorder(BorderFactory.createEmptyBorder(0, 20, 10, 20));
+        // --- 1. Top Bar ---
+        add(new TopBar(mainFrame), BorderLayout.NORTH);
 
-        JButton backBtn = new BackBtn(gm.getMainFrame(), MainFrame.MAIN_MENU);
-        northPanel.add(backBtn, BorderLayout.WEST);
-
-        moneyPanel = new MoneyDisplay(mainFrame);
-        northPanel.add(moneyPanel, BorderLayout.EAST);
-        add(northPanel, BorderLayout.NORTH);
-
-        // --- 2. ส่วนรายการ (Center) ---
+        // --- 2. Grid Content ---
         JPanel gridPanel = new JPanel(new GridLayout(0, 2, 15, 15));
         gridPanel.setOpaque(false);
         gridPanel.setBorder(BorderFactory.createEmptyBorder(10, 20, 10, 20));
@@ -50,7 +90,7 @@ public class ShopScreen extends JPanel {
             gridPanel.add(createItemCard(item));
         }
 
-        // setting ScrollPane
+        // --- 3. Custom ScrollPane ---
         JScrollPane scrollPane = new JScrollPane(gridPanel);
         scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
@@ -59,177 +99,201 @@ public class ShopScreen extends JPanel {
         scrollPane.getViewport().setOpaque(false);
         scrollPane.getVerticalScrollBar().setUnitIncrement(16);
 
+        // Minimalist ScrollBar UI
+        JScrollBar verticalBar = scrollPane.getVerticalScrollBar();
+        verticalBar.setPreferredSize(new Dimension(8, 0));
+        verticalBar.setUI(new BasicScrollBarUI() {
+            @Override
+            protected JButton createDecreaseButton(int orientation) {
+                return createZeroButton();
+            }
+
+            @Override
+            protected JButton createIncreaseButton(int orientation) {
+                return createZeroButton();
+            }
+
+            private JButton createZeroButton() {
+                JButton b = new JButton();
+                b.setPreferredSize(new Dimension(0, 0));
+                return b;
+            }
+
+            @Override
+            protected void paintTrack(Graphics g, JComponent c, Rectangle trackBounds) {
+                g.setColor(Color.lightGray);
+                g.fillRect(trackBounds.x, trackBounds.y, trackBounds.width, trackBounds.height);
+            }
+
+            @Override
+            protected void paintThumb(Graphics g, JComponent c, Rectangle thumbBounds) {
+                g.setColor(Color.darkGray);
+                g.fillRect(thumbBounds.x, thumbBounds.y, thumbBounds.width, thumbBounds.height);
+            }
+        });
+
         add(scrollPane, BorderLayout.CENTER);
+
+        // Start Auto-Refresh Timer (1s)
+        updateTimer = new Timer(1000, e -> refreshShopButtons());
+        updateTimer.start();
+    }
+
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        if (backgroundImage != null) {
+            g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
+        }
     }
 
     private void refreshShopButtons() {
-        int money = controller.getTotalMoney();
+        int money = mainFrame.getPlayerData().getMoney();
+
         for (int i = 0; i < buyButtons.size(); i++) {
             ImageJButton btn = buyButtons.get(i);
             ShopItem item = items.get(i);
+            CustomJLabel pLabel = priceLabels.get(i);
 
-            if (!controller.isItemUnlocked(item.getName())) {
-                btn.setImage("resources/images/shared/buttons/lockedBuy", ".png", 75, 30);
-            }
-            else if (money < item.getPrice()) {
-                btn.setImage("resources/images/shared/buttons/noMoneyBuy", ".png", 75, 30);
-            }
-            else {
-                btn.setImage("resources/images/shared/buttons/canBuy", ".png", 75, 30);
+            boolean isPurchased = controller.isItemPurchased(item.getName());
+            boolean isStageReached = controller.isItemStageReached(item);
+
+            if (isPurchased) {
+                pLabel.setText("Unlocked");
+                pLabel.setTextColor(new Color(110, 207, 106));
+                pLabel.setOutlineColor(new Color(34, 74, 32));
+                btn.setVisible(false);
+            } else {
+                btn.setVisible(true);
+                if (!isStageReached) {
+                    pLabel.setText("Locked");
+                    pLabel.setTextColor(new Color(184, 184, 184));
+                    pLabel.setOutlineColor(new Color(67, 67, 67));
+                    btn.setImage("resources/images/shared/buttons/lockedBuy", ".png", 75, 30);
+                } else {
+                    pLabel.setText(item.getPrice() + " N");
+                    pLabel.setTextColor(new Color(230, 181, 42));
+                    pLabel.setOutlineColor(new Color(115, 51, 12));
+
+                    if (money < item.getPrice()) {
+                        btn.setImage("resources/images/shared/buttons/noMoneyBuy", ".png", 75, 30);
+                    } else {
+                        btn.setImage("resources/images/shared/buttons/canBuy", ".png", 75, 30);
+                    }
+                }
             }
         }
     }
 
     private JPanel createItemCard(ShopItem item) {
+        ImageIcon cardBgIcon = IconImage.create("resources/images/shared/popups/Shop.png", 100, 100);
+        BackgroundPanel card = new BackgroundPanel(cardBgIcon, 30);
+        card.setPreferredSize(new Dimension(320, 100));
+        card.setBorder(BorderFactory.createEmptyBorder(10, 5, 10, 15));
 
-        JPanel card = new JPanel(new BorderLayout(15, 0));
-        card.setPreferredSize(new Dimension(320, 80));
-        card.setBackground(Color.WHITE);
-        card.setBorder(BorderFactory.createCompoundBorder(
-                BorderFactory.createLineBorder(new Color(230, 230, 230), 1),
-                BorderFactory.createEmptyBorder(5, 10, 5, 10)
-        ));
-
+        // Image Panel
         JPanel imagePanel = new JPanel(new BorderLayout());
-        imagePanel.setPreferredSize(new Dimension(120, 120));
+        imagePanel.setPreferredSize(new Dimension(85, 100));
         imagePanel.setOpaque(false);
 
         int iconSize = 80;
-
-        if (item.getImagePath().contains("noodles")
-        && !item.getName().equals("Green egg noodles")){
-            iconSize = 150;
+        if (item.getImagePath().contains("noodles") && !item.getName().equals("Green egg noodles")) {
+            iconSize = 130;
         }
-        ImageIcon itemIcon = utilities.IconImage.create(item.getImagePath(), iconSize, iconSize);
+
+        ImageIcon itemIcon = IconImage.create(item.getImagePath(), iconSize, iconSize);
         JLabel imageLabel = new JLabel(itemIcon);
         imageLabel.setHorizontalAlignment(SwingConstants.CENTER);
         imageLabel.setVerticalAlignment(SwingConstants.CENTER);
 
         String name = item.getName();
-
-        if (name.equals("Thin rice noodles")) {
-            imageLabel.setBorder(BorderFactory.createEmptyBorder(-80, -60, 0, 0));
-        }
-        else if (name.equals("Wide rice noodles")) {
-            imageLabel.setBorder(BorderFactory.createEmptyBorder(40, -50, 0, 0));
-        }
-        else if (name.equals("Rice vermicelli noodles")) {
+        if (name.equals("Thin rice noodles")) imageLabel.setBorder(BorderFactory.createEmptyBorder(-80, -40, 0, 0));
+        else if (name.equals("Wide rice noodles")) imageLabel.setBorder(BorderFactory.createEmptyBorder(40, -30, 0, 0));
+        else if (name.equals("Rice vermicelli noodles"))
             imageLabel.setBorder(BorderFactory.createEmptyBorder(50, 40, 0, 0));
-        }
-        else if (name.equals("Yellow egg noodles")) {
+        else if (name.equals("Yellow egg noodles"))
             imageLabel.setBorder(BorderFactory.createEmptyBorder(-80, 40, 0, 0));
-        }
-        else if (name.equals("Vegetable")) {
-            imageLabel.setBorder(BorderFactory.createEmptyBorder(0, -20, 0, 0));
-        }
+        else if (name.equals("Vegetable")) imageLabel.setBorder(BorderFactory.createEmptyBorder(0, -10, 0, 0));
 
         imagePanel.add(imageLabel, BorderLayout.CENTER);
         card.add(imagePanel, BorderLayout.WEST);
 
-        // [Center] ชื่อและราคา (จัดให้ชิดกัน)
+        // Info Panel
         JPanel infoPanel = new JPanel();
         infoPanel.setLayout(new BoxLayout(infoPanel, BoxLayout.Y_AXIS));
         infoPanel.setOpaque(false);
 
         Font jerseyFont = utilities.FontLoader.loadCustomFont("resources/font/Jersey10.ttf");
+        String rawName = item.getName();
+        String displayName = (rawName.length() > 13) ? rawName.substring(0, 12).trim() + ".." : rawName;
 
-        JLabel nameLabel = new JLabel(item.getName());
-        nameLabel.setFont(jerseyFont.deriveFont(Font.BOLD, 20f));
+        CustomJLabel nameLabel = new CustomJLabel(displayName, 4.5f);
+        nameLabel.setFont(jerseyFont.deriveFont(Font.BOLD, 26f));
+        nameLabel.setTextColor(Color.WHITE);
         nameLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
+        nameLabel.setBorder(BorderFactory.createEmptyBorder(0, 2, 0, 2));
 
-        JLabel priceLabel = new JLabel(item.getPrice() + " N");
-        priceLabel.setFont(jerseyFont.deriveFont(16f));
-        priceLabel.setForeground(Color.GRAY);
+        CustomJLabel priceLabel = new CustomJLabel("", 4f);
+        priceLabel.setFont(jerseyFont.deriveFont(22f));
         priceLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
+        priceLabel.setBorder(BorderFactory.createEmptyBorder(20, 2, 0, 2));
 
         infoPanel.add(Box.createVerticalGlue());
         infoPanel.add(nameLabel);
-        infoPanel.add(Box.createVerticalStrut(-5)); // ดึงราคาให้ขึ้นมาติดชื่อมากขึ้น
+        infoPanel.add(Box.createVerticalStrut(-8));
         infoPanel.add(priceLabel);
         infoPanel.add(Box.createVerticalGlue());
 
         card.add(infoPanel, BorderLayout.CENTER);
 
-        // [East] ปุ่ม BUY
-        String buttonPath;
-        boolean isClickable = true;
-
-        boolean unlocked = controller.isItemUnlocked(item.getName());
-        if (!unlocked) {
-            buttonPath = "resources/images/shared/buttons/lockedBuy";
-        } else if (controller.getTotalMoney() < item.getPrice()) {
-            buttonPath = "resources/images/shared/buttons/noMoneyBuy";
-        } else {
-            buttonPath = "resources/images/shared/buttons/canBuy";
-        }
-
-        ImageJButton buyBtn = new ImageJButton(buttonPath, ".png", 25, 75, 30);
-        buyButtons.add(buyBtn);
+        // Storage for updates
+        priceLabels.add(priceLabel);
         items.add(item);
 
+        // Buy Button
+        ImageJButton buyBtn = new ImageJButton("resources/images/shared/buttons/canBuy", ".png", 25, 75, 30);
+        buyButtons.add(buyBtn);
+
         buyBtn.addActionListener(e -> {
-            if (!controller.isItemUnlocked(item.getName())) {
-                new PopupWindow().createPopup(
-                        controller.getMainFrame(),
-                        "Your level is too low!",
-                        "resources/images/shared/popups/Demo.png",
-                        new String[]{"resources/images/shared/buttons/Ok"},
-                        new String[]{"resources/images/shared/buttons/Ok"},
-                        new ActionListener[]{
-                                ex -> ((Window)SwingUtilities.getWindowAncestor((Component)ex.getSource())).dispose()
-                        }
-                );
+            if (!controller.isItemStageReached(item)) {
+                showWarningPopup("Locked!<br>Clear Level " + item.getLevelRequired() + " to unlock.");
                 return;
             }
-
-
-            if (controller.getTotalMoney() < item.getPrice()) {
-                new PopupWindow().createPopup(
-                        controller.getMainFrame(),
-                        "Not enough money!",
-                        "resources/images/shared/popups/Demo.png",
-                        new String[]{"resources/images/shared/buttons/Ok"},
-                        new String[]{"resources/images/shared/buttons/Ok"},
-                        new ActionListener[]{
-                                ex -> ((Window)SwingUtilities.getWindowAncestor((Component)ex.getSource())).dispose()
-                        }
-                );
+            if (mainFrame.getPlayerData().getMoney() < item.getPrice()) {
+                showWarningPopup("Not enough money!");
                 return;
             }
-
             if (controller.purchaseItem(item)) {
-                moneyPanel.updateMoney(controller.getTotalMoney());
-
                 refreshShopButtons();
-
-                new PopupWindow().createPopup(
-                        controller.getMainFrame(),
-                        "Purchase successful!",
-                        "resources/images/shared/popups/Demo.png",
-                        new String[]{"resources/images/shared/buttons/Ok"},
-                        new String[]{"Ok"},
-                        new ActionListener[] {
-                                ex -> {
-                                    ((Window)SwingUtilities.getWindowAncestor((Component)ex.getSource())).dispose();
-//                                    controller.getMainFrame().getNavigator().toPage(MainFrame.SHOP_UI, false);
-                                }
-                        }
-                );
+                showWarningPopup("Purchase successful!");
             }
         });
 
-        // Animation button
         buyBtn.addMouseListener(new MouseAdapter() {
             public void mousePressed(MouseEvent e) {
                 if (buyBtn.isEnabled()) buyBtn.setBorder(BorderFactory.createEmptyBorder(3, 3, 0, 0));
             }
+
             public void mouseReleased(MouseEvent e) {
                 buyBtn.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
             }
         });
 
         card.add(buyBtn, BorderLayout.EAST);
+        refreshShopButtons();
         return card;
     }
 
+    private void showWarningPopup(String text) {
+        new PopupWindow().createPopup(
+                controller.getMainFrame(),
+                text,
+                "resources/images/shared/popups/Demo.png",
+                new String[]{"resources/images/shared/buttons/Ok"},
+                new String[]{"Ok"},
+                new ActionListener[]{
+                        ex -> ((Window) SwingUtilities.getWindowAncestor((Component) ex.getSource())).dispose()
+                }
+        );
+    }
 }

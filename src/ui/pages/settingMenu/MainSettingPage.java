@@ -7,6 +7,7 @@ import ui.components.PopupWindow;
 import utilities.FontLoader;
 import ui.components.ImageJButton;
 import utilities.IconImage;
+import utilities.SoundManager;
 
 import javax.swing.*;
 import javax.swing.plaf.basic.BasicSliderUI;
@@ -73,9 +74,12 @@ public class MainSettingPage extends JPanel {
         slider.setUI(new ModernSliderUI(slider, thumbImg));
 
         slider.addChangeListener(e -> {
-            int volume = slider.getValue();
-            playerData.setVolumeLv(volume);
-            images01.setIcon(volume == 0 ? iconMute : iconMusic);
+            if (!slider.getValueIsAdjusting()) {
+                int volume = slider.getValue();
+                playerData.setVolumeLv(volume);
+                SoundManager.setVolume(volume / 100f);
+                images01.setIcon(volume == 0 ? iconMute : iconMusic);
+            }
         });
 
         con_1.add(images01);
