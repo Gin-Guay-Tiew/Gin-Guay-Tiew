@@ -10,6 +10,7 @@ import java.awt.*;
 public class PauseScreen extends JPanel {
 
     private Image backgroundImage;
+    private float alpha = 0f;
 
     public PauseScreen(MainFrame mainFrame) {
 
@@ -70,7 +71,11 @@ public class PauseScreen extends JPanel {
         // ================= Button Action =================
 
         resume.addActionListener(e ->
-                mainFrame.getNavigator().toPage(mainFrame.getPreviousPage(), false)
+                fadeOut(() ->
+                        mainFrame.getNavigator().toPage(
+                                mainFrame.getPreviousPage(), false
+                        )
+                )
         );
 
         setting.addActionListener(e ->
@@ -82,9 +87,55 @@ public class PauseScreen extends JPanel {
         );
     }
 
+    public void fadeIn() {
+        alpha = 0f;
+        Timer timer = new Timer(15, null);
+        timer.addActionListener(e -> {
+            alpha += 0.05f;
+            if (alpha >= 1f) {
+                alpha = 1f;
+                timer.stop();
+            }
+
+            repaint();
+        });
+
+        timer.start();
+    }
+
+    public void fadeOut(Runnable afterFade) {
+        Timer timer = new Timer(15, null);
+        timer.addActionListener(e -> {
+            alpha -= 0.05f;
+            if (alpha <= 0f) {
+                alpha = 0f;
+                timer.stop();
+                afterFade.run();
+            }
+
+            repaint();
+        });
+
+        timer.start();
+    }
+
+    @Override
+    public void paint(Graphics g) {
+        Graphics2D g2 = (Graphics2D) g.create();
+
+        g2.setComposite(AlphaComposite.getInstance(
+                AlphaComposite.SRC_OVER, alpha
+        ));
+
+        super.paint(g2);
+
+        g2.dispose();
+    }
+
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
+
         g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
     }
 }
