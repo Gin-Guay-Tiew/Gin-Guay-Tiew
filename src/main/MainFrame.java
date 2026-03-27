@@ -46,6 +46,7 @@ public class MainFrame extends JFrame implements WindowListener {
     private PauseScreen pauseScreen;
 
     private PlayerData playerData = new PlayerData();
+    private String forceBackPage;
 
     // สำหรับสร้างหน้าเกมใหม่ตอนกด play again
     public void startNewGame(int levelID) {
@@ -55,7 +56,7 @@ public class MainFrame extends JFrame implements WindowListener {
             mainPanel.remove(currentGameScreen);
         }
 
-        currentGameScreen = new gamePlayScreen(this,levelID);
+        currentGameScreen = new gamePlayScreen(this, levelID);
         mainPanel.add(currentGameScreen, "gamePlay");
 
         mainPanel.revalidate();
@@ -63,8 +64,9 @@ public class MainFrame extends JFrame implements WindowListener {
 
         navigator.toPage("gamePlay", true, 500);
     }
+
     // ขอสร้างส่วนเสริมเพิ่มสำหรับกดเล่นใหม่
-    public void replayGame(){
+    public void replayGame() {
         startNewGame(currentLevel);
     }
 
@@ -81,8 +83,12 @@ public class MainFrame extends JFrame implements WindowListener {
         return previousPage;
     }
 
-    public PlayerData getPlayerData(){
+    public PlayerData getPlayerData() {
         return playerData;
+    }
+
+    public String getForceBackPage() {
+        return forceBackPage;
     }
 
     public MainFrame() {
@@ -168,22 +174,23 @@ public class MainFrame extends JFrame implements WindowListener {
         root.getActionMap().put("pauseGame", new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (!PAUSE.equals(navigator.getCurrentPage())) {
-                    previousPage = navigator.getCurrentPage();
+                String currentPage = navigator.getCurrentPage();
 
-                    if (currentGameScreen instanceof gamePlayScreen game) {
+                if (GAME.equals(currentPage) || "gamePlay".equals(currentPage)) {
+                    previousPage = currentPage;
+
+                    if (currentGameScreen instanceof ui.pages.gamePlay.gamePlayScreen game) {
                         game.pauseGame();
                     }
 
                     navigator.toPage(PAUSE, false);
                     pauseScreen.fadeIn();
-                }
-                else {
+                } else if (PAUSE.equals(currentPage)) {
                     pauseScreen.fadeOut(() -> {
-                            navigator.toPage(previousPage, false);
-                            if (currentGameScreen instanceof gamePlayScreen game) {
-                                game.resumeGame();
-                            }
+                        navigator.toPage(previousPage, false);
+                        if (currentGameScreen instanceof ui.pages.gamePlay.gamePlayScreen game) {
+                            game.resumeGame();
+                        }
                     });
                 }
             }
@@ -242,6 +249,10 @@ public class MainFrame extends JFrame implements WindowListener {
         navigator.toPage(MAIN_MENU, false);
     }
 
+    public void setBackBtnPage(String previousPage) {
+        this.forceBackPage = previousPage;
+    }
+
     @Override
     public void windowOpened(WindowEvent e) {
     }
@@ -265,4 +276,5 @@ public class MainFrame extends JFrame implements WindowListener {
     @Override
     public void windowDeactivated(WindowEvent e) {
     }
+
 }

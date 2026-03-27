@@ -7,6 +7,7 @@ import main.MainFrame;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
 
 public class TopBar extends JPanel {
 
@@ -22,7 +23,24 @@ public class TopBar extends JPanel {
         // Components
         JPanel nevText = new JPanel(new FlowLayout());
         nevText.setOpaque(false);
-        JButton backBtn = new BackBtn(mainFrame, "mainMenu");
+
+        JButton backBtn = new BackBtn(mainFrame, MainFrame.MAIN_MENU);
+
+        for (ActionListener al : backBtn.getActionListeners()) {
+            backBtn.removeActionListener(al);
+        }
+
+        backBtn.addActionListener(e -> {
+            String target = mainFrame.getForceBackPage();
+
+            if (target == null) {
+                target = MainFrame.MAIN_MENU;
+            }
+
+            mainFrame.setBackBtnPage(MainFrame.MAIN_MENU);
+            mainFrame.getNavigator().toPage(target, true);
+        });
+
         JLabel text = new CustomJLabel("~ Settings ~", 7f);
         text.setBorder(BorderFactory.createEmptyBorder(0, 5, 0, 5));
         text.setFont(loadedFont.deriveFont(45f));

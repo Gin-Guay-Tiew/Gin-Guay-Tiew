@@ -2,22 +2,25 @@ package ui.pages.pressESC;
 
 import main.MainFrame;
 import ui.components.ImageJButton;
+import ui.components.PopupWindow;
 import utilities.IconImage;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
 
 public class PauseScreen extends JPanel {
 
     private Image backgroundImage;
     private float alpha = 0f;
+    PopupWindow pop = new PopupWindow();
 
     public PauseScreen(MainFrame mainFrame) {
 
         setLayout(new GridBagLayout());
 
         // ================= Background =================
-        ImageIcon original = new ImageIcon("resources/images/mainMenu/Background.gif");
+        ImageIcon original = new ImageIcon("resources/images/shared/levelBackgrounds/Main_Dark.gif");
         backgroundImage = original.getImage();
 
         // ================= Center Container =================
@@ -78,13 +81,32 @@ public class PauseScreen extends JPanel {
                 )
         );
 
-        setting.addActionListener(e ->
-                mainFrame.getNavigator().toPage(MainFrame.SETTING, true)
-        );
+        setting.addActionListener(e -> {
+            mainFrame.setBackBtnPage(MainFrame.PAUSE);
+            mainFrame.getNavigator().toPage(MainFrame.SETTING, true);
+        });
 
-        menu.addActionListener(e ->
-                mainFrame.getNavigator().toPage(MainFrame.MAIN_MENU, true)
-        );
+        menu.addActionListener(e -> {
+            String[] btnPaths = {
+                    "resources/images/shared/buttons/Yes",
+                    "resources/images/shared/buttons/No"
+            };
+            String[] btnLabels = {"Yes", "No"};
+            ActionListener[] btnActions = {
+                    ex -> {
+                        mainFrame.getNavigator().toPage(MainFrame.MAIN_MENU, true);
+                    },
+                    null
+            };
+            pop.createPopup(
+                    mainFrame,
+                    "Are you sure you want to return?\nYour progress will not be saved.", // Message
+                    "resources/images/shared/popups/Demo.png", // Background Path
+                    btnPaths,
+                    btnLabels,
+                    btnActions
+            );
+        });
     }
 
     public void fadeIn() {
