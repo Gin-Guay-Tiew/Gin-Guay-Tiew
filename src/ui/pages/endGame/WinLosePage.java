@@ -3,6 +3,7 @@ package ui.pages.endGame;
 import main.MainFrame;
 import ui.components.CustomJLabel;
 import utilities.FontLoader;
+import utilities.SoundManager;
 
 import javax.swing.*;
 import javax.swing.border.*;
@@ -34,8 +35,12 @@ public class WinLosePage extends JPanel {
         statusLabel.setFont(jerseyFont.deriveFont(100f));
         statusLabel.setBorder(new EmptyBorder(20,0,0,0));
 
-        if (isWin) { statusLabel.setText("You win!"); }
-        else  { statusLabel.setText("You lose!"); }
+        if (isWin) {
+            statusLabel.setText("You win!");
+        }
+        else  {
+            statusLabel.setText("You lose!");
+        }
 
         add(statusLabel,BorderLayout.NORTH);
 

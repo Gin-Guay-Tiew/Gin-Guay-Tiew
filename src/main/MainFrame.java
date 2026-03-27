@@ -16,6 +16,7 @@ import utilities.IconImage;
 import utilities.PageNavigator;
 import ui.components.PopupWindow;
 import utilities.Transition;
+import utilities.SoundManager;
 
 import javax.swing.*;
 import java.awt.*;
@@ -52,6 +53,8 @@ public class MainFrame extends JFrame implements WindowListener {
     public void startNewGame(int levelID) {
 
         currentLevel = levelID;
+        SoundManager.playLevelMusic(levelID);
+
         if (currentGameScreen != null) {
             mainPanel.remove(currentGameScreen);
         }
@@ -101,6 +104,7 @@ public class MainFrame extends JFrame implements WindowListener {
         ImageIcon img = new ImageIcon("resources/images/shared/AppIcon.png");
         setIconImage(img.getImage());
         this.playerData = utilities.DataManager.loadPlayerData();
+        SoundManager.setVolume(playerData.getVolumeLv() / 100f);
 
         // Layered Position Setup (TransitionFrame Positioning :D)
         JPanel glass = (JPanel) getGlassPane();
@@ -136,6 +140,7 @@ public class MainFrame extends JFrame implements WindowListener {
         mainPanel.add(pauseScreen, PAUSE);
 
         navigator.toPage(MAIN_MENU, false);
+        SoundManager.playMenuBackground();
 
         add(mainPanel);
 
