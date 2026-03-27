@@ -282,4 +282,7 @@ public class MainFrame extends JFrame implements WindowListener {
     public void windowDeactivated(WindowEvent e) {
     }
 
+    public gamePlayScreen getGamePanel() {
+        return (gamePlayScreen) currentGameScreen;
+    }
 }

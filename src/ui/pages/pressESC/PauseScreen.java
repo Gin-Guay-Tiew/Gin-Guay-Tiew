@@ -74,11 +74,12 @@ public class PauseScreen extends JPanel {
         // ================= Button Action =================
 
         resume.addActionListener(e ->
-                fadeOut(() ->
-                        mainFrame.getNavigator().toPage(
-                                mainFrame.getPreviousPage(), false
-                        )
-                )
+                fadeOut(() -> {
+                    mainFrame.getGamePanel().resumeGame();
+                    mainFrame.getNavigator().toPage(
+                            mainFrame.getPreviousPage(), false
+                    );
+                })
         );
 
         setting.addActionListener(e -> {
@@ -132,7 +133,7 @@ public class PauseScreen extends JPanel {
             if (alpha <= 0f) {
                 alpha = 0f;
                 timer.stop();
-                afterFade.run();
+                SwingUtilities.invokeLater(afterFade);
             }
 
             repaint();
