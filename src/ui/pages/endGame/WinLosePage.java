@@ -21,9 +21,7 @@ public class WinLosePage extends JPanel {
     }
 
     public void setState(boolean isWin, double moneyEarned, double bonusMoney) {
-
         removeAll();
-
 
         CustomJLabel statusLabel = new CustomJLabel("status", 15f);
         statusLabel.setOutlineColor(Color.WHITE);
