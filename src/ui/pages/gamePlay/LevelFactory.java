@@ -5,6 +5,29 @@ import java.util.List;
 
 //หน้านี้สำหรับเก็บข้อมูลในแต่ละเลเวล เราจะเปลี่ยนแค่ของในเลเวล มาเพิ่มเปลี่ยนเอาในนี้ได้เลย case 1,2,3,4,5  แทนเลขในแต่ละเลเวล
 public class LevelFactory {
+
+    public static int getReqMoney(int levelId) {
+        switch (levelId) {
+            case 1: return 1000;
+            case 2: return 1100;
+            case 3: return 1200;
+            case 4: return 1300;
+            case 5: return 1400;
+            default: return 0;
+        }
+    }
+
+    public static int getLives(int levelId) {
+        switch (levelId) {
+            case 1: return 8;
+            case 2: return 11;
+            case 3: return 13;
+            case 4: return 16;
+            case 5: return 17;
+            default: return 10;
+        }
+    }
+
     public static LevelUIConfig getLevel(int levelId) {
         List<SlotSpec> slots = new ArrayList<>();
         String bg = "";

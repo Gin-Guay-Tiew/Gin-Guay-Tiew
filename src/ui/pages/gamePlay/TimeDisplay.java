@@ -1,6 +1,7 @@
 package ui.pages.gamePlay;
 
 import ui.components.CustomJLabel;
+import utilities.IconImage;
 import utilities.FontLoader;
 
 import javax.swing.*;
@@ -12,89 +13,101 @@ public class TimeDisplay extends JPanel {
     private CustomJLabel secLabel;
     private CustomJLabel colonLabel;
     private CustomJLabel countLabel;
-    private final Color defaultGrey = new Color(200, 200, 200);
-    private final Color flashGreen = new Color(100, 255, 100);
-    private final Color flashRed = new Color(255, 100, 100);
-    private Timer flashTimer;
+    private CustomJLabel livesValueLabel;
+    private JLabel heartIcon;
 
     public TimeDisplay() {
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        setBorder(BorderFactory.createEmptyBorder(35, 15, 0, 15));
+        setBorder(BorderFactory.createEmptyBorder(15, 15, 0, 15));
         setOpaque(false);
 
         Font timerFont = jerseyFont.deriveFont(35f);
-        Font smallFont = jerseyFont.deriveFont(20f);
+        Font smallFont = jerseyFont.deriveFont(22f);
 
-        JPanel timerPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
+        // --- Timer Row ---
+        JPanel timerPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
         timerPanel.setOpaque(false);
+        timerPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
 
         minLabel = new CustomJLabel("00", 5f);
         minLabel.setFont(timerFont);
-        minLabel.setHorizontalAlignment(SwingConstants.RIGHT);
-        minLabel.setPreferredSize(new Dimension(35, 35));
         minLabel.setForeground(Color.white);
+        minLabel.setBorder(BorderFactory.createEmptyBorder(0, 5, 0, 5));
 
         colonLabel = new CustomJLabel(":", 5f);
         colonLabel.setFont(timerFont);
         colonLabel.setForeground(Color.white);
-        colonLabel.setBorder(BorderFactory.createEmptyBorder(0, 2, 0, 2));
+        colonLabel.setBorder(BorderFactory.createEmptyBorder(0, 5, 0, 5));
 
         secLabel = new CustomJLabel("00", 5f);
         secLabel.setFont(timerFont);
-        secLabel.setHorizontalAlignment(SwingConstants.LEFT);
-        secLabel.setPreferredSize(new Dimension(35, 35));
         secLabel.setForeground(Color.white);
+        secLabel.setBorder(BorderFactory.createEmptyBorder(0, 5, 0, 5));
 
         timerPanel.add(minLabel);
         timerPanel.add(colonLabel);
         timerPanel.add(secLabel);
 
-        countLabel = new CustomJLabel("0/20", 3.5f);
+        // --- Money Row ---
+        countLabel = new CustomJLabel("NA / NA", 4f);
         countLabel.setFont(smallFont);
         countLabel.setTextColor(new Color(200, 200, 200));
-        countLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        countLabel.setBorder(BorderFactory.createEmptyBorder(0, 2, 0, 2));
+        countLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
+        countLabel.setBorder(BorderFactory.createEmptyBorder(0, 5, 0, 5));
+
+        // --- Lives Row ---
+        JPanel livesPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 5, 0));
+        livesPanel.setOpaque(false);
+        livesPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
+
+        heartIcon = new JLabel(IconImage.create("resources/images/shared/Heart.png", 20, 20));
+        heartIcon.setBorder(BorderFactory.createEmptyBorder(0, 1, 0, 1));
+
+        livesValueLabel = new CustomJLabel(": 10", 4f);
+        livesValueLabel.setFont(smallFont);
+        livesValueLabel.setTextColor(new Color(255, 50, 50));
+        livesValueLabel.setBorder(BorderFactory.createEmptyBorder(0, 2, 0, 5));
+
+        livesPanel.add(heartIcon);
+        livesPanel.add(livesValueLabel);
 
         add(timerPanel);
         add(Box.createVerticalStrut(-5));
         add(countLabel);
+        add(Box.createVerticalStrut(2));
+        add(livesPanel);
     }
 
     public void updateTime(int totalSeconds) {
         int min = totalSeconds / 60;
         int sec = totalSeconds % 60;
+        Color c = (totalSeconds <= 10) ? new Color(255, 75, 75) : Color.white;
 
-        if (totalSeconds <= 10) {
-            Color urgencyColor = new Color(255, 75, 75);
-            minLabel.setForeground(urgencyColor);
-            secLabel.setForeground(urgencyColor);
-            colonLabel.setForeground(urgencyColor);
-        } else {
-            minLabel.setForeground(Color.white);
-            secLabel.setForeground(Color.white);
-            colonLabel.setForeground(Color.white);
-        }
-
+        minLabel.setForeground(c);
+        secLabel.setForeground(c);
+        colonLabel.setForeground(c);
         minLabel.setText(String.format("%02d", min));
         secLabel.setText(String.format("%02d", sec));
     }
 
     public void updateCount(int current, int max) {
-        countLabel.setText(current + "/" + max);
+        countLabel.setText(current + " N / " + max + " N");
     }
 
-    public void playCountFlash(boolean isSuccess) {
-        if (flashTimer != null && flashTimer.isRunning()) {
-            flashTimer.stop();
+    public void updateLives(int health) {
+        livesValueLabel.setText(": " + health);
+
+        if (health <= 3) {
+            livesValueLabel.setTextColor(new Color(255, 0, 0));
+        } else {
+            livesValueLabel.setTextColor(new Color(255, 92, 92));
         }
-        System.out.println("E");
+        revalidate();
+        repaint();
+    }
 
-        countLabel.setTextColor(isSuccess ? flashGreen : flashRed);
-
-        flashTimer = new Timer(500, e -> {
-            countLabel.setTextColor(defaultGrey);
-        });
-        flashTimer.setRepeats(false);
-        flashTimer.start();
+    public void setCountColor(Color color) {
+        countLabel.setTextColor(color);
+        repaint();
     }
 }

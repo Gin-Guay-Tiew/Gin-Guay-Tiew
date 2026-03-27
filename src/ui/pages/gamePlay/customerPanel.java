@@ -1,5 +1,6 @@
 package ui.pages.gamePlay;
 
+import main.MainFrame;
 import utilities.IconImage;
 
 import javax.swing.*;
@@ -11,8 +12,10 @@ import javax.swing.Timer;
 public class customerPanel extends JPanel {
 
     TopBar bar;
-    private int totalCustomers;
-    private int servedCustomers = 0;
+    MainFrame mainFrame;
+    private int targetMoney;
+    private int currentMoney = 0;
+    private int health;
 
     // คิวลูกค้าทั้งหมดในด่าน
     private Queue<CustomerData> queue = new LinkedList<>();
@@ -22,8 +25,9 @@ public class customerPanel extends JPanel {
     private int[] xs = {211, 397, 591};
     private int[] ys = {78, 59, 80};
 
-    public customerPanel(TopBar bar) {
+    public customerPanel(TopBar bar, MainFrame mainFrame) {
         this.bar = bar;
+        this.mainFrame = mainFrame;
         setLayout(null);
         setPreferredSize(new Dimension(800, 600));
         setOpaque(false);
@@ -37,10 +41,10 @@ public class customerPanel extends JPanel {
 
         java.util.List<CustomerData> dataList = CustomerFactory.getCustomer(levelID);
 
-        totalCustomers = dataList.size();
-        servedCustomers = 0;
-
-        bar.getTimeDisplay().updateCount(servedCustomers, totalCustomers);
+        this.targetMoney = LevelFactory.getReqMoney(levelID);
+        this.health = LevelFactory.getLives(levelID);
+        bar.getTimeDisplay().updateCount(currentMoney, targetMoney);
+        bar.getTimeDisplay().updateLives(health);
         queue.addAll(dataList);
 
         int startWait = 1000 + (int) (Math.random() * 1000);
@@ -173,10 +177,12 @@ public class customerPanel extends JPanel {
         if (c == null) return;
 
         // Reward Logic tong nee!
-        servedCustomers++;
-        bar.getTimeDisplay().updateCount(servedCustomers, totalCustomers);
-        bar.getTimeDisplay().playCountFlash(true);
+        currentMoney += 67;
+        bar.getTimeDisplay().updateCount(currentMoney, targetMoney);
         System.out.println("You received 67 baht from " + d.type);
+        if (currentMoney >= targetMoney) {
+            bar.getTimeDisplay().setCountColor(new Color(110, 207, 106));
+        }
 
         playExitAnimation(c, c.getBubble(), index, () -> {
             int randomDelay = 1000 + (int) (Math.random() * 2000);
@@ -200,10 +206,8 @@ public class customerPanel extends JPanel {
             if (c.isExpired()) {
                 int index = i;
                 customerComponent expiringComp = slots[i];
-
-                servedCustomers++;
-                bar.getTimeDisplay().updateCount(servedCustomers, totalCustomers);
-                bar.getTimeDisplay().playCountFlash(false);
+                health--;
+                bar.getTimeDisplay().updateLives(health);
 
                 playExitAnimation(expiringComp, expiringComp.getBubble(), index, () -> {
                     spawnNext();
@@ -222,6 +226,8 @@ public class customerPanel extends JPanel {
         for (customerComponent c : slots) {
             if (c != null) return false;
         }
+        // Finish level check if failed or not then add Money! :3
+        mainFrame.getPlayerData().addMoney(currentMoney);
         return true;
     }
 

@@ -44,7 +44,7 @@ public class gamePlayScreen extends JPanel {
         topBar.setBounds(0,0,800,90);
 
         // customer panel
-        customerPanel = new customerPanel(topBar);
+        customerPanel = new customerPanel(topBar, mainFrame);
         customerPanel.setBounds(0,0,800,600);
         customerPanel.showCustomers(levelId);
 
