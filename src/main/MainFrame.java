@@ -43,6 +43,7 @@ public class MainFrame extends JFrame implements WindowListener {
     private int currentLevel;
 
     private String previousPage;
+    private PauseScreen pauseScreen;
 
     private PlayerData playerData = new PlayerData();
 
@@ -113,6 +114,7 @@ public class MainFrame extends JFrame implements WindowListener {
         animator = new Transition(transFrame, transIcon);
         glass.add(transFrame);
         navigator = new PageNavigator(mainPanel, cardLayout, animator);
+        pauseScreen = new PauseScreen(this);
 
         mainPanel.add(new MainMenuPage(this), MAIN_MENU); // + MainMenu
         mainPanel.add(new LevelSelectPage(this), LEVEL_SELECT); // + LevelSelection
@@ -125,7 +127,7 @@ public class MainFrame extends JFrame implements WindowListener {
         mainPanel.add(new WinLosePage(this), ENDGAME);
         mainPanel.add(new MainSettingPage(this, this.playerData), SETTING);
         mainPanel.add(new ShopScreen(this, gameController), SHOP_UI);
-        mainPanel.add(new PauseScreen(this), PAUSE);
+        mainPanel.add(pauseScreen, PAUSE);
 
         navigator.toPage(MAIN_MENU, false);
 
@@ -169,6 +171,12 @@ public class MainFrame extends JFrame implements WindowListener {
                 if (!PAUSE.equals(navigator.getCurrentPage())) {
                     previousPage = navigator.getCurrentPage();
                     navigator.toPage(PAUSE, false);
+                    pauseScreen.fadeIn();
+                }
+                else {
+                    pauseScreen.fadeOut(() ->
+                            navigator.toPage(previousPage, false)
+                    );
                 }
             }
         });
