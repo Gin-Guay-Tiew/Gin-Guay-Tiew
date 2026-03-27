@@ -1,22 +1,28 @@
 package utilities;
 
-import javazoom.jl.player.Player;
-import java.io.FileInputStream;
+import javafx.embed.swing.JFXPanel;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+
+import java.io.File;
 
 public class TestMusic {
 
     public static void main(String[] args) {
 
-        try {
+        new JFXPanel(); // start JavaFX
 
-            FileInputStream fis = new FileInputStream("resources/audio_bg/background1.mp3");
-            Player player = new Player(fis);
+        String path = "resources/audio_bg/background1.mp3";
 
-            player.play();
+        Media media = new Media(new File(path).toURI().toString());
+        MediaPlayer player = new MediaPlayer(media);
 
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        player.setVolume(0.2);
+
+        player.play();
+
+        System.out.println("Playing...");
 
     }
+
 }

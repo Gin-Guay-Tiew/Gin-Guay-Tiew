@@ -1,14 +1,23 @@
 package utilities;
 
-import javazoom.jl.player.Player;
-import java.io.FileInputStream;
+import javafx.embed.swing.JFXPanel;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.util.Duration;
+
+import java.io.File;
 
 public class SoundManager {
 
-    private static Thread musicThread;
-    private static Player player;
+    private static MediaPlayer player;
     private static String currentMusic = null;
     private static boolean isLevelMusic = false;
+
+    private static float volume = 0.35f;
+
+    static {
+        new JFXPanel(); // start JavaFX
+    }
 
     private static synchronized void playMusic(String path) {
 
@@ -16,33 +25,34 @@ public class SoundManager {
 
         stopMusic();
 
-        currentMusic = path;
-        System.out.println("PLAY MUSIC: " + path);
-        System.out.println("PLAY MUSIC FROM: " + Thread.currentThread().getStackTrace()[3]);
+        try {
 
-        musicThread = new Thread(() -> {
-            try {
-                while (path.equals(currentMusic)) {
-                    FileInputStream fis = new FileInputStream(path);
-                    player = new Player(fis);
-                    player.play();
-                }
-            } catch (Exception ignored) {}
-        });
+            File file = new File(path);
+            Media media = new Media(file.toURI().toString());
 
-        musicThread.start();
+            player = new MediaPlayer(media);
+            player.setCycleCount(MediaPlayer.INDEFINITE); // loop
+            player.setVolume(volume);
+
+            player.play();
+
+            currentMusic = path;
+
+            System.out.println("PLAY MUSIC: " + path);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public static synchronized void stopMusic() {
-        try {
-            if (player != null) {
-                player.close();
-                player = null;
-            }
 
-            if (musicThread != null) {
-                musicThread.interrupt();
-                musicThread = null;
+        try {
+
+            if (player != null) {
+                player.stop();
+                player.dispose();
+                player = null;
             }
 
         } catch (Exception ignored) {}
@@ -53,8 +63,11 @@ public class SoundManager {
     // ================= MENU BACKGROUND =================
 
     public static void playMenuBackground() {
+
         if (isLevelMusic) return;
+
         playMusic("resources/audio_bg/background1.mp3");
+
     }
 
     // ================= LEVEL =================
@@ -76,14 +89,17 @@ public class SoundManager {
     // ================= OTHER =================
 
     public static void playWaiting() {
+        isLevelMusic = false;
         playMusic("resources/audio_bg/waitting.mp3");
     }
 
     public static void playWin() {
+        isLevelMusic = false;
         playMusic("resources/audio_bg/win.mp3");
     }
 
     public static void playLose() {
+        isLevelMusic = false;
         playMusic("resources/audio_bg/lose.mp3");
     }
 
@@ -92,5 +108,21 @@ public class SoundManager {
         isLevelMusic = false;
         playMenuBackground();
 
+    }
+
+    // ================= VOLUME =================
+
+    public static void setVolume(float v) {
+
+        volume = Math.max(0f, Math.min(1f, v));
+
+        if (player != null) {
+            player.setVolume(volume);
+        }
+
+    }
+
+    public static float getVolume() {
+        return volume;
     }
 }
