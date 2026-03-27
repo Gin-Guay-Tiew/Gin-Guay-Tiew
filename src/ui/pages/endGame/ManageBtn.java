@@ -3,6 +3,7 @@ package ui.pages.endGame;
 import main.MainFrame;
 import utilities.FontLoader;
 import ui.components.ImageJButton;
+import utilities.SoundManager;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -44,6 +45,7 @@ public class ManageBtn extends JPanel implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("backToMainMenu")) {
+            SoundManager.backToMenu();
             mainFrame.getNavigator().toPage("mainMenu",true,500);
             System.out.println("winlosepage to mainMenu");
         }
@@ -52,6 +54,7 @@ public class ManageBtn extends JPanel implements ActionListener {
             System.out.println("winlosepage to gamePlay");
         }
         else if (e.getActionCommand().equals("shop")) {
+            SoundManager.backToMenu();
             mainFrame.getNavigator().toPage("shop",true,500);
             System.out.println("winlosepage to shop");
         }
