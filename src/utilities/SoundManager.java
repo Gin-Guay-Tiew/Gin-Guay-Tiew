@@ -14,6 +14,7 @@ public class SoundManager {
     private static boolean isLevelMusic = false;
 
     private static float volume = 0.35f;
+    private static final float MASTER_VOLUME = 0.45f;
 
     static {
         new JFXPanel(); // start JavaFX
@@ -32,7 +33,7 @@ public class SoundManager {
 
             player = new MediaPlayer(media);
             player.setCycleCount(MediaPlayer.INDEFINITE); // loop
-            player.setVolume(volume);
+            player.setVolume(volume * MASTER_VOLUME);
 
             player.play();
 
@@ -64,7 +65,7 @@ public class SoundManager {
 
     public static void playMenuBackground() {
 
-        if (isLevelMusic) return;
+//        if (isLevelMusic) return;
 
         playMusic("resources/audio_bg/background1.mp3");
 
@@ -105,6 +106,7 @@ public class SoundManager {
 
     public static void backToMenu() {
 
+        System.out.println("BACK TO MENU");
         isLevelMusic = false;
         playMenuBackground();
 
