@@ -118,12 +118,13 @@ public class gamePlayScreen extends JPanel {
     }
 
     public void updateGame() {
-
         if (isGameOver) return;
         customerPanel.updateCustomers();
         if (customerPanel.isFinished()) {
+            int n = (customerPanel.getcurrentMoney()+customerPanel.getBonus());
             int reqMoney = LevelFactory.getReqMoney(levelId);
             if (customerPanel.getcurrentMoney() < reqMoney){
+                mainFrame.getPlayerData().addMoney(n-((int) Math.ceil((double) n / 2)));
                 gameWiner(false);
             }else{
                 mainFrame.getPlayerData().addMoney(customerPanel.getcurrentMoney()+customerPanel.getBonus());
@@ -132,8 +133,10 @@ public class gamePlayScreen extends JPanel {
             isGameOver = true;
         }
         else if ((gameTimer.getTimeLeft() <= 0)) {
+            int n = (customerPanel.getcurrentMoney()+customerPanel.getBonus());
             int reqMoney = LevelFactory.getReqMoney(levelId);
             if (customerPanel.getcurrentMoney() < reqMoney){
+                mainFrame.getPlayerData().addMoney(n-((int) Math.ceil((double) n / 2)));
                 gameWiner(false);
             }else{
                 mainFrame.getPlayerData().addMoney(customerPanel.getcurrentMoney()+customerPanel.getBonus());
@@ -146,8 +149,8 @@ public class gamePlayScreen extends JPanel {
     public void gameWiner(boolean state){
         pauseGame();
         int saveMoney = customerPanel.getcurrentMoney();
-        System.out.println(saveMoney);
-        status.setState(state,saveMoney,customerPanel.getBonus());
+        int bonusMoney = customerPanel.getBonus();
+        status.setState(state, saveMoney, bonusMoney);
         status.setVisible(true);
     }
 

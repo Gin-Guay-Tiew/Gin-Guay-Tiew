@@ -42,12 +42,12 @@ public class CustomerSetting {
     Object[] result;
 
     public List<CustomerData> Setting(int quantity,int level){
-        int Teacher_Bank_wallet = (int)(Math.random() * 251) + 50;
         List<CustomerData> customer = new ArrayList<>();
         List<List<String>> list = new ArrayList<>();
         setNPC(list, level);
 
         for (int i = 0; i < quantity; i++) {
+            int Teacher_Bank_wallet = (int)(Math.random() * 251) + 50;
             int randomInt = (int)(Math.random() * list.size());
             typeCustomer = list.get(randomInt).get(0);
             skinCustomer = list.get(randomInt).get(1);

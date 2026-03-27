@@ -12,13 +12,104 @@ import java.awt.*;
 public class ShowMeTheMoney extends JPanel {
     private MainFrame mainFrame;
     private final Font jerseyFont = FontLoader.loadCustomFont("resources/font/Jersey10.ttf");
-    private double TotalMoney;
 
-    private JPanel OrderPanel, MoneyPanel, BonusPanel, TotalPanel;
-    private CustomJLabel Money, Bonus, Total;
-    private JPanel moneyField, bonusField, totalField;
+    private JPanel OrderPanel, TotalPanel;
+    private CustomJLabel Total;
+    private JPanel totalField;
 
-    // 9-Slice Background Panel
+    public ShowMeTheMoney(MainFrame mainFrame, double moneyEarned, double bonusMoney, boolean isLost) {
+        this.mainFrame = mainFrame;
+
+        double netTotal = ((int) Math.ceil((double) (moneyEarned + bonusMoney) / 2));
+
+        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        setOpaque(false);
+        setBorder(new EmptyBorder(25, 120, 25, 120));
+
+        ImageIcon mainBg = IconImage.create("resources/images/shared/popups/Demo.png", 200, 200);
+        ImageIcon fieldBg = IconImage.create("resources/images/shared/popups/Shop.png", 100, 100);
+
+        // --- ส่วนบน: รายละเอียดเงิน ---
+        OrderPanel = new NineSlicePanel(mainBg.getImage(), 30);
+        // ถ้าแพ้ (isLost) ให้มี 3 แถวเพื่อแสดง Penalty ถ้าชนะมีแค่ 2 แถว
+        int rows = isLost ? 3 : 2;
+        OrderPanel.setLayout(new GridLayout(rows, 1, 0, 10));
+        OrderPanel.setBorder(new EmptyBorder(20, 40, 20, 40));
+        OrderPanel.setMaximumSize(new Dimension(500, rows * 60));
+
+        // 1. แถว Money (สีเขียว/เหลืองปกติ)
+        OrderPanel.add(createDataRow("Money", moneyEarned, fieldBg.getImage(), new Color(214, 181, 88)));
+
+        // 2. แถว Bonus (สีเขียว/เหลืองปกติ)
+        OrderPanel.add(createDataRow("Bonus", bonusMoney, fieldBg.getImage(), new Color(214, 181, 88)));
+
+        if (isLost) {
+            OrderPanel.add(createDataRow("Penalty", -netTotal, fieldBg.getImage(), new Color(255, 102, 102)));
+        }
+
+        // --- ส่วนล่าง: ยอดรวมสุทธิ ---
+        TotalPanel = new NineSlicePanel(mainBg.getImage(), 30);
+        TotalPanel.setLayout(new BorderLayout(20, 0));
+        TotalPanel.setBorder(new EmptyBorder(15, 40, 15, 40));
+        TotalPanel.setMaximumSize(new Dimension(500, 90));
+
+        Total = createLabel("Total", 50f);
+        if (isLost){
+            totalField = createValueBox((moneyEarned + bonusMoney)-netTotal, 45f, fieldBg.getImage(), new Color(230, 181, 42), true);
+        } else {
+            totalField = createValueBox((moneyEarned + bonusMoney), 45f, fieldBg.getImage(), new Color(230, 181, 42), true);
+        }
+
+        TotalPanel.add(Total, BorderLayout.WEST);
+        TotalPanel.add(totalField, BorderLayout.CENTER);
+
+        // ประกอบร่าง
+        add(OrderPanel);
+        add(Box.createVerticalStrut(15));
+        add(TotalPanel);
+    }
+
+    // ฟังก์ชันช่วยสร้างแถวข้อมูล (Label + Box)
+    private JPanel createDataRow(String title, double value, Image bg, Color numColor) {
+        JPanel row = new JPanel(new BorderLayout(10, 0));
+        row.setOpaque(false);
+
+        CustomJLabel label = createLabel(title, 35f);
+        label.setPreferredSize(new Dimension(120, 40));
+
+        JPanel box = createValueBox(value, 30f, bg, numColor, false);
+        box.setPreferredSize(new Dimension(200, 45));
+
+        row.add(label, BorderLayout.WEST);
+        row.add(box, BorderLayout.CENTER);
+        return row;
+    }
+
+    private CustomJLabel createLabel(String text, float fontSize) {
+        CustomJLabel label = new CustomJLabel(text, 4f);
+        label.setFont(jerseyFont.deriveFont(fontSize));
+        label.setTextColor(Color.WHITE);
+        label.setOutlineColor(new Color(67, 67, 67));
+        return label;
+    }
+
+    private JPanel createValueBox(double value, float fontSize, Image bgImage, Color textColor, boolean isTotal) {
+        String formattedValue = String.format("%.2f", value);
+        if (value > 0) formattedValue = "+" + formattedValue;
+
+        NineSlicePanel boxPanel = new NineSlicePanel(bgImage, 20);
+        boxPanel.setLayout(new BorderLayout());
+
+        CustomJLabel numberLabel = new CustomJLabel(formattedValue + " N", isTotal ? 5f : 4f);
+        numberLabel.setFont(jerseyFont.deriveFont(fontSize));
+        numberLabel.setTextColor(textColor);
+        numberLabel.setOutlineColor(new Color(40, 40, 40));
+        numberLabel.setHorizontalAlignment(SwingConstants.CENTER);
+
+        boxPanel.add(numberLabel, BorderLayout.CENTER);
+        return boxPanel;
+    }
+
     static class NineSlicePanel extends JPanel {
         private final Image image;
         private final int margin;
@@ -58,107 +149,5 @@ public class ShowMeTheMoney extends JPanel {
             g.drawImage(image, margin, ch - margin, cw - margin, ch, margin, ih - margin, iw - margin, ih, this);
             g.drawImage(image, cw - margin, ch - margin, cw, ch, iw - margin, ih - margin, iw, ih, this);
         }
-    }
-
-    public ShowMeTheMoney(MainFrame mainFrame, double moneyEarned, double bonusMoney) {
-        this.mainFrame = mainFrame;
-        this.TotalMoney = moneyEarned + bonusMoney;
-
-        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        setOpaque(false);
-        setBorder(new EmptyBorder(25, 120, 25, 120));
-
-        // Background images for the 9-slice panels
-        ImageIcon mainBg = IconImage.create("resources/images/shared/popups/Demo.png", 200, 200);
-        ImageIcon fieldBg = IconImage.create("resources/images/shared/popups/Shop.png", 100, 100);
-
-        // Top Box
-        OrderPanel = new NineSlicePanel(mainBg.getImage(), 30);
-        OrderPanel.setLayout(new GridLayout(2, 1, 20, 15));
-        OrderPanel.setBorder(new EmptyBorder(15, 40, 15, 20));
-        OrderPanel.setMaximumSize(new Dimension(450, 120));
-
-        MoneyPanel = new JPanel();
-        MoneyPanel.setLayout(new BorderLayout());
-        MoneyPanel.setOpaque(false);
-        Money = createLabel("Money", 40f);
-        moneyField = createNumberBox(moneyEarned, 35f, fieldBg.getImage());
-        moneyField.setPreferredSize(new Dimension(250, 45));
-        MoneyPanel.add(Money, BorderLayout.WEST);
-        MoneyPanel.add(moneyField, BorderLayout.EAST);
-        OrderPanel.add(MoneyPanel);
-
-        BonusPanel = new JPanel();
-        BonusPanel.setLayout(new BorderLayout());
-        BonusPanel.setOpaque(false);
-        Bonus = createLabel("Bonus", 40f);
-        bonusField = createNumberBox(bonusMoney, 35f, fieldBg.getImage());
-        bonusField.setPreferredSize(new Dimension(250, 45));
-        BonusPanel.add(Bonus, BorderLayout.WEST);
-        BonusPanel.add(bonusField, BorderLayout.EAST);
-        OrderPanel.add(BonusPanel);
-
-        // Bottom Box
-        TotalPanel = new NineSlicePanel(mainBg.getImage(), 30);
-        TotalPanel.setLayout(new GridLayout(1, 2, 20, 15));
-        TotalPanel.setBorder(new EmptyBorder(15, 30, 15, 20));
-        TotalPanel.setMaximumSize(new Dimension(450, 80));
-
-        Total = createLabel("Total", 50f);
-        totalField = createTotalBox(TotalMoney, 45f, fieldBg.getImage());
-        TotalPanel.add(Total);
-        TotalPanel.add(totalField);
-
-        add(OrderPanel);
-        add(Box.createVerticalStrut(20));
-        add(TotalPanel);
-    }
-
-    // ฟังก์ชันสร้างข้อความด้านซ้าย (Money, Bonus, Total)
-    private CustomJLabel createLabel(String text, float fontSize) {
-        CustomJLabel label = new CustomJLabel(text, 4f);
-        label.setFont(jerseyFont.deriveFont(fontSize));
-        label.setTextColor(Color.WHITE);
-        label.setOutlineColor(new Color(67, 67, 67));
-        label.setHorizontalAlignment(SwingConstants.CENTER); // จัดตัวหนังสือตรงกลาง
-        label.setBorder(BorderFactory.createEmptyBorder(0, 5, 0, 5));
-        return label;
-    }
-
-    // ฟังก์ชันสร้างกล่องตัวเลขด้านขวา (0.00)
-    private JPanel createNumberBox(double value, float fontSize, Image bgImage) {
-        String formattedValue = String.format("%.2f", value);
-
-        NineSlicePanel boxPanel = new NineSlicePanel(bgImage, 20);
-        boxPanel.setLayout(new BorderLayout());
-        boxPanel.setBorder(BorderFactory.createEmptyBorder(0, 10, 0, 10));
-
-        CustomJLabel numberLabel = new CustomJLabel(formattedValue+" N", 4f);
-        numberLabel.setFont(jerseyFont.deriveFont(fontSize));
-        numberLabel.setTextColor(new Color(214, 181, 88));
-        numberLabel.setOutlineColor(new Color(90, 62, 44));
-        numberLabel.setHorizontalAlignment(SwingConstants.CENTER); // ตัวเลขอยู่ตรงกลางกล่อง
-        numberLabel.setBorder(BorderFactory.createEmptyBorder(0, 5, 0, 5));
-
-        boxPanel.add(numberLabel, BorderLayout.CENTER);
-        return boxPanel;
-    }
-
-    private JPanel createTotalBox(double value, float fontSize, Image bgImage) {
-        String formattedValue = String.format("%.2f", value);
-
-        NineSlicePanel boxPanel = new NineSlicePanel(bgImage, 20);
-        boxPanel.setLayout(new BorderLayout());
-        boxPanel.setBorder(BorderFactory.createEmptyBorder(0, 10, 0, 10));
-
-        CustomJLabel numberLabel = new CustomJLabel("+"+formattedValue+" N", 5f);
-        numberLabel.setFont(jerseyFont.deriveFont(fontSize));
-        numberLabel.setTextColor(new Color(230, 181, 42));
-        numberLabel.setOutlineColor(new Color(115, 51, 12));
-        numberLabel.setHorizontalAlignment(SwingConstants.CENTER); // ตัวเลขอยู่ตรงกลางกล่อง
-        numberLabel.setBorder(BorderFactory.createEmptyBorder(0, 5, 0, 5));
-
-        boxPanel.add(numberLabel, BorderLayout.CENTER);
-        return boxPanel;
     }
 }

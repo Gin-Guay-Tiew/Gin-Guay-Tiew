@@ -5,7 +5,6 @@ import ui.components.CustomJLabel;
 import utilities.FontLoader;
 
 import javax.swing.*;
-import javax.swing.border.*;
 import java.awt.*;
 
 public class WinLosePage extends JPanel {
@@ -22,30 +21,31 @@ public class WinLosePage extends JPanel {
     public void setState(boolean isWin, double moneyEarned, double bonusMoney) {
         removeAll();
 
-        CustomJLabel statusLabel = new CustomJLabel("status", 10f);
-        statusLabel.setOutlineColor(Color.WHITE);
+        // --- ส่วนหัวข้อ Status (Passed / Failed) ---
+        CustomJLabel statusLabel = new CustomJLabel("", 10f);
         statusLabel.setHorizontalAlignment(JLabel.CENTER);
         statusLabel.setFont(jerseyFont.deriveFont(85f));
 
-        if (isWin){
+        if (isWin) {
             statusLabel.setText("You Passed!");
-            statusLabel.setTextColor(new Color(69, 236, 147));
+            statusLabel.setTextColor(new Color(69, 236, 147)); // สีเขียว
             statusLabel.setOutlineColor(new Color(37, 90, 60));
         } else {
             statusLabel.setText("You Failed..");
-            statusLabel.setTextColor(new Color(236, 69, 69));
+            statusLabel.setTextColor(new Color(236, 69, 69)); // สีแดง
             statusLabel.setOutlineColor(new Color(90, 37, 37));
         }
 
-        statusLabel.setBounds(0, 50, 800, 100);
+        statusLabel.setBounds(0, 40, 800, 100);
         add(statusLabel);
 
-        ShowMeTheMoney scorePanel = new ShowMeTheMoney(mainFrame, moneyEarned, bonusMoney);
-        scorePanel.setBounds(0, 145, 800, 350);
+        ShowMeTheMoney scorePanel = new ShowMeTheMoney(mainFrame, moneyEarned, bonusMoney, !isWin);
+        scorePanel.setBounds(0, 130, 800, 350);
         add(scorePanel);
 
+
         ManageBtn manageBtn = new ManageBtn(mainFrame);
-        manageBtn.setBounds(0, 400, 800, 120);
+        manageBtn.setBounds(0, 425, 800, 120);
         add(manageBtn);
 
         revalidate();
@@ -56,10 +56,11 @@ public class WinLosePage extends JPanel {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
 
+        // วาด Background มืดๆ โปร่งแสงด้านหลัง Popup
         Graphics2D g2d = (Graphics2D) g;
         GradientPaint gp = new GradientPaint(
-                0, 0, new Color(0, 0, 0, 150),
-                0, getHeight(), new Color(0, 0, 0, 200)
+                0, 0, new Color(0, 0, 0, 180),
+                0, getHeight(), new Color(0, 0, 0, 220)
         );
         g2d.setPaint(gp);
         g2d.fillRect(0, 0, getWidth(), getHeight());

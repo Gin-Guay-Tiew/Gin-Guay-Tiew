@@ -183,7 +183,16 @@ public class customerPanel extends JPanel {
 
         currentMoney += d.money;
         bar.getTimeDisplay().updateCount(currentMoney, targetMoney);
-        // System.out.println("You received "+d.money+" baht from " + d.type);
+
+        // --- เพิ่มส่วนนี้เพื่อแสดง Popup เงิน ---
+        // คำนวณตำแหน่งกึ่งกลางหัวลูกค้า
+        int popupX = c.getX() + (c.getWidth() / 2) - 100;
+        int popupY = c.getY() - 20;
+        FloatingMoneyLabel moneyPopup = new FloatingMoneyLabel("+"+d.money+"$", popupX, popupY);
+        add(moneyPopup);
+        setComponentZOrder(moneyPopup, 0); // ให้แสดงอยู่ชั้นบนสุด
+        // --------------------------------------
+
         if (currentMoney >= targetMoney) {
             bar.getTimeDisplay().setCountColor(new Color(110, 207, 106));
         }
@@ -210,8 +219,17 @@ public class customerPanel extends JPanel {
             if (c.isExpired()) {
                 int index = i;
                 customerComponent expiringComp = slots[i];
+
                 health--;
                 bar.getTimeDisplay().updateLives(Math.max(0, health));
+
+                int popupX = c.getX() + (c.getWidth() / 2) - 100;
+                int popupY = c.getY() - 20;
+
+                FloatingMoneyLabel moneyPopup = new FloatingMoneyLabel("X", popupX, popupY);
+                add(moneyPopup);
+                setComponentZOrder(moneyPopup, 0);
+
                 playExitAnimation(expiringComp, expiringComp.getBubble(), index, () -> {
                     spawnNext();
                 });
@@ -221,7 +239,6 @@ public class customerPanel extends JPanel {
                     state.gameWiner(false);
                     return;
                 }
-
             }
         }
         revalidate();
