@@ -170,13 +170,21 @@ public class MainFrame extends JFrame implements WindowListener {
             public void actionPerformed(ActionEvent e) {
                 if (!PAUSE.equals(navigator.getCurrentPage())) {
                     previousPage = navigator.getCurrentPage();
+
+                    if (currentGameScreen instanceof gamePlayScreen game) {
+                        game.pauseGame();
+                    }
+
                     navigator.toPage(PAUSE, false);
                     pauseScreen.fadeIn();
                 }
                 else {
-                    pauseScreen.fadeOut(() ->
-                            navigator.toPage(previousPage, false)
-                    );
+                    pauseScreen.fadeOut(() -> {
+                            navigator.toPage(previousPage, false);
+                            if (currentGameScreen instanceof gamePlayScreen game) {
+                                game.resumeGame();
+                            }
+                    });
                 }
             }
         });

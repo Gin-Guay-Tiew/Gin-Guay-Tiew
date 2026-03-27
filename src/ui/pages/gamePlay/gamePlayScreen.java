@@ -15,6 +15,8 @@ public class gamePlayScreen extends JPanel {
 
     private customerPanel customerPanel; //  ต้องเป็น field
 
+    private GameTimer gameTimer;
+
     public gamePlayScreen(MainFrame mainFrame,int levelId){
 
         setLayout(new OverlayLayout(this));
@@ -61,18 +63,20 @@ public class gamePlayScreen extends JPanel {
         add(mainGameArea);
 
         TimeDisplay screenTime = topBar.getTimeDisplay();
+        gameTimer = new GameTimer(400, this, screenTime);
+        gameTimer.startTimer();
 
-        GameTimer myTimer = new GameTimer(400, this, screenTime){
-            public void onTick() {
-                customerPanel.updateCustomers();
-
-                if (customerPanel.isFinished()) {
-                    gameOver();
-                }
-            }
-        };
-
-        myTimer.startTimer();
+//        GameTimer myTimer = new GameTimer(400, this, screenTime){
+//            public void onTick() {
+//                customerPanel.updateCustomers();
+//
+//                if (customerPanel.isFinished()) {
+//                    gameOver();
+//                }
+//            }
+//        };
+//
+//        myTimer.startTimer();
 
         showLevel(levelId);
     }
@@ -112,6 +116,16 @@ public class gamePlayScreen extends JPanel {
         status.setVisible(true);
     }
 
+    public void pauseGame() {
+        if (gameTimer != null) {
+            gameTimer.pauseTimer();
+        }
+    }
 
+    public void resumeGame() {
+        if (gameTimer != null) {
+            gameTimer.resumeTimer();
+        }
+    }
 
 }

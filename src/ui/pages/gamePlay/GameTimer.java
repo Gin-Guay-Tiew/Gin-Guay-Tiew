@@ -8,6 +8,7 @@ public class GameTimer implements Runnable {
     private TimeDisplay timeDisplay;
     private Thread timer;
     private volatile boolean isRunning = false;
+    private volatile boolean isPaused = false;
 
     public GameTimer(int seconds, gamePlayScreen screen, TimeDisplay timeDisplay) {
         this.timeLeft = seconds;
@@ -28,6 +29,10 @@ public class GameTimer implements Runnable {
                 break;
             }
 
+            if (isPaused) {
+                continue;
+            }
+
             this.timeLeft--;
 
             SwingUtilities.invokeLater(() -> {
@@ -35,7 +40,7 @@ public class GameTimer implements Runnable {
                     timeDisplay.updateTime(timeLeft);
                 }
 
-                screen.updateGame(); // ⭐ ต้องมี
+                screen.updateGame();
 
                 if (timeLeft <= 0) {
                     stopTimer();
@@ -58,5 +63,13 @@ public class GameTimer implements Runnable {
         if (timer != null) {
             timer.interrupt();
         }
+    }
+
+    public void pauseTimer() {
+        isPaused = true;
+    }
+
+    public void resumeTimer() {
+        isPaused = false;
     }
 }
