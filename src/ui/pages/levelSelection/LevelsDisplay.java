@@ -147,8 +147,8 @@ public class LevelsDisplay extends JPanel {
         Level current_lv = levelsInfo.get(levelNum - 1);
 
         if (plrData.getMoney() < current_lv.unlockCost) {
-            plrData.setMoney(plrData.getMoney()+1000);
-            System.out.println("Give player +1000 Noodle. Now have "+plrData.getMoney());
+            plrData.setMoney(plrData.getMoney()+10000);
+            System.out.println("Give player +10000 Noodle. Now have "+plrData.getMoney());
             String[] btnPaths = {
                     "resources/images/shared/buttons/Ok",
             };

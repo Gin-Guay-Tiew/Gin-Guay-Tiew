@@ -12,19 +12,21 @@ public class gamePlayScreen extends JPanel {
     private bgPanel bgPanel;
     private counterBar counterBarPanel;
     private TopBar topBar;
+    private MainFrame mainFrame;
 
     private customerPanel customerPanel; //  ต้องเป็น field
 
     private GameTimer gameTimer;
 
-    public gamePlayScreen(MainFrame mainFrame,int levelId){
+    public gamePlayScreen(MainFrame mainFrame, int levelId) {
 
         setLayout(new OverlayLayout(this));
         this.setBackground(Color.white);
+        this.mainFrame = mainFrame;
 
         // status
         status = new WinLosePage(mainFrame);
-        status.setBounds(0,0,800,520);
+        status.setBounds(0, 0, 800, 520);
         status.setVisible(false);
 
         JPanel mainGameArea = new JPanel(new BorderLayout());
@@ -33,27 +35,27 @@ public class gamePlayScreen extends JPanel {
         // layered
         JLayeredPane gameLayer = new JLayeredPane();
         gameLayer.setLayout(null);
-        gameLayer.setBounds(0,0,800,600);
+        gameLayer.setBounds(0, 0, 800, 600);
 
         // bg
         bgPanel = new bgPanel();
-        bgPanel.setBounds(0,0,800,400);
+        bgPanel.setBounds(0, 0, 800, 400);
 
         // top bar
         topBar = new TopBar(mainFrame);
-        topBar.setBounds(0,0,800,90);
+        topBar.setBounds(0, 0, 800, 90);
 
         // customer panel
         customerPanel = new customerPanel(topBar, mainFrame);
-        customerPanel.setBounds(0,0,800,600);
+        customerPanel.setBounds(0, 0, 800, 600);
         customerPanel.showCustomers(levelId);
 
         // counter
         counterBarPanel = new counterBar(mainFrame, customerPanel);
-        counterBarPanel.setBounds(0,0,800,600);
+        counterBarPanel.setBounds(0, 0, 800, 600);
 
-        gameLayer.add(bgPanel,Integer.valueOf(0));
-        gameLayer.add(topBar,Integer.valueOf(1));
+        gameLayer.add(bgPanel, Integer.valueOf(0));
+        gameLayer.add(topBar, Integer.valueOf(1));
         gameLayer.add(customerPanel, Integer.valueOf(2));
         gameLayer.add(counterBarPanel, Integer.valueOf(3));
 
@@ -84,24 +86,24 @@ public class gamePlayScreen extends JPanel {
     public void showLevel(int levelId) {
         switch (levelId) {
             case 1:
-                bgPanel.setBackgroundImage("resources/images/gamePlay/bg/LV1.gif",-3,-100 , 800, 400);
+                bgPanel.setBackgroundImage("resources/images/gamePlay/bg/LV1.gif", -3, -100, 800, 400);
                 break;
             case 2:
-                bgPanel.setBackgroundImage("resources/images/gamePlay/bg/LV2.gif",0, -50, 800, 400);
+                bgPanel.setBackgroundImage("resources/images/gamePlay/bg/LV2.gif", 0, -50, 800, 400);
                 break;
             case 3:
-                bgPanel.setBackgroundImage("resources/images/gamePlay/bg/LV3.gif",0, -80, 800, 400);
+                bgPanel.setBackgroundImage("resources/images/gamePlay/bg/LV3.gif", 0, -80, 800, 400);
                 break;
             case 4:
-                bgPanel.setBackgroundImage("resources/images/gamePlay/bg/LV4.gif",0, 0, 800, 400);
+                bgPanel.setBackgroundImage("resources/images/gamePlay/bg/LV4.gif", 0, 0, 800, 400);
                 break;
             case 5:
-                bgPanel.setBackgroundImage("resources/images/gamePlay/bg/LV5.gif",0, 0, 800, 400);
+                bgPanel.setBackgroundImage("resources/images/gamePlay/bg/LV5.gif", 0, 0, 800, 400);
                 break;
         }
 
         counterBarPanel.setSlots(
-                LevelFactory.getLevel(levelId).slots
+                LevelFactory.getLevel(levelId, mainFrame.getPlayerData()).slots
         );
     }
 
@@ -112,7 +114,7 @@ public class gamePlayScreen extends JPanel {
         }
     }
 
-    public void gameOver(){
+    public void gameOver() {
         status.setVisible(true);
     }
 

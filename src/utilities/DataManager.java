@@ -2,16 +2,24 @@ package utilities;
 
 import logic.GamePlay.PlayerData;
 import java.io.*;
+import java.util.Set;
 
 public class DataManager {
     private static final String SAVE_FILE = "saveData.dat";
 
     public static void savePlayerData(PlayerData player) {
         try (DataOutputStream dos = new DataOutputStream(new FileOutputStream(SAVE_FILE))) {
-            dos.writeInt(player.getMoney()); // Save money
-            dos.writeInt(player.getLevel()); // Save level
-            dos.writeInt(player.getVolumeLv()); // Save volume
-            dos.writeBoolean(player.isStateSFX()); // Save SFX toggle
+            dos.writeInt(player.getMoney());
+            dos.writeInt(player.getLevel());
+            dos.writeInt(player.getVolumeLv());
+            dos.writeBoolean(player.isStateSFX());
+
+            Set<String> unlocked = player.getUnlockedItems();
+            dos.writeInt(unlocked.size());
+            for (String item : unlocked) {
+                dos.writeUTF(item);
+            }
+
             dos.flush();
         } catch (IOException e) {
             e.printStackTrace();
@@ -29,6 +37,12 @@ public class DataManager {
             player.setLevel(dis.readInt());
             player.setVolumeLv(dis.readInt());
             player.setStateSFX(dis.readBoolean());
+
+            int unlockedCount = dis.readInt();
+            for (int i = 0; i < unlockedCount; i++) {
+                player.unlockItem(dis.readUTF());
+            }
+
         } catch (IOException e) {
             System.err.println("Could not load save data. Starting fresh.");
         }

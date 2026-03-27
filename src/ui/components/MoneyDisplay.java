@@ -37,6 +37,7 @@ public class MoneyDisplay extends JPanel {
         moneyAmount.setHorizontalAlignment(JLabel.CENTER);
         moneyAmount.setForeground(new Color(230, 181, 42));
         moneyAmount.setOutlineColor(new Color(115, 51, 12));
+        moneyAmount.setBorder(BorderFactory.createEmptyBorder(0, 5, 0, 5));
 
         mainFrame.getPlayerData().addPropertyChangeListener(evt -> {
             if ("money".equals(evt.getPropertyName())) {
