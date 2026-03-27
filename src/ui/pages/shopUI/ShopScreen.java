@@ -256,7 +256,7 @@ public class ShopScreen extends JPanel {
 
         buyBtn.addActionListener(e -> {
             if (!controller.isItemStageReached(item)) {
-                showWarningPopup("Locked!<br>Clear Level " + item.getLevelRequired() + " to unlock.");
+                showWarningPopup("Locked!\nUnlock Level " + item.getLevelRequired() + " to unlock this item.");
                 return;
             }
             if (mainFrame.getPlayerData().getMoney() < item.getPrice()) {

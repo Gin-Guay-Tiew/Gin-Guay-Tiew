@@ -118,7 +118,7 @@ public class LevelFactory {
         }
 
         if (data.isItemUnlocked("Pork slices")) {
-            slots.add(new SlotSpec("porkSlice", 558, 260, 102, 102, "resources/images/gamePlay/ingredients/addOn/porkSlices/idle.png", "SPAWN", "resources/images/gamePlay/ingredients/addOn/porkSlices/picked.png"));
+            slots.add(new SlotSpec("porkSlice", 567, 260, 102, 102, "resources/images/gamePlay/ingredients/addOn/porkSlices/idle.png", "SPAWN", "resources/images/gamePlay/ingredients/addOn/porkSlices/picked.png"));
         } else {
             slots.add(new SlotSpec("emptyBox",558,260,102,102,"resources/images/gamePlay/aquiment/emptyBox.png","STATIC",null));
         }

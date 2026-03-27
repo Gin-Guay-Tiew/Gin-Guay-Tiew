@@ -38,7 +38,6 @@ public class MainFrame extends JFrame implements WindowListener {
     private Transition animator;
     private PageNavigator navigator;
     PopupWindow pop = new PopupWindow();
-    private boolean isWarningActive = false;
 
     private JPanel currentGameScreen;
     private int currentLevel;
@@ -202,24 +201,6 @@ public class MainFrame extends JFrame implements WindowListener {
         });
     }
 
-    private void setupGlassPane() {
-        JPanel glass = (JPanel) getGlassPane();
-        glass.setLayout(null);
-        glass.setVisible(true);
-
-        ImageIcon transIcon = IconImage.create("resources/images/shared/Transition.png", 50, 50);
-        JButton transFrame = new JButton();
-        transFrame.setIcon(transIcon);
-        transFrame.setBorderPainted(false);
-        transFrame.setContentAreaFilled(false);
-        transFrame.setFocusPainted(false);
-        transFrame.setBounds(400, 300, 0, 0);
-
-        animator = new Transition(transFrame, transIcon);
-        glass.add(transFrame);
-        navigator = new PageNavigator(mainPanel, cardLayout, animator);
-    }
-
     // Handles adding all pages to the CardLayout
     private void initPages() {
         mainPanel.removeAll(); // Clear everything
@@ -237,7 +218,10 @@ public class MainFrame extends JFrame implements WindowListener {
         mainPanel.add(new WinLosePage(this), ENDGAME);
         mainPanel.add(new MainSettingPage(this, this.playerData), SETTING);
         mainPanel.add(new ShopScreen(this, gameController), SHOP_UI);
-        mainPanel.add(new PauseScreen(this), PAUSE);
+        this.pauseScreen = new PauseScreen(this);
+        mainPanel.add(pauseScreen, PAUSE);
+        this.forceBackPage = null;
+        this.previousPage = null;
 
         mainPanel.revalidate();
         mainPanel.repaint();
