@@ -83,10 +83,34 @@ public class LevelFactory {
         if (hasOrange) slots.add(new SlotSpec("orange", 301, 355, 40, 120, null, "SPAWN", "resources/images/gamePlay/ingredients/drinks/orange/orange.png"));
 
         // Soups
-        slots.add(new SlotSpec("yenTafo",230,210,70,70,"resources/images/gamePlay/ingredients/soups/category/yenTaFo/idle.png","SPAWN","resources/images/gamePlay/ingredients/soups/category/yenTaFo/laped.png"));
-        slots.add(new SlotSpec("tomYum",300,210,70,70,"resources/images/gamePlay/ingredients/soups/category/tomYum/idle.png","SPAWN","resources/images/gamePlay/ingredients/soups/category/tomYum/laped.png"));
-        slots.add(new SlotSpec("namTok",230,280,70,70,"resources/images/gamePlay/ingredients/soups/category/namTok/idle.png","SPAWN","resources/images/gamePlay/ingredients/soups/category/namTok/laped.png"));
-        slots.add(new SlotSpec("braisedPork",300,280,70,70,"resources/images/gamePlay/ingredients/soups/category/braisedPork/idle.png","SPAWN","resources/images/gamePlay/ingredients/soups/category/braisedPork/laped.png"));
+        switch (levelId) {
+            case 1:
+                slots.add(new SlotSpec("emptyPot",230,210,70,70,"resources/images/gamePlay/aquiment/emptyPot.png","STATIC",null));
+                slots.add(new SlotSpec("emptyPot",300,210,70,70,"resources/images/gamePlay/aquiment/emptyPot.png","STATIC",null));
+                slots.add(new SlotSpec("namTok",230,280,70,70,"resources/images/gamePlay/ingredients/soups/category/namTok/idle.png","SPAWN","resources/images/gamePlay/ingredients/soups/category/namTok/laped.png"));
+                slots.add(new SlotSpec("emptyPot",300,280,70,70,"resources/images/gamePlay/aquiment/emptyPot.png","STATIC",null));
+                break;
+            case 2:
+                slots.add(new SlotSpec("yenTafo",230,210,70,70,"resources/images/gamePlay/ingredients/soups/category/yenTaFo/idle.png","SPAWN","resources/images/gamePlay/ingredients/soups/category/yenTaFo/laped.png"));
+                slots.add(new SlotSpec("emptyPot",300,210,70,70,"resources/images/gamePlay/aquiment/emptyPot.png","STATIC",null));
+                slots.add(new SlotSpec("namTok",230,280,70,70,"resources/images/gamePlay/ingredients/soups/category/namTok/idle.png","SPAWN","resources/images/gamePlay/ingredients/soups/category/namTok/laped.png"));
+                slots.add(new SlotSpec("emptyPot",300,280,70,70,"resources/images/gamePlay/aquiment/emptyPot.png","STATIC",null));
+                break;
+            case 3:
+            case 4:
+                slots.add(new SlotSpec("yenTafo",230,210,70,70,"resources/images/gamePlay/ingredients/soups/category/yenTaFo/idle.png","SPAWN","resources/images/gamePlay/ingredients/soups/category/yenTaFo/laped.png"));
+                slots.add(new SlotSpec("tomYum",300,210,70,70,"resources/images/gamePlay/ingredients/soups/category/tomYum/idle.png","SPAWN","resources/images/gamePlay/ingredients/soups/category/tomYum/laped.png"));
+                slots.add(new SlotSpec("namTok",230,280,70,70,"resources/images/gamePlay/ingredients/soups/category/namTok/idle.png","SPAWN","resources/images/gamePlay/ingredients/soups/category/namTok/laped.png"));
+                slots.add(new SlotSpec("emptyPot",300,280,70,70,"resources/images/gamePlay/aquiment/emptyPot.png","STATIC",null));
+                break;
+            case 5:
+            default:
+                slots.add(new SlotSpec("yenTafo",230,210,70,70,"resources/images/gamePlay/ingredients/soups/category/yenTaFo/idle.png","SPAWN","resources/images/gamePlay/ingredients/soups/category/yenTaFo/laped.png"));
+                slots.add(new SlotSpec("tomYum",300,210,70,70,"resources/images/gamePlay/ingredients/soups/category/tomYum/idle.png","SPAWN","resources/images/gamePlay/ingredients/soups/category/tomYum/laped.png"));
+                slots.add(new SlotSpec("namTok",230,280,70,70,"resources/images/gamePlay/ingredients/soups/category/namTok/idle.png","SPAWN","resources/images/gamePlay/ingredients/soups/category/namTok/laped.png"));
+                slots.add(new SlotSpec("braisedPork",300,280,70,70,"resources/images/gamePlay/ingredients/soups/category/braisedPork/idle.png","SPAWN","resources/images/gamePlay/ingredients/soups/category/braisedPork/laped.png"));
+                break;
+        }
 
         // Add-ons
         if (data.isItemUnlocked("Vegetable")) {
@@ -111,7 +135,7 @@ public class LevelFactory {
             slots.add(new SlotSpec("emptyBox",694,260,102,102,"resources/images/gamePlay/aquiment/emptyBox.png","STATIC",null));
         }
 
-        // Base Equipment (Always there)
+        // Base Equipment
         slots.add(new SlotSpec("takronoodle",-2,200,120,114,"resources/images/gamePlay/aquiment/takronoodle.png","DRAG",null));
         slots.add(new SlotSpec("ladle",95,200,120,120,"resources/images/gamePlay/aquiment/ladle.png","DRAG",null));
         slots.add(new SlotSpec("placemat",355,150,240,240,"resources/images/gamePlay/ingredients/noodles/placemat.png","STATIC",null));
