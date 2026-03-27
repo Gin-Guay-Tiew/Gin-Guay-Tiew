@@ -113,7 +113,7 @@ public class gamePlayScreen extends JPanel {
         }
 
         counterBarPanel.setSlots(
-                LevelFactory.getLevel(levelId).slots
+                LevelFactory.getLevel(levelId, mainFrame.getPlayerData()).slots
         );
     }
 
