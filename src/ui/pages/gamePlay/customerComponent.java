@@ -42,19 +42,17 @@ public class customerComponent extends JPanel {
         add(imgLabel);
         add(patienceLabel);
 
-        // =========================
-        // ✅ คลิกแล้วหาย (TEST)
-        // =========================
-        this.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                System.out.println("Clicked: " + data); // debug
-
-                if (onClick != null) {
-                    onClick.run(); // เรียก removeCustomer()
-                }
-            }
-        });
+        // คลิกแล้วหาย (TEST)
+//        this.addMouseListener(new MouseAdapter() {
+//            @Override
+//            public void mouseClicked(MouseEvent e) {
+//                System.out.println("Clicked: " + data); // debug
+//
+//                if (onClick != null) {
+//                    onClick.run(); // เรียก removeCustomer()
+//                }
+//            }
+//        });
     }
 
     public CustomerData getData() {
@@ -167,8 +165,8 @@ public class customerComponent extends JPanel {
                 break;
 
             case "JarnBank":
-                money_bored = data.getMoney();
-                money_angry = data.getMoney();
+                money_bored = data.pay();
+                money_angry = data.pay();
                 break;
         }
     }

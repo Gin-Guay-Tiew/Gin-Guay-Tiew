@@ -83,107 +83,92 @@ public class customerPanel extends JPanel {
     private void spawnNext() {
         if (queue.isEmpty()) return;
 
-        // โหลด font (ใช้แบบเดียวกับหน้าเงิน)
         Font customFontzz = FontLoader.loadCustomFont("resources/font/SOV_BokThang.ttf");
 
+
+        int emptyIndex = -1;
         for (int i = 0; i < slots.length; i++) {
             if (slots[i] == null) {
-
-                CustomerData d = queue.poll();
-                System.out.println(d.toString());
-                int index = i;
-
-                JPanel bubblePanel = new JPanel();
-
-                customerComponent c = new customerComponent(
-                        d,
-                        d.imgPath,
-                        d.patiencePath,
-                        d.type,
-                        d.skin,
-                        d.life,
-                        bubblePanel,
-                        () -> removeCustomer(index, d)
-                );
-
-                c.setBounds(xs[i], ys[i], 197, 240);
-                c.playSpawnBounce(xs[i], ys[i]);
-
-                bubblePanel.setLayout(null);
-                bubblePanel.setOpaque(false);
-                bubblePanel.setBounds(xs[i] - 80, ys[i] - 50, 120, 120);
-                playBubbleBounce(bubblePanel, xs[i] - 80, ys[i] - 50);
-
-                JLabel bubble = new JLabel(
-                        IconImage.create("resources/images/gamePlay/customer/message.png", 140, 140)
-                );
-                bubble.setBounds(0, 0, 120, 120);
-
-                // =========================
-                // 🔹 Food + Text (ใช้ CustomJLabel)
-                // =========================
-                JLabel food = new JLabel();
-                food.setLayout(null);
-
-                boolean isSpecial = false;
-                String noodleText = "";
-
-                if (d.getNoodle() != null) {
-                    String n = d.getNoodle();
-
-                    if (n.equals("rice") ||
-                            n.equals("wide") ||
-                            n.equals("thin")) {
-
-                        isSpecial = true;
-
-                        if (n.equals("rice")){
-                            noodleText = "เส้นหมี่";
-                        } else if (n.equals("wide")){
-                            noodleText = "เส้นใหญ่";
-                        } else if (n.equals("thin")){
-                            noodleText = "เส้นเล็ก";
-                        }
-                    }
-                }
-
-                if (isSpecial) {
-                    food.setBounds(20, 25, 80, 80);
-                    food.setIcon(IconImage.create(d.foodPath, 80, 80));
-
-                    CustomJLabel text = new CustomJLabel(noodleText, 3f);
-
-                    text.setBounds(0, -5, 80, 30); // อยู่เหนือชาม
-                    text.setHorizontalAlignment(SwingConstants.CENTER);
-
-                    text.setFont(customFontzz.deriveFont(20f));
-                    text.setTextColor(new Color(232, 205, 97)); // สีส้ม
-                    text.setOutlineColor(new Color(89, 51, 14)); // ขอบเข้ม
-
-                    text.setOpaque(false);
-
-                    food.add(text);
-
-                } else {
-                    food.setBounds(25, 15, 76, 76);
-                    food.setIcon(IconImage.create(d.foodPath, 76, 76));
-                }
-
-                bubblePanel.add(bubble);
-                bubblePanel.add(food);
-
-                bubblePanel.setComponentZOrder(food, 0);
-                bubblePanel.setComponentZOrder(bubble, 1);
-
-                slots[i] = c;
-                add(c);
-                add(bubblePanel);
-
-                SFXManager.play(SFX.POP);
-
+                emptyIndex = i;
                 break;
             }
         }
+        if (emptyIndex == -1) return;
+
+        CustomerData d = queue.poll();
+        System.out.println(d.toString());
+
+        JPanel bubblePanel = new JPanel();
+
+        final int slotIndex = emptyIndex;
+        customerComponent c = new customerComponent(
+                d,
+                d.imgPath,
+                d.patiencePath,
+                d.type,
+                d.skin,
+                d.life,
+                bubblePanel,
+                () -> removeCustomer(slotIndex, d)
+        );
+
+        c.setBounds(xs[emptyIndex], ys[emptyIndex], 197, 240);
+        c.playSpawnBounce(xs[emptyIndex], ys[emptyIndex]);
+
+        bubblePanel.setLayout(null);
+        bubblePanel.setOpaque(false);
+        bubblePanel.setBounds(xs[emptyIndex] - 80, ys[emptyIndex] - 50, 120, 120);
+        playBubbleBounce(bubblePanel, xs[emptyIndex] - 80, ys[emptyIndex] - 50);
+
+        JLabel bubble = new JLabel(
+                IconImage.create("resources/images/gamePlay/customer/message.png", 140, 140)
+        );
+        bubble.setBounds(0, 0, 120, 120);
+
+        JLabel food = new JLabel();
+        food.setLayout(null);
+
+        boolean isSpecial = false;
+        String noodleText = "";
+
+        if (d.getNoodle() != null) {
+            String n = d.getNoodle();
+            if (n.equals("rice") || n.equals("wide") || n.equals("thin")) {
+                isSpecial = true;
+                if (n.equals("rice")) noodleText = "เส้นหมี่";
+                else if (n.equals("wide")) noodleText = "เส้นใหญ่";
+                else if (n.equals("thin")) noodleText = "เส้นเล็ก";
+            }
+        }
+
+        if (isSpecial) {
+            food.setBounds(20, 25, 80, 80);
+            food.setIcon(IconImage.create(d.foodPath, 80, 80));
+
+            CustomJLabel text = new CustomJLabel(noodleText, 3f);
+            text.setBounds(0, -5, 80, 30);
+            text.setHorizontalAlignment(SwingConstants.CENTER);
+            text.setFont(customFontzz.deriveFont(20f));
+            text.setTextColor(new Color(232, 205, 97));
+            text.setOutlineColor(new Color(89, 51, 14));
+            text.setOpaque(false);
+
+            food.add(text);
+        } else {
+            food.setBounds(25, 15, 76, 76);
+            food.setIcon(IconImage.create(d.foodPath, 76, 76));
+        }
+
+        bubblePanel.add(bubble);
+        bubblePanel.add(food);
+        bubblePanel.setComponentZOrder(food, 0);
+        bubblePanel.setComponentZOrder(bubble, 1);
+
+        slots[emptyIndex] = c;
+        add(c);
+        add(bubblePanel);
+
+        SFXManager.play(SFX.POP);
     }
 
     public CustomerData getCustomerDataAt(int index) {
@@ -234,35 +219,32 @@ public class customerPanel extends JPanel {
         shakeTimer.start();
     }
 
-    public void removeCustomer(int index, CustomerData d) {
+    public void removeCustomer(int index, CustomerPay d) {
         customerComponent c = slots[index];
         if (c == null) return;
 
-        currentMoney += d.money;
+        currentMoney += d.pay();
+        CustomerData data = (CustomerData) d;
+
         bar.getTimeDisplay().updateCount(currentMoney, targetMoney);
 
-        // --- เพิ่มส่วนนี้เพื่อแสดง Popup เงิน ---
-        // คำนวณตำแหน่งกึ่งกลางหัวลูกค้า
         int popupX = c.getX() + (c.getWidth() / 2) - 100;
         int popupY = c.getY() - 20;
-        FloatingMoneyLabel moneyPopup = new FloatingMoneyLabel("+"+d.money+"$", popupX, popupY);
+
+        FloatingMoneyLabel moneyPopup =
+                new FloatingMoneyLabel("+" + data.pay() + "$", popupX, popupY);
+
         add(moneyPopup);
-        setComponentZOrder(moneyPopup, 0); // ให้แสดงอยู่ชั้นบนสุด
-        // --------------------------------------
+        setComponentZOrder(moneyPopup, 0);
 
         if (currentMoney >= targetMoney) {
             bar.getTimeDisplay().setCountColor(new Color(110, 207, 106));
         }
 
         playExitAnimation(c, c.getBubble(), index, () -> {
-            int randomDelay = 1000 + (int) (Math.random() * 2000);
-            Timer delaySpawnTimer = new Timer(randomDelay, e -> {
-                spawnNext();
-                revalidate();
-                repaint();
-            });
-            delaySpawnTimer.setRepeats(false);
-            delaySpawnTimer.start();
+            spawnNext();
+            revalidate();
+            repaint();
         });
     }
 
@@ -340,7 +322,7 @@ public class customerPanel extends JPanel {
             if (t >= 1) {
                 timer.stop();
                 remove(c);
-                slots[index] = null;
+                slots[index] = null; // slot ว่างทันที
 
                 revalidate();
                 repaint();
