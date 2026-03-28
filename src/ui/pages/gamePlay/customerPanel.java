@@ -245,7 +245,7 @@ public class customerPanel extends JPanel {
         int popupY = c.getY() - 20;
 
         FloatingMoneyLabel moneyPopup =
-                new FloatingMoneyLabel("+" + data.getMoney() + "$", popupX, popupY);
+                new FloatingMoneyLabel("+" + data.pay() + "$", popupX, popupY);
 
         add(moneyPopup);
         setComponentZOrder(moneyPopup, 0);

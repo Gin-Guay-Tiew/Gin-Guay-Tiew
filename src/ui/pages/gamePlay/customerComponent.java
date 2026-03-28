@@ -164,8 +164,8 @@ public class customerComponent extends JPanel {
                 break;
 
             case "JarnBank":
-                money_bored = data.getMoney();
-                money_angry = data.getMoney();
+                money_bored = data.pay();
+                money_angry = data.pay();
                 break;
         }
     }
