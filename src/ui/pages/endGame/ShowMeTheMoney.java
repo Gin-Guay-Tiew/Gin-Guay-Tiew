@@ -54,6 +54,7 @@ public class ShowMeTheMoney extends JPanel {
         TotalPanel.setMaximumSize(new Dimension(500, 90));
 
         Total = createLabel("Total", 50f);
+        Total.setBorder(new EmptyBorder(0, 3, 0, 3));
         if (isLost){
             totalField = createValueBox((moneyEarned + bonusMoney)-netTotal, 45f, fieldBg.getImage(), new Color(230, 181, 42), true);
         } else {
