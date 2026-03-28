@@ -31,16 +31,77 @@ The challenge lies in balancing speed, accuracy, and decision-making to achieve 
 ---
 
 ## Folder Structure
-
----
+The repository is organized as follows:
+```text
+Gin-Guay-Tiew/
+├── lib/                  # External libraries (JavaFX SDK 21.0.10, JLayer)
+├── resources/            # Game assets
+│   ├── audio/            # BGM and SFX sourced from Pixabay
+│   ├── font/             # Custom typography (Jersey10.ttf)
+│   └── images/           # Sprites and UI components
+├── src/                  # Source code
+│   ├── logic/            # Game mechanics and scoring systems
+│   ├── main/             # Application entry point
+│   ├── ui/               # Pages, components, and layouts
+│   └── utilities/        # Loaders and managers (Sound, Font, Icons)
+└── saveData.dat          # Local game progress data
+```
 
 ## Installation
+### Requirements
+* JDK 21
+* JavaFX 21.0.10 (included in lib/ folder for Fat JAR deployment)
+* Recommended: IntelliJ IDEA for development
+### Running in IntelliJ IDEA
+1. Clone the repository:
+```
+git clone https://github.com/yourusername/gin-guay-tiew.git
+cd gin-guay-tiew
+```
+2. Open the project in IntelliJ IDEA
+3. Add JavaFX SDK as a library
+```
+File → Project Structure → Libraries → + → Java → [select JavaFX SDK folder]
+```
+4. Run the main class
+```
+src/main/Main.java
+```
 
 ---
 
-## Additional Resources
-
+### Running as Fat JAR (Recommended for distribution)
+1. Create a Fat JAR to include all dependencies
+```
+File → Project Structure → Artifacts → + → JAR → From modules with dependencies → Select Main Class
+Build → Build Artifacts → YourGame.jar → Build
+```
+2. Distribute the folder with
+```
+   Gin-Guay-Tiew/
+   ├─ YourGame.jar
+   ├─ lib/
+   │   └─ javafx-sdk-21/
+   └─ launch.bat / launch.sh
+```
+3. Example Windows launch script (launch.bat)
+```
+java --module-path "lib/javafx-sdk-21/lib" --add-modules javafx.controls,javafx.fxml -jar YourGame.jar
+pause
+```
+4. Run launch.bat (Windows) or launch.sh (macOS/Linux)
 ---
+
+## Audio
+- Background music : resources/audio/bg/
+- Sound effects : resources/audio/sfx/
+- Audio resources are sourced from Pixabay and free for educational use
+
+## Notes
+- Saves progress locally in saveData.dat.
+- All assets, including sprites, fonts, and sounds, are optimized for smooth gameplay.
+- Fully offline playable once the JAR and libraries are distributed.
+- JavaFX is required only for GUI rendering and audio playback.
 
 ## Collaborators (Team of 10)
 - 68070028 ชวัลรัตน์ ศรีรัตน์
