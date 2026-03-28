@@ -5,56 +5,64 @@ import ui.components.CustomJLabel;
 import utilities.FontLoader;
 
 import javax.swing.*;
-import javax.swing.border.*;
 import java.awt.*;
 
 public class WinLosePage extends JPanel {
-    private final Font jerseyFont = FontLoader.loadCustomFont("resources/font/Jersey10.ttf");
+
+    private static final Font jerseyFont = FontLoader.loadCustomFont("resources/font/Jersey10.ttf");
     private MainFrame mainFrame;
-    private boolean isWin;
-    private CustomJLabel statusLabel;
 
     public WinLosePage(MainFrame mainFrame) {
-        this(mainFrame,true,0,0);
+        this.mainFrame = mainFrame;
+        setLayout(null);
+        setOpaque(false);
     }
 
-    public WinLosePage(MainFrame mainFrame, boolean isWin, double moneyEarned, double bonusMoney) {
-        this.mainFrame = mainFrame;
+    public void setState(boolean isWin, double moneyEarned, double bonusMoney) {
+        removeAll();
 
-        setLayout(new BorderLayout());
-        setOpaque(false);
-
-        this.isWin = isWin;
-
-        // Status Win or Lose
-        statusLabel = new CustomJLabel("status", 15f);
-        statusLabel.setOutlineColor(Color.WHITE);
+        // --- ส่วนหัวข้อ Status (Passed / Failed) ---
+        CustomJLabel statusLabel = new CustomJLabel("", 10f);
         statusLabel.setHorizontalAlignment(JLabel.CENTER);
-        statusLabel.setVerticalAlignment(JLabel.TOP);
-        statusLabel.setFont(jerseyFont.deriveFont(100f));
-        statusLabel.setBorder(new EmptyBorder(20,0,0,0));
+        statusLabel.setFont(jerseyFont.deriveFont(85f));
 
-        if (isWin) { statusLabel.setText("You win!"); }
-        else  { statusLabel.setText("You lose!"); }
+        if (isWin) {
+            statusLabel.setText("You Passed!");
+            statusLabel.setTextColor(new Color(69, 236, 147)); // สีเขียว
+            statusLabel.setOutlineColor(new Color(37, 90, 60));
+        } else {
+            statusLabel.setText("You Failed..");
+            statusLabel.setTextColor(new Color(236, 69, 69)); // สีแดง
+            statusLabel.setOutlineColor(new Color(90, 37, 37));
+        }
 
-        add(statusLabel,BorderLayout.NORTH);
+        statusLabel.setBounds(0, 40, 800, 100);
+        add(statusLabel);
 
-        // ScorePanel
-        ShowMeTheMoney scorePanel = new ShowMeTheMoney(mainFrame, moneyEarned, bonusMoney);
-        add(scorePanel, BorderLayout.CENTER);
+        ShowMeTheMoney scorePanel = new ShowMeTheMoney(mainFrame, moneyEarned, bonusMoney, !isWin);
+        scorePanel.setBounds(0, 130, 800, 350);
+        add(scorePanel);
 
-        // Botton
+
         ManageBtn manageBtn = new ManageBtn(mainFrame);
-        add(manageBtn, BorderLayout.SOUTH);
+        manageBtn.setBounds(0, 425, 800, 120);
+        add(manageBtn);
+
+        revalidate();
+        repaint();
     }
 
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
 
-        // พื้นหลังสีดำจางๆ
+        // วาด Background มืดๆ โปร่งแสงด้านหลัง Popup
         Graphics2D g2d = (Graphics2D) g;
-        g2d.setColor(new Color(0, 0, 0, 100));
+        GradientPaint gp = new GradientPaint(
+                0, 0, new Color(0, 0, 0, 180),
+                0, getHeight(), new Color(0, 0, 0, 220)
+        );
+        g2d.setPaint(gp);
         g2d.fillRect(0, 0, getWidth(), getHeight());
     }
 }

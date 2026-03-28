@@ -1,5 +1,7 @@
 package ui.components;
 
+import logic.GamePlay.PlayerData;
+import main.MainFrame;
 import utilities.FontLoader;
 import utilities.IconImage;
 
@@ -8,9 +10,10 @@ import java.awt.*;
 
 public class MoneyDisplay extends JPanel {
     private final Font jerseyFont = FontLoader.loadCustomFont("resources/font/Jersey10.ttf");
-    private JLabel moneyAmount;
+    private CustomJLabel moneyAmount;
+    private PlayerData data;
 
-    public MoneyDisplay(int amount) {
+    public MoneyDisplay(MainFrame mainFrame) {
         // Display
         setLayout(new BorderLayout());
         setBorder(BorderFactory.createEmptyBorder(10, 37, 10, 37));
@@ -28,10 +31,19 @@ public class MoneyDisplay extends JPanel {
         moneyLabel.setVerticalAlignment(JLabel.CENTER);
 
         // MoneyAmount
-        moneyAmount = new JLabel(String.format("%,d N", amount));
+        moneyAmount = new CustomJLabel(String.format("%,d N", mainFrame.getPlayerData().getMoney()), 4f);
         moneyAmount.setFont(jerseyFont.deriveFont(25f));
         moneyAmount.setVerticalAlignment(JLabel.CENTER);
         moneyAmount.setHorizontalAlignment(JLabel.CENTER);
+        moneyAmount.setForeground(new Color(230, 181, 42));
+        moneyAmount.setOutlineColor(new Color(115, 51, 12));
+        moneyAmount.setBorder(BorderFactory.createEmptyBorder(0, 5, 0, 5));
+
+        mainFrame.getPlayerData().addPropertyChangeListener(evt -> {
+            if ("money".equals(evt.getPropertyName())) {
+                updateMoney((int) evt.getNewValue());
+            }
+        });
 
         add(paddingLabel, BorderLayout.NORTH);
         add(moneyLabel, BorderLayout.CENTER);

@@ -1,8 +1,5 @@
 package ui.pages.gamePlay;
 
-import java.awt.event.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.SwingUtilities;
 
 public class GameTimer implements Runnable {
@@ -10,15 +7,16 @@ public class GameTimer implements Runnable {
     private gamePlayScreen screen;
     private TimeDisplay timeDisplay;
     private Thread timer;
+    private customerPanel c;
     private volatile boolean isRunning = false;
+    private volatile boolean isPaused = false;
 
-    // รับค่า เวลา, หน้าจอเกม, หน้าปัดเวลา
-    public GameTimer(int seconds, gamePlayScreen screen, TimeDisplay timeDisplay) {
+    public GameTimer(int seconds, gamePlayScreen screen, TimeDisplay timeDisplay,customerPanel c) {
         this.timeLeft = seconds;
         this.screen = screen;
         this.timeDisplay = timeDisplay;
+        this.c = c;
 
-        // อัปเดตเวลาก่อนเริ่มเกม
         if (this.timeDisplay != null) {
             this.timeDisplay.updateTime(timeLeft);
         }
@@ -30,22 +28,25 @@ public class GameTimer implements Runnable {
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException ex) {
-                ex.printStackTrace();
                 break;
             }
+
+            if (isPaused) {
+                continue;
+            }
+
             this.timeLeft--;
 
-            SwingUtilities.invokeLater(new Runnable() {
-                @Override
-                public void run() {
-                    if (timeDisplay != null) {
-                        timeDisplay.updateTime(timeLeft);
-                    }
+            SwingUtilities.invokeLater(() -> {
+                if (timeDisplay != null) {
+                    timeDisplay.updateTime(timeLeft);
+                }
 
-                    if (timeLeft <= 0) {
-                        stopTimer();
-                        screen.gameOver();
-                    }
+                screen.updateGame();
+
+                if (timeLeft <= 0) {
+                    stopTimer();
+                    screen.updateGame();
                 }
             });
         }
@@ -64,5 +65,17 @@ public class GameTimer implements Runnable {
         if (timer != null) {
             timer.interrupt();
         }
+    }
+
+    public void pauseTimer() {
+        isPaused = true;
+    }
+
+    public void resumeTimer() {
+        isPaused = false;
+    }
+
+    public int getTimeLeft(){
+        return timeLeft;
     }
 }

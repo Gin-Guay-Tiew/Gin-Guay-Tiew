@@ -108,6 +108,7 @@ public class LevelsDisplay extends JPanel {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         if (current_lv.isUnlocked) {
+                            SFXManager.play(SFX.CLICK);
                             int realLevel = Math.min(levelNum, levelsInfo.size());
                             mainFrame.startNewGame(realLevel);
                             return;
@@ -147,8 +148,8 @@ public class LevelsDisplay extends JPanel {
         Level current_lv = levelsInfo.get(levelNum - 1);
 
         if (plrData.getMoney() < current_lv.unlockCost) {
-            plrData.setMoney(plrData.getMoney()+1000);
-            System.out.println("Give player +1000 Noodle. Now have "+plrData.getMoney());
+            plrData.setMoney(plrData.getMoney()+10000);
+            System.out.println("Give player +10000 Noodle. Now have "+plrData.getMoney());
             String[] btnPaths = {
                     "resources/images/shared/buttons/Ok",
             };
@@ -191,6 +192,7 @@ public class LevelsDisplay extends JPanel {
         loadedGif_lk.getImage().flush();
         lockIcon.setIcon(loadedGif_lk);
         current_lv.isUnlocked = true;
+        SFXManager.play(SFX.UNLOCK);
         plrData.spendMoney(current_lv.unlockCost);
         plrData.setLevel(levelNum);
 

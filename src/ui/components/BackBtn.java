@@ -1,6 +1,7 @@
 package ui.components;
 
 import main.MainFrame;
+import utilities.SFXManager;
 
 import java.awt.event.*;
 
@@ -11,6 +12,7 @@ public class BackBtn extends ImageJButton {
         addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                SFXManager.play("resources/audio/sfx/click_button.mp3");
                 mainFrame.getNavigator().toPage(pageName, true);
             }
         });

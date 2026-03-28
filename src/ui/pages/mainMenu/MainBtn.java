@@ -6,6 +6,8 @@ import java.awt.event.ActionListener;
 
 import main.MainFrame;
 import ui.components.PopupWindow;
+import utilities.SFX;
+import utilities.SFXManager;
 
 public class MainBtn implements ActionListener {
     private MainFrame frame;
@@ -20,10 +22,12 @@ public class MainBtn implements ActionListener {
     public void actionPerformed(ActionEvent e) {
 
         if (e.getActionCommand().equals("Start Game")) {
+            SFXManager.play(SFX.CLICK);
             frame.getNavigator().toPage("levelSelect", true, 250);
         }
 
         if (e.getActionCommand().equals("Tutorial")) {
+            SFXManager.play(SFX.CLICK);
             // Create popUp
             String[] btnPaths = {
                     "resources/images/shared/buttons/Yes",
@@ -31,12 +35,12 @@ public class MainBtn implements ActionListener {
             };
             String[] btnLabels = {"Yes", "No"};
             ActionListener[] btnActions = {
-                    ex -> frame.getNavigator().toPage("loadingScreen", true, 250),
+                    ex -> frame.getNavigator().toPage("tutorial", true, 250),
                     null // Use "Null" if btnLabels == "No"
             };
             pop.createPopup(
                     frame,
-                    "Do you want to play the tutorial?", // Message
+                    "Do you want to see the tutorial?", // Message
                     "resources/images/shared/popups/Demo.png", // Background Path
                     btnPaths,
                     btnLabels,
@@ -45,14 +49,17 @@ public class MainBtn implements ActionListener {
         }
 
         if (e.getActionCommand().equals("Shop")) {
+            SFXManager.play(SFX.CLICK);
             frame.getNavigator().toPage(MainFrame.SHOP_UI, true);
         }
 
         if (e.getActionCommand().equals("Setting")) {
+            SFXManager.play(SFX.CLICK);
             frame.getNavigator().toPage("setting", true, 250);
         }
 
         if (e.getActionCommand().equals("Exit")) {
+            SFXManager.play(SFX.CLICK);
             // Create popUp
             String[] btnPaths = {
                     "resources/images/shared/buttons/Yes",
