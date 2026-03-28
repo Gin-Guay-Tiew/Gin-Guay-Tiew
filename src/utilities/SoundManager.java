@@ -66,7 +66,7 @@ public class SoundManager {
 
 //        if (isLevelMusic) return;
 
-        playMusic("resources/audio_bg/background1.mp3");
+        playMusic("resources/audio/bg/background1.mp3");
 
     }
 
@@ -77,11 +77,11 @@ public class SoundManager {
         isLevelMusic = true;
 
         switch(level) {
-            case 1 -> playMusic("resources/audio_bg/lv1.mp3");
-            case 2 -> playMusic("resources/audio_bg/lv2.mp3");
-            case 3 -> playMusic("resources/audio_bg/lv3.mp3");
-            case 4 -> playMusic("resources/audio_bg/lv4.mp3");
-            case 5 -> playMusic("resources/audio_bg/lv5.mp3");
+            case 1 -> playMusic("resources/audio/bg/lv1.mp3");
+            case 2 -> playMusic("resources/audio/bg/lv2.mp3");
+            case 3 -> playMusic("resources/audio/bg/lv3.mp3");
+            case 4 -> playMusic("resources/audio/bg/lv4.mp3");
+            case 5 -> playMusic("resources/audio/bg/lv5.mp3");
         }
 
     }
@@ -90,17 +90,17 @@ public class SoundManager {
 
     public static void playWaiting() {
         isLevelMusic = false;
-        playMusic("resources/audio_bg/waitting.mp3");
+        playMusic("resources/audio/bg/waitting.mp3");
     }
 
     public static void playWin() {
         isLevelMusic = false;
-        playMusic("resources/audio_bg/win.mp3");
+        playMusic("resources/audio/bg/win.mp3");
     }
 
     public static void playLose() {
         isLevelMusic = false;
-        playMusic("resources/audio_bg/lose.mp3");
+        playMusic("resources/audio/bg/lose.mp3");
     }
 
     public static void backToMenu() {

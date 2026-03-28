@@ -11,12 +11,8 @@ import ui.pages.settingMenu.MainSettingPage;
 import ui.pages.shopUI.ShopScreen;
 import logic.Shop.ShopManager;
 import logic.GamePlay.PlayerData;
-import utilities.DataManager;
-import utilities.IconImage;
-import utilities.PageNavigator;
+import utilities.*;
 import ui.components.PopupWindow;
-import utilities.Transition;
-import utilities.SoundManager;
 
 import javax.swing.*;
 import java.awt.*;
@@ -181,6 +177,9 @@ public class MainFrame extends JFrame implements WindowListener {
                 String currentPage = navigator.getCurrentPage();
 
                 if (GAME.equals(currentPage) || "gamePlay".equals(currentPage)) {
+
+                    SFXManager.play(SFX.CLICK);
+
                     previousPage = currentPage;
 
                     if (currentGameScreen instanceof ui.pages.gamePlay.gamePlayScreen game) {

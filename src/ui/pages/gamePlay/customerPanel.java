@@ -3,6 +3,8 @@ package ui.pages.gamePlay;
 import main.MainFrame;
 import ui.pages.endGame.WinLosePage;
 import utilities.IconImage;
+import utilities.SFX;
+import utilities.SFXManager;
 
 import javax.swing.*;
 import java.awt.*;
@@ -124,6 +126,8 @@ public class customerPanel extends JPanel {
                 add(c);
                 add(bubblePanel);
 
+                SFXManager.play(SFX.POP);
+
                 break;
             }
         }
@@ -217,6 +221,7 @@ public class customerPanel extends JPanel {
             c.tick();
 
             if (c.isExpired()) {
+                SFXManager.play(SFX.CUSTOMER_FLEES);
                 int index = i;
                 customerComponent expiringComp = slots[i];
 

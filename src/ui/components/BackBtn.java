@@ -1,6 +1,8 @@
 package ui.components;
 
 import main.MainFrame;
+import utilities.SFX;
+import utilities.SFXManager;
 
 import java.awt.event.*;
 

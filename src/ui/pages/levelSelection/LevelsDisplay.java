@@ -107,6 +107,7 @@ public class LevelsDisplay extends JPanel {
                 iconLevel.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
+                        SFXManager.play(SFX.CLICK);
                         if (current_lv.isUnlocked) {
                             int realLevel = Math.min(levelNum, levelsInfo.size());
                             mainFrame.startNewGame(realLevel);
@@ -190,6 +191,7 @@ public class LevelsDisplay extends JPanel {
         ImageIcon loadedGif_lk = new ImageIcon("resources/images/levelSelection/Unlock.gif");
         loadedGif_lk.getImage().flush();
         lockIcon.setIcon(loadedGif_lk);
+        SFXManager.play(SFX.UNLOCK);
         current_lv.isUnlocked = true;
         plrData.spendMoney(current_lv.unlockCost);
         plrData.setLevel(levelNum);

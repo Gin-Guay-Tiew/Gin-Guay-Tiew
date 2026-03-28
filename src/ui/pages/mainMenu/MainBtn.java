@@ -6,6 +6,8 @@ import java.awt.event.ActionListener;
 
 import main.MainFrame;
 import ui.components.PopupWindow;
+import utilities.SFX;
+import utilities.SFXManager;
 
 public class MainBtn implements ActionListener {
     private MainFrame frame;
