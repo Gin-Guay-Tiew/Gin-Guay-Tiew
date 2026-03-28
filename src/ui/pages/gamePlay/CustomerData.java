@@ -31,10 +31,6 @@ public class CustomerData implements CustomerPay {
         return money;
     }
 
-    public int getMoney(){
-        return money;
-    }
-
     public int getlevelID(){
         return levelID;
     }
