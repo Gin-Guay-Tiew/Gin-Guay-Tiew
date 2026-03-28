@@ -142,8 +142,8 @@ public class LevelFactory {
         slots.add(new SlotSpec("noodlesBowl",226,122,76,76,"resources/images/gamePlay/bowl/decorate.png","SPAWN","resources/images/gamePlay/bowl/picked.png"));
         slots.add(new SlotSpec("chopsticks",282,110,86,86,"resources/images/gamePlay/counter/chopsticks.png","STATIC",null));
         slots.add(new SlotSpec("pot",-86,240,380,380,"resources/images/gamePlay/ingredients/noodles/boilingPot/not_boiling.png","STATIC",null));
-        slots.add(new SlotSpec("trash",620,405,153,73,"resources/images/gamePlay/binn/empty.png","STATIC",null));
-        slots.add(new SlotSpec("bucket",230,355,120,120, bucketImg,"STATIC",null));
+        slots.add(new SlotSpec("trash",620,410,153,73,"resources/images/gamePlay/binn/empty.png","STATIC",null));
+        slots.add(new SlotSpec("bucket",230,365,120,120, bucketImg,"STATIC",null));
 
         // Noodles
         if (hasVermicelli) slots.add(new SlotSpec("riceVermicelli", 32, 40, 60, 60, null, "SPAWN", "resources/images/gamePlay/ingredients/noodles/category/riceVermicelli/picked.png"));
