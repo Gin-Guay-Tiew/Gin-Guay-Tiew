@@ -90,6 +90,8 @@ public class counterBar extends JPanel {
 
         // ตอนลากให้จำตำแหน่งเดิมไว้
         c.addMouseListener(new MouseAdapter() {
+            WindowFocusListener focusListener;
+
             @Override
             public void mousePressed(MouseEvent e) {
                 offset[0] = e.getPoint();
@@ -98,11 +100,28 @@ public class counterBar extends JPanel {
                 Container parent = c.getParent();
                 parent.setComponentZOrder(c,0);
                 c.setVisible(true);
+
+                Window window = SwingUtilities.getWindowAncestor(c);
+                if (window != null) {
+                    focusListener = new WindowAdapter() {
+                        @Override
+                        public void windowLostFocus(WindowEvent we) {
+                            c.setLocation(originalPos[0]);
+                            window.removeWindowFocusListener(this);
+                        }
+                    };
+                    window.addWindowFocusListener(focusListener);
+                }
             }
 
             // ตอนปล่อยแล้วจะให้กลับที่เดิม
             @Override
             public void mouseReleased(MouseEvent e){
+                Window window = SwingUtilities.getWindowAncestor(c);
+                if (window != null && focusListener != null) {
+                    window.removeWindowFocusListener(focusListener);
+                }
+
                 // Only reset/hide if the component isn't meant to be deleted
                 if (c.isVisible()) {
                     for (Component cc : getComponents()) {
@@ -349,6 +368,10 @@ public class counterBar extends JPanel {
 
         c.addMouseMotionListener(new MouseMotionAdapter() {
             public void mouseDragged(MouseEvent e) {
+                if ((e.getModifiersEx() & InputEvent.BUTTON1_DOWN_MASK) == 0) {
+                    c.setLocation(originalPos[0]);
+                    return;
+                }
                 int x = c.getX() + e.getX() - offset[0].x;
                 int y = c.getY() + e.getY() - offset[0].y;
                 c.setLocation(x, y);
@@ -384,21 +407,34 @@ public class counterBar extends JPanel {
         add(item);
         setComponentZOrder(item, 0);
 
-        MouseMotionListener teleportDrag = new MouseMotionAdapter() {
+        Window window = SwingUtilities.getWindowAncestor(this);
+        WindowFocusListener[] focusListener = new WindowFocusListener[1];
+
+        MouseAdapter teleportDrag = new MouseAdapter() {
             @Override
             public void mouseDragged(MouseEvent me) {
+                if ((me.getModifiersEx() & InputEvent.BUTTON1_DOWN_MASK) == 0) {
+                    if (window != null && focusListener[0] != null) {
+                        window.removeWindowFocusListener(focusListener[0]);
+                    }
+                    sourceBtn.removeMouseMotionListener(this);
+                    sourceBtn.removeMouseListener(this);
+                    remove(item);
+                    revalidate();
+                    repaint();
+                    return;
+                }
                 Point p = SwingUtilities.convertPoint(sourceBtn, me.getPoint(), sourceBtn.getParent());
                 item.setLocation(p.x - 60, p.y - 60);
                 repaint();
             }
-        };
 
-        sourceBtn.addMouseMotionListener(teleportDrag);
-
-        sourceBtn.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseReleased(MouseEvent me) {
-                sourceBtn.removeMouseMotionListener(teleportDrag);
+                if (window != null && focusListener[0] != null) {
+                    window.removeWindowFocusListener(focusListener[0]);
+                }
+                sourceBtn.removeMouseMotionListener(this);
                 sourceBtn.removeMouseListener(this);
                 Rectangle itemBounds = item.getBounds();
                 String itemName = item.getName();
@@ -564,7 +600,25 @@ public class counterBar extends JPanel {
                 revalidate();
                 repaint();
             }
-        });
+        };
+
+        if (window != null) {
+            focusListener[0] = new WindowAdapter() {
+                @Override
+                public void windowLostFocus(WindowEvent we) {
+                    window.removeWindowFocusListener(this);
+                    sourceBtn.removeMouseMotionListener(teleportDrag);
+                    sourceBtn.removeMouseListener(teleportDrag);
+                    remove(item);
+                    revalidate();
+                    repaint();
+                }
+            };
+            window.addWindowFocusListener(focusListener[0]);
+        }
+
+        sourceBtn.addMouseMotionListener(teleportDrag);
+        sourceBtn.addMouseListener(teleportDrag);
 
         revalidate();
         repaint();

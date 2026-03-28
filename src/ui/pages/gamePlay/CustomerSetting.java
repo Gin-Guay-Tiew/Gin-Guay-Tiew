@@ -100,7 +100,7 @@ public class CustomerSetting {
 
     public Object[] tSet(String typeCustomer,int general, int hungry,int vip, int JarnBank, int working){
         if (typeCustomer.equals("general") || typeCustomer.equals("mars")){
-            return new Object[]{"general", 460,general};
+            return new Object[]{"general", 46,general};
         } else if (typeCustomer.equals("hungry")){
             return new Object[]{"hungry-vip", 21,hungry};
         } else if (typeCustomer.equals("JarnBank")){
