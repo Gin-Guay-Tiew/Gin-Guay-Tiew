@@ -66,12 +66,12 @@ public class customerComponent extends JPanel {
             changeMoney();
             data.setMoney(money_bored);
             imgLabel.setIcon( new ImageIcon(pathImage+"_bored.png"));
-            System.out.println(data.toString()+"bored");
+            //System.out.println(data.toString()+"bored");
         } else if (life == state_angry){
             changeMoney();
             data.setMoney(money_angry);
             imgLabel.setIcon( new ImageIcon(pathImage+"_angry.png"));
-            System.out.println(data.toString()+"angry");
+            //System.out.println(data.toString()+"angry");
         }
     }
 

@@ -120,26 +120,19 @@ public class gamePlayScreen extends JPanel {
     public void updateGame() {
         if (isGameOver) return;
         customerPanel.updateCustomers();
+        int reqMoney = LevelFactory.getReqMoney(levelId);
         if (customerPanel.isFinished()) {
-            int n = (customerPanel.getcurrentMoney()+customerPanel.getBonus());
-            int reqMoney = LevelFactory.getReqMoney(levelId);
             if (customerPanel.getcurrentMoney() < reqMoney){
-                mainFrame.getPlayerData().addMoney(n-((int) Math.ceil((double) n / 2)));
                 gameWiner(false);
             }else{
-                mainFrame.getPlayerData().addMoney(customerPanel.getcurrentMoney()+customerPanel.getBonus());
                 gameWiner(true);
             }
             isGameOver = true;
         }
         else if ((gameTimer.getTimeLeft() <= 0)) {
-            int n = (customerPanel.getcurrentMoney()+customerPanel.getBonus());
-            int reqMoney = LevelFactory.getReqMoney(levelId);
             if (customerPanel.getcurrentMoney() < reqMoney){
-                mainFrame.getPlayerData().addMoney(n-((int) Math.ceil((double) n / 2)));
                 gameWiner(false);
             }else{
-                mainFrame.getPlayerData().addMoney(customerPanel.getcurrentMoney()+customerPanel.getBonus());
                 gameWiner(true);
             }
             isGameOver = true;
@@ -148,6 +141,13 @@ public class gamePlayScreen extends JPanel {
 
     public void gameWiner(boolean state){
         pauseGame();
+        int n = (customerPanel.getcurrentMoney()+customerPanel.getBonus());
+        if (!state){
+            mainFrame.getPlayerData().addMoney(n-((int) Math.ceil((double) n / 2)));
+        }else{
+            mainFrame.getPlayerData().addMoney(customerPanel.getcurrentMoney()+customerPanel.getBonus());
+        }
+        customerPanel.clearAllCustomers();
         int saveMoney = customerPanel.getcurrentMoney();
         int bonusMoney = customerPanel.getBonus();
         status.setState(state, saveMoney, bonusMoney);

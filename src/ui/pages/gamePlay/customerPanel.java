@@ -333,6 +333,22 @@ public class customerPanel extends JPanel {
                 + c1 * (float) Math.pow(t - 1, 2);
     }
 
+    public void clearAllCustomers() {
+        for (int i = 0; i < slots.length; i++) {
+            if (slots[i] != null) {
+                remove(slots[i]);
+                slots[i] = null;
+            }
+        }
+
+        removeAll();
+
+        queue.clear();
+
+        revalidate();
+        repaint();
+    }
+
 
     public int getBonus() {
         return health*20;
