@@ -1,5 +1,8 @@
 package ui.pages.tutorialGame;
 
+import utilities.SFX;
+import utilities.SFXManager;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
@@ -57,9 +60,14 @@ public abstract class AbstractNavButton extends JLabel {
             public void mouseReleased(MouseEvent e) {
                 if (!buttonEnabled) return;
 
+                System.out.println("BUTTON RELEASED");
+
                 if (mouseInside) {
                     setIcon(hoverIcon);
                     if (clickAction != null && contains(e.getPoint())) {
+
+                        System.out.println("PLAY CLICK SFX");
+                        SFXManager.play(SFX.CLICK);
                         clickAction.run();
                     }
                 } else {
