@@ -104,16 +104,7 @@ public class MainFrame extends JFrame implements WindowListener {
         ImageIcon img = new ImageIcon("resources/images/shared/AppIcon.png");
         setIconImage(img.getImage());
         this.playerData = utilities.DataManager.loadPlayerData();
-        int volumeLv = playerData.getVolumeLv();
-        float dB = 0f;
-
-        if (volumeLv <= 0) {
-            dB = -80.0f;
-        } else {
-            dB = 20f * (float) Math.log10(volumeLv / 100f);
-        }
-
-        SoundManager.setVolume(dB);
+        SoundManager.setVolume(playerData.getVolumeLv() / 100f);
 
         // Layered Position Setup (TransitionFrame Positioning :D)
         JPanel glass = (JPanel) getGlassPane();
