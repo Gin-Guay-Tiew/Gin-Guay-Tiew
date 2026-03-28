@@ -29,12 +29,12 @@ public class WinLosePage extends JPanel {
         statusLabel.setFont(jerseyFont.deriveFont(85f));
 
         if (isWin) {
-            SFXManager.play(SFX.WIN);
+            utilities.SoundManager.playWin();
             statusLabel.setText("You Passed!");
             statusLabel.setTextColor(new Color(69, 236, 147)); // สีเขียว
             statusLabel.setOutlineColor(new Color(37, 90, 60));
         } else {
-            SFXManager.play(SFX.LOSE);
+            utilities.SoundManager.playLose();
             statusLabel.setText("You Failed..");
             statusLabel.setTextColor(new Color(236, 69, 69)); // สีแดง
             statusLabel.setOutlineColor(new Color(90, 37, 37));

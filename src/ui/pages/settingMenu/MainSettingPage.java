@@ -7,6 +7,7 @@ import ui.components.PopupWindow;
 import utilities.FontLoader;
 import ui.components.ImageJButton;
 import utilities.IconImage;
+import utilities.SFXManager;
 import utilities.SoundManager;
 
 import javax.swing.*;
@@ -25,6 +26,8 @@ public class MainSettingPage extends JPanel {
     public MainSettingPage(MainFrame frame, PlayerData playerData) {
 
         setLayout(new BorderLayout());
+
+        SFXManager.setSfxEnabled(playerData.isStateSFX());
 
         JPanel main_container = new JPanel(new GridBagLayout());
         main_container.setOpaque(false);
@@ -104,6 +107,8 @@ public class MainSettingPage extends JPanel {
             boolean newState = !playerData.isStateSFX();
             playerData.setStateSFX(newState);
             btnSFX.setIcon(newState ? onIcon : offIcon);
+
+            SFXManager.setSfxEnabled(newState);
         });
 
         con_2.add(images02);
