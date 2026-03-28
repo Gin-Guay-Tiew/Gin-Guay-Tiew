@@ -5,83 +5,65 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CustomerMenu {
-    //method for add folder for random in level
-    public static List<String> CustomerMenu(int levelID){
-        List<String> folders = new ArrayList<>();
 
-        if (levelID >= 1){
-            folders.add("resources/images/gamePlay/ingredients/drinks/cola");
-            folders.add("resources/images/gamePlay/ingredients/noodles/finishedNoodles/namTok/riceThinWideVermicelli/meatball");
-            folders.add("resources/images/gamePlay/ingredients/noodles/finishedNoodles/namTokk/riceThinWideVermicelli/no_addon.png");
-            folders.add("resources/images/gamePlay/ingredients/noodles/finishedNoodles/namTok/yellow/meatball");
-            folders.add("resources/images/gamePlay/ingredients/noodles/finishedNoodles/namTokk/yellow/no_addon.png");
-            folders.add("resources/images/gamePlay/ingredients/noodles/finishedNoodles/clearBroth/riceThinWideVermicelli/meatball");
-            folders.add("resources/images/gamePlay/ingredients/noodles/finishedNoodles/clearBroth/riceThinWideVermicelli/no_addon.png");
-            folders.add("resources/images/gamePlay/ingredients/noodles/finishedNoodles/clearBroth/yellow/meatball");
-            folders.add("resources/images/gamePlay/ingredients/noodles/finishedNoodles/clearBroth/yellow/no_addon.png");
-        }
+    private static void addNoodlePaths(List<String> folders, String broth, String noodle, boolean hasMeatball, boolean hasPorkSlices, boolean hasPorkRind) {
+        String base = "resources/images/gamePlay/ingredients/noodles/finishedNoodles/" + broth + "/" + noodle + "/";
 
-        if (levelID >= 2){
-            folders.add("resources/images/gamePlay/ingredients/drinks/sprite");
-            folders.add("resources/images/gamePlay/ingredients/noodles/finishedNoodles/yenTaFo/riceThinWideVermicelli/meatball&porkSlices");
-            folders.add("resources/images/gamePlay/ingredients/noodles/finishedNoodles/yenTaFo/riceThinWideVermicelli/meatball");
-            folders.add("resources/images/gamePlay/ingredients/noodles/finishedNoodles/yenTaFo/riceThinWideVermicelli/porkSlices");
-            folders.add("resources/images/gamePlay/ingredients/noodles/finishedNoodles/yenTaFo/riceThinWideVermicelli/no_addon.png");
-            folders.add("resources/images/gamePlay/ingredients/noodles/finishedNoodles/yenTaFo/yellow/meatball&porkSlices");
-            folders.add("resources/images/gamePlay/ingredients/noodles/finishedNoodles/yenTaFo/yellow/porkSlices");
-            folders.add("resources/images/gamePlay/ingredients/noodles/finishedNoodles/yenTaFo/yellow/no_addon.png");
-            folders.add("resources/images/gamePlay/ingredients/noodles/finishedNoodles/namTok/riceThinWideVermicelli/meatball&porkSlices");
-            folders.add("resources/images/gamePlay/ingredients/noodles/finishedNoodles/namTok/riceThinWideVermicelli/porkSlices");
-            folders.add("resources/images/gamePlay/ingredients/noodles/finishedNoodles/namTok/yellow/meatball&porkSlices");
-            folders.add("resources/images/gamePlay/ingredients/noodles/finishedNoodles/namTok/yellow/porkSlices");
-            folders.add("resources/images/gamePlay/ingredients/noodles/finishedNoodles/clearBroth/riceThinWideVermicelli/meatball&porkSlices");
-            folders.add("resources/images/gamePlay/ingredients/noodles/finishedNoodles/clearBroth/riceThinWideVermicelli/porkSlices");
-            folders.add("resources/images/gamePlay/ingredients/noodles/finishedNoodles/clearBroth/yellow/meatball&porkSlices");
-            folders.add("resources/images/gamePlay/ingredients/noodles/finishedNoodles/clearBroth/yellow/porkSlices");
-        }
+        folders.add(base + "no_addon.png");
 
-        if (levelID >= 3){
-            folders.add("resources/images/gamePlay/ingredients/drinks/orange");
-            folders.add("resources/images/gamePlay/ingredients/noodles/finishedNoodles/tomYum/riceThinWideVermicelli/meatball");
-            folders.add("resources/images/gamePlay/ingredients/noodles/finishedNoodles/tomYum/riceThinWideVermicelli/meatball&porkSlices");
-            folders.add("resources/images/gamePlay/ingredients/noodles/finishedNoodles/tomYum/riceThinWideVermicelli/porkSlices");
-            folders.add("resources/images/gamePlay/ingredients/noodles/finishedNoodles/tomYum/yellow/meatball");
-            folders.add("resources/images/gamePlay/ingredients/noodles/finishedNoodles/tomYum/yellow/meatball&porkSlices");
-            folders.add("resources/images/gamePlay/ingredients/noodles/finishedNoodles/tomYum/yellow/porkSlices");
-            folders.add("resources/images/gamePlay/ingredients/noodles/finishedNoodles/tomYum/yellow/no_addon.png");
-            folders.add("resources/images/gamePlay/ingredients/noodles/finishedNoodles/tomYum/riceThinWideVermicelli/no_addon.png");
-        }
+        if (hasMeatball) folders.add(base + "meatball");
+        if (hasPorkSlices) folders.add(base + "porkSlices");
+        if (hasPorkRind) folders.add(base + "porkRind");
 
-        if (levelID >= 4){
-            folders.add("resources/images/gamePlay/ingredients/kanomTuay/picked.png");
-            folders.add("resources/images/gamePlay/ingredients/noodles/finishedNoodles/namTok/greenEgg/meatball");
-            folders.add("resources/images/gamePlay/ingredients/noodles/finishedNoodles/namTok/greenEgg/meatball&porkSlices");
-            folders.add("resources/images/gamePlay/ingredients/noodles/finishedNoodles/namTok/greenEgg/porkSlices");
-            folders.add("resources/images/gamePlay/ingredients/noodles/finishedNoodles/namTok/greenEgg/no_addon.png");
-            folders.add("resources/images/gamePlay/ingredients/noodles/finishedNoodles/clearBroth/greenEgg/meatball");
-            folders.add("resources/images/gamePlay/ingredients/noodles/finishedNoodles/clearBroth/greenEgg/meatball&porkSlices");
-            folders.add("resources/images/gamePlay/ingredients/noodles/finishedNoodles/clearBroth/greenEgg/no_addon.png");
-            folders.add("resources/images/gamePlay/ingredients/noodles/finishedNoodles/clearBroth/greenEgg/porkSlices");
-            folders.add("resources/images/gamePlay/ingredients/noodles/finishedNoodles/tomYum/greenEgg/meatball");
-            folders.add("resources/images/gamePlay/ingredients/noodles/finishedNoodles/tomYum/greenEgg/no_addon.png");
-            folders.add("resources/images/gamePlay/ingredients/noodles/finishedNoodles/tomYum/greenEgg/meatball&porkSlices");
-            folders.add("resources/images/gamePlay/ingredients/noodles/finishedNoodles/tomYum/greenEgg/porkSlices");
-            folders.add("resources/images/gamePlay/ingredients/noodles/finishedNoodles/yenTaFo/greenEgg/no_addon.png");
-            folders.add("resources/images/gamePlay/ingredients/noodles/finishedNoodles/yenTaFo/greenEgg/meatball");
-            folders.add("resources/images/gamePlay/ingredients/noodles/finishedNoodles/yenTaFo/greenEgg/meatball&porkSlices");
-            folders.add("resources/images/gamePlay/ingredients/noodles/finishedNoodles/yenTaFo/greenEgg/porkSlices");
+        if (hasMeatball && hasPorkSlices) folders.add(base + "meatball&porkSlices");
+        if (hasMeatball && hasPorkRind) folders.add(base + "meatball&porkRind");
+        if (hasPorkSlices && hasPorkRind) folders.add(base + "porkSlices&porkRind");
 
-        }
-
-        if (levelID == 5){
-            folders.add("resources/images/gamePlay/ingredients/noodles/finishedNoodles");
-        }
-
-        return  folders;
+        if (hasMeatball && hasPorkSlices && hasPorkRind) folders.add(base + "meatball&porkRind&porkSlices");
     }
 
+    public static List<String> CustomerMenu(int levelID) {
+        List<String> folders = new ArrayList<>();
 
+        if (levelID >= 1) folders.add("resources/images/gamePlay/ingredients/drinks/cola");
+        if (levelID >= 2) folders.add("resources/images/gamePlay/ingredients/drinks/sprite");
+        if (levelID >= 3) folders.add("resources/images/gamePlay/ingredients/drinks/orange");
+        if (levelID >= 4) folders.add("resources/images/gamePlay/ingredients/kanomTuay/picked.png");
 
+        boolean m = levelID >= 1;
+        boolean s = levelID >= 2;
+        boolean r = levelID >= 3;
+
+        addNoodlePaths(folders, "namTok", "riceThinWideVermicelli", m, s, r);
+        addNoodlePaths(folders, "namTok", "yellow", m, s, r);
+        addNoodlePaths(folders, "clearBroth", "riceThinWideVermicelli", m, s, r);
+        addNoodlePaths(folders, "clearBroth", "yellow", m, s, r);
+
+        if (levelID >= 2) {
+            addNoodlePaths(folders, "yenTaFo", "riceThinWideVermicelli", m, s, r);
+            addNoodlePaths(folders, "yenTaFo", "yellow", m, s, r);
+        }
+
+        if (levelID >= 3) {
+            addNoodlePaths(folders, "tomYum", "riceThinWideVermicelli", m, s, r);
+            addNoodlePaths(folders, "tomYum", "yellow", m, s, r);
+        }
+
+        if (levelID >= 4) {
+            addNoodlePaths(folders, "namTok", "greenEgg", m, s, r);
+            addNoodlePaths(folders, "clearBroth", "greenEgg", m, s, r);
+            addNoodlePaths(folders, "yenTaFo", "greenEgg", m, s, r);
+            addNoodlePaths(folders, "tomYum", "greenEgg", m, s, r);
+        }
+
+        if (levelID >= 5) {
+            addNoodlePaths(folders, "braisedPork", "riceThinWideVermicelli", m, s, r);
+            addNoodlePaths(folders, "braisedPork", "yellow", m, s, r);
+            addNoodlePaths(folders, "braisedPork", "greenEgg", m, s, r);
+        }
+
+        return folders;
+    }
 
     // method for request food and drink from customer
     public static String getRandomFoodImage(int levelIO){
@@ -89,15 +71,24 @@ public class CustomerMenu {
         List<File> allFiles = new ArrayList<>();
 
         for(String path : folders){
-            File[] files = new File(path).listFiles();
-            if (files != null){
-                for(File f : files){
-                    if(f.isFile()){
-                        allFiles.add(f);
+            File fileOrFolder = new File(path);
+
+            if (fileOrFolder.isFile()) {
+                allFiles.add(fileOrFolder);
+            } else if (fileOrFolder.isDirectory()) {
+                File[] files = fileOrFolder.listFiles();
+                if (files != null){
+                    for(File f : files){
+                        // Ignore idle/picked mix-ups if a whole folder is scanned
+                        if(f.isFile() && !f.getName().equalsIgnoreCase("idle.png") && !f.getName().equalsIgnoreCase("picked.png")){
+                            allFiles.add(f);
+                        }
                     }
                 }
             }
         }
+
+        if (allFiles.isEmpty()) return "";
 
         int i = (int)(Math.random() * allFiles.size());
         return allFiles.get(i).getPath();
