@@ -34,7 +34,6 @@ The challenge lies in balancing speed, accuracy, and decision-making to achieve 
 The repository is organized as follows:
 ```text
 Gin-Guay-Tiew/
-├── lib/                  # External libraries (JavaFX SDK 21.0.10, JLayer)
 ├── resources/            # Game assets
 │   ├── audio/            # BGM and SFX sourced from Pixabay
 │   ├── font/             # Custom typography (Jersey10.ttf)
@@ -58,10 +57,12 @@ Gin-Guay-Tiew/
 git clone https://github.com/yourusername/gin-guay-tiew.git
 cd gin-guay-tiew
 ```
-2. Open the project in IntelliJ IDEA
+2. Open the project in IntelliJ IDEA and Install JavaFX 21.0.10
+https://gluonhq.com/products/javafx/
 3. Add JavaFX SDK as a library
 ```
-File → Project Structure → Libraries → + → Java → [select JavaFX SDK folder]
+File → Project Structure → Libraries → + → Java → [select lib folder in JavaFX SDK folder]
+Main ⬇️ -> Edit Configurations -> Application -> Main -> Modify options -> add Main class -> add --module-path "C:\Users\Admin\Downloads\javafx-sdk-21.0.10\lib" --add-modules javafx.controls,javafx.fxml,javafx.media,,javafx.swing (don't forget to fix path file to your path) in Program arguments
 ```
 4. Run the main class
 ```
