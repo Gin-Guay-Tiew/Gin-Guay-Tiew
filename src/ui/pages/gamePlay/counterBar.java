@@ -197,7 +197,7 @@ public class counterBar extends JPanel {
                                                                         "bowl_noodle_rice"
                                                                 );
                                                                 enableDrag(bowl);
-                                                            } else{
+                                                            } else if (itemName.contains("thin")){
                                                                 updateBowlVisual(
                                                                         bowl,
                                                                         "resources/images/gamePlay/ingredients/noodles/finishedNoodles/justNoodle/riceThinWideVermicelli.png",
@@ -234,29 +234,39 @@ public class counterBar extends JPanel {
                                         System.out.println("Serving food from: " + currentFoodPath);
 
                                         String bowlName = bowl.getName().toLowerCase();
-                                        boolean checker = true;
-                                        if (!noodle.equals("else")) {
-                                            checker = false;
-                                            if (bowlName.contains("wide") && noodle.equals("wide")) checker = true;
-                                            if (bowlName.contains("rice") && noodle.equals("rice")) checker = true;
-                                            if (bowlName.contains("thin") && noodle.equals("thin")) checker = true;
+                                        String targetNoodle = noodle.toLowerCase().trim();
+                                        String extractedNoodle = "";
+                                        if (bowlName.contains("wide")) {
+                                            extractedNoodle = "wide";
+                                        } else if (bowlName.contains("thin")) {
+                                            extractedNoodle = "thin";
+                                        } else if (bowlName.contains("rice")) {
+                                            extractedNoodle = "rice";
+                                        }
+                                        boolean checker = false;
+
+                                        System.out.println(extractedNoodle+" / "+targetNoodle);
+
+                                        if (targetNoodle.equals("else") || extractedNoodle.equals(targetNoodle)) {
+                                            checker = true;
                                         }
 
                                         if (currentFoodPath.equals(targetFoodPath) && checker) {
                                             System.out.println("Match! Customer satisfied.");
                                             SFXManager.play(SFX.SERVED);
-                                            // Remove Bowl
+
                                             remove(bowl);
                                             for (Component comp : getComponents()) {
                                                 if (comp instanceof JButton p && "Occupied".equals(p.getName())) {
                                                     p.setName("placemat");
                                                 }
                                             }
+
                                             revalidate();
                                             repaint();
-                                            cstPanel.removeCustomer(sectionIndex-1,cstPanel.getCustomerDataAt(sectionIndex - 1));
+                                            cstPanel.removeCustomer(sectionIndex - 1, cstPanel.getCustomerDataAt(sectionIndex - 1));
                                         } else {
-                                            System.out.println("Wrong order! Customer wanted: " + targetFoodPath);
+                                            System.out.println("Wrong! Wanted: " + targetNoodle + " | Got: " + bowlName);
                                             cstPanel.wrongOrder(sectionIndex - 1);
                                         }
 
@@ -408,9 +418,15 @@ public class counterBar extends JPanel {
                                 } else if ("yellowEgg".equals(itemName)) {
                                     imagePath = "resources/images/gamePlay/ingredients/noodles/blanchNoodles/takronoodle_yellow.png";
                                     newName = "takronoodle_yellow";
-                                } else if ("thinRice".equals(itemName) || "wideRice".equals(itemName) || "riceVermicelli".equals(itemName)) {
+                                } else if ("thinRice".equals(itemName)) {
                                     imagePath = "resources/images/gamePlay/ingredients/noodles/blanchNoodles/takronoodle_rice_thin_wide_vermicelli.png";
-                                    newName = "takronoodle_rice_thin_wide_vermicelli";
+                                    newName = "takronoodle_thin";
+                                } else if ("wideRice".equals(itemName)) {
+                                    imagePath = "resources/images/gamePlay/ingredients/noodles/blanchNoodles/takronoodle_rice_thin_wide_vermicelli.png";
+                                    newName = "takronoodle_wide";
+                                } else if ("riceVermicelli".equals(itemName)) {
+                                    imagePath = "resources/images/gamePlay/ingredients/noodles/blanchNoodles/takronoodle_rice_thin_wide_vermicelli.png";
+                                    newName = "takronoodle_rice";
                                 }
                                 // Apply changes only if a match was found
                                 if (imagePath != null) {
@@ -657,4 +673,3 @@ public class counterBar extends JPanel {
     }
 
 }
-
