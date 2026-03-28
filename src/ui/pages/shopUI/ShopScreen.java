@@ -11,7 +11,10 @@ import ui.components.PopupWindow;
 import ui.components.ImageJButton;
 import ui.components.CustomJLabel;
 import main.MainFrame;
+import ui.pages.gamePlay.TopBar;
 import utilities.IconImage;
+import utilities.SFX;
+import utilities.SFXManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -256,14 +259,17 @@ public class ShopScreen extends JPanel {
 
         buyBtn.addActionListener(e -> {
             if (!controller.isItemStageReached(item)) {
+                SFXManager.play(SFX.CANT_BUY);
                 showWarningPopup("Locked!\nUnlock Level " + item.getLevelRequired() + " to unlock this item.");
                 return;
             }
             if (mainFrame.getPlayerData().getMoney() < item.getPrice()) {
+                SFXManager.play(SFX.CANT_BUY);
                 showWarningPopup("Not enough money!");
                 return;
             }
             if (controller.purchaseItem(item)) {
+                SFXManager.play(SFX.BUY);
                 refreshShopButtons();
                 showWarningPopup("Purchase successful!");
             }

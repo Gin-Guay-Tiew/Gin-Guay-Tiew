@@ -4,6 +4,8 @@ import main.MainFrame;
 import ui.components.ImageJButton;
 import ui.components.PopupWindow;
 import utilities.IconImage;
+import utilities.SFX;
+import utilities.SFXManager;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,7 +15,7 @@ public class PauseScreen extends JPanel {
 
     private Image backgroundImage;
     private float alpha = 0f;
-    PopupWindow pop = new PopupWindow();
+    private PopupWindow pop = new PopupWindow();
 
     public PauseScreen(MainFrame mainFrame) {
 
@@ -71,38 +73,43 @@ public class PauseScreen extends JPanel {
 
         add(centerContain, gbc);
 
-        // ================= Button Action =================
+        // ================= Button Actions =================
 
-        resume.addActionListener(e ->
-                fadeOut(() -> {
-                    mainFrame.getGamePanel().resumeGame();
-                    mainFrame.getNavigator().toPage(
-                            mainFrame.getPreviousPage(), false
-                    );
-                })
-        );
+        resume.addActionListener(e -> {
+            SFXManager.play(SFX.CLICK);
+            fadeOut(() -> {
+                mainFrame.getGamePanel().resumeGame();
+                mainFrame.getNavigator().toPage(
+                        mainFrame.getPreviousPage(), false
+                );
+            });
+        });
 
         setting.addActionListener(e -> {
+            SFXManager.play(SFX.CLICK);
             mainFrame.setBackBtnPage(MainFrame.PAUSE);
             mainFrame.getNavigator().toPage(MainFrame.SETTING, true);
         });
 
         menu.addActionListener(e -> {
+            SFXManager.play(SFX.CLICK);
+
             String[] btnPaths = {
                     "resources/images/shared/buttons/Yes",
                     "resources/images/shared/buttons/No"
             };
+
             String[] btnLabels = {"Yes", "No"};
+
             ActionListener[] btnActions = {
-                    ex -> {
-                        mainFrame.getNavigator().toPage(MainFrame.MAIN_MENU, true);
-                    },
+                    ex -> mainFrame.getNavigator().toPage(MainFrame.MAIN_MENU, true),
                     null
             };
+
             pop.createPopup(
                     mainFrame,
-                    "Are you sure you want to return?\nYour progress will not be saved.", // Message
-                    "resources/images/shared/popups/Demo.png", // Background Path
+                    "Are you sure you want to return?\nYour progress will not be saved.",
+                    "resources/images/shared/popups/Demo.png",
                     btnPaths,
                     btnLabels,
                     btnActions
@@ -112,9 +119,11 @@ public class PauseScreen extends JPanel {
 
     public void fadeIn() {
         alpha = 0f;
+
         Timer timer = new Timer(15, null);
         timer.addActionListener(e -> {
             alpha += 0.05f;
+
             if (alpha >= 1f) {
                 alpha = 1f;
                 timer.stop();
@@ -127,9 +136,12 @@ public class PauseScreen extends JPanel {
     }
 
     public void fadeOut(Runnable afterFade) {
+
         Timer timer = new Timer(15, null);
         timer.addActionListener(e -> {
+
             alpha -= 0.05f;
+
             if (alpha <= 0f) {
                 alpha = 0f;
                 timer.stop();
@@ -144,11 +156,15 @@ public class PauseScreen extends JPanel {
 
     @Override
     public void paint(Graphics g) {
+
         Graphics2D g2 = (Graphics2D) g.create();
 
-        g2.setComposite(AlphaComposite.getInstance(
-                AlphaComposite.SRC_OVER, alpha
-        ));
+        g2.setComposite(
+                AlphaComposite.getInstance(
+                        AlphaComposite.SRC_OVER,
+                        alpha
+                )
+        );
 
         super.paint(g2);
 
@@ -157,8 +173,16 @@ public class PauseScreen extends JPanel {
 
     @Override
     protected void paintComponent(Graphics g) {
+
         super.paintComponent(g);
 
-        g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
+        g.drawImage(
+                backgroundImage,
+                0,
+                0,
+                getWidth(),
+                getHeight(),
+                this
+        );
     }
 }

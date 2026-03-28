@@ -4,10 +4,8 @@ import main.MainFrame;
 import logic.GamePlay.PlayerData;
 import ui.components.CustomJLabel;
 import ui.components.PopupWindow;
-import utilities.FontLoader;
+import utilities.*;
 import ui.components.ImageJButton;
-import utilities.IconImage;
-import utilities.SoundManager;
 
 import javax.swing.*;
 import javax.swing.plaf.basic.BasicSliderUI;
@@ -101,6 +99,7 @@ public class MainSettingPage extends JPanel {
         btnSFX.setOpaque(false);
 
         btnSFX.addActionListener(e -> {
+            SFXManager.play(SFX.CLICK);
             boolean newState = !playerData.isStateSFX();
             playerData.setStateSFX(newState);
             btnSFX.setIcon(newState ? onIcon : offIcon);
@@ -126,6 +125,7 @@ public class MainSettingPage extends JPanel {
 
         JButton resetBtn = new ImageJButton("resources/images/settingMenu/ResetGame", ".png", 30, 175, 30);
         resetBtn.addActionListener(e -> {
+            SFXManager.play(SFX.CLICK);
             // Create popUp
             String[] btnPaths = {
                     "resources/images/shared/buttons/Yes",
