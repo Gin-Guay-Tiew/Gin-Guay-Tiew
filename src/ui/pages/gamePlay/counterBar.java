@@ -90,6 +90,8 @@ public class counterBar extends JPanel {
 
         // ตอนลากให้จำตำแหน่งเดิมไว้
         c.addMouseListener(new MouseAdapter() {
+            WindowFocusListener focusListener;
+
             @Override
             public void mousePressed(MouseEvent e) {
                 offset[0] = e.getPoint();
@@ -98,11 +100,28 @@ public class counterBar extends JPanel {
                 Container parent = c.getParent();
                 parent.setComponentZOrder(c,0);
                 c.setVisible(true);
+
+                Window window = SwingUtilities.getWindowAncestor(c);
+                if (window != null) {
+                    focusListener = new WindowAdapter() {
+                        @Override
+                        public void windowLostFocus(WindowEvent we) {
+                            c.setLocation(originalPos[0]);
+                            window.removeWindowFocusListener(this);
+                        }
+                    };
+                    window.addWindowFocusListener(focusListener);
+                }
             }
 
             // ตอนปล่อยแล้วจะให้กลับที่เดิม
             @Override
             public void mouseReleased(MouseEvent e){
+                Window window = SwingUtilities.getWindowAncestor(c);
+                if (window != null && focusListener != null) {
+                    window.removeWindowFocusListener(focusListener);
+                }
+
                 // Only reset/hide if the component isn't meant to be deleted
                 if (c.isVisible()) {
                     for (Component cc : getComponents()) {
@@ -197,7 +216,7 @@ public class counterBar extends JPanel {
                                                                         "bowl_noodle_rice"
                                                                 );
                                                                 enableDrag(bowl);
-                                                            } else{
+                                                            } else if (itemName.contains("thin")){
                                                                 updateBowlVisual(
                                                                         bowl,
                                                                         "resources/images/gamePlay/ingredients/noodles/finishedNoodles/justNoodle/riceThinWideVermicelli.png",
@@ -234,29 +253,39 @@ public class counterBar extends JPanel {
                                         System.out.println("Serving food from: " + currentFoodPath);
 
                                         String bowlName = bowl.getName().toLowerCase();
-                                        boolean checker = true;
-                                        if (!noodle.equals("else")) {
-                                            checker = false;
-                                            if (bowlName.contains("wide") && noodle.equals("wide")) checker = true;
-                                            if (bowlName.contains("rice") && noodle.equals("rice")) checker = true;
-                                            if (bowlName.contains("thin") && noodle.equals("thin")) checker = true;
+                                        String targetNoodle = noodle.toLowerCase().trim();
+                                        String extractedNoodle = "";
+                                        if (bowlName.contains("wide")) {
+                                            extractedNoodle = "wide";
+                                        } else if (bowlName.contains("thin")) {
+                                            extractedNoodle = "thin";
+                                        } else if (bowlName.contains("rice")) {
+                                            extractedNoodle = "rice";
+                                        }
+                                        boolean checker = false;
+
+                                        System.out.println(extractedNoodle+" / "+targetNoodle);
+
+                                        if (targetNoodle.equals("else") || extractedNoodle.equals(targetNoodle)) {
+                                            checker = true;
                                         }
 
                                         if (currentFoodPath.equals(targetFoodPath) && checker) {
                                             System.out.println("Match! Customer satisfied.");
                                             SFXManager.play(SFX.SERVED);
-                                            // Remove Bowl
+
                                             remove(bowl);
                                             for (Component comp : getComponents()) {
                                                 if (comp instanceof JButton p && "Occupied".equals(p.getName())) {
                                                     p.setName("placemat");
                                                 }
                                             }
+
                                             revalidate();
                                             repaint();
-                                            cstPanel.removeCustomer(sectionIndex-1,cstPanel.getCustomerDataAt(sectionIndex - 1));
+                                            cstPanel.removeCustomer(sectionIndex - 1, cstPanel.getCustomerDataAt(sectionIndex - 1));
                                         } else {
-                                            System.out.println("Wrong order! Customer wanted: " + targetFoodPath);
+                                            System.out.println("Wrong! Wanted: " + targetNoodle + " | Got: " + bowlName);
                                             cstPanel.wrongOrder(sectionIndex - 1);
                                         }
 
@@ -339,6 +368,10 @@ public class counterBar extends JPanel {
 
         c.addMouseMotionListener(new MouseMotionAdapter() {
             public void mouseDragged(MouseEvent e) {
+                if ((e.getModifiersEx() & InputEvent.BUTTON1_DOWN_MASK) == 0) {
+                    c.setLocation(originalPos[0]);
+                    return;
+                }
                 int x = c.getX() + e.getX() - offset[0].x;
                 int y = c.getY() + e.getY() - offset[0].y;
                 c.setLocation(x, y);
@@ -374,21 +407,34 @@ public class counterBar extends JPanel {
         add(item);
         setComponentZOrder(item, 0);
 
-        MouseMotionListener teleportDrag = new MouseMotionAdapter() {
+        Window window = SwingUtilities.getWindowAncestor(this);
+        WindowFocusListener[] focusListener = new WindowFocusListener[1];
+
+        MouseAdapter teleportDrag = new MouseAdapter() {
             @Override
             public void mouseDragged(MouseEvent me) {
+                if ((me.getModifiersEx() & InputEvent.BUTTON1_DOWN_MASK) == 0) {
+                    if (window != null && focusListener[0] != null) {
+                        window.removeWindowFocusListener(focusListener[0]);
+                    }
+                    sourceBtn.removeMouseMotionListener(this);
+                    sourceBtn.removeMouseListener(this);
+                    remove(item);
+                    revalidate();
+                    repaint();
+                    return;
+                }
                 Point p = SwingUtilities.convertPoint(sourceBtn, me.getPoint(), sourceBtn.getParent());
                 item.setLocation(p.x - 60, p.y - 60);
                 repaint();
             }
-        };
 
-        sourceBtn.addMouseMotionListener(teleportDrag);
-
-        sourceBtn.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseReleased(MouseEvent me) {
-                sourceBtn.removeMouseMotionListener(teleportDrag);
+                if (window != null && focusListener[0] != null) {
+                    window.removeWindowFocusListener(focusListener[0]);
+                }
+                sourceBtn.removeMouseMotionListener(this);
                 sourceBtn.removeMouseListener(this);
                 Rectangle itemBounds = item.getBounds();
                 String itemName = item.getName();
@@ -408,9 +454,15 @@ public class counterBar extends JPanel {
                                 } else if ("yellowEgg".equals(itemName)) {
                                     imagePath = "resources/images/gamePlay/ingredients/noodles/blanchNoodles/takronoodle_yellow.png";
                                     newName = "takronoodle_yellow";
-                                } else if ("thinRice".equals(itemName) || "wideRice".equals(itemName) || "riceVermicelli".equals(itemName)) {
+                                } else if ("thinRice".equals(itemName)) {
                                     imagePath = "resources/images/gamePlay/ingredients/noodles/blanchNoodles/takronoodle_rice_thin_wide_vermicelli.png";
-                                    newName = "takronoodle_rice_thin_wide_vermicelli";
+                                    newName = "takronoodle_thin";
+                                } else if ("wideRice".equals(itemName)) {
+                                    imagePath = "resources/images/gamePlay/ingredients/noodles/blanchNoodles/takronoodle_rice_thin_wide_vermicelli.png";
+                                    newName = "takronoodle_wide";
+                                } else if ("riceVermicelli".equals(itemName)) {
+                                    imagePath = "resources/images/gamePlay/ingredients/noodles/blanchNoodles/takronoodle_rice_thin_wide_vermicelli.png";
+                                    newName = "takronoodle_rice";
                                 }
                                 // Apply changes only if a match was found
                                 if (imagePath != null) {
@@ -548,7 +600,25 @@ public class counterBar extends JPanel {
                 revalidate();
                 repaint();
             }
-        });
+        };
+
+        if (window != null) {
+            focusListener[0] = new WindowAdapter() {
+                @Override
+                public void windowLostFocus(WindowEvent we) {
+                    window.removeWindowFocusListener(this);
+                    sourceBtn.removeMouseMotionListener(teleportDrag);
+                    sourceBtn.removeMouseListener(teleportDrag);
+                    remove(item);
+                    revalidate();
+                    repaint();
+                }
+            };
+            window.addWindowFocusListener(focusListener[0]);
+        }
+
+        sourceBtn.addMouseMotionListener(teleportDrag);
+        sourceBtn.addMouseListener(teleportDrag);
 
         revalidate();
         repaint();
@@ -657,4 +727,3 @@ public class counterBar extends JPanel {
     }
 
 }
-

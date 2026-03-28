@@ -2,7 +2,6 @@ package utilities;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.image.BufferedImage;
 
 /**
  * Manages visual transitions for UI ui.components, specifically handling expansion and fade effects.
@@ -58,9 +57,9 @@ public class Transition {
         timer = new Timer(16, e -> {
             alpha -= speed;
             if (alpha <= 0) {
-                alpha = 0;
+                alpha = 0f;
                 target.setVisible(false);
-                timer.stop();
+                ((Timer) e.getSource()).stop(); // Safer timer stopping
             }
             updateBoundsAndIcon();
         });
@@ -76,7 +75,7 @@ public class Transition {
             currentSize += step;
             if (currentSize >= 2000) {
                 currentSize = 2000;
-                timer.stop();
+                ((Timer) e.getSource()).stop(); // Safer timer stopping
             }
             updateBoundsAndIcon();
         });
@@ -108,18 +107,34 @@ public class Transition {
      * @param src     The source image to transform.
      * @param size    The target width and height for the square icon.
      * @param opacity The transparency level (0.0f to 1.0f).
-     * @return A new {@link ImageIcon} with the applied transformations.
+     * @return A new {@link Icon} with the applied transformations.
      */
-    private ImageIcon createFadedIcon(Image src, int size, float opacity) {
-        BufferedImage buf = new BufferedImage(size, size, BufferedImage.TYPE_INT_ARGB);
-        Graphics2D g2 = buf.createGraphics();
+    private Icon createFadedIcon(Image src, int size, float opacity) {
+        return new Icon() {
+            @Override
+            public void paintIcon(Component c, Graphics g, int x, int y) {
+                Graphics2D g2 = (Graphics2D) g.create();
 
-        // Set transparency
-        g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, opacity));
-        g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+                // Safety clamp to ensure opacity never drops below 0.0 or above 1.0
+                float safeOpacity = Math.max(0.0f, Math.min(1.0f, opacity));
 
-        g2.drawImage(src, 0, 0, size, size, null);
-        g2.dispose();
-        return new ImageIcon(buf);
+                // Set transparency
+                g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, safeOpacity));
+                g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+
+                g2.drawImage(src, x, y, size, size, c);
+                g2.dispose();
+            }
+
+            @Override
+            public int getIconWidth() {
+                return size;
+            }
+
+            @Override
+            public int getIconHeight() {
+                return size;
+            }
+        };
     }
 }
