@@ -83,9 +83,6 @@ public class customerPanel extends JPanel {
     private void spawnNext() {
         if (queue.isEmpty()) return;
 
-        Font customFontzz = FontLoader.loadCustomFont("resources/font/SOV_BokThang.ttf");
-
-
         int emptyIndex = -1;
         for (int i = 0; i < slots.length; i++) {
             if (slots[i] == null) {
@@ -96,19 +93,11 @@ public class customerPanel extends JPanel {
         if (emptyIndex == -1) return;
 
         CustomerData d = queue.poll();
-        System.out.println(d.toString());
 
         JPanel bubblePanel = new JPanel();
-
         final int slotIndex = emptyIndex;
         customerComponent c = new customerComponent(
-                d,
-                d.imgPath,
-                d.patiencePath,
-                d.type,
-                d.skin,
-                d.life,
-                bubblePanel,
+                d, d.imgPath, d.patiencePath, d.type, d.skin, d.life, bubblePanel,
                 () -> removeCustomer(slotIndex, d)
         );
 
@@ -117,58 +106,21 @@ public class customerPanel extends JPanel {
 
         bubblePanel.setLayout(null);
         bubblePanel.setOpaque(false);
-        bubblePanel.setBounds(xs[emptyIndex] - 80, ys[emptyIndex] - 50, 120, 120);
-        playBubbleBounce(bubblePanel, xs[emptyIndex] - 80, ys[emptyIndex] - 50);
-
-        JLabel bubble = new JLabel(
-                IconImage.create("resources/images/gamePlay/customer/message.png", 140, 140)
-        );
-        bubble.setBounds(0, 0, 120, 120);
-
-        JLabel food = new JLabel();
-        food.setLayout(null);
-
-        boolean isSpecial = false;
-        String noodleText = "";
-
-        if (d.getNoodle() != null) {
-            String n = d.getNoodle();
-            if (n.equals("rice") || n.equals("wide") || n.equals("thin")) {
-                isSpecial = true;
-                if (n.equals("rice")) noodleText = "เส้นหมี่";
-                else if (n.equals("wide")) noodleText = "เส้นใหญ่";
-                else if (n.equals("thin")) noodleText = "เส้นเล็ก";
-            }
-        }
-
-        if (isSpecial) {
-            food.setBounds(20, 25, 80, 80);
-            food.setIcon(IconImage.create(d.foodPath, 80, 80));
-
-            CustomJLabel text = new CustomJLabel(noodleText, 3f);
-            text.setBounds(0, -5, 80, 30);
-            text.setHorizontalAlignment(SwingConstants.CENTER);
-            text.setFont(customFontzz.deriveFont(20f));
-            text.setTextColor(new Color(232, 205, 97));
-            text.setOutlineColor(new Color(89, 51, 14));
-            text.setOpaque(false);
-
-            food.add(text);
-        } else {
-            food.setBounds(25, 15, 76, 76);
-            food.setIcon(IconImage.create(d.foodPath, 76, 76));
-        }
-
-        bubblePanel.add(bubble);
-        bubblePanel.add(food);
-        bubblePanel.setComponentZOrder(food, 0);
-        bubblePanel.setComponentZOrder(bubble, 1);
+        bubblePanel.setBounds(xs[emptyIndex]-80, ys[emptyIndex]-50, 120, 120);
+        playBubbleBounce(bubblePanel, xs[emptyIndex]-80, ys[emptyIndex]-50);
 
         slots[emptyIndex] = c;
         add(c);
         add(bubblePanel);
 
         SFXManager.play(SFX.POP);
+
+        if (!queue.isEmpty()) {
+            new Timer(300 + (int)(Math.random()*700), e -> {
+                ((Timer)e.getSource()).stop();
+                spawnNext();
+            }).start();
+        }
     }
 
     public CustomerData getCustomerDataAt(int index) {
