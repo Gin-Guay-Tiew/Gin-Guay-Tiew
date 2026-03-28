@@ -20,7 +20,6 @@ public class CustomerMenu {
             folders.add("resources/images/gamePlay/ingredients/noodles/finishedNoodles/clearBroth/yellow/meatball");
             folders.add("resources/images/gamePlay/ingredients/noodles/finishedNoodles/clearBroth/yellow/no_addon.png");
         }
-
         if (levelID >= 2){
             folders.add("resources/images/gamePlay/ingredients/drinks/sprite");
             folders.add("resources/images/gamePlay/ingredients/noodles/finishedNoodles/yenTaFo/riceThinWideVermicelli/meatball&porkSlices");

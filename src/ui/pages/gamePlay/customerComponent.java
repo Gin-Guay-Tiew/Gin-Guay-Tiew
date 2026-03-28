@@ -42,6 +42,16 @@ public class customerComponent extends JPanel {
         add(imgLabel);
         add(patienceLabel);
 
+        this.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                System.out.println("Clicked: " + data); // debug
+
+                if (onClick != null) {
+                    onClick.run(); // เรียก removeCustomer()
+                }
+            }
+        });
     }
 
     public CustomerData getData() {
