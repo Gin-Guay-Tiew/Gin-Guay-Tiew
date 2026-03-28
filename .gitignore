@@ -1,8 +1,9 @@
 ### IntelliJ IDEA ###
 out/
-!**/src/main/**/out/
-!**/src/test/**/out/
-.kotlin
+.idea/workspace.xml
+.idea/usage.statistics.xml
+.idea/tasks.xml
+.idea/shelf/
 
 ### Eclipse ###
 .apt_generated
@@ -31,5 +32,3 @@ bin/
 
 ## Game Save Data ##
 saveData.dat
-/.idea/libraries
-Gin-Guay-Tiew.iml

@@ -1,0 +1,11 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Main" type="Application" factoryName="Application">
+    <option name="ALTERNATIVE_JRE_PATH" value="C:/Program Files/Java/jdk-21" />
+    <option name="MAIN_CLASS_NAME" value="main.Main" />
+    <module name="Gin-Guay-Tiew" />
+    <option name="VM_PARAMETERS" value="--module-path lib --add-modules javafx.controls,javafx.fxml,javafx.swing,javafx.media -Dprism.verbose=true" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>
