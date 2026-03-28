@@ -16,7 +16,6 @@ public class GameTutorialPage extends JPanel {
 
     private JLabel pageLabel;
 
-    // เรียกใช้งานชนิดข้อมูลเป็น Abstract Class
     private AbstractNavButton ArrowLeft;
     private AbstractNavButton ArrowRight;
 
@@ -50,7 +49,7 @@ public class GameTutorialPage extends JPanel {
                 "resources/images/Tutorial/ArrowInTutorial/ArrowLeft_Click.png",
                 btnWidth, btnHeight
         );
-        // เรียกใช้เมธอดที่รับค่าเป็น Abstract Class
+
         registerNavigationButton(ArrowLeft, 10, 232, () -> {
             if (currentPage > 1) {
                 currentPage--;
@@ -64,7 +63,7 @@ public class GameTutorialPage extends JPanel {
                 "resources/images/Tutorial/ArrowInTutorial/ArrowRight_Click.png",
                 btnWidth, 80
         );
-        // เรียกใช้เมธอดที่รับค่าเป็น Abstract Class
+
         registerNavigationButton(ArrowRight, 710, 232, () -> {
             if (currentPage < TOTAL_PAGES) {
                 currentPage++;
@@ -85,9 +84,6 @@ public class GameTutorialPage extends JPanel {
         updatePage();
     }
 
-    /**
-     * เมธอดรับค่า Parameter เป็น Abstract Class (AbstractNavButton)
-     */
     private void registerNavigationButton(AbstractNavButton navButton, int x, int y, Runnable action) {
         navButton.setBounds(x, y, btnWidth, btnHeight);
         navButton.setClickAction(action);
