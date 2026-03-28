@@ -4,6 +4,7 @@ import main.MainFrame;
 import ui.components.ImageJButton;
 import ui.components.PopupWindow;
 import utilities.IconImage;
+import utilities.SoundManager;
 
 import javax.swing.*;
 import java.awt.*;
@@ -95,6 +96,7 @@ public class PauseScreen extends JPanel {
             String[] btnLabels = {"Yes", "No"};
             ActionListener[] btnActions = {
                     ex -> {
+                        SoundManager.backToMenu();
                         mainFrame.getNavigator().toPage(MainFrame.MAIN_MENU, true);
                     },
                     null
