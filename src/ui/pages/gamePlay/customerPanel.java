@@ -240,7 +240,6 @@ public class customerPanel extends JPanel {
                 });
 
                 if (health <= 0){
-                    state.pauseGame();
                     state.gameWiner(false);
                     return;
                 }
