@@ -19,7 +19,6 @@ public class CustomerMenu {
             folders.add("resources/images/gamePlay/ingredients/noodles/finishedNoodles/clearBroth/riceThinWideVermicelli/no_addon.png");
             folders.add("resources/images/gamePlay/ingredients/noodles/finishedNoodles/clearBroth/yellow/meatball");
             folders.add("resources/images/gamePlay/ingredients/noodles/finishedNoodles/clearBroth/yellow/no_addon.png");
-
         }
 
         if (levelID >= 2){
