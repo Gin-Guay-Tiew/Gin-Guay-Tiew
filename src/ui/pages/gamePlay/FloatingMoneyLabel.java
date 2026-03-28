@@ -16,7 +16,7 @@ public class FloatingMoneyLabel extends CustomJLabel {
     private final Color outlineColor = new Color(0, 0, 0);
 
     private Color currentColor; // เก็บสีที่จะใช้แสดงผลจริง
-    private final Font jerseyFont = FontLoader.loadCustomFont("resources/font/Jersey10.ttf");
+    private final Font jerseyFont = FontLoader.loadCustomFont("/font/Jersey10.ttf");
 
     public FloatingMoneyLabel(String amount, int x, int y) {
         super(amount, 4.0f);

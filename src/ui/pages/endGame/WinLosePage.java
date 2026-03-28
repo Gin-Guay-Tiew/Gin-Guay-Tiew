@@ -11,7 +11,7 @@ import java.awt.*;
 
 public class WinLosePage extends JPanel {
 
-    private static final Font jerseyFont = FontLoader.loadCustomFont("resources/font/Jersey10.ttf");
+    private static final Font jerseyFont = FontLoader.loadCustomFont("/font/Jersey10.ttf");
     private MainFrame mainFrame;
 
     public WinLosePage(MainFrame mainFrame) {

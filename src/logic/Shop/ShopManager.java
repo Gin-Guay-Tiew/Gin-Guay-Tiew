@@ -57,19 +57,19 @@ public class ShopManager {
     public List<ShopItem> getItems() {
         List<ShopItem> items = new ArrayList<>();
 
-        items.add(new ShopItem("Thin rice noodles", 100, "resources/images/gamePlay/ingredients/noodles/category/thinRice/idle.png", 1));
-        items.add(new ShopItem("Wide rice noodles", 200, "resources/images/gamePlay/ingredients/noodles/category/wideRice/idle.png", 3));
-        items.add(new ShopItem("Green egg noodles", 250, "resources/images/gamePlay/ingredients/noodles/category/greenEgg/idle.png", 4));
-        items.add(new ShopItem("Rice vermicelli noodles", 150, "resources/images/gamePlay/ingredients/noodles/category/riceVermicelli/idle.png", 2));
-        items.add(new ShopItem("Yellow egg noodles", 100, "resources/images/gamePlay/ingredients/noodles/category/yellowEgg/idle.png", 1));
-        items.add(new ShopItem("Vegetable", 100, "resources/images/gamePlay/ingredients/vegetables/picked.png", 1));
-        items.add(new ShopItem("Cola", 100, "resources/images/gamePlay/ingredients/drinks/cola/cola.png", 1));
-        items.add(new ShopItem("Orange", 200, "resources/images/gamePlay/ingredients/drinks/orange/orange.png", 3));
-        items.add(new ShopItem("Sprite", 150, "resources/images/gamePlay/ingredients/drinks/sprite/sprite.png", 2));
-        items.add(new ShopItem("Kanom tuay", 250, "resources/images/gamePlay/ingredients/kanomTuay/idle.png", 4));
-        items.add(new ShopItem("Meatball", 100, "resources/images/gamePlay/ingredients/addOn/meatball/idle.png", 1));
-        items.add(new ShopItem("Pork rind", 300, "resources/images/gamePlay/ingredients/addOn/porkRind/idle.png", 5));
-        items.add(new ShopItem("Pork slices", 150, "resources/images/gamePlay/ingredients/addOn/porkSlices/idle.png", 2));
+        items.add(new ShopItem("Thin rice noodles", 100, "/images/gamePlay/ingredients/noodles/category/thinRice/idle.png", 1));
+        items.add(new ShopItem("Wide rice noodles", 200, "/images/gamePlay/ingredients/noodles/category/wideRice/idle.png", 3));
+        items.add(new ShopItem("Green egg noodles", 250, "/images/gamePlay/ingredients/noodles/category/greenEgg/idle.png", 4));
+        items.add(new ShopItem("Rice vermicelli noodles", 150, "/images/gamePlay/ingredients/noodles/category/riceVermicelli/idle.png", 2));
+        items.add(new ShopItem("Yellow egg noodles", 100, "/images/gamePlay/ingredients/noodles/category/yellowEgg/idle.png", 1));
+        items.add(new ShopItem("Vegetable", 100, "/images/gamePlay/ingredients/vegetables/picked.png", 1));
+        items.add(new ShopItem("Cola", 100, "/images/gamePlay/ingredients/drinks/cola/cola.png", 1));
+        items.add(new ShopItem("Orange", 200, "/images/gamePlay/ingredients/drinks/orange/orange.png", 3));
+        items.add(new ShopItem("Sprite", 150, "/images/gamePlay/ingredients/drinks/sprite/sprite.png", 2));
+        items.add(new ShopItem("Kanom tuay", 250, "/images/gamePlay/ingredients/kanomTuay/idle.png", 4));
+        items.add(new ShopItem("Meatball", 100, "/images/gamePlay/ingredients/addOn/meatball/idle.png", 1));
+        items.add(new ShopItem("Pork rind", 300, "/images/gamePlay/ingredients/addOn/porkRind/idle.png", 5));
+        items.add(new ShopItem("Pork slices", 150, "/images/gamePlay/ingredients/addOn/porkSlices/idle.png", 2));
 
         return items;
     }

@@ -14,13 +14,13 @@ public class TripleIcons extends JPanel {
         setLayout(new GridLayout(1,3));
         setBorder(BorderFactory.createEmptyBorder(0, 40, 135, 35));
 
-        ImageIcon img_1 = IconImage.create("resources/images/loadingScreen/randomIcon/"+this.GetRandom()+".png", 125, 125); // Icon for JLabel
+        ImageIcon img_1 = IconImage.create("/images/loadingScreen/randomIcon/"+this.GetRandom()+".png", 125, 125); // Icon for JLabel
         JLabel icon_1 = new JLabel(img_1);
 
-        ImageIcon img_2 = IconImage.create("resources/images/loadingScreen/randomIcon/"+this.GetRandom()+".png", 125, 125); // Icon for JLabel
+        ImageIcon img_2 = IconImage.create("/images/loadingScreen/randomIcon/"+this.GetRandom()+".png", 125, 125); // Icon for JLabel
         JLabel icon_2 = new JLabel(img_2);
 
-        ImageIcon img_3 = IconImage.create("resources/images/loadingScreen/randomIcon/"+this.GetRandom()+".png", 125, 125); // Icon for JLabel
+        ImageIcon img_3 = IconImage.create("/images/loadingScreen/randomIcon/"+this.GetRandom()+".png", 125, 125); // Icon for JLabel
         JLabel icon_3 = new JLabel(img_3);
 
         add(icon_1);

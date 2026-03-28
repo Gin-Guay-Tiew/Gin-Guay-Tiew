@@ -13,7 +13,7 @@ import java.awt.event.ActionListener;
 // modify add a time box into it
 public class TopBar extends JPanel {
 
-    private final Font loadedFont = FontLoader.loadCustomFont("resources/font/Jersey10.ttf");
+    private final Font loadedFont = FontLoader.loadCustomFont("/font/Jersey10.ttf");
     private TimeDisplay timeDisplay;
 
     public TopBar(MainFrame mainFrame) {

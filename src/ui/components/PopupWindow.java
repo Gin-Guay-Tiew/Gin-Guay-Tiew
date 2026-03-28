@@ -12,7 +12,7 @@ import java.awt.*;
 public class PopupWindow {
 
     private JDialog dialog;
-    private final Font loadedFont = FontLoader.loadCustomFont("resources/font/Jersey10.ttf");
+    private final Font loadedFont = FontLoader.loadCustomFont("/font/Jersey10.ttf");
 
     /* ===================== BACKGROUND PANEL ===================== */
     static class BackgroundPanel extends JPanel {
@@ -163,7 +163,7 @@ public class PopupWindow {
         for (int i = 0; i < buttonTexts.length; i++) {
             JButton btn;
             if (images == null || images[i] == null) {
-                btn = new ImageJButton("resources/images/shared/buttons/Yes", ".png", 30, 94, 37);
+                btn = new ImageJButton("/images/shared/buttons/Yes", ".png", 30, 94, 37);
             } else {
                 btn = new ImageJButton(images[i], ".png", 30, 94, 37);
             }

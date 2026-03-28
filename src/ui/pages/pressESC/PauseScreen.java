@@ -21,7 +21,7 @@ public class PauseScreen extends JPanel {
         setLayout(new GridBagLayout());
 
         // ================= Background =================
-        ImageIcon original = new ImageIcon("resources/images/shared/levelBackgrounds/Main_Dark.gif");
+        ImageIcon original = new ImageIcon(getClass().getResource("/images/shared/levelBackgrounds/Main_Dark.gif"));
         backgroundImage = original.getImage();
 
         // ================= Center Container =================
@@ -31,7 +31,7 @@ public class PauseScreen extends JPanel {
 
         // ================= Logo =================
         ImageIcon icon = IconImage.create(
-                "resources/images/mainMenu/LogoGame.png",
+                "/images/mainMenu/LogoGame.png",
                 280, 280
         );
 
@@ -43,15 +43,15 @@ public class PauseScreen extends JPanel {
 
         // ================= Buttons =================
         JButton resume = new ImageJButton(
-                "resources/images/endGame/BackToTheGame", ".png", 30, 250, 40
+                "/images/endGame/BackToTheGame", ".png", 30, 250, 40
         );
 
         JButton setting = new ImageJButton(
-                "resources/images/mainMenu/buttons/Settings", ".png", 30, 250, 40
+                "/images/mainMenu/buttons/Settings", ".png", 30, 250, 40
         );
 
         JButton menu = new ImageJButton(
-                "resources/images/endGame/backToMenu", ".png", 30, 250, 40
+                "/images/endGame/backToMenu", ".png", 30, 250, 40
         );
 
         resume.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -90,8 +90,8 @@ public class PauseScreen extends JPanel {
 
         menu.addActionListener(e -> {
             String[] btnPaths = {
-                    "resources/images/shared/buttons/Yes",
-                    "resources/images/shared/buttons/No"
+                    "/images/shared/buttons/Yes",
+                    "/images/shared/buttons/No"
             };
             String[] btnLabels = {"Yes", "No"};
             ActionListener[] btnActions = {
@@ -104,7 +104,7 @@ public class PauseScreen extends JPanel {
             pop.createPopup(
                     mainFrame,
                     "Are you sure you want to return?\nYour progress will not be saved.", // Message
-                    "resources/images/shared/popups/Demo.png", // Background Path
+                    "/images/shared/popups/Demo.png", // Background Path
                     btnPaths,
                     btnLabels,
                     btnActions

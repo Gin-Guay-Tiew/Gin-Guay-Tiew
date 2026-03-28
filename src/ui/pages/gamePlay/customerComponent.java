@@ -22,7 +22,7 @@ public class customerComponent extends JPanel {
         this.data = data;
         this.typeCustomer = type;
         Object[] results = setState(type);
-        pathImage = "resources/images/gamePlay/customer/"+type+"/"+skin;
+        pathImage = "/images/gamePlay/customer/"+type+"/"+skin;
         state_bored = (int) results[0];
         state_angry = (int) results[1];
         this.life = life;
@@ -32,7 +32,7 @@ public class customerComponent extends JPanel {
         setOpaque(false);
         setSize(197,240);
 
-        imgLabel = new JLabel(new ImageIcon(imgPath));
+        imgLabel = new JLabel(new ImageIcon(getClass().getResource(imgPath)));
         imgLabel.setBounds(0,0,160,240);
 
         patienceLabel = new JLabel();
@@ -77,11 +77,11 @@ public class customerComponent extends JPanel {
         if (life == state_bored){
             changeMoney();
             data.setMoney(money_bored);
-            imgLabel.setIcon( new ImageIcon(pathImage+"_bored.png"));
+            imgLabel.setIcon( new ImageIcon(getClass().getResource(pathImage+"_bored.png")));
         } else if (life == state_angry){
             changeMoney();
             data.setMoney(money_angry);
-            imgLabel.setIcon( new ImageIcon(pathImage+"_angry.png"));
+            imgLabel.setIcon( new ImageIcon(getClass().getResource(pathImage+"_angry.png")));
         }
     }
 

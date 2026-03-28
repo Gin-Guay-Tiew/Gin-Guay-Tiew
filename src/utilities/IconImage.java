@@ -2,6 +2,7 @@ package utilities;
 
 import javax.swing.*;
 import java.awt.*;
+import java.net.*;
 
 /**
  * Utility for creating and scaling ImageIcons.
@@ -16,11 +17,13 @@ public class IconImage {
      * @return A scaled {@link ImageIcon} object.
      */
     public static ImageIcon create(String path, int width, int height) {
-        ImageIcon icon = new ImageIcon(path);
+        URL resource = IconImage.class.getResource(path);
 
-        if (icon.getIconWidth() == -1) {
-            throw new RuntimeException("FILE NOT FOUND at: " + new java.io.File(path).getAbsolutePath());
+        if (resource == null) {
+            throw new RuntimeException("FILE NOT FOUND at: " + path);
         }
+
+        ImageIcon icon = new ImageIcon(resource);
 
         Image image = icon.getImage();
         Image newImg = image.getScaledInstance(width, height, Image.SCALE_SMOOTH);

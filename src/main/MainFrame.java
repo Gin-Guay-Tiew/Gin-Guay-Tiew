@@ -101,7 +101,7 @@ public class MainFrame extends JFrame implements WindowListener {
         addWindowListener(this);
         setLocationRelativeTo(null);
         setResizable(false);
-        ImageIcon img = new ImageIcon("resources/images/shared/AppIcon.png");
+        ImageIcon img = new ImageIcon(getClass().getResource("/images/shared/AppIcon.png"));
         setIconImage(img.getImage());
         this.playerData = utilities.DataManager.loadPlayerData();
         SoundManager.setVolume(playerData.getVolumeLv() / 100f);
@@ -111,7 +111,7 @@ public class MainFrame extends JFrame implements WindowListener {
         glass.setLayout(null);
         glass.setVisible(true);
 
-        ImageIcon transIcon = IconImage.create("resources/images/shared/Transition.png", 50, 50);
+        ImageIcon transIcon = IconImage.create("/images/shared/Transition.png", 50, 50);
         JButton transFrame = new JButton();
         transFrame.setIcon(transIcon);
         transFrame.setBorderPainted(false);
@@ -152,8 +152,8 @@ public class MainFrame extends JFrame implements WindowListener {
     @Override
     public void windowClosing(WindowEvent e) {
         String[] btnPaths = {
-                "resources/images/shared/buttons/Yes",
-                "resources/images/shared/buttons/No"
+                "/images/shared/buttons/Yes",
+                "/images/shared/buttons/No"
         };
         String[] btnLabels = {"Yes", "No"};
         ActionListener[] btnActions = {
@@ -163,7 +163,7 @@ public class MainFrame extends JFrame implements WindowListener {
         pop.createPopup(
                 this,
                 "Are you sure you want to leave the kitchen?", // Message
-                "resources/images/shared/popups/Demo.png", // Background Path
+                "/images/shared/popups/Demo.png", // Background Path
                 btnPaths,
                 btnLabels,
                 btnActions

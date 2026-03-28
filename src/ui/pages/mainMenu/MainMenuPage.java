@@ -20,7 +20,7 @@ public class MainMenuPage extends JPanel {
         setLayout(new GridBagLayout());
 
         // ================= Background =================
-        ImageIcon original = new ImageIcon("resources/images/mainMenu/Background.gif");
+        ImageIcon original = new ImageIcon(getClass().getResource("/images/mainMenu/Background.gif"));
         //ImageIcon newBackground = IconFilter.cloneDark(original, 100);
         backgroundImage = original.getImage();
 
@@ -31,7 +31,7 @@ public class MainMenuPage extends JPanel {
 
         // ================= Logo =================
         ImageIcon icon = IconImage.create(
-                "resources/images/mainMenu/LogoGame.png",
+                "/images/mainMenu/LogoGame.png",
                 280, 280
         );
 
@@ -42,11 +42,11 @@ public class MainMenuPage extends JPanel {
         centerContain.add(Box.createVerticalStrut(20));
 
         // ================= Buttons =================
-        JButton startGame = new ImageJButton("resources/images/mainMenu/buttons/StartGame", ".png", 30, 250, 40);
-        JButton tutorial = new ImageJButton("resources/images/mainMenu/buttons/Tutorial", ".png", 30, 250, 40);
-        JButton shop = new ImageJButton("resources/images/mainMenu/buttons/Shop", ".png", 30, 250, 40);
-        JButton setting = new ImageJButton("resources/images/mainMenu/buttons/Settings", ".png", 30, 250, 40);
-        JButton exit = new ImageJButton("resources/images/mainMenu/buttons/Exit", ".png", 30, 510, 40);
+        JButton startGame = new ImageJButton("/images/mainMenu/buttons/StartGame", ".png", 30, 250, 40);
+        JButton tutorial = new ImageJButton("/images/mainMenu/buttons/Tutorial", ".png", 30, 250, 40);
+        JButton shop = new ImageJButton("/images/mainMenu/buttons/Shop", ".png", 30, 250, 40);
+        JButton setting = new ImageJButton("/images/mainMenu/buttons/Settings", ".png", 30, 250, 40);
+        JButton exit = new ImageJButton("/images/mainMenu/buttons/Exit", ".png", 30, 510, 40);
 
         // ================= Row 1 =================
         JPanel row1 = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 0));

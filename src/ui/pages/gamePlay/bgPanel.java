@@ -17,7 +17,7 @@ public class bgPanel extends JPanel {
 
 
     public void setBackgroundImage(String path, int x, int y, int w, int h) {
-        this.bgImage = new ImageIcon(path).getImage();
+        this.bgImage = new ImageIcon(getClass().getResource(path)).getImage();
         this.x = x;
         this.y = y;
         this.width = w;

@@ -21,7 +21,7 @@ public class MainSettingPage extends JPanel {
     private JLabel images01;
     private Image backgroundImage;
     PopupWindow pop = new PopupWindow();
-    private final Font loadedFont = FontLoader.loadCustomFont("resources/font/Jersey10.ttf");
+    private final Font loadedFont = FontLoader.loadCustomFont("/font/Jersey10.ttf");
 
     public MainSettingPage(MainFrame frame, PlayerData playerData) {
 
@@ -31,7 +31,7 @@ public class MainSettingPage extends JPanel {
 
         JPanel main_container = new JPanel(new GridBagLayout());
         main_container.setOpaque(false);
-        this.backgroundImage = new ImageIcon("resources/images/settingMenu/Background.gif").getImage();
+        this.backgroundImage = new ImageIcon(getClass().getResource("/images/settingMenu/Background.gif")).getImage();
 
         GridBagConstraints gbc = new GridBagConstraints();
 
@@ -55,11 +55,11 @@ public class MainSettingPage extends JPanel {
         con_2.setMaximumSize(new Dimension(Integer.MAX_VALUE, 60));
         con_2.setAlignmentX(Component.LEFT_ALIGNMENT);
 
-        ImageIcon iconMusic = IconImage.create("resources/images/settingMenu/speaker.png", 45, 45);
-        ImageIcon iconMute = IconImage.create("resources/images/settingMenu/mute.png", 45, 45);
-        ImageIcon iconFX = IconImage.create("resources/images/settingMenu/sound_fx.png", 45, 45);
-        ImageIcon offIcon = IconImage.create("resources/images/settingMenu/off.png", 100, 45);
-        ImageIcon onIcon = IconImage.create("resources/images/settingMenu/on.png", 100, 45);
+        ImageIcon iconMusic = IconImage.create("/images/settingMenu/speaker.png", 45, 45);
+        ImageIcon iconMute = IconImage.create("/images/settingMenu/mute.png", 45, 45);
+        ImageIcon iconFX = IconImage.create("/images/settingMenu/sound_fx.png", 45, 45);
+        ImageIcon offIcon = IconImage.create("/images/settingMenu/off.png", 100, 45);
+        ImageIcon onIcon = IconImage.create("/images/settingMenu/on.png", 100, 45);
 
         images01 = new JLabel(playerData.getVolumeLv() == 0 ? iconMute : iconMusic);
         images01.setPreferredSize(new Dimension(50, 50));
@@ -73,7 +73,7 @@ public class MainSettingPage extends JPanel {
         slider.setOpaque(false);
         slider.setPreferredSize(new Dimension(200, 40));
 
-        Image thumbImg = IconImage.create("resources/images/settingMenu/thumb.png", 25, 25).getImage();
+        Image thumbImg = IconImage.create("/images/settingMenu/thumb.png", 25, 25).getImage();
         slider.setUI(new ModernSliderUI(slider, thumbImg));
 
         slider.addChangeListener(e -> {
@@ -129,12 +129,12 @@ public class MainSettingPage extends JPanel {
         gbc.anchor = GridBagConstraints.NORTH;
         main_container.add(container, gbc);
 
-        JButton resetBtn = new ImageJButton("resources/images/settingMenu/ResetGame", ".png", 30, 175, 30);
+        JButton resetBtn = new ImageJButton("/images/settingMenu/ResetGame", ".png", 30, 175, 30);
         resetBtn.addActionListener(e -> {
             // Create popUp
             String[] btnPaths = {
-                    "resources/images/shared/buttons/Yes",
-                    "resources/images/shared/buttons/No"
+                    "/images/shared/buttons/Yes",
+                    "/images/shared/buttons/No"
             };
             String[] btnLabels = {"Yes", "No"};
             ActionListener[] btnActions = {
@@ -158,7 +158,7 @@ public class MainSettingPage extends JPanel {
             pop.createPopup(
                     frame,
                     "WARNING!\n This will wipe all of your data.", // Message
-                    "resources/images/shared/popups/Warning.png", // Background Path
+                    "/images/shared/popups/Warning.png", // Background Path
                     btnPaths,
                     btnLabels,
                     btnActions

@@ -93,8 +93,8 @@ public class CustomerSetting {
 
             customer.add(new CustomerData(
                     level,
-                        "resources/images/gamePlay/customer/"+typeCustomer+"/"+skinCustomer+"_happy.png",
-                    "resources/images/gamePlay/customer/Time/"+timeSet+".gif",
+                        "/images/gamePlay/customer/"+typeCustomer+"/"+skinCustomer+"_happy.png",
+                    "/images/gamePlay/customer/Time/"+timeSet+".gif",
                     typeCustomer,
                     skinCustomer,
                     wantNoodle,

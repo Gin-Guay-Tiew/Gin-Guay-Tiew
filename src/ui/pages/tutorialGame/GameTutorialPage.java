@@ -24,7 +24,6 @@ public class GameTutorialPage extends JPanel {
 
     private Image backgroundImage;
     private Image backgroundImage_Two;
-    private Image panelFrameImage;
 
     private JButton backToMenuBtn;
 
@@ -33,9 +32,8 @@ public class GameTutorialPage extends JPanel {
         setLayout(null);
         setPreferredSize(new Dimension(800, 600));
 
-        backgroundImage = new ImageIcon("resources/images/mainMenu/Background.gif").getImage();
-        backgroundImage_Two = new ImageIcon("resources/images/Tutorial/BackGround_Tutorial.png").getImage();
-        panelFrameImage = new ImageIcon("resources/images/Tutorial/Frame.png").getImage();
+        backgroundImage = new ImageIcon(getClass().getResource("/images/mainMenu/Background.gif")).getImage();
+        backgroundImage_Two = new ImageIcon(getClass().getResource("/images/Tutorial/BackGround_Tutorial.png")).getImage();
 
         pageLabel = new JLabel();
         pageLabel.setBounds(100, 90, 600, 380);
@@ -44,9 +42,9 @@ public class GameTutorialPage extends JPanel {
         add(pageLabel);
 
         ArrowLeft = new ArrowButton(
-                "resources/images/Tutorial/ArrowInTutorial/ArrowLeft.png",
-                "resources/images/Tutorial/ArrowInTutorial/ArrowLeft_Hover.png",
-                "resources/images/Tutorial/ArrowInTutorial/ArrowLeft_Click.png",
+                "/images/Tutorial/ArrowInTutorial/ArrowLeft.png",
+                "/images/Tutorial/ArrowInTutorial/ArrowLeft_Hover.png",
+                "/images/Tutorial/ArrowInTutorial/ArrowLeft_Click.png",
                 btnWidth, btnHeight
         );
 
@@ -58,9 +56,9 @@ public class GameTutorialPage extends JPanel {
         });
 
         ArrowRight = new ArrowButton(
-                "resources/images/Tutorial/ArrowInTutorial/ArrowRight.png",
-                "resources/images/Tutorial/ArrowInTutorial/ArrowRight_Hover.png",
-                "resources/images/Tutorial/ArrowInTutorial/ArrowRight_Click.png",
+                "/images/Tutorial/ArrowInTutorial/ArrowRight.png",
+                "/images/Tutorial/ArrowInTutorial/ArrowRight_Hover.png",
+                "/images/Tutorial/ArrowInTutorial/ArrowRight_Click.png",
                 btnWidth, 80
         );
 
@@ -71,7 +69,7 @@ public class GameTutorialPage extends JPanel {
             }
         });
 
-        backToMenuBtn = new ImageJButton("resources/images/endGame/backToMenu", ".png", 30, 250, 40);
+        backToMenuBtn = new ImageJButton("/images/endGame/backToMenu", ".png", 30, 250, 40);
         backToMenuBtn.setBounds(275, 500, 250, 40);
         add(backToMenuBtn);
         backToMenuBtn.addActionListener(new ActionListener() {
@@ -91,8 +89,8 @@ public class GameTutorialPage extends JPanel {
     }
 
     private void updatePage() {
-        String pagePath = "resources/images/Tutorial/Tutorial_Page/Tutorial_page " + currentPage + ".png";
-        ImageIcon icon = new ImageIcon(pagePath);
+        String pagePath = "/images/Tutorial/Tutorial_Page/Tutorial_page " + currentPage + ".png";
+        ImageIcon icon = new ImageIcon(getClass().getResource(pagePath));
 
         Image scaled = icon.getImage().getScaledInstance(
                 pageLabel.getWidth(),
@@ -117,10 +115,6 @@ public class GameTutorialPage extends JPanel {
 
         if (backgroundImage_Two != null) {
             g.drawImage(backgroundImage_Two, 0, 0, getWidth(), getHeight(), this);
-        }
-
-        if (panelFrameImage != null) {
-            g.drawImage(panelFrameImage, 39, 29, 575, 362, this);
         }
     }
 }

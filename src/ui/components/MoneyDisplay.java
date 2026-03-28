@@ -9,7 +9,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class MoneyDisplay extends JPanel {
-    private final Font jerseyFont = FontLoader.loadCustomFont("resources/font/Jersey10.ttf");
+    private final Font jerseyFont = FontLoader.loadCustomFont("/font/Jersey10.ttf");
     private CustomJLabel moneyAmount;
     private PlayerData data;
 
@@ -25,7 +25,7 @@ public class MoneyDisplay extends JPanel {
 
         // MoneyLabel
         JLabel moneyLabel = new JLabel("Money");
-        ImageIcon icon = IconImage.create("resources/images/shared/Money.png", 20, 20); // Icon for JLabel
+        ImageIcon icon = IconImage.create("/images/shared/Money.png", 20, 20); // Icon for JLabel
         moneyLabel.setFont(jerseyFont.deriveFont(17f));
         moneyLabel.setIcon(icon);
         moneyLabel.setVerticalAlignment(JLabel.CENTER);
@@ -60,7 +60,7 @@ public class MoneyDisplay extends JPanel {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        g.drawImage(new ImageIcon("resources/images/shared/SignFrame.png").getImage(), 0, 0, getWidth(), getHeight(), this);
+        g.drawImage(new ImageIcon(getClass().getResource("/images/shared/SignFrame.png")).getImage(), 0, 0, getWidth(), getHeight(), this);
     }
 
 }

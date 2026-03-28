@@ -11,7 +11,7 @@ public class LoadingPage extends JLayeredPane {
 
     public LoadingPage(String SelectedLevel) {
 
-        this.bgImage = new ImageIcon("resources/images/shared/levelBackgrounds/" + SelectedLevel + ".gif").getImage();
+        this.bgImage = new ImageIcon(getClass().getResource("/images/shared/levelBackgrounds/" + SelectedLevel + ".gif")).getImage();
 
         setLayout(new OverlayLayout(this));
 
@@ -19,7 +19,7 @@ public class LoadingPage extends JLayeredPane {
             @Override
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
-                Image frameImg = new ImageIcon("resources/images/loadingScreen/Frame.png").getImage();
+                Image frameImg = new ImageIcon(getClass().getResource("/images/loadingScreen/Frame.png")).getImage();
                 g.drawImage(frameImg, 0, 0, getWidth(), getHeight(), this);
             }
         };

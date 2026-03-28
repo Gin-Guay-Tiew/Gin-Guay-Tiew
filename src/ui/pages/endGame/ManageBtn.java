@@ -15,7 +15,7 @@ import java.awt.event.ActionListener;
 
 public class ManageBtn extends JPanel implements ActionListener {
     private MainFrame mainFrame;
-    private final Font jerseyFont = FontLoader.loadCustomFont("resources/font/Jersey10.ttf");
+    private final Font jerseyFont = FontLoader.loadCustomFont("/font/Jersey10.ttf");
     private JButton backBtn, playAgainBtn, shopBtn;
 
     public ManageBtn(MainFrame mainFrame) {
@@ -26,9 +26,9 @@ public class ManageBtn extends JPanel implements ActionListener {
 
         // ================= Button Images =================
 
-        backBtn = new ImageJButton("resources/images/endGame/backToMenu",".png", 30, 250, 40);
-        playAgainBtn = new ImageJButton("resources/images/endGame/playAgain", ".png", 30, 250, 40);
-        shopBtn = new ImageJButton("resources/images/endGame/shop", ".png", 30, 250, 40);
+        backBtn = new ImageJButton("/images/endGame/backToMenu",".png", 30, 250, 40);
+        playAgainBtn = new ImageJButton("/images/endGame/playAgain", ".png", 30, 250, 40);
+        shopBtn = new ImageJButton("/images/endGame/shop", ".png", 30, 250, 40);
 
         add(backBtn);
         add(playAgainBtn);

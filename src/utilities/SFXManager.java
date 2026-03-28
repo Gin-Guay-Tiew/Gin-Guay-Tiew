@@ -4,7 +4,7 @@ import javafx.embed.swing.JFXPanel;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 
-import java.io.File;
+import java.net.URL;
 
 public class SFXManager {
 
@@ -22,11 +22,11 @@ public class SFXManager {
 
         try {
 
-            File file = new File(path);
+            URL url = SFXManager.class.getResource(path);
 
-            System.out.println("LOOKING FOR: " + file.getAbsolutePath());
+            System.out.println("LOOKING FOR: " + path);
 
-            if (!file.exists()) {
+            if (url == null) {
                 System.out.println("❌ SFX NOT FOUND: " + path);
                 return;
             }
@@ -43,7 +43,7 @@ public class SFXManager {
                 );
             }
 
-            Media media = new Media(file.toURI().toString());
+            Media media = new Media(url.toExternalForm());
             MediaPlayer player = new MediaPlayer(media);
 
             player.setVolume(volume * MASTER_VOLUME);

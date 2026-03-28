@@ -1,0 +1,11 @@
+<component name="ArtifactManager">
+  <artifact name="Gin-Guay-Tiew:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/Gin_Guay_Tiew_jar</output-path>
+    <root id="root">
+      <element id="archive" name="Gin-Guay-Tiew.jar">
+        <element id="module-output" name="Gin-Guay-Tiew" />
+      </element>
+      <element id="library" level="project" name="lib" />
+    </root>
+  </artifact>
+</component>

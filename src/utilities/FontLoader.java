@@ -1,36 +1,39 @@
 package utilities;
 
 import java.awt.*;
-import java.io.File;
-import java.io.IOException;
+import java.io.InputStream;
 
 /**
- * Utility class for loading and registering external font files.
+ * Utility class for loading and registering fonts from resources (JAR-safe).
  */
 public class FontLoader {
 
     /**
-     * Loads a custom font from the specified file path
-     * Usage Example:
-     * <pre>
-     * Font jerseyFont = CustomFontLoader.loadCustomFont("resources/font/Jersey10.ttf");
-     * myLabel.setFont(jerseyFont.deriveFont(32f));
-     * </pre>
+     * Loads a custom font from resources folder.
      *
-     * @param fontFileName The relative or absolute path to the .ttf font file.
-     * @return A {@link Font} object with a default size of 16pt.
-     * Returns a plain "Arial" font if loading fails.
+     * Example:
+     * Font font = FontLoader.loadCustomFont("/font/Jersey10.ttf", 32f);
+     *
+     * @param path Path inside resources (must start with '/')
+     * @param size Font size
+     * @return Font object, fallback to Arial if failed
      */
-    public static Font loadCustomFont(String fontFileName) {
+    public static Font loadCustomFont(String path) {
         try {
-            Font customFont = Font.createFont(Font.TRUETYPE_FONT, new File(fontFileName));
+            InputStream is = FontLoader.class.getResourceAsStream(path);
+
+            if (is == null) {
+                throw new RuntimeException("Font not found: " + path);
+            }
+
+            Font font = Font.createFont(Font.TRUETYPE_FONT, is);
 
             GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-            ge.registerFont(customFont);
+            ge.registerFont(font);
 
-            return customFont.deriveFont(16f);
+            return font.deriveFont(16f);
 
-        } catch (IOException | FontFormatException e) {
+        } catch (Exception e) {
             System.err.println("Error loading custom font: " + e.getMessage());
             return new Font("Arial", Font.PLAIN, 16);
         }

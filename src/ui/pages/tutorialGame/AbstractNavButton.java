@@ -19,9 +19,9 @@ public abstract class AbstractNavButton extends JLabel {
 
     public AbstractNavButton(String normalPath, String hoverPath, String clickPath, int width, int height) {
         // โหลดรูปต้นฉบับ
-        ImageIcon tempNormal = new ImageIcon(normalPath);
-        ImageIcon tempHover = new ImageIcon(hoverPath);
-        ImageIcon tempClick = new ImageIcon(clickPath);
+        ImageIcon tempNormal = new ImageIcon(getClass().getResource(normalPath));
+        ImageIcon tempHover = new ImageIcon(getClass().getResource(hoverPath));
+        ImageIcon tempClick = new ImageIcon(getClass().getResource(clickPath));
 
         // ปรับขนาดรูปภาพ
         Image imgNormal = tempNormal.getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH);

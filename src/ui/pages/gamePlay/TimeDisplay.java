@@ -8,7 +8,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class TimeDisplay extends JPanel {
-    private final Font jerseyFont = FontLoader.loadCustomFont("resources/font/Jersey10.ttf");
+    private final Font jerseyFont = FontLoader.loadCustomFont("/font/Jersey10.ttf");
     private CustomJLabel minLabel;
     private CustomJLabel secLabel;
     private CustomJLabel colonLabel;
@@ -63,7 +63,7 @@ public class TimeDisplay extends JPanel {
         livesValueLabel.setTextColor(new Color(255, 50, 50));
         livesValueLabel.setBorder(BorderFactory.createEmptyBorder(0, 5, 0, 1));
 
-        heartIcon = new JLabel(IconImage.create("resources/images/shared/Heart.png", 20, 20));
+        heartIcon = new JLabel(IconImage.create("/images/shared/Heart.png", 20, 20));
         heartIcon.setBorder(BorderFactory.createEmptyBorder(0, 1, 0, 1));
 
         livesPanel.add(livesValueLabel);

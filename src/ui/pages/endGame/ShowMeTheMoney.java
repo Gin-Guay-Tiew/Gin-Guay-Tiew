@@ -11,7 +11,7 @@ import java.awt.*;
 
 public class ShowMeTheMoney extends JPanel {
     private MainFrame mainFrame;
-    private final Font jerseyFont = FontLoader.loadCustomFont("resources/font/Jersey10.ttf");
+    private final Font jerseyFont = FontLoader.loadCustomFont("/font/Jersey10.ttf");
 
     private JPanel OrderPanel, TotalPanel;
     private CustomJLabel Total;
@@ -26,8 +26,8 @@ public class ShowMeTheMoney extends JPanel {
         setOpaque(false);
         setBorder(new EmptyBorder(25, 120, 25, 120));
 
-        ImageIcon mainBg = IconImage.create("resources/images/shared/popups/Demo.png", 200, 200);
-        ImageIcon fieldBg = IconImage.create("resources/images/shared/popups/Shop.png", 100, 100);
+        ImageIcon mainBg = IconImage.create("/images/shared/popups/Demo.png", 200, 200);
+        ImageIcon fieldBg = IconImage.create("/images/shared/popups/Shop.png", 100, 100);
 
         // --- ส่วนบน: รายละเอียดเงิน ---
         OrderPanel = new NineSlicePanel(mainBg.getImage(), 30);

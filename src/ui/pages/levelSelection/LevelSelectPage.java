@@ -12,14 +12,14 @@ public class LevelSelectPage extends JPanel {
     public LevelSelectPage(MainFrame mainFrame) {
         setLayout(new BorderLayout());
         setOpaque(true);
-        this.backgroundImage = new ImageIcon("resources/images/levelSelection/Background.png").getImage();
+        this.backgroundImage = new ImageIcon(getClass().getResource("/images/levelSelection/Background.png")).getImage();
         add(new TopBar(mainFrame), BorderLayout.NORTH);
         add(new LevelsDisplay(mainFrame, this), BorderLayout.CENTER);
     }
 
     public void changeBg(String imagePath) {
-        ImageIcon newIcon = new ImageIcon(imagePath);
-        if (!imagePath.equals("resources/images/levelSelection/Background.png")) {
+        ImageIcon newIcon = new ImageIcon(getClass().getResource(imagePath));
+        if (!imagePath.equals("/images/levelSelection/Background.png")) {
             newIcon = setOpacity(newIcon, 0.5f);
         }
         this.backgroundImage = newIcon.getImage();

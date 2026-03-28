@@ -21,7 +21,7 @@ public class TipsLabel extends JPanel {
     };
     private final Timer tipTimer;
     private final Random random = new Random();
-    Font jersyFont = FontLoader.loadCustomFont("resources/font/Jersey10.ttf");
+    Font jersyFont = FontLoader.loadCustomFont("/font/Jersey10.ttf");
 
     public TipsLabel() {
         setLayout(new BorderLayout());
@@ -44,7 +44,7 @@ public class TipsLabel extends JPanel {
         loadLabel.setFont(jersyFont.deriveFont(32f));
         loadLabel.setHorizontalTextPosition(SwingConstants.LEFT);
         loadLabel.setHorizontalAlignment(SwingConstants.RIGHT);
-        loadLabel.setIcon(new ImageIcon("resources/images/loadingScreen/Loading.gif"));
+        loadLabel.setIcon(new ImageIcon(getClass().getResource("/images/loadingScreen/Loading.gif")));
 
         add(tipsPanel, BorderLayout.NORTH);
         add(loadLabel, BorderLayout.SOUTH);

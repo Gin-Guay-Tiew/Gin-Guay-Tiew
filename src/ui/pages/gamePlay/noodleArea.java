@@ -27,6 +27,6 @@ public class noodleArea extends JPanel {
 
     // method for dynamic noodles pic
     public void setNoodlesImage(String imagePath){
-        noodleBtn.setIcon(new ImageIcon(imagePath));
+        noodleBtn.setIcon(new ImageIcon(getClass().getResource((imagePath))));
     }
 }

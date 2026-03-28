@@ -74,7 +74,7 @@ public class ShopScreen extends JPanel {
         this.controller = gm;
 
         // Setup Main Background
-        ImageIcon newBg = new ImageIcon("resources/images/shared/levelBackgrounds/Level3.png");
+        ImageIcon newBg = new ImageIcon(getClass().getResource("/images/shared/levelBackgrounds/Level3.png"));
         newBg = setOpacity(newBg, 0.5f);
         this.backgroundImage = newBg.getImage();
 
@@ -171,16 +171,16 @@ public class ShopScreen extends JPanel {
                     pLabel.setText("Locked");
                     pLabel.setTextColor(new Color(184, 184, 184));
                     pLabel.setOutlineColor(new Color(67, 67, 67));
-                    btn.setImage("resources/images/shared/buttons/lockedBuy", ".png", 75, 30);
+                    btn.setImage("/images/shared/buttons/lockedBuy", ".png", 75, 30);
                 } else {
                     pLabel.setText(item.getPrice() + " N");
                     pLabel.setTextColor(new Color(230, 181, 42));
                     pLabel.setOutlineColor(new Color(115, 51, 12));
 
                     if (money < item.getPrice()) {
-                        btn.setImage("resources/images/shared/buttons/noMoneyBuy", ".png", 75, 30);
+                        btn.setImage("/images/shared/buttons/noMoneyBuy", ".png", 75, 30);
                     } else {
-                        btn.setImage("resources/images/shared/buttons/canBuy", ".png", 75, 30);
+                        btn.setImage("/images/shared/buttons/canBuy", ".png", 75, 30);
                     }
                 }
             }
@@ -188,7 +188,7 @@ public class ShopScreen extends JPanel {
     }
 
     private JPanel createItemCard(ShopItem item) {
-        ImageIcon cardBgIcon = IconImage.create("resources/images/shared/popups/Shop.png", 100, 100);
+        ImageIcon cardBgIcon = IconImage.create("/images/shared/popups/Shop.png", 100, 100);
         BackgroundPanel card = new BackgroundPanel(cardBgIcon, 30);
         card.setPreferredSize(new Dimension(320, 100));
         card.setBorder(BorderFactory.createEmptyBorder(10, 5, 10, 15));
@@ -225,7 +225,7 @@ public class ShopScreen extends JPanel {
         infoPanel.setLayout(new BoxLayout(infoPanel, BoxLayout.Y_AXIS));
         infoPanel.setOpaque(false);
 
-        Font jerseyFont = utilities.FontLoader.loadCustomFont("resources/font/Jersey10.ttf");
+        Font jerseyFont = utilities.FontLoader.loadCustomFont("/font/Jersey10.ttf");
         String rawName = item.getName();
         String displayName = (rawName.length() > 13) ? rawName.substring(0, 12).trim() + ".." : rawName;
 
@@ -253,7 +253,7 @@ public class ShopScreen extends JPanel {
         items.add(item);
 
         // Buy Button
-        ImageJButton buyBtn = new ImageJButton("resources/images/shared/buttons/canBuy", ".png", 25, 75, 30);
+        ImageJButton buyBtn = new ImageJButton("/images/shared/buttons/canBuy", ".png", 25, 75, 30);
         buyButtons.add(buyBtn);
 
         buyBtn.addActionListener(e -> {
@@ -293,8 +293,8 @@ public class ShopScreen extends JPanel {
         new PopupWindow().createPopup(
                 controller.getMainFrame(),
                 text,
-                "resources/images/shared/popups/Demo.png",
-                new String[]{"resources/images/shared/buttons/Ok"},
+                "/images/shared/popups/Demo.png",
+                new String[]{"/images/shared/buttons/Ok"},
                 new String[]{"Ok"},
                 new ActionListener[]{
                         ex -> ((Window) SwingUtilities.getWindowAncestor((Component) ex.getSource())).dispose()

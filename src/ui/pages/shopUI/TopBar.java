@@ -11,7 +11,7 @@ import java.awt.*;
 
 public class TopBar extends JPanel {
 
-    private final Font loadedFont = FontLoader.loadCustomFont("resources/font/Jersey10.ttf");
+    private final Font loadedFont = FontLoader.loadCustomFont("/font/Jersey10.ttf");
 
     public TopBar(MainFrame mainFrame) {
 

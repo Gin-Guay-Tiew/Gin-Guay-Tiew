@@ -29,8 +29,8 @@ public class MainBtn implements ActionListener {
 
         if (e.getActionCommand().equals("Tutorial")) {
             String[] btnPaths = {
-                    "resources/images/shared/buttons/Yes",
-                    "resources/images/shared/buttons/No"
+                    "/images/shared/buttons/Yes",
+                    "/images/shared/buttons/No"
             };
             String[] btnLabels = {"Yes", "No"};
             ActionListener[] btnActions = {
@@ -43,7 +43,7 @@ public class MainBtn implements ActionListener {
             pop.createPopup(
                     frame,
                     "Do you want to see the tutorial?",
-                    "resources/images/shared/popups/Demo.png",
+                    "/images/shared/popups/Demo.png",
                     btnPaths,
                     btnLabels,
                     btnActions
@@ -62,8 +62,8 @@ public class MainBtn implements ActionListener {
 
         if (e.getActionCommand().equals("Exit")) {
             String[] btnPaths = {
-                    "resources/images/shared/buttons/Yes",
-                    "resources/images/shared/buttons/No"
+                    "/images/shared/buttons/Yes",
+                    "/images/shared/buttons/No"
             };
             String[] btnLabels = {"Yes", "No"};
             ActionListener[] btnActions = {
@@ -78,7 +78,7 @@ public class MainBtn implements ActionListener {
             pop.createPopup(
                     frame,
                     "Are you sure you want to leave the kitchen?",
-                    "resources/images/shared/popups/Demo.png",
+                    "/images/shared/popups/Demo.png",
                     btnPaths,
                     btnLabels,
                     btnActions

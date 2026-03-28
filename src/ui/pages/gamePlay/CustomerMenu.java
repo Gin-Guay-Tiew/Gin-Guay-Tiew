@@ -7,7 +7,7 @@ import java.util.List;
 public class CustomerMenu {
 
     private static void addNoodlePaths(List<String> folders, String broth, String noodle, boolean hasMeatball, boolean hasPorkSlices, boolean hasPorkRind) {
-        String base = "resources/images/gamePlay/ingredients/noodles/finishedNoodles/" + broth + "/" + noodle + "/";
+        String base = "/images/gamePlay/ingredients/noodles/finishedNoodles/" + broth + "/" + noodle + "/";
 
         folders.add(base + "no_addon.png");
 
@@ -25,10 +25,10 @@ public class CustomerMenu {
     public static List<String> CustomerMenu(int levelID) {
         List<String> folders = new ArrayList<>();
 
-        if (levelID >= 1) folders.add("resources/images/gamePlay/ingredients/drinks/cola");
-        if (levelID >= 2) folders.add("resources/images/gamePlay/ingredients/drinks/sprite");
-        if (levelID >= 3) folders.add("resources/images/gamePlay/ingredients/drinks/orange");
-        if (levelID >= 4) folders.add("resources/images/gamePlay/ingredients/kanomTuay/picked.png");
+        if (levelID >= 1) folders.add("/images/gamePlay/ingredients/drinks/cola");
+        if (levelID >= 2) folders.add("/images/gamePlay/ingredients/drinks/sprite");
+        if (levelID >= 3) folders.add("/images/gamePlay/ingredients/drinks/orange");
+        if (levelID >= 4) folders.add("/images/gamePlay/ingredients/kanomTuay/picked.png");
 
         boolean m = levelID >= 1;
         boolean s = levelID >= 2;

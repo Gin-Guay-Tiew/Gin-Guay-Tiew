@@ -19,7 +19,7 @@ public class counterBar extends JPanel {
         //set layout
         setLayout(null);// ให้มันกำหนดตำแหน่งจาก figma ได้เลย เลยตั้งค่าเป็น null
         setOpaque(false);
-        counterBarimage = new ImageIcon("resources/images/gamePlay/counter/counter_bar.png").getImage();
+        counterBarimage = new ImageIcon(getClass().getResource("/images/gamePlay/counter/counter_bar.png")).getImage();
         this.cstPanel = cstPanel;
     }
 
@@ -32,7 +32,7 @@ public class counterBar extends JPanel {
             if (s.getIconPath() != null) {
                 icon = IconImage.create(s.getIconPath(), s.getWidth(), s.getHeight());
             }else{
-                icon = new ImageIcon(s.getIconPath());
+                icon = new ImageIcon("");
             }
             JButton btn = new JButton(icon);
             btn.setBounds(s.getX(), s.getY()+yOffset, s.getWidth(), s.getHeight());
@@ -136,16 +136,16 @@ public class counterBar extends JPanel {
 
                                     SFXManager.play(SFX.PICK_MATERIAL);
                                     // Update the Takro (the item being dragged)
-                                    takro.setIcon(new ImageIcon("resources/images/gamePlay/aquiment/takronoodle.png"));
+                                    takro.setIcon(new ImageIcon(getClass().getResource("/images/gamePlay/aquiment/takronoodle.png")));
                                     takro.setName("takronoodle");
                                     // Define animation frames for the pot
                                     String[] boilingFrames = {
-                                            "resources/images/gamePlay/ingredients/noodles/boilingPot/boiling1.png",
-                                            "resources/images/gamePlay/ingredients/noodles/boilingPot/boiling2.png"
+                                            "/images/gamePlay/ingredients/noodles/boilingPot/boiling1.png",
+                                            "/images/gamePlay/ingredients/noodles/boilingPot/boiling2.png"
                                     };
                                     btn.setName("pot_boiling");
                                     // Create and add the progress indicator
-                                    ImageIcon gifIcon = new ImageIcon("resources/images/gamePlay/ingredients/noodles/boilingPot/boilingProgress/progress_animation.GIF");
+                                    ImageIcon gifIcon = new ImageIcon(getClass().getResource("/images/gamePlay/ingredients/noodles/boilingPot/boilingProgress/progress_animation.GIF"));
                                     JButton progress = new JButton(gifIcon);
                                     // me when image flush exist
                                     gifIcon.getImage().flush();
@@ -181,7 +181,7 @@ public class counterBar extends JPanel {
                                             delayTimer.start();
 
                                             btn.setName("pot");
-                                            btn.setIcon(IconImage.create("resources/images/gamePlay/ingredients/noodles/boilingPot/not_boiling.png", 380, 380));
+                                            btn.setIcon(IconImage.create("/images/gamePlay/ingredients/noodles/boilingPot/not_boiling.png", 380, 380));
                                             revalidate();
                                             repaint();
                                             for (Component comp : getComponents()) {
@@ -191,35 +191,35 @@ public class counterBar extends JPanel {
                                                             if (itemName.contains("green")){
                                                                 updateBowlVisual(
                                                                         bowl,
-                                                                        "resources/images/gamePlay/ingredients/noodles/finishedNoodles/justNoodle/greenEgg.png",
+                                                                        "/images/gamePlay/ingredients/noodles/finishedNoodles/justNoodle/greenEgg.png",
                                                                         "bowl_noodle_greenEgg"
                                                                 );
                                                                 enableDrag(bowl);
                                                             }else if (itemName.contains("yellow")){
                                                                 updateBowlVisual(
                                                                         bowl,
-                                                                        "resources/images/gamePlay/ingredients/noodles/finishedNoodles/justNoodle/yellow.png",
+                                                                        "/images/gamePlay/ingredients/noodles/finishedNoodles/justNoodle/yellow.png",
                                                                         "bowl_noodle_yellow"
                                                                 );
                                                                 enableDrag(bowl);
                                                             }else if (itemName.contains("wide")){
                                                                 updateBowlVisual(
                                                                         bowl,
-                                                                        "resources/images/gamePlay/ingredients/noodles/finishedNoodles/justNoodle/riceThinWideVermicelli.png",
+                                                                        "/images/gamePlay/ingredients/noodles/finishedNoodles/justNoodle/riceThinWideVermicelli.png",
                                                                         "bowl_noodle_wide"
                                                                 );
                                                                 enableDrag(bowl);
                                                             }else if (itemName.contains("rice")){
                                                                 updateBowlVisual(
                                                                         bowl,
-                                                                        "resources/images/gamePlay/ingredients/noodles/finishedNoodles/justNoodle/riceThinWideVermicelli.png",
+                                                                        "/images/gamePlay/ingredients/noodles/finishedNoodles/justNoodle/riceThinWideVermicelli.png",
                                                                         "bowl_noodle_rice"
                                                                 );
                                                                 enableDrag(bowl);
                                                             } else if (itemName.contains("thin")){
                                                                 updateBowlVisual(
                                                                         bowl,
-                                                                        "resources/images/gamePlay/ingredients/noodles/finishedNoodles/justNoodle/riceThinWideVermicelli.png",
+                                                                        "/images/gamePlay/ingredients/noodles/finishedNoodles/justNoodle/riceThinWideVermicelli.png",
                                                                         "bowl_noodle_thin"
                                                                 );
                                                                 enableDrag(bowl);
@@ -298,12 +298,12 @@ public class counterBar extends JPanel {
                                     SFXManager.play(SFX.THROW);
                                     updateBowlVisual(
                                             bowl,
-                                            "resources/images/gamePlay/bowl/empty.png",
+                                            "/images/gamePlay/bowl/empty.png",
                                             "bowl_empty"
                                     );
                                     disableDrag(bowl);
                                     if (btn.getName().equals("trash")){
-                                        btn.setIcon(new ImageIcon("resources/images/gamePlay/binn/trash.png"));
+                                        btn.setIcon(new ImageIcon(getClass().getResource("/images/gamePlay/binn/trash.png")));
                                         //she so perfect bah bah
                                         //the + 5 is so on point
                                         btn.setBounds(btn.getX(),btn.getY() + 5, 162, 68);
@@ -337,9 +337,9 @@ public class counterBar extends JPanel {
                                             if (!noodleType.isEmpty()) {
                                                 try {
                                                     // Construct path: clearBroth -> [noodleType] -> no_addon.png
-                                                    String actualPath = "resources/images/gamePlay/ingredients/noodles/finishedNoodles/clearBroth/" + noodleType + "/no_addon.png";
+                                                    String actualPath = "/images/gamePlay/ingredients/noodles/finishedNoodles/clearBroth/" + noodleType + "/no_addon.png";
                                                     if (isRiceThinWideVermicelli) {
-                                                        actualPath = "resources/images/gamePlay/ingredients/noodles/finishedNoodles/clearBroth/riceThinWideVermicelli/no_addon.png";
+                                                        actualPath = "/images/gamePlay/ingredients/noodles/finishedNoodles/clearBroth/riceThinWideVermicelli/no_addon.png";
                                                     }
                                                     updateBowlVisual(
                                                             bowl,
@@ -390,7 +390,7 @@ public class counterBar extends JPanel {
             SFXManager.play(SFX.PICK_MATERIAL);
         }
 
-        JButton item = new JButton(new ImageIcon(imgPath));
+        JButton item = new JButton(new ImageIcon(getClass().getResource(imgPath)));
         String[] parts = imgPath.split("/");
         String result = parts[parts.length - 2];
         // maybe bugged
@@ -449,24 +449,24 @@ public class counterBar extends JPanel {
                                 String newName = null;
 
                                 if ("greenEgg".equals(itemName)) {
-                                    imagePath = "resources/images/gamePlay/ingredients/noodles/blanchNoodles/takronoodle_green_egg.png";
+                                    imagePath = "/images/gamePlay/ingredients/noodles/blanchNoodles/takronoodle_green_egg.png";
                                     newName = "takronoodle_green_egg";
                                 } else if ("yellowEgg".equals(itemName)) {
-                                    imagePath = "resources/images/gamePlay/ingredients/noodles/blanchNoodles/takronoodle_yellow.png";
+                                    imagePath = "/images/gamePlay/ingredients/noodles/blanchNoodles/takronoodle_yellow.png";
                                     newName = "takronoodle_yellow";
                                 } else if ("thinRice".equals(itemName)) {
-                                    imagePath = "resources/images/gamePlay/ingredients/noodles/blanchNoodles/takronoodle_rice_thin_wide_vermicelli.png";
+                                    imagePath = "/images/gamePlay/ingredients/noodles/blanchNoodles/takronoodle_rice_thin_wide_vermicelli.png";
                                     newName = "takronoodle_thin";
                                 } else if ("wideRice".equals(itemName)) {
-                                    imagePath = "resources/images/gamePlay/ingredients/noodles/blanchNoodles/takronoodle_rice_thin_wide_vermicelli.png";
+                                    imagePath = "/images/gamePlay/ingredients/noodles/blanchNoodles/takronoodle_rice_thin_wide_vermicelli.png";
                                     newName = "takronoodle_wide";
                                 } else if ("riceVermicelli".equals(itemName)) {
-                                    imagePath = "resources/images/gamePlay/ingredients/noodles/blanchNoodles/takronoodle_rice_thin_wide_vermicelli.png";
+                                    imagePath = "/images/gamePlay/ingredients/noodles/blanchNoodles/takronoodle_rice_thin_wide_vermicelli.png";
                                     newName = "takronoodle_rice";
                                 }
                                 // Apply changes only if a match was found
                                 if (imagePath != null) {
-                                    btn.setIcon(new ImageIcon(imagePath));
+                                    btn.setIcon(new ImageIcon(getClass().getResource(imagePath)));
                                     btn.setName(newName);
                                 }
                                 // TODO: if  the takro break delete this "break"
@@ -474,7 +474,7 @@ public class counterBar extends JPanel {
                             }
                             if (btn.getName().equals("placemat") && itemBounds.intersects(btn.getBounds()) && itemName.equals("bowl")) {
                                 ImageIcon icon;
-                                icon = IconImage.create("resources/images/gamePlay/bowl/empty.png", 175, 175);
+                                icon = IconImage.create("/images/gamePlay/bowl/empty.png", 175, 175);
                                 JButton bowl_empty = new JButton(icon);
                                 bowl_empty.setBounds(390, 169+yOffset, 175, 175);
                                 bowl_empty.setBorderPainted(false);
@@ -712,9 +712,9 @@ public class counterBar extends JPanel {
     }
 
     private String buildFinalPath(String broth, String noodle, String combo, boolean hasVeg) {
-        String basePath = "resources/images/gamePlay/ingredients/noodles/finishedNoodles/" + broth + "/" + noodle + "/";
+        String basePath = "/images/gamePlay/ingredients/noodles/finishedNoodles/" + broth + "/" + noodle + "/";
         if (noodle.contains("thin") || noodle.contains("wide") || noodle.contains("rice")) {
-            basePath = "resources/images/gamePlay/ingredients/noodles/finishedNoodles/" + broth + "/" + "riceThinWideVermicelli" + "/";
+            basePath = "/images/gamePlay/ingredients/noodles/finishedNoodles/" + broth + "/" + "riceThinWideVermicelli" + "/";
         }
         // If no meat toppings are present return the no_addon image directly.
         if (combo.equals("no_addon")) {

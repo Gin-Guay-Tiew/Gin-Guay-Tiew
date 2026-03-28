@@ -4,7 +4,7 @@ import javafx.embed.swing.JFXPanel;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 
-import java.io.File;
+import java.net.URL;
 
 public class SoundManager {
 
@@ -27,8 +27,13 @@ public class SoundManager {
 
         try {
 
-            File file = new File(path);
-            Media media = new Media(file.toURI().toString());
+            URL url = SoundManager.class.getResource(path);
+
+            if (url == null) {
+                throw new RuntimeException("AUDIO NOT FOUND: " + path);
+            }
+
+            Media media = new Media(url.toExternalForm());
 
             player = new MediaPlayer(media);
             player.setCycleCount(MediaPlayer.INDEFINITE); // loop
@@ -66,7 +71,7 @@ public class SoundManager {
 
 //        if (isLevelMusic) return;
 
-        playMusic("resources/audio/bg/background1.mp3");
+        playMusic("/audio/bg/background1.mp3");
 
     }
 
@@ -77,11 +82,11 @@ public class SoundManager {
         isLevelMusic = true;
 
         switch(level) {
-            case 1 -> playMusic("resources/audio/bg/lv1.mp3");
-            case 2 -> playMusic("resources/audio/bg/lv2.mp3");
-            case 3 -> playMusic("resources/audio/bg/lv3.mp3");
-            case 4 -> playMusic("resources/audio/bg/lv4.mp3");
-            case 5 -> playMusic("resources/audio/bg/lv5.mp3");
+            case 1 -> playMusic("/audio/bg/lv1.mp3");
+            case 2 -> playMusic("/audio/bg/lv2.mp3");
+            case 3 -> playMusic("/audio/bg/lv3.mp3");
+            case 4 -> playMusic("/audio/bg/lv4.mp3");
+            case 5 -> playMusic("/audio/bg/lv5.mp3");
         }
 
     }
@@ -90,17 +95,17 @@ public class SoundManager {
 
     public static void playWaiting() {
         isLevelMusic = false;
-        playMusic("resources/audio/bg/waitting.mp3");
+        playMusic("/audio/bg/waitting.mp3");
     }
 
     public static void playWin() {
         isLevelMusic = false;
-        playMusic("resources/audio/bg/win.mp3");
+        playMusic("/audio/bg/win.mp3");
     }
 
     public static void playLose() {
         isLevelMusic = false;
-        playMusic("resources/audio/bg/lose.mp3");
+        playMusic("/audio/bg/lose.mp3");
     }
 
     public static void backToMenu() {

@@ -96,19 +96,19 @@ public class gamePlayScreen extends JPanel {
         this.levelId = levelId;
         switch (levelId) {
             case 1:
-                bgPanel.setBackgroundImage("resources/images/gamePlay/bg/LV1.gif",-3,-100 , 800, 400);
+                bgPanel.setBackgroundImage("/images/gamePlay/bg/LV1.gif",-3,-100 , 800, 400);
                 break;
             case 2:
-                bgPanel.setBackgroundImage("resources/images/gamePlay/bg/LV2.gif",0, -50, 800, 400);
+                bgPanel.setBackgroundImage("/images/gamePlay/bg/LV2.gif",0, -50, 800, 400);
                 break;
             case 3:
-                bgPanel.setBackgroundImage("resources/images/gamePlay/bg/LV3.gif",0, -80, 800, 400);
+                bgPanel.setBackgroundImage("/images/gamePlay/bg/LV3.gif",0, -80, 800, 400);
                 break;
             case 4:
-                bgPanel.setBackgroundImage("resources/images/gamePlay/bg/LV4.gif",0, 0, 800, 400);
+                bgPanel.setBackgroundImage("/images/gamePlay/bg/LV4.gif",0, 0, 800, 400);
                 break;
             case 5:
-                bgPanel.setBackgroundImage("resources/images/gamePlay/bg/LV5.gif",0, 0, 800, 400);
+                bgPanel.setBackgroundImage("/images/gamePlay/bg/LV5.gif",0, 0, 800, 400);
                 break;
         }
 

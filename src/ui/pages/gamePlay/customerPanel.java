@@ -122,7 +122,7 @@ public class customerPanel extends JPanel {
         playBubbleBounce(bubblePanel, xs[emptyIndex] - 80, ys[emptyIndex] - 50);
 
         JLabel bubble = new JLabel(
-                IconImage.create("resources/images/gamePlay/customer/message.png", 140, 140)
+                IconImage.create("/images/gamePlay/customer/message.png", 140, 140)
         );
         bubble.setBounds(0, 0, 120, 120);
 
@@ -147,7 +147,7 @@ public class customerPanel extends JPanel {
             food.setBounds(20, 25, 80, 80);
             food.setIcon(IconImage.create(d.foodPath, 80, 80));
 
-            Font customFont = FontLoader.loadCustomFont("resources/font/SOV_BokThang.ttf");
+            Font customFont = FontLoader.loadCustomFont("/font/SOV_BokThang.ttf");
 
             CustomJLabel text = new CustomJLabel(noodleText, 3f);
             text.setBounds(0, -5, 80, 30);
@@ -202,10 +202,10 @@ public class customerPanel extends JPanel {
 
         if (bubblePanel.getComponentCount() >= 2) {
             JLabel bubbleBg = (JLabel) bubblePanel.getComponent(1);
-            bubbleBg.setIcon(IconImage.create("resources/images/gamePlay/customer/wrong.png", 140, 140));
+            bubbleBg.setIcon(IconImage.create("/images/gamePlay/customer/wrong.png", 140, 140));
             playShakeAnimation(bubblePanel);
             Timer resetTimer = new Timer(800, e -> {
-                bubbleBg.setIcon(IconImage.create("resources/images/gamePlay/customer/message.png", 140, 140));
+                bubbleBg.setIcon(IconImage.create("/images/gamePlay/customer/message.png", 140, 140));
             });
             resetTimer.setRepeats(false);
             resetTimer.start();
