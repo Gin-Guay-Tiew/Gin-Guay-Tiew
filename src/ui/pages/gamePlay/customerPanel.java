@@ -119,9 +119,6 @@ public class customerPanel extends JPanel {
                 );
                 bubble.setBounds(0, 0, 120, 120);
 
-                // =========================
-                // 🔹 Food + Text (ใช้ CustomJLabel)
-                // =========================
                 JLabel food = new JLabel();
                 food.setLayout(null);
 

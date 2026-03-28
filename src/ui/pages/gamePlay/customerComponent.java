@@ -42,9 +42,6 @@ public class customerComponent extends JPanel {
         add(imgLabel);
         add(patienceLabel);
 
-        // =========================
-        // ✅ คลิกแล้วหาย (TEST)
-        // =========================
         this.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
