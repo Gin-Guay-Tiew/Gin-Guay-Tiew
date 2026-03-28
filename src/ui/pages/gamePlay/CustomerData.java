@@ -43,6 +43,10 @@ public class CustomerData implements CustomerPay {
         return noodles;
     }
 
+    public void setMoney(int money){
+        this.money = money;
+    }
+
     @Override
     public String toString() {
         return "CustomerData "+"\n" +
