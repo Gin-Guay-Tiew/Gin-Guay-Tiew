@@ -6,13 +6,14 @@ public class CustomerData implements CustomerPay{
     public String imgPath;
     public String patiencePath;
     public String foodPath;
+    public String noodles;
     public int levelID;
     public int money;
     public int x,y;
 
     public int life;
 
-    public CustomerData(int levelID,String img, String patience,String type,String skin,String foodPath,int money, int x, int y, int life){
+    public CustomerData(int levelID,String img, String patience,String type,String skin,String foodPath,int money, int x, int y, int life,String noodles){
         this.levelID = levelID;
         this.type = type;
         this.skin = skin;
@@ -20,6 +21,7 @@ public class CustomerData implements CustomerPay{
         this.money = money;
         this.patiencePath = patience;
         this.foodPath = foodPath;
+        this.noodles = noodles;
         this.x = x;
         this.y = y;
         this.life = life;
@@ -41,13 +43,18 @@ public class CustomerData implements CustomerPay{
         return levelID;
     }
 
+    public String getNoodle(){
+        return noodles;
+    }
+
     @Override
     public String toString() {
-        return "CustomerData"+"\n" +
+        return "CustomerData "+"\n" +
                 "levelID= "+ levelID+'\n'+
-                "type='" + type + '\n' +
-                ", foodPath='" + foodPath + '\n' +
-                ", money=" + money+'\n';
+                "type= " + type + '\n' +
+                ", foodPath= " + foodPath + '\n' +
+                ", noodle= "+noodles+'\n'+
+                ", money= " + money+'\n';
     }
 
 }

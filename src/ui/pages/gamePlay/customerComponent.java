@@ -41,6 +41,20 @@ public class customerComponent extends JPanel {
 
         add(imgLabel);
         add(patienceLabel);
+
+        // =========================
+        // ✅ คลิกแล้วหาย (TEST)
+        // =========================
+        this.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                System.out.println("Clicked: " + data); // debug
+
+                if (onClick != null) {
+                    onClick.run(); // เรียก removeCustomer()
+                }
+            }
+        });
     }
 
     public CustomerData getData() {
@@ -66,12 +80,10 @@ public class customerComponent extends JPanel {
             changeMoney();
             data.setMoney(money_bored);
             imgLabel.setIcon( new ImageIcon(pathImage+"_bored.png"));
-            //System.out.println(data.toString()+"bored");
         } else if (life == state_angry){
             changeMoney();
             data.setMoney(money_angry);
             imgLabel.setIcon( new ImageIcon(pathImage+"_angry.png"));
-            //System.out.println(data.toString()+"angry");
         }
     }
 
@@ -91,7 +103,6 @@ public class customerComponent extends JPanel {
         }
         return new Object[]{30, 21};
     }
-
 
     public void playSpawnBounce(int targetX, int targetY) {
         int startY = targetY + 100;
@@ -118,7 +129,6 @@ public class customerComponent extends JPanel {
         timer.start();
     }
 
-    // easing เด้ง
     private float easeOutBack(float t) {
         float c1 = 1.70158f;
         float c3 = c1 + 1;
@@ -169,5 +179,4 @@ public class customerComponent extends JPanel {
             money_angry = angry[level - 1];
         }
     }
-
 }

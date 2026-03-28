@@ -183,11 +183,25 @@ public class counterBar extends JPanel {
                                                                         "bowl_noodle_yellow"
                                                                 );
                                                                 enableDrag(bowl);
-                                                            }else{
+                                                            }else if (itemName.contains("wide")){
                                                                 updateBowlVisual(
                                                                         bowl,
                                                                         "resources/images/gamePlay/ingredients/noodles/finishedNoodles/justNoodle/riceThinWideVermicelli.png",
-                                                                        "bowl_noodle_riceThinWideVermicelli"
+                                                                        "bowl_noodle_wide"
+                                                                );
+                                                                enableDrag(bowl);
+                                                            }else if (itemName.contains("rice")){
+                                                                updateBowlVisual(
+                                                                        bowl,
+                                                                        "resources/images/gamePlay/ingredients/noodles/finishedNoodles/justNoodle/riceThinWideVermicelli.png",
+                                                                        "bowl_noodle_rice"
+                                                                );
+                                                                enableDrag(bowl);
+                                                            } else{
+                                                                updateBowlVisual(
+                                                                        bowl,
+                                                                        "resources/images/gamePlay/ingredients/noodles/finishedNoodles/justNoodle/riceThinWideVermicelli.png",
+                                                                        "bowl_noodle_thin"
                                                                 );
                                                                 enableDrag(bowl);
                                                             }
@@ -215,10 +229,20 @@ public class counterBar extends JPanel {
                                         String rawTargetPath = cstPanel.getCustomerDataAt(sectionIndex - 1).foodPath;
                                         String currentFoodPath = (rawCurrentPath != null) ? rawCurrentPath.replace("\\", "/") : "";
                                         String targetFoodPath = (rawTargetPath != null) ? rawTargetPath.replace("\\", "/") : "";
+                                        String noodle = cstPanel.getCustomerDataAt(sectionIndex - 1).noodles;
 
                                         System.out.println("Serving food from: " + currentFoodPath);
 
-                                        if (currentFoodPath.equals(targetFoodPath)) {
+                                        String bowlName = bowl.getName().toLowerCase();
+                                        boolean checker = true;
+                                        if (!noodle.equals("else")) {
+                                            checker = false;
+                                            if (bowlName.contains("wide") && noodle.equals("wide")) checker = true;
+                                            if (bowlName.contains("rice") && noodle.equals("rice")) checker = true;
+                                            if (bowlName.contains("thin") && noodle.equals("thin")) checker = true;
+                                        }
+
+                                        if (currentFoodPath.equals(targetFoodPath) && checker) {
                                             System.out.println("Match! Customer satisfied.");
                                             SFXManager.play(SFX.SERVED);
                                             // Remove Bowl
@@ -261,6 +285,7 @@ public class counterBar extends JPanel {
                                 if (c instanceof JButton ladle && itemBounds.intersects(btn.getBounds()) && btn.getName().contains("pot") && ladle.getName().equals("ladle")) {
                                     SFXManager.play(SFX.LADLE);
                                     for (Component comp : getComponents()) {
+                                        boolean isRiceThinWideVermicelli = false;
                                         if (comp instanceof JButton bowl && bowl.getName().contains("bowl_noodle_")) {
                                             String bowlName = bowl.getName();
                                             // Check if it's a bowl that already has noodles but no soup yet
@@ -270,13 +295,23 @@ public class counterBar extends JPanel {
                                                 noodleType = "greenEgg";
                                             } else if (bowlName.contains("yellow")) {
                                                 noodleType = "yellow";
-                                            } else if (bowlName.contains("riceThinWideVermicelli")) {
-                                                noodleType = "riceThinWideVermicelli";
+                                            } else if (bowlName.contains("rice")) {
+                                                noodleType = "rice";
+                                                isRiceThinWideVermicelli = true;
+                                            } else if (bowlName.contains("thin")) {
+                                                noodleType = "thin";
+                                                isRiceThinWideVermicelli = true;
+                                            } else if (bowlName.contains("wide")) {
+                                                noodleType = "wide";
+                                                isRiceThinWideVermicelli = true;
                                             }
                                             if (!noodleType.isEmpty()) {
                                                 try {
                                                     // Construct path: clearBroth -> [noodleType] -> no_addon.png
                                                     String actualPath = "resources/images/gamePlay/ingredients/noodles/finishedNoodles/clearBroth/" + noodleType + "/no_addon.png";
+                                                    if (isRiceThinWideVermicelli) {
+                                                        actualPath = "resources/images/gamePlay/ingredients/noodles/finishedNoodles/clearBroth/riceThinWideVermicelli/no_addon.png";
+                                                    }
                                                     updateBowlVisual(
                                                             bowl,
                                                             actualPath,
@@ -608,7 +643,9 @@ public class counterBar extends JPanel {
 
     private String buildFinalPath(String broth, String noodle, String combo, boolean hasVeg) {
         String basePath = "resources/images/gamePlay/ingredients/noodles/finishedNoodles/" + broth + "/" + noodle + "/";
-
+        if (noodle.contains("thin") || noodle.contains("wide") || noodle.contains("rice")) {
+            basePath = "resources/images/gamePlay/ingredients/noodles/finishedNoodles/" + broth + "/" + "riceThinWideVermicelli" + "/";
+        }
         // If no meat toppings are present return the no_addon image directly.
         if (combo.equals("no_addon")) {
             return basePath + "no_addon.png";

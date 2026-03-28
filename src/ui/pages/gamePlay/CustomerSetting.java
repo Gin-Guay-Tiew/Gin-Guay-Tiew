@@ -1,7 +1,9 @@
 package ui.pages.gamePlay;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 
 public class CustomerSetting {
     List<List<String>> general = List.of(
@@ -40,6 +42,8 @@ public class CustomerSetting {
     String typeCustomer;
     String skinCustomer;
     Object[] result;
+    List<String> listNoodle = Arrays.asList("rice", "wide", "thin");
+    Random rand = new Random();
 
     public List<CustomerData> Setting(int quantity,int level){
         List<CustomerData> customer = new ArrayList<>();
@@ -68,17 +72,25 @@ public class CustomerSetting {
             String timeSet = (String) result[0];
             int patience = (int) result[1];
             int money = (int) result[2];
-
-
+            String noodle = "";
+            String wantNoodle = CustomerMenu.getRandomFoodImage(level);
+            if (wantNoodle.contains("riceThin")){
+                noodle = listNoodle.get(rand.nextInt(3));
+            }else {
+                noodle = "else";
+            }
             customer.add(new CustomerData(
                     level,
                         "resources/images/gamePlay/customer/"+typeCustomer+"/"+skinCustomer+"_happy.png",
                     "resources/images/gamePlay/customer/Time/"+timeSet+".gif",
-                    typeCustomer,skinCustomer,CustomerMenu.getRandomFoodImage(level),
+                    typeCustomer,
+                    skinCustomer,
+                    wantNoodle,
                         money,
                         211,
                         78,
-                    patience
+                    patience,
+                    noodle
                 ));
             }
         return customer;

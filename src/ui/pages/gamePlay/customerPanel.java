@@ -1,7 +1,9 @@
 package ui.pages.gamePlay;
 
 import main.MainFrame;
+import ui.components.CustomJLabel;
 import ui.pages.endGame.WinLosePage;
+import utilities.FontLoader;
 import utilities.IconImage;
 import utilities.SFX;
 import utilities.SFXManager;
@@ -81,12 +83,16 @@ public class customerPanel extends JPanel {
     private void spawnNext() {
         if (queue.isEmpty()) return;
 
+        // โหลด font (ใช้แบบเดียวกับหน้าเงิน)
+        Font customFontzz = FontLoader.loadCustomFont("resources/font/SOV_BokThang.ttf");
+
         for (int i = 0; i < slots.length; i++) {
             if (slots[i] == null) {
 
                 CustomerData d = queue.poll();
-                // System.out.println(d.toString());
+                System.out.println(d.toString());
                 int index = i;
+
                 JPanel bubblePanel = new JPanel();
 
                 customerComponent c = new customerComponent(
@@ -102,6 +108,7 @@ public class customerPanel extends JPanel {
 
                 c.setBounds(xs[i], ys[i], 197, 240);
                 c.playSpawnBounce(xs[i], ys[i]);
+
                 bubblePanel.setLayout(null);
                 bubblePanel.setOpaque(false);
                 bubblePanel.setBounds(xs[i] - 80, ys[i] - 50, 120, 120);
@@ -112,9 +119,55 @@ public class customerPanel extends JPanel {
                 );
                 bubble.setBounds(0, 0, 120, 120);
 
+                // =========================
+                // 🔹 Food + Text (ใช้ CustomJLabel)
+                // =========================
                 JLabel food = new JLabel();
-                food.setBounds(25, 15, 76, 76);
-                food.setIcon(IconImage.create(d.foodPath, 76, 76));
+                food.setLayout(null);
+
+                boolean isSpecial = false;
+                String noodleText = "";
+
+                if (d.getNoodle() != null) {
+                    String n = d.getNoodle();
+
+                    if (n.equals("rice") ||
+                            n.equals("wide") ||
+                            n.equals("thin")) {
+
+                        isSpecial = true;
+
+                        if (n.equals("rice")){
+                            noodleText = "เส้นหมี่";
+                        } else if (n.equals("wide")){
+                            noodleText = "เส้นใหญ่";
+                        } else if (n.equals("thin")){
+                            noodleText = "เส้นเล็ก";
+                        }
+                    }
+                }
+
+                if (isSpecial) {
+                    food.setBounds(20, 25, 80, 80);
+                    food.setIcon(IconImage.create(d.foodPath, 80, 80));
+
+                    CustomJLabel text = new CustomJLabel(noodleText, 3f);
+
+                    text.setBounds(0, -5, 80, 30); // อยู่เหนือชาม
+                    text.setHorizontalAlignment(SwingConstants.CENTER);
+
+                    text.setFont(customFontzz.deriveFont(20f));
+                    text.setTextColor(new Color(232, 205, 97)); // สีส้ม
+                    text.setOutlineColor(new Color(89, 51, 14)); // ขอบเข้ม
+
+                    text.setOpaque(false);
+
+                    food.add(text);
+
+                } else {
+                    food.setBounds(25, 15, 76, 76);
+                    food.setIcon(IconImage.create(d.foodPath, 76, 76));
+                }
 
                 bubblePanel.add(bubble);
                 bubblePanel.add(food);
