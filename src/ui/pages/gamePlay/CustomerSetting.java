@@ -42,7 +42,7 @@ public class CustomerSetting {
     String typeCustomer;
     String skinCustomer;
     Object[] result;
-    List<String> listNoodle = Arrays.asList("Vermicelli", "Twine", "Thin");
+    List<String> listNoodle = Arrays.asList("rice", "wide", "thin");
     Random rand = new Random();
 
     public List<CustomerData> Setting(int quantity,int level){

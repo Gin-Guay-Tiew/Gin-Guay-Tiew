@@ -131,17 +131,17 @@ public class customerPanel extends JPanel {
                 if (d.getNoodle() != null) {
                     String n = d.getNoodle();
 
-                    if (n.equals("Vermicelli") ||
-                            n.equals("Twine") ||
-                            n.equals("Thin")) {
+                    if (n.equals("rice") ||
+                            n.equals("wide") ||
+                            n.equals("thin")) {
 
                         isSpecial = true;
 
-                        if (n.equals("Vermicelli")){
+                        if (n.equals("rice")){
                             noodleText = "เส้นหมี่";
-                        } else if (n.equals("Twine")){
+                        } else if (n.equals("wide")){
                             noodleText = "เส้นใหญ่";
-                        } else if (n.equals("Thin")){
+                        } else if (n.equals("thin")){
                             noodleText = "เส้นเล็ก";
                         }
                     }
