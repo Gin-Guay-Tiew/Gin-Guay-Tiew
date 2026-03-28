@@ -234,21 +234,24 @@ public class customerPanel extends JPanel {
         shakeTimer.start();
     }
 
-    public void removeCustomer(int index, CustomerData d) {
+    public void removeCustomer(int index, CustomerPay d) {
         customerComponent c = slots[index];
         if (c == null) return;
 
-        currentMoney += d.money;
-        bar.getTimeDisplay().updateCount(currentMoney, targetMoney);
+        currentMoney += d.pay();
 
-        // --- เพิ่มส่วนนี้เพื่อแสดง Popup เงิน ---
-        // คำนวณตำแหน่งกึ่งกลางหัวลูกค้า
+        CustomerData data = (CustomerData) d;
+
+        bar.getTimeDisplay().updateCount(currentMoney, targetMoney);
+        
         int popupX = c.getX() + (c.getWidth() / 2) - 100;
         int popupY = c.getY() - 20;
-        FloatingMoneyLabel moneyPopup = new FloatingMoneyLabel("+"+d.money+"$", popupX, popupY);
+
+        FloatingMoneyLabel moneyPopup =
+                new FloatingMoneyLabel("+" + data.getMoney() + "$", popupX, popupY);
+
         add(moneyPopup);
-        setComponentZOrder(moneyPopup, 0); // ให้แสดงอยู่ชั้นบนสุด
-        // --------------------------------------
+        setComponentZOrder(moneyPopup, 0);
 
         if (currentMoney >= targetMoney) {
             bar.getTimeDisplay().setCountColor(new Color(110, 207, 106));

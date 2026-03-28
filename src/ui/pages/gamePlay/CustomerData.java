@@ -1,6 +1,6 @@
 package ui.pages.gamePlay;
 
-public class CustomerData implements CustomerPay{
+public class CustomerData implements CustomerPay {
     public String type;
     public String skin;
     public String imgPath;
@@ -10,7 +10,6 @@ public class CustomerData implements CustomerPay{
     public int levelID;
     public int money;
     public int x,y;
-
     public int life;
 
     public CustomerData(int levelID,String img, String patience,String type,String skin,String foodPath,int money, int x, int y, int life,String noodles){
@@ -27,12 +26,9 @@ public class CustomerData implements CustomerPay{
         this.life = life;
     }
 
+    @Override
     public int pay(){
         return money;
-    }
-
-    public void setMoney(int money){
-        this.money = money;
     }
 
     public int getMoney(){
@@ -56,5 +52,4 @@ public class CustomerData implements CustomerPay{
                 ", noodle= "+noodles+'\n'+
                 ", money= " + money+'\n';
     }
-
 }
