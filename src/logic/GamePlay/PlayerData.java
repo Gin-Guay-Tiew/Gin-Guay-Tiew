@@ -6,24 +6,20 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class PlayerData {
-
     private int money = 0;
     private int level = 1;
     private int volumeLv = 100;
     private boolean stateSFX = true;
-
     private Set<String> unlockedItems = new HashSet<>();
 
     private final PropertyChangeSupport support = new PropertyChangeSupport(this);
 
     public PlayerData() {
-
         unlockedItems.add("Yellow egg noodles");
         unlockedItems.add("Thin rice noodles");
         unlockedItems.add("Cola");
         unlockedItems.add("Meatball");
         unlockedItems.add("Vegetable");
-
     }
 
     public void addPropertyChangeListener(PropertyChangeListener listener) {
