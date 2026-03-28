@@ -1,8 +1,8 @@
 package ui.pages.gamePlay;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class CustomerMenu {
 
@@ -11,23 +11,23 @@ public class CustomerMenu {
 
         folders.add(base + "no_addon.png");
 
-        if (hasMeatball) folders.add(base + "meatball");
-        if (hasPorkSlices) folders.add(base + "porkSlices");
-        if (hasPorkRind) folders.add(base + "porkRind");
+        if (hasMeatball) folders.add(base + "meatball/idle.png");
+        if (hasPorkSlices) folders.add(base + "porkSlices/idle.png");
+        if (hasPorkRind) folders.add(base + "porkRind/idle.png");
 
-        if (hasMeatball && hasPorkSlices) folders.add(base + "meatball&porkSlices");
-        if (hasMeatball && hasPorkRind) folders.add(base + "meatball&porkRind");
-        if (hasPorkSlices && hasPorkRind) folders.add(base + "porkSlices&porkRind");
+        if (hasMeatball && hasPorkSlices) folders.add(base + "meatball&porkSlices/idle.png");
+        if (hasMeatball && hasPorkRind) folders.add(base + "meatball&porkRind/idle.png");
+        if (hasPorkSlices && hasPorkRind) folders.add(base + "porkSlices&porkRind/idle.png");
 
-        if (hasMeatball && hasPorkSlices && hasPorkRind) folders.add(base + "meatball&porkRind&porkSlices");
+        if (hasMeatball && hasPorkSlices && hasPorkRind) folders.add(base + "meatball&porkRind&porkSlices/idle.png");
     }
 
     public static List<String> CustomerMenu(int levelID) {
         List<String> folders = new ArrayList<>();
 
-        if (levelID >= 1) folders.add("/images/gamePlay/ingredients/drinks/cola");
-        if (levelID >= 2) folders.add("/images/gamePlay/ingredients/drinks/sprite");
-        if (levelID >= 3) folders.add("/images/gamePlay/ingredients/drinks/orange");
+        if (levelID >= 1) folders.add("/images/gamePlay/ingredients/drinks/cola/picked.png");
+        if (levelID >= 2) folders.add("/images/gamePlay/ingredients/drinks/sprite/picked.png");
+        if (levelID >= 3) folders.add("/images/gamePlay/ingredients/drinks/orange/picked.png");
         if (levelID >= 4) folders.add("/images/gamePlay/ingredients/kanomTuay/picked.png");
 
         boolean m = levelID >= 1;
@@ -67,30 +67,14 @@ public class CustomerMenu {
 
     // method for request food and drink from customer
     public static String getRandomFoodImage(int levelIO){
-        List<String> folders = CustomerMenu(levelIO);
-        List<File> allFiles = new ArrayList<>();
+        List<String> allPaths = CustomerMenu(levelIO);
 
-        for(String path : folders){
-            File fileOrFolder = new File(path);
+        if (allPaths.isEmpty()) return "";
 
-            if (fileOrFolder.isFile()) {
-                allFiles.add(fileOrFolder);
-            } else if (fileOrFolder.isDirectory()) {
-                File[] files = fileOrFolder.listFiles();
-                if (files != null){
-                    for(File f : files){
-                        // Ignore idle/picked mix-ups if a whole folder is scanned
-                        if(f.isFile() && !f.getName().equalsIgnoreCase("idle.png") && !f.getName().equalsIgnoreCase("picked.png")){
-                            allFiles.add(f);
-                        }
-                    }
-                }
-            }
-        }
+        int i = (int)(Math.random() * allPaths.size());
+        String selectedPath = allPaths.get(i);
 
-        if (allFiles.isEmpty()) return "";
-
-        int i = (int)(Math.random() * allFiles.size());
-        return allFiles.get(i).getPath();
+        System.out.println("Customer is ordering: " + selectedPath);
+        return selectedPath;
     }
 }

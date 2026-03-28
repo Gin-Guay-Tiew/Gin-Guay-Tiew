@@ -625,9 +625,15 @@ public class counterBar extends JPanel {
     }
 
     private void updateBowlVisual(JButton bowl, String path, String newName) {
-        bowl.setIcon(IconImage.create(path, 175, 175));
-        bowl.setName(newName);
-        bowl.putClientProperty("foodPath", path);
+        try {
+            bowl.setIcon(IconImage.create(path, 175, 175));
+            bowl.setName(newName);
+            bowl.putClientProperty("foodPath", path);
+        } catch (RuntimeException e) {
+            System.err.println("❌ DYNAMIC PATH ERROR!");
+            System.err.println("The game tried to load this exact path: " + path);
+            System.err.println("Please check your folders and ensure the uppercase/lowercase letters match exactly!");
+        }
     }
 
     @Override

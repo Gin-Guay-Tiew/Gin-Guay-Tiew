@@ -59,13 +59,14 @@ public class customerComponent extends JPanel {
         return data;
     }
 
-    public void setPatienceGif(String path){
+    public void setPatienceGif(String path) {
         patienceLabel.setIcon(null);
-
-        Image img = Toolkit.getDefaultToolkit().createImage(path);
-        ImageIcon icon = new ImageIcon(img);
-
-        patienceLabel.setIcon(icon);
+        java.net.URL url = getClass().getResource(path);
+        if (url != null) {
+            Image img = Toolkit.getDefaultToolkit().createImage(url);
+            ImageIcon icon = new ImageIcon(img);
+            patienceLabel.setIcon(icon);
+        }
     }
 
     public JPanel getBubble(){
