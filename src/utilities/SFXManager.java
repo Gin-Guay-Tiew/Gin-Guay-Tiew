@@ -10,12 +10,15 @@ public class SFXManager {
 
     private static float volume = 0.35f;
     private static final float MASTER_VOLUME = 0.45f;
+    private static boolean sfxEnabled = true;
 
     static {
         new JFXPanel();
     }
 
     public static void play(String path) {
+
+        if (!sfxEnabled) return;
 
         try {
 
@@ -62,5 +65,9 @@ public class SFXManager {
 
     public static float getVolume() {
         return volume;
+    }
+
+    public static void setSfxEnabled(boolean enabled) {
+        sfxEnabled = enabled;
     }
 }
