@@ -32,7 +32,7 @@ public class CustomerMenu {
 
         boolean m = levelID >= 1;
         boolean s = levelID >= 2;
-        boolean r = levelID >= 3;
+        boolean r = levelID >= 5;
 
         addNoodlePaths(folders, "namTok", "riceThinWideVermicelli", m, s, r);
         addNoodlePaths(folders, "namTok", "yellow", m, s, r);
