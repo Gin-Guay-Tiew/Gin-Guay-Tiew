@@ -400,6 +400,8 @@ public class counterBar extends JPanel {
                                 revalidate();
                                 repaint();
 
+                                SFXManager.play(SFX.PUT_ON_PLATE);
+
                                 btn.setName("Occupied");
                                 // TODO: if  the bowl placing break delete this "break"
                                 break;
