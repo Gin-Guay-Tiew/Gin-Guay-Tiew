@@ -2,8 +2,6 @@ package ui.pages.tutorialGame;
 
 import main.MainFrame;
 import ui.components.ImageJButton;
-import utilities.SFX;
-import utilities.SFXManager;
 
 import javax.swing.*;
 import java.awt.*;
@@ -17,7 +15,8 @@ public class GameTutorialPage extends JPanel {
     private int currentPage = 1;
 
     private JLabel pageLabel;
-    
+
+    // เรียกใช้งานชนิดข้อมูลเป็น Abstract Class
     private AbstractNavButton ArrowLeft;
     private AbstractNavButton ArrowRight;
 
@@ -51,9 +50,8 @@ public class GameTutorialPage extends JPanel {
                 "resources/images/Tutorial/ArrowInTutorial/ArrowLeft_Click.png",
                 btnWidth, btnHeight
         );
-
+        // เรียกใช้เมธอดที่รับค่าเป็น Abstract Class
         registerNavigationButton(ArrowLeft, 10, 232, () -> {
-            SFXManager.play(SFX.CLICK);
             if (currentPage > 1) {
                 currentPage--;
                 updatePage();
@@ -66,9 +64,8 @@ public class GameTutorialPage extends JPanel {
                 "resources/images/Tutorial/ArrowInTutorial/ArrowRight_Click.png",
                 btnWidth, 80
         );
-
+        // เรียกใช้เมธอดที่รับค่าเป็น Abstract Class
         registerNavigationButton(ArrowRight, 710, 232, () -> {
-            SFXManager.play(SFX.CLICK);
             if (currentPage < TOTAL_PAGES) {
                 currentPage++;
                 updatePage();
@@ -81,7 +78,6 @@ public class GameTutorialPage extends JPanel {
         backToMenuBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                SFXManager.play(SFX.CLICK);
                 mainFrame.getNavigator().toPage("mainMenu", true, 500);
             }
         });
@@ -89,6 +85,9 @@ public class GameTutorialPage extends JPanel {
         updatePage();
     }
 
+    /**
+     * เมธอดรับค่า Parameter เป็น Abstract Class (AbstractNavButton)
+     */
     private void registerNavigationButton(AbstractNavButton navButton, int x, int y, Runnable action) {
         navButton.setBounds(x, y, btnWidth, btnHeight);
         navButton.setClickAction(action);
