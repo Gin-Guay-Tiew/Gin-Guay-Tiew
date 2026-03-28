@@ -115,10 +115,10 @@ public class MainMenuPage extends JPanel {
             ActionListener[] exitActions = {
                     ex -> System.exit(0),
                     ex -> {
-                        if (tutorialNoCount == 6) {
+                        tutorialNoCount = 0;
+                        if (tutorialNoCount == 6 ) {
                             frame.getPlayerData().addMoney(10000);
                         }
-                        tutorialNoCount = 0;
                     }
             };
             pop.createPopup(frame, "Are you sure you want to exit?", "resources/images/shared/popups/Demo.png", btnPaths, btnLabels, exitActions);
