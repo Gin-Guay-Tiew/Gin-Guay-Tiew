@@ -42,7 +42,6 @@ public class CustomerSetting {
     String typeCustomer;
     String skinCustomer;
     Object[] result;
-    List<String> listNoodle = Arrays.asList("rice", "wide", "thin");
     Random rand = new Random();
 
     public List<CustomerData> Setting(int quantity,int level){
@@ -72,13 +71,26 @@ public class CustomerSetting {
             String timeSet = (String) result[0];
             int patience = (int) result[1];
             int money = (int) result[2];
-            String noodle = "";
+            List<String> listNoodle;
+
+            if (level == 1) {
+                listNoodle = Arrays.asList("thin");
+            } else if (level == 2) {
+                listNoodle = Arrays.asList("thin", "rice");
+            } else {
+                listNoodle = Arrays.asList("thin", "rice", "wide");
+            }
+
             String wantNoodle = CustomerMenu.getRandomFoodImage(level);
-            if (wantNoodle.contains("riceThin")){
-                noodle = listNoodle.get(rand.nextInt(3));
-            }else {
+            String noodle;
+
+            if (wantNoodle.contains("riceThin")) {
+                noodle = listNoodle.get(rand.nextInt(listNoodle.size()));
+            } else {
                 noodle = "else";
             }
+
+
             customer.add(new CustomerData(
                     level,
                         "resources/images/gamePlay/customer/"+typeCustomer+"/"+skinCustomer+"_happy.png",
