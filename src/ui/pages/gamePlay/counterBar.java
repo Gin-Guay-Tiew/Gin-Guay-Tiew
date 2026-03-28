@@ -2,6 +2,8 @@ package ui.pages.gamePlay;
 
 import main.MainFrame;
 import utilities.IconImage;
+import utilities.SFX;
+import utilities.SFXManager;
 
 import javax.swing.*;
 import java.awt.*;
@@ -113,6 +115,7 @@ public class counterBar extends JPanel {
                                 // Check for collision with the pot and ensure the item is a noodle-type takro
                                 if (btn.getName().equals("pot") && itemBounds.intersects(btn.getBounds()) && itemName.contains("takronoodle_") && c instanceof JButton takro) {
 
+                                    SFXManager.play(SFX.PICK_MATERIAL);
                                     // Update the Takro (the item being dragged)
                                     takro.setIcon(new ImageIcon("resources/images/gamePlay/aquiment/takronoodle.png"));
                                     takro.setName("takronoodle");
@@ -217,6 +220,7 @@ public class counterBar extends JPanel {
 
                                         if (currentFoodPath.equals(targetFoodPath)) {
                                             System.out.println("Match! Customer satisfied.");
+                                            SFXManager.play(SFX.SERVED);
                                             // Remove Bowl
                                             remove(bowl);
                                             for (Component comp : getComponents()) {
@@ -238,6 +242,7 @@ public class counterBar extends JPanel {
                                 }
                                 // Trash Can
                                 if (c instanceof JButton bowl && bowl.getName().contains("bowl_") && btn.getName().contains("trash") && itemBounds.intersects(btn.getBounds())){
+                                    SFXManager.play(SFX.THROW);
                                     updateBowlVisual(
                                             bowl,
                                             "resources/images/gamePlay/bowl/empty.png",
@@ -254,6 +259,7 @@ public class counterBar extends JPanel {
                                 }
                                 // Pot
                                 if (c instanceof JButton ladle && itemBounds.intersects(btn.getBounds()) && btn.getName().contains("pot") && ladle.getName().equals("ladle")) {
+                                    SFXManager.play(SFX.LADLE);
                                     for (Component comp : getComponents()) {
                                         if (comp instanceof JButton bowl && bowl.getName().contains("bowl_noodle_")) {
                                             String bowlName = bowl.getName();
@@ -308,8 +314,15 @@ public class counterBar extends JPanel {
 
     //method for item can spawn and item spawn can drag
     public void spawnItem(String imgPath, JButton sourceBtn, MouseEvent e) {
-        JButton item = new JButton(new ImageIcon(imgPath));
 
+        if (imgPath.contains("drink") || imgPath.contains("cola")
+                || imgPath.contains("sprite") || imgPath.contains("orange")) {
+            SFXManager.play(SFX.PICK_DRINK);
+        } else {
+            SFXManager.play(SFX.PICK_MATERIAL);
+        }
+
+        JButton item = new JButton(new ImageIcon(imgPath));
         String[] parts = imgPath.split("/");
         String result = parts[parts.length - 2];
         // maybe bugged
@@ -393,6 +406,9 @@ public class counterBar extends JPanel {
                             }
                             // Check if user are dropping a topping (meatball, porkSlices, porkRind) into a bowl
                             if (itemBounds.intersects(btn.getBounds()) && btn.getName().startsWith("bowl_")) {
+
+                                SFXManager.play(SFX.PUT_ON_PLATE);
+
                                 String bowlName = btn.getName();
                                 String[] nameParts = bowlName.split("_");
 
@@ -466,6 +482,7 @@ public class counterBar extends JPanel {
 
                                         if (currentDrinkPath.equals(targetDrinkPath)) {
                                             System.out.println("Drink served correctly!");
+                                            SFXManager.play(SFX.SERVED);
 
                                             remove(item);
                                             cstPanel.removeCustomer(sectionIndex - 1, target);

@@ -21,8 +21,6 @@ public class MainBtn implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
 
-        SFXManager.play(SFX.CLICK);
-
         if (e.getActionCommand().equals("Start Game")) {
             frame.getNavigator().toPage("levelSelect", true, 250);
         }

@@ -107,6 +107,7 @@ public class LevelsDisplay extends JPanel {
                 iconLevel.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
+                        SFXManager.play(SFX.CLICK);
                         if (current_lv.isUnlocked) {
                             int realLevel = Math.min(levelNum, levelsInfo.size());
                             mainFrame.startNewGame(realLevel);

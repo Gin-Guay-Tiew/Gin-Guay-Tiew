@@ -8,9 +8,12 @@ public class SFX {
     public static final String LADLE = "resources/audio/sfx/ladle_soup.mp3";
     public static final String PICK_MATERIAL = "resources/audio/sfx/pick_material.mp3";
     public static final String PICK_DRINK = "resources/audio/sfx/pick_drinks.mp3";
+    public static final String PUT_ON_PLATE = "resources/audio/sfx/put_on_plate.mp3";
 
-    public static final String SERVED = "resources/audio/sfx/served.mp3";
+    public static final String SERVED = "resources/audio/sfx/servered.mp3";
     public static final String CUSTOMER_FLEES = "resources/audio/sfx/customer_flees.mp3";
+
+    public static final String POP = "resources/audio/sfx/pop.mp3";
 
     public static final String THROW = "resources/audio/sfx/throw_garbage.mp3";
 

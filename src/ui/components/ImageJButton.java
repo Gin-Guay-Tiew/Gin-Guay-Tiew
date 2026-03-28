@@ -2,6 +2,8 @@ package ui.components;
 
 import utilities.FontLoader;
 import utilities.IconImage;
+import utilities.SFX;
+import utilities.SFXManager;
 
 import javax.swing.*;
 import java.awt.*;
@@ -47,6 +49,7 @@ public class ImageJButton extends JButton {
 
             @Override
             public void mousePressed(MouseEvent e) {
+                SFXManager.play(SFX.CLICK);
                 setIcon(btnImage_Clicked);
             }
 

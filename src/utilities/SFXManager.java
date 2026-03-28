@@ -28,6 +28,18 @@ public class SFXManager {
                 return;
             }
 
+            StackTraceElement[] stack = Thread.currentThread().getStackTrace();
+            if (stack.length > 2) {
+                StackTraceElement caller = stack[2];
+                System.out.println(
+                        "[SFX] " + path +
+                                " | called from: " +
+                                caller.getClassName() +
+                                "." +
+                                caller.getMethodName()
+                );
+            }
+
             Media media = new Media(file.toURI().toString());
             MediaPlayer player = new MediaPlayer(media);
 
