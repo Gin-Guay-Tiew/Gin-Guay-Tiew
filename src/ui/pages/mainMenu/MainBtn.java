@@ -6,6 +6,8 @@ import java.awt.event.ActionListener;
 
 import main.MainFrame;
 import ui.components.PopupWindow;
+import utilities.SFX;
+import utilities.SFXManager;
 
 public class MainBtn implements ActionListener {
     private MainFrame frame;
@@ -18,6 +20,8 @@ public class MainBtn implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+
+        SFXManager.play(SFX.CLICK);
 
         if (e.getActionCommand().equals("Start Game")) {
             frame.getNavigator().toPage("levelSelect", true, 250);

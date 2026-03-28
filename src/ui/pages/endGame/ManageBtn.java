@@ -3,6 +3,8 @@ package ui.pages.endGame;
 import main.MainFrame;
 import utilities.FontLoader;
 import ui.components.ImageJButton;
+import utilities.SFX;
+import utilities.SFXManager;
 import utilities.SoundManager;
 
 import javax.swing.*;
@@ -44,6 +46,7 @@ public class ManageBtn extends JPanel implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        SFXManager.play(SFX.CLICK);
         if (e.getActionCommand().equals("backToMainMenu")) {
             SoundManager.backToMenu();
             mainFrame.getNavigator().toPage("mainMenu",true,500);

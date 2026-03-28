@@ -12,7 +12,7 @@ public class SFXManager {
     private static final float MASTER_VOLUME = 0.45f;
 
     static {
-        new JFXPanel(); // start JavaFX
+        new JFXPanel();
     }
 
     public static void play(String path) {
@@ -20,6 +20,8 @@ public class SFXManager {
         try {
 
             File file = new File(path);
+
+            System.out.println("LOOKING FOR: " + file.getAbsolutePath());
 
             if (!file.exists()) {
                 System.out.println("❌ SFX NOT FOUND: " + path);
@@ -31,7 +33,6 @@ public class SFXManager {
 
             player.setVolume(volume * MASTER_VOLUME);
 
-            // เคลียร์ memory หลังเล่นจบ
             player.setOnEndOfMedia(player::dispose);
 
             player.play();
