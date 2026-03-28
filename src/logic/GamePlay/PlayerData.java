@@ -8,7 +8,7 @@ import java.util.Set;
 public class PlayerData {
     private int money = 0;
     private int level = 1;
-    private int volumeLv = 100;
+    private int volumeLv = 45;
     private boolean stateSFX = true;
     private Set<String> unlockedItems = new HashSet<>();
 

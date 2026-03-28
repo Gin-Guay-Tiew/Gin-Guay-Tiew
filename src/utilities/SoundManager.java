@@ -114,13 +114,13 @@ public class SoundManager {
     // ================= VOLUME =================
 
     public static void setVolume(float v) {
+        float linearVolume = Math.max(0f, Math.min(1f, v));
 
-        volume = Math.max(0f, Math.min(1f, v));
+        volume = linearVolume * linearVolume;
 
         if (player != null) {
-            player.setVolume(volume);
+            player.setVolume(volume * MASTER_VOLUME);
         }
-
     }
 
     public static float getVolume() {

@@ -48,19 +48,24 @@ public class MainFrame extends JFrame implements WindowListener {
     public void startNewGame(int levelID) {
 
         currentLevel = levelID;
-        SoundManager.playLevelMusic(levelID);
 
-        if (currentGameScreen != null) {
-            mainPanel.remove(currentGameScreen);
-        }
+        navigator.toPage("loading_"+levelID, true, 250);
+        Timer timer = new Timer((int)(Math.random() * 1000) + 500, event -> {
+            SoundManager.playLevelMusic(levelID);
 
-        currentGameScreen = new gamePlayScreen(this, levelID);
-        mainPanel.add(currentGameScreen, "gamePlay");
+            if (currentGameScreen != null) {
+                mainPanel.remove(currentGameScreen);
+            }
 
-        mainPanel.revalidate();
-        mainPanel.repaint();
+            currentGameScreen = new gamePlayScreen(this, levelID);
+            mainPanel.add(currentGameScreen, "gamePlay");
 
-        navigator.toPage("gamePlay", true, 500);
+            mainPanel.revalidate();
+            mainPanel.repaint();
+            navigator.toPage("gamePlay", true, 500);
+        });
+        timer.setRepeats(false);
+        timer.start();
     }
 
     // ขอสร้างส่วนเสริมเพิ่มสำหรับกดเล่นใหม่
