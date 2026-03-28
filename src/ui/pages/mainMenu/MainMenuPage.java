@@ -3,14 +3,19 @@ package ui.pages.mainMenu;
 import main.MainFrame;
 import utilities.IconImage;
 import ui.components.ImageJButton;
+import ui.components.PopupWindow;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
 
 public class MainMenuPage extends JPanel {
 
     MainFrame frame;
     private Image backgroundImage;
+    private PopupWindow pop = new PopupWindow();
+
+    private int tutorialNoCount = 0;
 
     public MainMenuPage(MainFrame frame) {
 
@@ -88,11 +93,36 @@ public class MainMenuPage extends JPanel {
         exit.setActionCommand("Exit");
 
         startGame.addActionListener(actionBtn);
-        tutorial.addActionListener(actionBtn);
         shop.addActionListener(actionBtn);
         setting.addActionListener(actionBtn);
-        exit.addActionListener(actionBtn);
 
+        // Cheat logic
+        String[] btnPaths = {"resources/images/shared/buttons/Yes", "resources/images/shared/buttons/No"};
+        String[] btnLabels = {"Yes", "No"};
+
+        tutorial.addActionListener(e -> {
+            ActionListener[] tutorialActions = {
+                    ex -> frame.getNavigator().toPage("TutorialPage", true, 250),
+                    ex -> {
+                        tutorialNoCount++;
+                        System.out.println(tutorialNoCount);
+                    }
+            };
+            pop.createPopup(frame, "Open Tutorial?", "resources/images/shared/popups/Demo.png", btnPaths, btnLabels, tutorialActions);
+        });
+
+        exit.addActionListener(e -> {
+            ActionListener[] exitActions = {
+                    ex -> System.exit(0),
+                    ex -> {
+                        tutorialNoCount = 0;
+                        if (tutorialNoCount == 6 ) {
+                            frame.getPlayerData().addMoney(10000);
+                        }
+                    }
+            };
+            pop.createPopup(frame, "Are you sure you want to exit?", "resources/images/shared/popups/Demo.png", btnPaths, btnLabels, exitActions);
+        });
     }
 
     @Override
