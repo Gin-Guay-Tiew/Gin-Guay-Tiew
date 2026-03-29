@@ -25,9 +25,9 @@ public class CustomerMenu {
     public static List<String> CustomerMenu(int levelID) {
         List<String> folders = new ArrayList<>();
 
-        if (levelID >= 1) folders.add("/images/gamePlay/ingredients/drinks/cola/picked.png");
-        if (levelID >= 2) folders.add("/images/gamePlay/ingredients/drinks/sprite/picked.png");
-        if (levelID >= 3) folders.add("/images/gamePlay/ingredients/drinks/orange/picked.png");
+        if (levelID >= 1) folders.add("/images/gamePlay/ingredients/drinks/cola/cola.png");
+        if (levelID >= 2) folders.add("/images/gamePlay/ingredients/drinks/sprite/sprite.png");
+        if (levelID >= 3) folders.add("/images/gamePlay/ingredients/drinks/orange/orange.png");
         if (levelID >= 4) folders.add("/images/gamePlay/ingredients/kanomTuay/picked.png");
 
         boolean m = levelID >= 1;
