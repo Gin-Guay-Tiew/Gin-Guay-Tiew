@@ -5,7 +5,7 @@
       <element id="archive" name="Gin-Guay-Tiew.jar">
         <element id="module-output" name="Gin-Guay-Tiew" />
       </element>
-      <element id="library" level="project" name="javafx-sdk-21" />
+      <element id="library" level="project" name="lib" />
     </root>
   </artifact>
 </component>
