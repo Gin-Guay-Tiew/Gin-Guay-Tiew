@@ -5,7 +5,13 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
-public class CustomerSetting {
+public class CustomerSetting extends CustomerCount {
+
+    @Override
+    public void setCount(int count){
+        this.count = count;
+    }
+
     List<List<String>> general = List.of(
             List.of("general", "CollegeStudent_female01"),
             List.of("general", "CollegeStudent_male01"),
@@ -45,11 +51,13 @@ public class CustomerSetting {
     Random rand = new Random();
 
     public List<CustomerData> Setting(int quantity,int level){
+        setCount(quantity);
+        int countCustomer = getCount();
         List<CustomerData> customer = new ArrayList<>();
         List<List<String>> list = new ArrayList<>();
         setNPC(list, level);
 
-        for (int i = 0; i < quantity; i++) {
+        for (int i = 0; i < countCustomer; i++) {
             int Teacher_Bank_wallet = (int)(Math.random() * 251) + 50;
             int randomInt = (int)(Math.random() * list.size());
             typeCustomer = list.get(randomInt).get(0);
@@ -143,4 +151,5 @@ public class CustomerSetting {
             list.addAll(mars);
         }
     }
+
 }
