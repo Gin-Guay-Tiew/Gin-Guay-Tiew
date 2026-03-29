@@ -18,6 +18,12 @@ public class FloatingMoneyLabel extends CustomJLabel {
     private Color currentColor; // เก็บสีที่จะใช้แสดงผลจริง
     private final Font jerseyFont = FontLoader.loadCustomFont("resources/font/Jersey10.ttf");
 
+    @Override
+    public void setOutlineColor(Color color) {
+        super.setOutlineColor(new Color(0, 0, 0, color.getAlpha()));
+        super.setForeground(color);
+    }
+
     public FloatingMoneyLabel(String amount, int x, int y) {
         super(amount, 4.0f);
 
@@ -48,19 +54,11 @@ public class FloatingMoneyLabel extends CustomJLabel {
             } else {
                 setLocation(x, y + yOffset);
 
-                // อัปเดตสีโดยใช้ค่า currentColor ที่เลือกไว้ตอนต้น
-                setForeground(new Color(
+                // ใช้ override method เพื่ออัปเดตทั้งคู่พร้อมกันด้วยค่า opacity ใหม่
+                setOutlineColor(new Color(
                         currentColor.getRed(),
                         currentColor.getGreen(),
                         currentColor.getBlue(),
-                        opacity)
-                );
-
-                // อัปเดตสีขอบให้จางลงตาม
-                setOutlineColor(new Color(
-                        outlineColor.getRed(),
-                        outlineColor.getGreen(),
-                        outlineColor.getBlue(),
                         opacity)
                 );
             }
