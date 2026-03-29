@@ -2,7 +2,6 @@ package ui.pages.gamePlay;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 public class CustomerMenu {
 
@@ -11,15 +10,36 @@ public class CustomerMenu {
 
         folders.add(base + "no_addon.png");
 
-        if (hasMeatball) folders.add(base + "meatball/idle.png");
-        if (hasPorkSlices) folders.add(base + "porkSlices/idle.png");
-        if (hasPorkRind) folders.add(base + "porkRind/idle.png");
+        if (hasMeatball) {
+            folders.add(base + "meatball/idle.png");
+            folders.add(base + "meatball/haveVegetable.png");
+        }
+        if (hasPorkSlices) {
+            folders.add(base + "porkSlices/idle.png");
+            folders.add(base + "porkSlices/haveVegetable.png");
+        }
+        if (hasPorkRind) {
+            folders.add(base + "porkRind/idle.png");
+            folders.add(base + "porkRind/haveVegetable.png");
+        }
 
-        if (hasMeatball && hasPorkSlices) folders.add(base + "meatball&porkSlices/idle.png");
-        if (hasMeatball && hasPorkRind) folders.add(base + "meatball&porkRind/idle.png");
-        if (hasPorkSlices && hasPorkRind) folders.add(base + "porkSlices&porkRind/idle.png");
+        if (hasMeatball && hasPorkSlices) {
+            folders.add(base + "meatball&porkSlices/idle.png");
+            folders.add(base + "meatball&porkSlices/haveVegetable.png");
+        }
+        if (hasMeatball && hasPorkRind) {
+            folders.add(base + "meatball&porkRind/idle.png");
+            folders.add(base + "meatball&porkRind/haveVegetable.png");
+        }
+        if (hasPorkSlices && hasPorkRind) {
+            folders.add(base + "porkSlices&porkRind/idle.png");
+            folders.add(base + "porkSlices&porkRind/haveVegetable.png");
+        }
 
-        if (hasMeatball && hasPorkSlices && hasPorkRind) folders.add(base + "meatball&porkRind&porkSlices/idle.png");
+        if (hasMeatball && hasPorkSlices && hasPorkRind) {
+            folders.add(base + "meatball&porkRind&porkSlices/idle.png");
+            folders.add(base + "meatball&porkRind&porkSlices/haveVegetable.png");
+        }
     }
 
     public static List<String> CustomerMenu(int levelID) {
@@ -74,7 +94,6 @@ public class CustomerMenu {
         int i = (int)(Math.random() * allPaths.size());
         String selectedPath = allPaths.get(i);
 
-        System.out.println("Customer is ordering: " + selectedPath);
         return selectedPath;
     }
 }
