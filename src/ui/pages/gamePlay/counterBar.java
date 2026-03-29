@@ -469,7 +469,7 @@ public class counterBar extends JPanel {
                                     btn.setIcon(new ImageIcon(imagePath));
                                     btn.setName(newName);
                                 }
-                                // TODO: if  the takro break delete this "break"
+                                // TODO: if the takro break delete this "break"
                                 break;
                             }
                             if (btn.getName().equals("placemat") && itemBounds.intersects(btn.getBounds()) && itemName.equals("bowl")) {
